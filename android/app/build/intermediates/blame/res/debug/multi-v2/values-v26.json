@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "/home/jalond/projects/capstones/q2/kapstone/android/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-v26/values-v26.xml",
+            "outputFile": "/home/jalond/projects/capstones/q2/seroful/android/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-v26/values-v26.xml",
             "map": [
                 {
                     "source": "/home/jalond/.gradle/caches/transforms-2/files-2.1/4128786a6dd248e695865c19a580dee4/appcompat-1.1.0/res/values-v26/values-v26.xml",

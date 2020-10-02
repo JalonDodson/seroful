@@ -1,4 +1,4 @@
-#Thu Oct 01 21:21:38 CDT 2020
-base.0=/home/jalond/projects/capstones/q2/kapstone/android/app/build/intermediates/dex/debug/mergeDexDebug/out/classes.dex
+#Fri Oct 02 10:40:04 CDT 2020
+base.0=/home/jalond/projects/capstones/q2/seroful/android/app/build/intermediates/dex/debug/mergeDexDebug/out/classes.dex
 renamed.0=classes.dex
 path.0=classes.dex
