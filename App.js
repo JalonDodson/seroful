@@ -6,7 +6,12 @@
  * @flow strict-local
  */
 
-import React from 'react';
+import React from "react";
+import { Button } from "react-native-paper";
+
+import firestore from "@react-native-firebase/firestore";
+const usersCollection = firestore().collection("users");
+
 import {
   SafeAreaView,
   StyleSheet,
@@ -14,15 +19,24 @@ import {
   View,
   Text,
   StatusBar,
-} from 'react-native';
+} from "react-native";
 
-import {
-  Header,
-  LearnMoreLinks,
-  Colors,
-  DebugInstructions,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
+import { Colors } from "react-native/Libraries/NewAppScreen";
+
+const addCollectionTest = () => {
+  firestore()
+    .collection("users")
+    .doc("chippickering231")
+    .set({
+      first: "Chip",
+      last: "Pickering",
+      age: 30,
+    })
+    .then(() => {
+      console.log("User added!");
+    })
+    .catch((err) => console.log(err));
+};
 
 const App: () => React$Node = () => {
   return (
@@ -31,8 +45,8 @@ const App: () => React$Node = () => {
       <SafeAreaView>
         <ScrollView
           contentInsetAdjustmentBehavior="automatic"
-          style={styles.scrollView}>
-          <Header />
+          style={styles.scrollView}
+        >
           {global.HermesInternal == null ? null : (
             <View style={styles.engine}>
               <Text style={styles.footer}>Engine: Hermes</Text>
@@ -40,31 +54,14 @@ const App: () => React$Node = () => {
           )}
           <View style={styles.body}>
             <View style={styles.sectionContainer}>
-              <Text style={styles.sectionTitle}>Step One</Text>
-              <Text style={styles.sectionDescription}>
-                Edit <Text style={styles.highlight}>App.js</Text> to change this
-                screen and then come back to see your edits broski. Also chip sucks a lot.
-              </Text>
+              <Text style={styles.sectionTitle}>Stepa One</Text>
+              <Button mode="contained" onPress={() => addCollectionTest()}>
+                Register
+              </Button>
+              <Button mode="contained" onPress={() => addCollectionTest()}>
+                Login
+              </Button>
             </View>
-            <View style={styles.sectionContainer}>
-              <Text style={styles.sectionTitle}>See Your Changes</Text>
-              <Text style={styles.sectionDescription}>
-                <ReloadInstructions />
-              </Text>
-            </View>
-            <View style={styles.sectionContainer}>
-              <Text style={styles.sectionTitle}>Debug</Text>
-              <Text style={styles.sectionDescription}>
-                <DebugInstructions />
-              </Text>
-            </View>
-            <View style={styles.sectionContainer}>
-              <Text style={styles.sectionTitle}>Learn More</Text>
-              <Text style={styles.sectionDescription}>
-                Read the docs to discover what to do next:
-              </Text>
-            </View>
-            <LearnMoreLinks />
           </View>
         </ScrollView>
       </SafeAreaView>
@@ -77,7 +74,7 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.lighter,
   },
   engine: {
-    position: 'absolute',
+    position: "absolute",
     right: 0,
   },
   body: {
@@ -89,26 +86,34 @@ const styles = StyleSheet.create({
   },
   sectionTitle: {
     fontSize: 24,
-    fontWeight: '600',
+    fontWeight: "600",
     color: Colors.black,
   },
   sectionDescription: {
     marginTop: 8,
     fontSize: 18,
-    fontWeight: '400',
+    fontWeight: "400",
     color: Colors.dark,
   },
   highlight: {
-    fontWeight: '700',
+    fontWeight: "700",
   },
   footer: {
     color: Colors.dark,
     fontSize: 12,
-    fontWeight: '600',
+    fontWeight: "600",
     padding: 4,
     paddingRight: 12,
-    textAlign: 'right',
+    textAlign: "right",
   },
 });
 
 export default App;
+
+// ex
+// <View style={styles.sectionContainer}>
+//               <Text style={styles.sectionTitle}>Learn More</Text>
+//               <Text style={styles.sectionDescription}>
+//                 Read the docs to discover what to do next:
+//               </Text>
+//             </View>
