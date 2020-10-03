@@ -9,8 +9,7 @@
 import React from "react";
 import { Button } from "react-native-paper";
 
-import firestore from "@react-native-firebase/firestore";
-const usersCollection = firestore().collection("users");
+import * as api from "./util/api";
 
 import {
   SafeAreaView,
@@ -23,20 +22,7 @@ import {
 
 import { Colors } from "react-native/Libraries/NewAppScreen";
 
-const addCollectionTest = () => {
-  firestore()
-    .collection("users")
-    .doc("chippickering231")
-    .set({
-      first: "Chip",
-      last: "Pickering",
-      age: 30,
-    })
-    .then(() => {
-      console.log("User added!");
-    })
-    .catch((err) => console.log(err));
-};
+
 
 const App: () => React$Node = () => {
   return (
@@ -55,10 +41,10 @@ const App: () => React$Node = () => {
           <View style={styles.body}>
             <View style={styles.sectionContainer}>
               <Text style={styles.sectionTitle}>Stepa One</Text>
-              <Button mode="contained" onPress={() => addCollectionTest()}>
-                Register
+              <Button mode="contained" onPress={() => api.userList()}>
+                Get Users
               </Button>
-              <Button mode="contained" onPress={() => addCollectionTest()}>
+              <Button mode="contained" onPress={() => console.log("test")}>
                 Login
               </Button>
             </View>
