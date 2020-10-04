@@ -64,4 +64,4 @@ seroful-web/*.tgz
 seroful-web/.yarn-integrity
 
 # dotenv environment variables file
-seroful-web/.env
+seroful-web/client/.env
