@@ -1,4 +1,19 @@
 seroful-web/node_modules/
 seroful-mobile/node_modules/
-seroful-web/.env
-seroful-mobile/.env
+# Optional npm cache directory
+seroful-web/.npm
+
+# Optional eslint cache
+seroful-web/.eslintcache
+
+# Optional REPL history
+seroful-web/.node_repl_history
+
+# Output of 'npm pack'
+seroful-web/*.tgz
+
+# Yarn Integrity file
+seroful-web/.yarn-integrity
+
+# dotenv environment variables file
+seroful-web/client/.env
