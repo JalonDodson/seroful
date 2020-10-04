@@ -1,8 +1,14 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { Button } from "@material-ui/core";
+import logo from "./logo.svg";
+import "./App.css";
+import * as api from "./util/api";
 
 function App() {
+  const test = async () => {
+    const res = await api.users();
+    console.log(res);
+  };
   return (
     <div className="App">
       <header className="App-header">
@@ -18,6 +24,7 @@ function App() {
         >
           Learn React
         </a>
+        <Button onClick={() => test()}>Test</Button>
       </header>
     </div>
   );
