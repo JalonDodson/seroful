@@ -21,6 +21,7 @@
     "joi": "^17.2.1",
     "react": "16.13.1",
     "react-native": "0.63.3",
+    "react-native-linear-gradient": "^2.5.6",
     "react-native-paper": "^4.2.0",
     "react-native-vector-icons": "^7.1.0",
     "react-query": "^2.23.0"

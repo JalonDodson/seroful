@@ -6,8 +6,10 @@
  * @flow strict-local
  */
 
-import React from "react";
+import React, { useState, useEffect } from "react";
+import auth from "@react-native-firebase/auth";
 import { Button } from "react-native-paper";
+import { LoginForm } from "./components/LoginForm/LoginForm";
 
 import * as api from "./util/api";
 
@@ -22,36 +24,44 @@ import {
 
 import { Colors } from "react-native/Libraries/NewAppScreen";
 
-
-
 const App: () => React$Node = () => {
+  const [init, setInit] = useState(true);
+  const [user, setUser] = useState();
+
+  const onAuthStateChanged = (user) => {
+    setUser(user);
+    if (init) setInit(false);
+  };
+
+  useEffect(() => {
+    const subscriber = auth().onAuthStateChanged(onAuthStateChanged);
+    return subscriber;
+  }, []);
+
+  const logout = () => {
+    auth()
+      .signOut()
+      .then(() => console.log("User signed out."));
+  };
+
+  if (init) return null;
+  // if user is null then it's assumed that they're logged out
+  if (!user) {
+    return <LoginForm />;
+  }
+  // otherwise the user is logged in and can see the home screen
   return (
-    <>
-      <StatusBar barStyle="dark-content" />
-      <SafeAreaView>
-        <ScrollView
-          contentInsetAdjustmentBehavior="automatic"
-          style={styles.scrollView}
-        >
-          {global.HermesInternal == null ? null : (
-            <View style={styles.engine}>
-              <Text style={styles.footer}>Engine: Hermes</Text>
-            </View>
-          )}
-          <View style={styles.body}>
-            <View style={styles.sectionContainer}>
-              <Text style={styles.sectionTitle}>Stepa One</Text>
-              <Button mode="contained" onPress={() => api.userList()}>
-                Get Users
-              </Button>
-              <Button mode="contained" onPress={() => console.log("test")}>
-                Login
-              </Button>
-            </View>
-          </View>
-        </ScrollView>
-      </SafeAreaView>
-    </>
+    <View>
+      <Text>Welcome, {user.email}.</Text>
+      <Button
+        mode="contained"
+        color="#4B8AC6"
+        uppercase={false}
+        onPress={() => logout()}
+      >
+        Logout
+      </Button>
+    </View>
   );
 };
 
@@ -96,10 +106,31 @@ const styles = StyleSheet.create({
 
 export default App;
 
-// ex
-// <View style={styles.sectionContainer}>
-//               <Text style={styles.sectionTitle}>Learn More</Text>
-//               <Text style={styles.sectionDescription}>
-//                 Read the docs to discover what to do next:
-//               </Text>
-//             </View>
+{
+  /* <>
+    //   <StatusBar barStyle="dark-content" />
+    //   <SafeAreaView>
+    //     <ScrollView */
+}
+//       contentInsetAdjustmentBehavior="automatic"
+//       style={styles.scrollView}
+//     >
+//       {global.HermesInternal == null ? null : (
+//         <View style={styles.engine}>
+//           <Text style={styles.footer}>Engine: Hermes</Text>
+//         </View>
+//       )}
+//       <View style={styles.body}>
+//         <View style={styles.sectionContainer}>
+//           <Text style={styles.sectionTitle}>Stepa One</Text>
+//           <Button mode="contained" onPress={() => api.userList()}>
+//             Get Users
+//           </Button>
+//           <Button mode="contained" onPress={() => console.log("test")}>
+//             Login
+//           </Button>
+//         </View>
+//       </View>
+//     </ScrollView>
+//   </SafeAreaView>
+// </>

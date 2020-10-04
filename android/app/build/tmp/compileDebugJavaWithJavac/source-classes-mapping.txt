@@ -646,6 +646,8 @@ com/oblador/vectoricons/R.java
  com.oblador.vectoricons.R$style
  com.oblador.vectoricons.R$styleable
  com.oblador.vectoricons.R$xml
+com/BV/LinearGradient/R.java
+ com.BV.LinearGradient.R
 com/seroful/MainApplication.java
  com.seroful.MainApplication
  com.seroful.MainApplication$1

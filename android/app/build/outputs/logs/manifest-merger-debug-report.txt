@@ -20,6 +20,7 @@ MERGED from [:react-native-vector-icons] /home/jalond/projects/seroful/node_modu
 MERGED from [com.facebook.react:react-native:0.63.3] /home/jalond/.gradle/caches/transforms-2/files-2.1/ddb187f502326ee131b1a2f4e1c2b817/jetified-react-native-0.63.3/AndroidManifest.xml:2:1-13:12
 MERGED from [androidx.swiperefreshlayout:swiperefreshlayout:1.0.0] /home/jalond/.gradle/caches/transforms-2/files-2.1/aefc9bb990e1aab69c73afa3094cd5cf/swiperefreshlayout-1.0.0/AndroidManifest.xml:17:1-22:12
 MERGED from [org.webkit:android-jsc:r245459] /home/jalond/.gradle/caches/transforms-2/files-2.1/82188d90792207cbf6974937b7819dab/android-jsc-r245459/AndroidManifest.xml:2:1-11:12
+MERGED from [:react-native-linear-gradient] /home/jalond/projects/seroful/node_modules/react-native-linear-gradient/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:2:1-11:12
 MERGED from [com.facebook.fresco:flipper:2.2.0] /home/jalond/.gradle/caches/transforms-2/files-2.1/09ef784d8e22eeacce22e082080d0720/flipper-2.2.0/AndroidManifest.xml:2:1-9:12
 MERGED from [com.facebook.fresco:stetho:2.2.0] /home/jalond/.gradle/caches/transforms-2/files-2.1/bbd3719e0dcee306b55787368abb429c/stetho-2.2.0/AndroidManifest.xml:2:1-9:12
 MERGED from [com.facebook.fresco:fresco:2.2.0] /home/jalond/.gradle/caches/transforms-2/files-2.1/69d3e7830d3081dbf6fd16480aec4f00/fresco-2.2.0/AndroidManifest.xml:2:1-9:12
@@ -271,6 +272,8 @@ MERGED from [androidx.swiperefreshlayout:swiperefreshlayout:1.0.0] /home/jalond/
 MERGED from [androidx.swiperefreshlayout:swiperefreshlayout:1.0.0] /home/jalond/.gradle/caches/transforms-2/files-2.1/aefc9bb990e1aab69c73afa3094cd5cf/swiperefreshlayout-1.0.0/AndroidManifest.xml:20:5-44
 MERGED from [org.webkit:android-jsc:r245459] /home/jalond/.gradle/caches/transforms-2/files-2.1/82188d90792207cbf6974937b7819dab/android-jsc-r245459/AndroidManifest.xml:7:5-9:41
 MERGED from [org.webkit:android-jsc:r245459] /home/jalond/.gradle/caches/transforms-2/files-2.1/82188d90792207cbf6974937b7819dab/android-jsc-r245459/AndroidManifest.xml:7:5-9:41
+MERGED from [:react-native-linear-gradient] /home/jalond/projects/seroful/node_modules/react-native-linear-gradient/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:7:5-9:41
+MERGED from [:react-native-linear-gradient] /home/jalond/projects/seroful/node_modules/react-native-linear-gradient/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:7:5-9:41
 MERGED from [com.facebook.fresco:flipper:2.2.0] /home/jalond/.gradle/caches/transforms-2/files-2.1/09ef784d8e22eeacce22e082080d0720/flipper-2.2.0/AndroidManifest.xml:5:5-7:41
 MERGED from [com.facebook.fresco:flipper:2.2.0] /home/jalond/.gradle/caches/transforms-2/files-2.1/09ef784d8e22eeacce22e082080d0720/flipper-2.2.0/AndroidManifest.xml:5:5-7:41
 MERGED from [com.facebook.fresco:stetho:2.2.0] /home/jalond/.gradle/caches/transforms-2/files-2.1/bbd3719e0dcee306b55787368abb429c/stetho-2.2.0/AndroidManifest.xml:5:5-7:41
