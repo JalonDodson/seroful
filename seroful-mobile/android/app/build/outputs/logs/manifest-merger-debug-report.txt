@@ -1,0 +1,606 @@
+-- Merging decision tree log ---
+manifest
+ADDED from /home/jalond/projects/seroful/android/app/src/main/AndroidManifest.xml:1:1-27:12
+INJECTED from /home/jalond/projects/seroful/android/app/src/main/AndroidManifest.xml:1:1-27:12
+INJECTED from /home/jalond/projects/seroful/android/app/src/main/AndroidManifest.xml:1:1-27:12
+INJECTED from /home/jalond/projects/seroful/android/app/src/main/AndroidManifest.xml:1:1-27:12
+MERGED from /home/jalond/projects/seroful/android/app/src/main/AndroidManifest.xml:1:1-27:12
+MERGED from [com.facebook.flipper:flipper:0.54.0] /home/jalond/.gradle/caches/transforms-2/files-2.1/d8f57faa559a7e8d22a1c57a9e7d8865/flipper-0.54.0/AndroidManifest.xml:8:1-18:12
+MERGED from [com.facebook.flipper:flipper-network-plugin:0.54.0] /home/jalond/.gradle/caches/transforms-2/files-2.1/840ea215e31c59d9feaa06d84dd75945/flipper-network-plugin-0.54.0/AndroidManifest.xml:8:1-15:12
+MERGED from [com.facebook.flipper:flipper-fresco-plugin:0.54.0] /home/jalond/.gradle/caches/transforms-2/files-2.1/cf16ec165a755bf47fb2e21ab659951d/flipper-fresco-plugin-0.54.0/AndroidManifest.xml:8:1-15:12
+MERGED from [:react-native-firebase_analytics] /home/jalond/projects/seroful/node_modules/@react-native-firebase/analytics/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:2:1-15:12
+MERGED from [:react-native-firebase_auth] /home/jalond/projects/seroful/node_modules/@react-native-firebase/auth/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:2:1-15:12
+MERGED from [:react-native-firebase_database] /home/jalond/projects/seroful/node_modules/@react-native-firebase/database/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:2:1-15:12
+MERGED from [:react-native-firebase_firestore] /home/jalond/projects/seroful/node_modules/@react-native-firebase/firestore/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:2:1-11:12
+MERGED from [:react-native-firebase_app] /home/jalond/projects/seroful/node_modules/@react-native-firebase/app/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:2:1-11:12
+MERGED from [androidx.multidex:multidex:2.0.0] /home/jalond/.gradle/caches/transforms-2/files-2.1/d330dab23d5c24e1f9abe62bd74bbadf/multidex-2.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [com.google.firebase:firebase-core:17.4.4] /home/jalond/.gradle/caches/transforms-2/files-2.1/875523ebc8689359881cbf73c44e8ae3/firebase-core-17.4.4/AndroidManifest.xml:2:1-9:12
+MERGED from [com.google.firebase:firebase-analytics:17.4.4] /home/jalond/.gradle/caches/transforms-2/files-2.1/c6ccde5c08db4226c5781d8393a0cba3/firebase-analytics-17.4.4/AndroidManifest.xml:2:1-9:12
+MERGED from [:react-native-vector-icons] /home/jalond/projects/seroful/node_modules/react-native-vector-icons/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:2:1-11:12
+MERGED from [com.facebook.react:react-native:0.63.3] /home/jalond/.gradle/caches/transforms-2/files-2.1/ddb187f502326ee131b1a2f4e1c2b817/jetified-react-native-0.63.3/AndroidManifest.xml:2:1-13:12
+MERGED from [androidx.swiperefreshlayout:swiperefreshlayout:1.0.0] /home/jalond/.gradle/caches/transforms-2/files-2.1/aefc9bb990e1aab69c73afa3094cd5cf/swiperefreshlayout-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [org.webkit:android-jsc:r245459] /home/jalond/.gradle/caches/transforms-2/files-2.1/82188d90792207cbf6974937b7819dab/android-jsc-r245459/AndroidManifest.xml:2:1-11:12
+MERGED from [:react-native-linear-gradient] /home/jalond/projects/seroful/node_modules/react-native-linear-gradient/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:2:1-11:12
+MERGED from [com.facebook.fresco:flipper:2.2.0] /home/jalond/.gradle/caches/transforms-2/files-2.1/09ef784d8e22eeacce22e082080d0720/flipper-2.2.0/AndroidManifest.xml:2:1-9:12
+MERGED from [com.facebook.fresco:stetho:2.2.0] /home/jalond/.gradle/caches/transforms-2/files-2.1/bbd3719e0dcee306b55787368abb429c/stetho-2.2.0/AndroidManifest.xml:2:1-9:12
+MERGED from [com.facebook.fresco:fresco:2.2.0] /home/jalond/.gradle/caches/transforms-2/files-2.1/69d3e7830d3081dbf6fd16480aec4f00/fresco-2.2.0/AndroidManifest.xml:2:1-9:12
+MERGED from [com.facebook.fresco:imagepipeline-okhttp3:2.0.0] /home/jalond/.gradle/caches/transforms-2/files-2.1/3365c8dff68df77e1f5d58797021ec91/imagepipeline-okhttp3-2.0.0/AndroidManifest.xml:2:1-9:12
+MERGED from [com.facebook.fresco:drawee:2.2.0] /home/jalond/.gradle/caches/transforms-2/files-2.1/04e375c5a830f0359a2e70dc6161b84f/drawee-2.2.0/AndroidManifest.xml:2:1-9:12
+MERGED from [com.facebook.fresco:nativeimagefilters:2.2.0] /home/jalond/.gradle/caches/transforms-2/files-2.1/a3af587fc483e4608c7b0f34ca8b4dd3/nativeimagefilters-2.2.0/AndroidManifest.xml:2:1-9:12
+MERGED from [com.facebook.fresco:memory-type-native:2.2.0] /home/jalond/.gradle/caches/transforms-2/files-2.1/c60421b3990f8e9faa2883b611d655c8/memory-type-native-2.2.0/AndroidManifest.xml:2:1-9:12
+MERGED from [com.facebook.fresco:memory-type-java:2.2.0] /home/jalond/.gradle/caches/transforms-2/files-2.1/54a331f85eb1537ff2e7220542bd968b/memory-type-java-2.2.0/AndroidManifest.xml:2:1-9:12
+MERGED from [com.facebook.fresco:imagepipeline-native:2.2.0] /home/jalond/.gradle/caches/transforms-2/files-2.1/6b63d23d70bf87a2770e82dea4995577/imagepipeline-native-2.2.0/AndroidManifest.xml:2:1-9:12
+MERGED from [com.facebook.fresco:memory-type-ashmem:2.2.0] /home/jalond/.gradle/caches/transforms-2/files-2.1/15c70f0a1fb51fe6af2930c9f9470ffd/memory-type-ashmem-2.2.0/AndroidManifest.xml:2:1-9:12
+MERGED from [com.facebook.fresco:imagepipeline:2.2.0] /home/jalond/.gradle/caches/transforms-2/files-2.1/b1aba8e132260bd1c4918b3b980a4ceb/imagepipeline-2.2.0/AndroidManifest.xml:2:1-9:12
+MERGED from [com.facebook.fresco:nativeimagetranscoder:2.2.0] /home/jalond/.gradle/caches/transforms-2/files-2.1/52eb20bc71160914fe75eb7e81ca62f6/nativeimagetranscoder-2.2.0/AndroidManifest.xml:2:1-9:12
+MERGED from [com.facebook.fresco:imagepipeline-base:2.2.0] /home/jalond/.gradle/caches/transforms-2/files-2.1/291f9dbfae02190bf8ecea9a29579a8a/imagepipeline-base-2.2.0/AndroidManifest.xml:2:1-9:12
+MERGED from [com.facebook.fresco:soloader:2.2.0] /home/jalond/.gradle/caches/transforms-2/files-2.1/d47f8705e77d52119df65473758ca76c/soloader-2.2.0/AndroidManifest.xml:2:1-9:12
+MERGED from [com.facebook.soloader:soloader:0.9.0] /home/jalond/.gradle/caches/transforms-2/files-2.1/7437e1ac3f8fadbe5dc4a7c4ea5cddaf/soloader-0.9.0/AndroidManifest.xml:2:1-13:12
+MERGED from [com.google.firebase:firebase-firestore:21.5.0] /home/jalond/.gradle/caches/transforms-2/files-2.1/826082f26c636fb8ce9b8ba0d61f3155/jetified-firebase-firestore-21.5.0/AndroidManifest.xml:2:1-26:12
+MERGED from [io.grpc:grpc-android:1.28.0] /home/jalond/.gradle/caches/transforms-2/files-2.1/b0d4aad8d4aa2d4a202ab26365f34709/grpc-android-1.28.0/AndroidManifest.xml:2:1-13:12
+MERGED from [androidx.appcompat:appcompat:1.1.0] /home/jalond/.gradle/caches/transforms-2/files-2.1/00e5eadf5755747ccbfa8141add00a51/appcompat-1.1.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.appcompat:appcompat-resources:1.1.0] /home/jalond/.gradle/caches/transforms-2/files-2.1/18b3d7758ce067b4eeadffb9ca217101/appcompat-resources-1.1.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.vectordrawable:vectordrawable-animated:1.1.0] /home/jalond/.gradle/caches/transforms-2/files-2.1/272973bc69c3743f557a0c2e727706fc/vectordrawable-animated-1.1.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.interpolator:interpolator:1.0.0] /home/jalond/.gradle/caches/transforms-2/files-2.1/f6951c16849ffe6253e3e5379ed2cc9c/interpolator-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [com.google.firebase:firebase-auth:19.3.2] /home/jalond/.gradle/caches/transforms-2/files-2.1/df8cece3f5a0a2dfda4d0c2b07585ac3/firebase-auth-19.3.2/AndroidManifest.xml:17:1-42:12
+MERGED from [com.google.android.gms:play-services-auth:16.0.1] /home/jalond/.gradle/caches/transforms-2/files-2.1/f8619fc701bf02cef5acb99a2dfd2649/jetified-play-services-auth-16.0.1/AndroidManifest.xml:17:1-39:12
+MERGED from [com.google.firebase:firebase-database:19.3.1] /home/jalond/.gradle/caches/transforms-2/files-2.1/c2b74abbc98fdda9a001b26dbcec32e6/firebase-database-19.3.1/AndroidManifest.xml:15:1-38:12
+MERGED from [com.google.android.gms:play-services-auth-api-phone:16.0.0] /home/jalond/.gradle/caches/transforms-2/files-2.1/e5cffc519915e59ac399d2134df9d752/jetified-play-services-auth-api-phone-16.0.0/AndroidManifest.xml:2:1-7:12
+MERGED from [com.google.android.gms:play-services-auth-base:16.0.0] /home/jalond/.gradle/caches/transforms-2/files-2.1/59f053a58acca689d999acc32a0ca7db/jetified-play-services-auth-base-16.0.0/AndroidManifest.xml:2:1-7:12
+MERGED from [com.google.firebase:firebase-auth-interop:19.0.0] /home/jalond/.gradle/caches/transforms-2/files-2.1/0589db6f430a3f7691e4397e869db8c2/firebase-auth-interop-19.0.0/AndroidManifest.xml:2:1-10:12
+MERGED from [com.google.firebase:firebase-database-collection:17.0.1] /home/jalond/.gradle/caches/transforms-2/files-2.1/fa268567d4a0e35866f51fa43dd8960e/firebase-database-collection-17.0.1/AndroidManifest.xml:2:1-9:12
+MERGED from [com.google.android.gms:play-services-base:17.1.0] /home/jalond/.gradle/caches/transforms-2/files-2.1/adb89b977f9809169aeb781fd2706a62/play-services-base-17.1.0/AndroidManifest.xml:17:1-29:12
+MERGED from [com.google.android.gms:play-services-measurement:17.4.4] /home/jalond/.gradle/caches/transforms-2/files-2.1/4421fe9eed72257c84e9366ac7e76dfa/play-services-measurement-17.4.4/AndroidManifest.xml:17:1-46:12
+MERGED from [com.google.android.gms:play-services-measurement-api:17.4.4] /home/jalond/.gradle/caches/transforms-2/files-2.1/bc34897f7044e8d56946ccf9e4f8c420/play-services-measurement-api-17.4.4/AndroidManifest.xml:17:1-36:12
+MERGED from [com.google.android.gms:play-services-measurement-sdk:17.4.4] /home/jalond/.gradle/caches/transforms-2/files-2.1/7f45236b643056d8bb2d7202673e17fe/play-services-measurement-sdk-17.4.4/AndroidManifest.xml:17:1-25:12
+MERGED from [com.google.firebase:firebase-installations:16.3.2] /home/jalond/.gradle/caches/transforms-2/files-2.1/1a57daee105f0d3fdc6feb817aa4080e/firebase-installations-16.3.2/AndroidManifest.xml:2:1-23:12
+MERGED from [com.google.firebase:firebase-common:19.3.0] /home/jalond/.gradle/caches/transforms-2/files-2.1/ba3cdf4986e94957fa21726019960559/jetified-firebase-common-19.3.0/AndroidManifest.xml:15:1-39:12
+MERGED from [com.google.firebase:firebase-installations-interop:16.0.0] /home/jalond/.gradle/caches/transforms-2/files-2.1/cd200ce07e4911d65e65072b1ff7982f/firebase-installations-interop-16.0.0/AndroidManifest.xml:15:1-23:12
+MERGED from [com.google.android.gms:play-services-tasks:17.0.0] /home/jalond/.gradle/caches/transforms-2/files-2.1/aa0135f899f80f95650e35f5c886fcec/play-services-tasks-17.0.0/AndroidManifest.xml:2:1-9:12
+MERGED from [com.google.android.gms:play-services-measurement-impl:17.4.4] /home/jalond/.gradle/caches/transforms-2/files-2.1/104a48d4182d0d31aff583a06bc10c7d/play-services-measurement-impl-17.4.4/AndroidManifest.xml:17:1-31:12
+MERGED from [com.google.android.gms:play-services-measurement-sdk-api:17.4.4] /home/jalond/.gradle/caches/transforms-2/files-2.1/1071f69ac53866079f13bb8bed598c6f/play-services-measurement-sdk-api-17.4.4/AndroidManifest.xml:17:1-27:12
+MERGED from [com.google.android.gms:play-services-measurement-base:17.4.4] /home/jalond/.gradle/caches/transforms-2/files-2.1/d11d3aa00d5f4587ac0fc973f7981a49/play-services-measurement-base-17.4.4/AndroidManifest.xml:2:1-9:12
+MERGED from [com.google.android.gms:play-services-stats:17.0.0] /home/jalond/.gradle/caches/transforms-2/files-2.1/87bebd45b4d327e623111ba8b249f301/play-services-stats-17.0.0/AndroidManifest.xml:2:1-9:12
+MERGED from [com.google.android.gms:play-services-ads-identifier:17.0.0] /home/jalond/.gradle/caches/transforms-2/files-2.1/d72adb57527bca6b0127ceed2b4771d3/play-services-ads-identifier-17.0.0/AndroidManifest.xml:17:1-24:12
+MERGED from [com.google.firebase:firebase-measurement-connector:18.0.0] /home/jalond/.gradle/caches/transforms-2/files-2.1/8f7d2c25a5be819391d6b0dab715066c/firebase-measurement-connector-18.0.0/AndroidManifest.xml:17:1-25:12
+MERGED from [com.google.android.gms:play-services-basement:17.0.0] /home/jalond/.gradle/caches/transforms-2/files-2.1/705985e46fab43562d44efc2fb1da36c/jetified-play-services-basement-17.0.0/AndroidManifest.xml:17:1-28:12
+MERGED from [androidx.fragment:fragment:1.1.0] /home/jalond/.gradle/caches/transforms-2/files-2.1/5f97fa39bc49301aead40ca9eabb2e37/fragment-1.1.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.drawerlayout:drawerlayout:1.0.0] /home/jalond/.gradle/caches/transforms-2/files-2.1/d0e396bf01324663caae1502c0ef4d76/drawerlayout-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.viewpager:viewpager:1.0.0] /home/jalond/.gradle/caches/transforms-2/files-2.1/c471b2c8d01d54101257a0d35953f903/viewpager-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.legacy:legacy-support-core-utils:1.0.0] /home/jalond/.gradle/caches/transforms-2/files-2.1/c98db76038068b0af1791f6bba3612ca/legacy-support-core-utils-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.loader:loader:1.0.0] /home/jalond/.gradle/caches/transforms-2/files-2.1/02909b992b60e090d4c412621b4249ae/loader-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.activity:activity:1.0.0] /home/jalond/.gradle/caches/transforms-2/files-2.1/4ff901c9f804557a6ab4890d79d34c48/activity-1.0.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.vectordrawable:vectordrawable:1.1.0] /home/jalond/.gradle/caches/transforms-2/files-2.1/7672817733073394523d8d9c293a9363/vectordrawable-1.1.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.customview:customview:1.0.0] /home/jalond/.gradle/caches/transforms-2/files-2.1/c4687084fd59486bb92a17d2bfe03ebb/customview-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.core:core:1.1.0] /home/jalond/.gradle/caches/transforms-2/files-2.1/001e670d46fbed4e665b6adef32417d7/core-1.1.0/AndroidManifest.xml:17:1-26:12
+MERGED from [androidx.cursoradapter:cursoradapter:1.0.0] /home/jalond/.gradle/caches/transforms-2/files-2.1/8b77a7f6f340f3a7f4e41db478e235d3/cursoradapter-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.0] /home/jalond/.gradle/caches/transforms-2/files-2.1/e388c132645b23fa07d3d5e0d68dcc53/versionedparcelable-1.1.0/AndroidManifest.xml:17:1-27:12
+MERGED from [androidx.localbroadcastmanager:localbroadcastmanager:1.0.0] /home/jalond/.gradle/caches/transforms-2/files-2.1/4bf6d2c560d2eb148895103511d936d6/localbroadcastmanager-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [com.google.firebase:firebase-components:16.0.0] /home/jalond/.gradle/caches/transforms-2/files-2.1/f81080c5a452c97203841ccf2cb7a627/jetified-firebase-components-16.0.0/AndroidManifest.xml:15:1-23:12
+MERGED from [androidx.lifecycle:lifecycle-runtime:2.1.0] /home/jalond/.gradle/caches/transforms-2/files-2.1/f37aba7b625429613ab4ce32bc3767c8/lifecycle-runtime-2.1.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.1.0] /home/jalond/.gradle/caches/transforms-2/files-2.1/d6ba9115490ff8e5f9d84dfd9f34e260/lifecycle-viewmodel-2.1.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.savedstate:savedstate:1.0.0] /home/jalond/.gradle/caches/transforms-2/files-2.1/23a89e55ce9a0f31f90c085a237e63b1/savedstate-1.0.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.lifecycle:lifecycle-livedata:2.0.0] /home/jalond/.gradle/caches/transforms-2/files-2.1/c5dce6db11a4eb1234074e1936899ab8/lifecycle-livedata-2.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.0.0] /home/jalond/.gradle/caches/transforms-2/files-2.1/91b647edea00b711700e4b2ec96d17be/lifecycle-livedata-core-2.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.arch.core:core-runtime:2.0.0] /home/jalond/.gradle/caches/transforms-2/files-2.1/3bba28777c5a63e7e97e5bb0bd30c93c/core-runtime-2.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.documentfile:documentfile:1.0.0] /home/jalond/.gradle/caches/transforms-2/files-2.1/02b882ed217611f149f90348ba77a1ae/documentfile-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.print:print:1.0.0] /home/jalond/.gradle/caches/transforms-2/files-2.1/08c4523083c5b1fa00f8bba92dd0051a/print-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [com.facebook.fresco:fbcore:2.2.0] /home/jalond/.gradle/caches/transforms-2/files-2.1/6619190333224877ff8d96d28dcffd9d/jetified-fbcore-2.2.0/AndroidManifest.xml:2:1-9:12
+MERGED from [com.facebook.fresco:ui-common:2.2.0] /home/jalond/.gradle/caches/transforms-2/files-2.1/722263cea6ae7db58474f5b0c0eb105e/ui-common-2.2.0/AndroidManifest.xml:2:1-9:12
+MERGED from [com.google.firebase:protolite-well-known-types:17.1.0] /home/jalond/.gradle/caches/transforms-2/files-2.1/5081db6321e0373113133db5c3737ac1/protolite-well-known-types-17.1.0/AndroidManifest.xml:2:1-11:12
+INJECTED from /home/jalond/projects/seroful/android/app/src/debug/AndroidManifest.xml:2:1-8:12
+INJECTED from /home/jalond/projects/seroful/android/app/src/debug/AndroidManifest.xml:2:1-8:12
+INJECTED from /home/jalond/projects/seroful/android/app/src/debug/AndroidManifest.xml:2:1-8:12
+	package
+		ADDED from /home/jalond/projects/seroful/android/app/src/main/AndroidManifest.xml:2:3-24
+		INJECTED from /home/jalond/projects/seroful/android/app/src/main/AndroidManifest.xml
+		ADDED from /home/jalond/projects/seroful/android/app/src/main/AndroidManifest.xml:2:3-24
+		INJECTED from /home/jalond/projects/seroful/android/app/src/debug/AndroidManifest.xml
+	android:versionName
+		INJECTED from /home/jalond/projects/seroful/android/app/src/main/AndroidManifest.xml
+		ADDED from /home/jalond/projects/seroful/android/app/src/main/AndroidManifest.xml:1:1-27:12
+		INJECTED from /home/jalond/projects/seroful/android/app/src/debug/AndroidManifest.xml
+	xmlns:tools
+		ADDED from /home/jalond/projects/seroful/android/app/src/debug/AndroidManifest.xml:3:5-51
+	android:versionCode
+		INJECTED from /home/jalond/projects/seroful/android/app/src/main/AndroidManifest.xml
+		ADDED from /home/jalond/projects/seroful/android/app/src/main/AndroidManifest.xml:1:1-27:12
+		INJECTED from /home/jalond/projects/seroful/android/app/src/debug/AndroidManifest.xml
+	xmlns:android
+		ADDED from /home/jalond/projects/seroful/android/app/src/main/AndroidManifest.xml:1:11-69
+uses-permission#android.permission.INTERNET
+ADDED from /home/jalond/projects/seroful/android/app/src/main/AndroidManifest.xml:4:5-67
+MERGED from [com.facebook.flipper:flipper:0.54.0] /home/jalond/.gradle/caches/transforms-2/files-2.1/d8f57faa559a7e8d22a1c57a9e7d8865/flipper-0.54.0/AndroidManifest.xml:15:5-67
+MERGED from [com.facebook.flipper:flipper:0.54.0] /home/jalond/.gradle/caches/transforms-2/files-2.1/d8f57faa559a7e8d22a1c57a9e7d8865/flipper-0.54.0/AndroidManifest.xml:15:5-67
+MERGED from [:react-native-firebase_analytics] /home/jalond/projects/seroful/node_modules/@react-native-firebase/analytics/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:12:5-67
+MERGED from [:react-native-firebase_analytics] /home/jalond/projects/seroful/node_modules/@react-native-firebase/analytics/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:12:5-67
+MERGED from [:react-native-firebase_auth] /home/jalond/projects/seroful/node_modules/@react-native-firebase/auth/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:11:5-67
+MERGED from [:react-native-firebase_auth] /home/jalond/projects/seroful/node_modules/@react-native-firebase/auth/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:11:5-67
+MERGED from [:react-native-firebase_database] /home/jalond/projects/seroful/node_modules/@react-native-firebase/database/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:11:5-67
+MERGED from [:react-native-firebase_database] /home/jalond/projects/seroful/node_modules/@react-native-firebase/database/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:11:5-67
+MERGED from [com.google.firebase:firebase-firestore:21.5.0] /home/jalond/.gradle/caches/transforms-2/files-2.1/826082f26c636fb8ce9b8ba0d61f3155/jetified-firebase-firestore-21.5.0/AndroidManifest.xml:14:5-67
+MERGED from [com.google.firebase:firebase-firestore:21.5.0] /home/jalond/.gradle/caches/transforms-2/files-2.1/826082f26c636fb8ce9b8ba0d61f3155/jetified-firebase-firestore-21.5.0/AndroidManifest.xml:14:5-67
+MERGED from [com.google.firebase:firebase-database:19.3.1] /home/jalond/.gradle/caches/transforms-2/files-2.1/c2b74abbc98fdda9a001b26dbcec32e6/firebase-database-19.3.1/AndroidManifest.xml:26:5-67
+MERGED from [com.google.firebase:firebase-database:19.3.1] /home/jalond/.gradle/caches/transforms-2/files-2.1/c2b74abbc98fdda9a001b26dbcec32e6/firebase-database-19.3.1/AndroidManifest.xml:26:5-67
+MERGED from [com.google.android.gms:play-services-measurement:17.4.4] /home/jalond/.gradle/caches/transforms-2/files-2.1/4421fe9eed72257c84e9366ac7e76dfa/play-services-measurement-17.4.4/AndroidManifest.xml:23:5-67
+MERGED from [com.google.android.gms:play-services-measurement:17.4.4] /home/jalond/.gradle/caches/transforms-2/files-2.1/4421fe9eed72257c84e9366ac7e76dfa/play-services-measurement-17.4.4/AndroidManifest.xml:23:5-67
+MERGED from [com.google.android.gms:play-services-measurement-api:17.4.4] /home/jalond/.gradle/caches/transforms-2/files-2.1/bc34897f7044e8d56946ccf9e4f8c420/play-services-measurement-api-17.4.4/AndroidManifest.xml:22:5-67
+MERGED from [com.google.android.gms:play-services-measurement-api:17.4.4] /home/jalond/.gradle/caches/transforms-2/files-2.1/bc34897f7044e8d56946ccf9e4f8c420/play-services-measurement-api-17.4.4/AndroidManifest.xml:22:5-67
+MERGED from [com.google.firebase:firebase-installations:16.3.2] /home/jalond/.gradle/caches/transforms-2/files-2.1/1a57daee105f0d3fdc6feb817aa4080e/firebase-installations-16.3.2/AndroidManifest.xml:11:5-67
+MERGED from [com.google.firebase:firebase-installations:16.3.2] /home/jalond/.gradle/caches/transforms-2/files-2.1/1a57daee105f0d3fdc6feb817aa4080e/firebase-installations-16.3.2/AndroidManifest.xml:11:5-67
+MERGED from [com.google.android.gms:play-services-measurement-impl:17.4.4] /home/jalond/.gradle/caches/transforms-2/files-2.1/104a48d4182d0d31aff583a06bc10c7d/play-services-measurement-impl-17.4.4/AndroidManifest.xml:23:5-67
+MERGED from [com.google.android.gms:play-services-measurement-impl:17.4.4] /home/jalond/.gradle/caches/transforms-2/files-2.1/104a48d4182d0d31aff583a06bc10c7d/play-services-measurement-impl-17.4.4/AndroidManifest.xml:23:5-67
+MERGED from [com.google.android.gms:play-services-measurement-sdk-api:17.4.4] /home/jalond/.gradle/caches/transforms-2/files-2.1/1071f69ac53866079f13bb8bed598c6f/play-services-measurement-sdk-api-17.4.4/AndroidManifest.xml:23:5-67
+MERGED from [com.google.android.gms:play-services-measurement-sdk-api:17.4.4] /home/jalond/.gradle/caches/transforms-2/files-2.1/1071f69ac53866079f13bb8bed598c6f/play-services-measurement-sdk-api-17.4.4/AndroidManifest.xml:23:5-67
+	android:name
+		ADDED from /home/jalond/projects/seroful/android/app/src/main/AndroidManifest.xml:4:22-64
+application
+ADDED from /home/jalond/projects/seroful/android/app/src/main/AndroidManifest.xml:6:5-25:19
+MERGED from /home/jalond/projects/seroful/android/app/src/main/AndroidManifest.xml:6:5-25:19
+MERGED from /home/jalond/projects/seroful/android/app/src/main/AndroidManifest.xml:6:5-25:19
+MERGED from [com.google.firebase:firebase-core:17.4.4] /home/jalond/.gradle/caches/transforms-2/files-2.1/875523ebc8689359881cbf73c44e8ae3/firebase-core-17.4.4/AndroidManifest.xml:7:5-20
+MERGED from [com.google.firebase:firebase-core:17.4.4] /home/jalond/.gradle/caches/transforms-2/files-2.1/875523ebc8689359881cbf73c44e8ae3/firebase-core-17.4.4/AndroidManifest.xml:7:5-20
+MERGED from [com.google.firebase:firebase-analytics:17.4.4] /home/jalond/.gradle/caches/transforms-2/files-2.1/c6ccde5c08db4226c5781d8393a0cba3/firebase-analytics-17.4.4/AndroidManifest.xml:7:5-20
+MERGED from [com.google.firebase:firebase-analytics:17.4.4] /home/jalond/.gradle/caches/transforms-2/files-2.1/c6ccde5c08db4226c5781d8393a0cba3/firebase-analytics-17.4.4/AndroidManifest.xml:7:5-20
+MERGED from [com.facebook.react:react-native:0.63.3] /home/jalond/.gradle/caches/transforms-2/files-2.1/ddb187f502326ee131b1a2f4e1c2b817/jetified-react-native-0.63.3/AndroidManifest.xml:11:5-20
+MERGED from [com.facebook.react:react-native:0.63.3] /home/jalond/.gradle/caches/transforms-2/files-2.1/ddb187f502326ee131b1a2f4e1c2b817/jetified-react-native-0.63.3/AndroidManifest.xml:11:5-20
+MERGED from [com.facebook.soloader:soloader:0.9.0] /home/jalond/.gradle/caches/transforms-2/files-2.1/7437e1ac3f8fadbe5dc4a7c4ea5cddaf/soloader-0.9.0/AndroidManifest.xml:11:5-20
+MERGED from [com.facebook.soloader:soloader:0.9.0] /home/jalond/.gradle/caches/transforms-2/files-2.1/7437e1ac3f8fadbe5dc4a7c4ea5cddaf/soloader-0.9.0/AndroidManifest.xml:11:5-20
+MERGED from [com.google.firebase:firebase-firestore:21.5.0] /home/jalond/.gradle/caches/transforms-2/files-2.1/826082f26c636fb8ce9b8ba0d61f3155/jetified-firebase-firestore-21.5.0/AndroidManifest.xml:16:5-24:19
+MERGED from [com.google.firebase:firebase-firestore:21.5.0] /home/jalond/.gradle/caches/transforms-2/files-2.1/826082f26c636fb8ce9b8ba0d61f3155/jetified-firebase-firestore-21.5.0/AndroidManifest.xml:16:5-24:19
+MERGED from [com.google.firebase:firebase-auth:19.3.2] /home/jalond/.gradle/caches/transforms-2/files-2.1/df8cece3f5a0a2dfda4d0c2b07585ac3/firebase-auth-19.3.2/AndroidManifest.xml:23:5-40:19
+MERGED from [com.google.firebase:firebase-auth:19.3.2] /home/jalond/.gradle/caches/transforms-2/files-2.1/df8cece3f5a0a2dfda4d0c2b07585ac3/firebase-auth-19.3.2/AndroidManifest.xml:23:5-40:19
+MERGED from [com.google.android.gms:play-services-auth:16.0.1] /home/jalond/.gradle/caches/transforms-2/files-2.1/f8619fc701bf02cef5acb99a2dfd2649/jetified-play-services-auth-16.0.1/AndroidManifest.xml:22:5-37:19
+MERGED from [com.google.android.gms:play-services-auth:16.0.1] /home/jalond/.gradle/caches/transforms-2/files-2.1/f8619fc701bf02cef5acb99a2dfd2649/jetified-play-services-auth-16.0.1/AndroidManifest.xml:22:5-37:19
+MERGED from [com.google.firebase:firebase-database:19.3.1] /home/jalond/.gradle/caches/transforms-2/files-2.1/c2b74abbc98fdda9a001b26dbcec32e6/firebase-database-19.3.1/AndroidManifest.xml:28:5-36:19
+MERGED from [com.google.firebase:firebase-database:19.3.1] /home/jalond/.gradle/caches/transforms-2/files-2.1/c2b74abbc98fdda9a001b26dbcec32e6/firebase-database-19.3.1/AndroidManifest.xml:28:5-36:19
+MERGED from [com.google.firebase:firebase-auth-interop:19.0.0] /home/jalond/.gradle/caches/transforms-2/files-2.1/0589db6f430a3f7691e4397e869db8c2/firebase-auth-interop-19.0.0/AndroidManifest.xml:7:5-8:19
+MERGED from [com.google.firebase:firebase-auth-interop:19.0.0] /home/jalond/.gradle/caches/transforms-2/files-2.1/0589db6f430a3f7691e4397e869db8c2/firebase-auth-interop-19.0.0/AndroidManifest.xml:7:5-8:19
+MERGED from [com.google.android.gms:play-services-base:17.1.0] /home/jalond/.gradle/caches/transforms-2/files-2.1/adb89b977f9809169aeb781fd2706a62/play-services-base-17.1.0/AndroidManifest.xml:22:5-27:19
+MERGED from [com.google.android.gms:play-services-base:17.1.0] /home/jalond/.gradle/caches/transforms-2/files-2.1/adb89b977f9809169aeb781fd2706a62/play-services-base-17.1.0/AndroidManifest.xml:22:5-27:19
+MERGED from [com.google.android.gms:play-services-measurement:17.4.4] /home/jalond/.gradle/caches/transforms-2/files-2.1/4421fe9eed72257c84e9366ac7e76dfa/play-services-measurement-17.4.4/AndroidManifest.xml:28:5-44:19
+MERGED from [com.google.android.gms:play-services-measurement:17.4.4] /home/jalond/.gradle/caches/transforms-2/files-2.1/4421fe9eed72257c84e9366ac7e76dfa/play-services-measurement-17.4.4/AndroidManifest.xml:28:5-44:19
+MERGED from [com.google.android.gms:play-services-measurement-api:17.4.4] /home/jalond/.gradle/caches/transforms-2/files-2.1/bc34897f7044e8d56946ccf9e4f8c420/play-services-measurement-api-17.4.4/AndroidManifest.xml:26:5-34:19
+MERGED from [com.google.android.gms:play-services-measurement-api:17.4.4] /home/jalond/.gradle/caches/transforms-2/files-2.1/bc34897f7044e8d56946ccf9e4f8c420/play-services-measurement-api-17.4.4/AndroidManifest.xml:26:5-34:19
+MERGED from [com.google.android.gms:play-services-measurement-sdk:17.4.4] /home/jalond/.gradle/caches/transforms-2/files-2.1/7f45236b643056d8bb2d7202673e17fe/play-services-measurement-sdk-17.4.4/AndroidManifest.xml:22:5-23:19
+MERGED from [com.google.android.gms:play-services-measurement-sdk:17.4.4] /home/jalond/.gradle/caches/transforms-2/files-2.1/7f45236b643056d8bb2d7202673e17fe/play-services-measurement-sdk-17.4.4/AndroidManifest.xml:22:5-23:19
+MERGED from [com.google.firebase:firebase-installations:16.3.2] /home/jalond/.gradle/caches/transforms-2/files-2.1/1a57daee105f0d3fdc6feb817aa4080e/firebase-installations-16.3.2/AndroidManifest.xml:13:5-21:19
+MERGED from [com.google.firebase:firebase-installations:16.3.2] /home/jalond/.gradle/caches/transforms-2/files-2.1/1a57daee105f0d3fdc6feb817aa4080e/firebase-installations-16.3.2/AndroidManifest.xml:13:5-21:19
+MERGED from [com.google.firebase:firebase-common:19.3.0] /home/jalond/.gradle/caches/transforms-2/files-2.1/ba3cdf4986e94957fa21726019960559/jetified-firebase-common-19.3.0/AndroidManifest.xml:25:5-37:19
+MERGED from [com.google.firebase:firebase-common:19.3.0] /home/jalond/.gradle/caches/transforms-2/files-2.1/ba3cdf4986e94957fa21726019960559/jetified-firebase-common-19.3.0/AndroidManifest.xml:25:5-37:19
+MERGED from [com.google.android.gms:play-services-tasks:17.0.0] /home/jalond/.gradle/caches/transforms-2/files-2.1/aa0135f899f80f95650e35f5c886fcec/play-services-tasks-17.0.0/AndroidManifest.xml:7:5-20
+MERGED from [com.google.android.gms:play-services-tasks:17.0.0] /home/jalond/.gradle/caches/transforms-2/files-2.1/aa0135f899f80f95650e35f5c886fcec/play-services-tasks-17.0.0/AndroidManifest.xml:7:5-20
+MERGED from [com.google.android.gms:play-services-measurement-impl:17.4.4] /home/jalond/.gradle/caches/transforms-2/files-2.1/104a48d4182d0d31aff583a06bc10c7d/play-services-measurement-impl-17.4.4/AndroidManifest.xml:28:5-29:19
+MERGED from [com.google.android.gms:play-services-measurement-impl:17.4.4] /home/jalond/.gradle/caches/transforms-2/files-2.1/104a48d4182d0d31aff583a06bc10c7d/play-services-measurement-impl-17.4.4/AndroidManifest.xml:28:5-29:19
+MERGED from [com.google.android.gms:play-services-measurement-base:17.4.4] /home/jalond/.gradle/caches/transforms-2/files-2.1/d11d3aa00d5f4587ac0fc973f7981a49/play-services-measurement-base-17.4.4/AndroidManifest.xml:7:5-20
+MERGED from [com.google.android.gms:play-services-measurement-base:17.4.4] /home/jalond/.gradle/caches/transforms-2/files-2.1/d11d3aa00d5f4587ac0fc973f7981a49/play-services-measurement-base-17.4.4/AndroidManifest.xml:7:5-20
+MERGED from [com.google.android.gms:play-services-stats:17.0.0] /home/jalond/.gradle/caches/transforms-2/files-2.1/87bebd45b4d327e623111ba8b249f301/play-services-stats-17.0.0/AndroidManifest.xml:7:5-20
+MERGED from [com.google.android.gms:play-services-stats:17.0.0] /home/jalond/.gradle/caches/transforms-2/files-2.1/87bebd45b4d327e623111ba8b249f301/play-services-stats-17.0.0/AndroidManifest.xml:7:5-20
+MERGED from [com.google.android.gms:play-services-ads-identifier:17.0.0] /home/jalond/.gradle/caches/transforms-2/files-2.1/d72adb57527bca6b0127ceed2b4771d3/play-services-ads-identifier-17.0.0/AndroidManifest.xml:22:5-20
+MERGED from [com.google.android.gms:play-services-ads-identifier:17.0.0] /home/jalond/.gradle/caches/transforms-2/files-2.1/d72adb57527bca6b0127ceed2b4771d3/play-services-ads-identifier-17.0.0/AndroidManifest.xml:22:5-20
+MERGED from [com.google.firebase:firebase-measurement-connector:18.0.0] /home/jalond/.gradle/caches/transforms-2/files-2.1/8f7d2c25a5be819391d6b0dab715066c/firebase-measurement-connector-18.0.0/AndroidManifest.xml:22:5-23:19
+MERGED from [com.google.firebase:firebase-measurement-connector:18.0.0] /home/jalond/.gradle/caches/transforms-2/files-2.1/8f7d2c25a5be819391d6b0dab715066c/firebase-measurement-connector-18.0.0/AndroidManifest.xml:22:5-23:19
+MERGED from [com.google.android.gms:play-services-basement:17.0.0] /home/jalond/.gradle/caches/transforms-2/files-2.1/705985e46fab43562d44efc2fb1da36c/jetified-play-services-basement-17.0.0/AndroidManifest.xml:22:5-26:19
+MERGED from [com.google.android.gms:play-services-basement:17.0.0] /home/jalond/.gradle/caches/transforms-2/files-2.1/705985e46fab43562d44efc2fb1da36c/jetified-play-services-basement-17.0.0/AndroidManifest.xml:22:5-26:19
+MERGED from [androidx.core:core:1.1.0] /home/jalond/.gradle/caches/transforms-2/files-2.1/001e670d46fbed4e665b6adef32417d7/core-1.1.0/AndroidManifest.xml:24:5-89
+MERGED from [androidx.core:core:1.1.0] /home/jalond/.gradle/caches/transforms-2/files-2.1/001e670d46fbed4e665b6adef32417d7/core-1.1.0/AndroidManifest.xml:24:5-89
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.0] /home/jalond/.gradle/caches/transforms-2/files-2.1/e388c132645b23fa07d3d5e0d68dcc53/versionedparcelable-1.1.0/AndroidManifest.xml:24:5-25:19
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.0] /home/jalond/.gradle/caches/transforms-2/files-2.1/e388c132645b23fa07d3d5e0d68dcc53/versionedparcelable-1.1.0/AndroidManifest.xml:24:5-25:19
+	android:appComponentFactory
+		ADDED from [androidx.core:core:1.1.0] /home/jalond/.gradle/caches/transforms-2/files-2.1/001e670d46fbed4e665b6adef32417d7/core-1.1.0/AndroidManifest.xml:24:18-86
+	android:label
+		ADDED from /home/jalond/projects/seroful/android/app/src/main/AndroidManifest.xml:8:7-39
+		ADDED from /home/jalond/projects/seroful/android/app/src/main/AndroidManifest.xml:8:7-39
+	tools:ignore
+		ADDED from /home/jalond/projects/seroful/android/app/src/debug/AndroidManifest.xml:7:75-114
+	android:roundIcon
+		ADDED from /home/jalond/projects/seroful/android/app/src/main/AndroidManifest.xml:10:7-52
+		ADDED from /home/jalond/projects/seroful/android/app/src/main/AndroidManifest.xml:10:7-52
+	tools:targetApi
+		ADDED from /home/jalond/projects/seroful/android/app/src/debug/AndroidManifest.xml:7:54-74
+	android:icon
+		ADDED from /home/jalond/projects/seroful/android/app/src/main/AndroidManifest.xml:9:7-41
+		ADDED from /home/jalond/projects/seroful/android/app/src/main/AndroidManifest.xml:9:7-41
+	android:allowBackup
+		ADDED from /home/jalond/projects/seroful/android/app/src/main/AndroidManifest.xml:11:7-34
+		ADDED from /home/jalond/projects/seroful/android/app/src/main/AndroidManifest.xml:11:7-34
+	android:theme
+		ADDED from /home/jalond/projects/seroful/android/app/src/main/AndroidManifest.xml:12:7-38
+		ADDED from /home/jalond/projects/seroful/android/app/src/main/AndroidManifest.xml:12:7-38
+	android:usesCleartextTraffic
+		ADDED from /home/jalond/projects/seroful/android/app/src/debug/AndroidManifest.xml:7:18-53
+	android:name
+		ADDED from /home/jalond/projects/seroful/android/app/src/main/AndroidManifest.xml:7:7-38
+		ADDED from /home/jalond/projects/seroful/android/app/src/main/AndroidManifest.xml:7:7-38
+activity#com.seroful.MainActivity
+ADDED from /home/jalond/projects/seroful/android/app/src/main/AndroidManifest.xml:13:7-23:18
+	android:label
+		ADDED from /home/jalond/projects/seroful/android/app/src/main/AndroidManifest.xml:15:9-41
+	android:launchMode
+		ADDED from /home/jalond/projects/seroful/android/app/src/main/AndroidManifest.xml:17:9-40
+	android:windowSoftInputMode
+		ADDED from /home/jalond/projects/seroful/android/app/src/main/AndroidManifest.xml:18:9-51
+	android:configChanges
+		ADDED from /home/jalond/projects/seroful/android/app/src/main/AndroidManifest.xml:16:9-86
+	android:name
+		ADDED from /home/jalond/projects/seroful/android/app/src/main/AndroidManifest.xml:14:9-37
+intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
+ADDED from /home/jalond/projects/seroful/android/app/src/main/AndroidManifest.xml:19:9-22:25
+action#android.intent.action.MAIN
+ADDED from /home/jalond/projects/seroful/android/app/src/main/AndroidManifest.xml:20:13-65
+	android:name
+		ADDED from /home/jalond/projects/seroful/android/app/src/main/AndroidManifest.xml:20:21-62
+category#android.intent.category.LAUNCHER
+ADDED from /home/jalond/projects/seroful/android/app/src/main/AndroidManifest.xml:21:13-73
+	android:name
+		ADDED from /home/jalond/projects/seroful/android/app/src/main/AndroidManifest.xml:21:23-70
+activity#com.facebook.react.devsupport.DevSettingsActivity
+ADDED from /home/jalond/projects/seroful/android/app/src/main/AndroidManifest.xml:24:7-84
+	android:name
+		ADDED from /home/jalond/projects/seroful/android/app/src/main/AndroidManifest.xml:24:17-81
+uses-sdk
+INJECTED from /home/jalond/projects/seroful/android/app/src/main/AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from /home/jalond/projects/seroful/android/app/src/main/AndroidManifest.xml
+INJECTED from /home/jalond/projects/seroful/android/app/src/main/AndroidManifest.xml
+MERGED from [com.facebook.flipper:flipper:0.54.0] /home/jalond/.gradle/caches/transforms-2/files-2.1/d8f57faa559a7e8d22a1c57a9e7d8865/flipper-0.54.0/AndroidManifest.xml:11:5-13:41
+MERGED from [com.facebook.flipper:flipper:0.54.0] /home/jalond/.gradle/caches/transforms-2/files-2.1/d8f57faa559a7e8d22a1c57a9e7d8865/flipper-0.54.0/AndroidManifest.xml:11:5-13:41
+MERGED from [com.facebook.flipper:flipper-network-plugin:0.54.0] /home/jalond/.gradle/caches/transforms-2/files-2.1/840ea215e31c59d9feaa06d84dd75945/flipper-network-plugin-0.54.0/AndroidManifest.xml:11:5-13:41
+MERGED from [com.facebook.flipper:flipper-network-plugin:0.54.0] /home/jalond/.gradle/caches/transforms-2/files-2.1/840ea215e31c59d9feaa06d84dd75945/flipper-network-plugin-0.54.0/AndroidManifest.xml:11:5-13:41
+MERGED from [com.facebook.flipper:flipper-fresco-plugin:0.54.0] /home/jalond/.gradle/caches/transforms-2/files-2.1/cf16ec165a755bf47fb2e21ab659951d/flipper-fresco-plugin-0.54.0/AndroidManifest.xml:11:5-13:41
+MERGED from [com.facebook.flipper:flipper-fresco-plugin:0.54.0] /home/jalond/.gradle/caches/transforms-2/files-2.1/cf16ec165a755bf47fb2e21ab659951d/flipper-fresco-plugin-0.54.0/AndroidManifest.xml:11:5-13:41
+MERGED from [:react-native-firebase_analytics] /home/jalond/projects/seroful/node_modules/@react-native-firebase/analytics/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:7:5-9:41
+MERGED from [:react-native-firebase_analytics] /home/jalond/projects/seroful/node_modules/@react-native-firebase/analytics/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:7:5-9:41
+MERGED from [:react-native-firebase_auth] /home/jalond/projects/seroful/node_modules/@react-native-firebase/auth/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:7:5-9:41
+MERGED from [:react-native-firebase_auth] /home/jalond/projects/seroful/node_modules/@react-native-firebase/auth/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:7:5-9:41
+MERGED from [:react-native-firebase_database] /home/jalond/projects/seroful/node_modules/@react-native-firebase/database/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:7:5-9:41
+MERGED from [:react-native-firebase_database] /home/jalond/projects/seroful/node_modules/@react-native-firebase/database/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:7:5-9:41
+MERGED from [:react-native-firebase_firestore] /home/jalond/projects/seroful/node_modules/@react-native-firebase/firestore/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:7:5-9:41
+MERGED from [:react-native-firebase_firestore] /home/jalond/projects/seroful/node_modules/@react-native-firebase/firestore/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:7:5-9:41
+MERGED from [:react-native-firebase_app] /home/jalond/projects/seroful/node_modules/@react-native-firebase/app/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:7:5-9:41
+MERGED from [:react-native-firebase_app] /home/jalond/projects/seroful/node_modules/@react-native-firebase/app/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:7:5-9:41
+MERGED from [androidx.multidex:multidex:2.0.0] /home/jalond/.gradle/caches/transforms-2/files-2.1/d330dab23d5c24e1f9abe62bd74bbadf/multidex-2.0.0/AndroidManifest.xml:20:5-43
+MERGED from [androidx.multidex:multidex:2.0.0] /home/jalond/.gradle/caches/transforms-2/files-2.1/d330dab23d5c24e1f9abe62bd74bbadf/multidex-2.0.0/AndroidManifest.xml:20:5-43
+MERGED from [com.google.firebase:firebase-core:17.4.4] /home/jalond/.gradle/caches/transforms-2/files-2.1/875523ebc8689359881cbf73c44e8ae3/firebase-core-17.4.4/AndroidManifest.xml:5:5-44
+MERGED from [com.google.firebase:firebase-core:17.4.4] /home/jalond/.gradle/caches/transforms-2/files-2.1/875523ebc8689359881cbf73c44e8ae3/firebase-core-17.4.4/AndroidManifest.xml:5:5-44
+MERGED from [com.google.firebase:firebase-analytics:17.4.4] /home/jalond/.gradle/caches/transforms-2/files-2.1/c6ccde5c08db4226c5781d8393a0cba3/firebase-analytics-17.4.4/AndroidManifest.xml:5:5-44
+MERGED from [com.google.firebase:firebase-analytics:17.4.4] /home/jalond/.gradle/caches/transforms-2/files-2.1/c6ccde5c08db4226c5781d8393a0cba3/firebase-analytics-17.4.4/AndroidManifest.xml:5:5-44
+MERGED from [:react-native-vector-icons] /home/jalond/projects/seroful/node_modules/react-native-vector-icons/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:7:5-9:41
+MERGED from [:react-native-vector-icons] /home/jalond/projects/seroful/node_modules/react-native-vector-icons/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:7:5-9:41
+MERGED from [com.facebook.react:react-native:0.63.3] /home/jalond/.gradle/caches/transforms-2/files-2.1/ddb187f502326ee131b1a2f4e1c2b817/jetified-react-native-0.63.3/AndroidManifest.xml:7:5-9:41
+MERGED from [com.facebook.react:react-native:0.63.3] /home/jalond/.gradle/caches/transforms-2/files-2.1/ddb187f502326ee131b1a2f4e1c2b817/jetified-react-native-0.63.3/AndroidManifest.xml:7:5-9:41
+MERGED from [androidx.swiperefreshlayout:swiperefreshlayout:1.0.0] /home/jalond/.gradle/caches/transforms-2/files-2.1/aefc9bb990e1aab69c73afa3094cd5cf/swiperefreshlayout-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.swiperefreshlayout:swiperefreshlayout:1.0.0] /home/jalond/.gradle/caches/transforms-2/files-2.1/aefc9bb990e1aab69c73afa3094cd5cf/swiperefreshlayout-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [org.webkit:android-jsc:r245459] /home/jalond/.gradle/caches/transforms-2/files-2.1/82188d90792207cbf6974937b7819dab/android-jsc-r245459/AndroidManifest.xml:7:5-9:41
+MERGED from [org.webkit:android-jsc:r245459] /home/jalond/.gradle/caches/transforms-2/files-2.1/82188d90792207cbf6974937b7819dab/android-jsc-r245459/AndroidManifest.xml:7:5-9:41
+MERGED from [:react-native-linear-gradient] /home/jalond/projects/seroful/node_modules/react-native-linear-gradient/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:7:5-9:41
+MERGED from [:react-native-linear-gradient] /home/jalond/projects/seroful/node_modules/react-native-linear-gradient/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:7:5-9:41
+MERGED from [com.facebook.fresco:flipper:2.2.0] /home/jalond/.gradle/caches/transforms-2/files-2.1/09ef784d8e22eeacce22e082080d0720/flipper-2.2.0/AndroidManifest.xml:5:5-7:41
+MERGED from [com.facebook.fresco:flipper:2.2.0] /home/jalond/.gradle/caches/transforms-2/files-2.1/09ef784d8e22eeacce22e082080d0720/flipper-2.2.0/AndroidManifest.xml:5:5-7:41
+MERGED from [com.facebook.fresco:stetho:2.2.0] /home/jalond/.gradle/caches/transforms-2/files-2.1/bbd3719e0dcee306b55787368abb429c/stetho-2.2.0/AndroidManifest.xml:5:5-7:41
+MERGED from [com.facebook.fresco:stetho:2.2.0] /home/jalond/.gradle/caches/transforms-2/files-2.1/bbd3719e0dcee306b55787368abb429c/stetho-2.2.0/AndroidManifest.xml:5:5-7:41
+MERGED from [com.facebook.fresco:fresco:2.2.0] /home/jalond/.gradle/caches/transforms-2/files-2.1/69d3e7830d3081dbf6fd16480aec4f00/fresco-2.2.0/AndroidManifest.xml:5:5-7:41
+MERGED from [com.facebook.fresco:fresco:2.2.0] /home/jalond/.gradle/caches/transforms-2/files-2.1/69d3e7830d3081dbf6fd16480aec4f00/fresco-2.2.0/AndroidManifest.xml:5:5-7:41
+MERGED from [com.facebook.fresco:imagepipeline-okhttp3:2.0.0] /home/jalond/.gradle/caches/transforms-2/files-2.1/3365c8dff68df77e1f5d58797021ec91/imagepipeline-okhttp3-2.0.0/AndroidManifest.xml:5:5-7:41
+MERGED from [com.facebook.fresco:imagepipeline-okhttp3:2.0.0] /home/jalond/.gradle/caches/transforms-2/files-2.1/3365c8dff68df77e1f5d58797021ec91/imagepipeline-okhttp3-2.0.0/AndroidManifest.xml:5:5-7:41
+MERGED from [com.facebook.fresco:drawee:2.2.0] /home/jalond/.gradle/caches/transforms-2/files-2.1/04e375c5a830f0359a2e70dc6161b84f/drawee-2.2.0/AndroidManifest.xml:5:5-7:41
+MERGED from [com.facebook.fresco:drawee:2.2.0] /home/jalond/.gradle/caches/transforms-2/files-2.1/04e375c5a830f0359a2e70dc6161b84f/drawee-2.2.0/AndroidManifest.xml:5:5-7:41
+MERGED from [com.facebook.fresco:nativeimagefilters:2.2.0] /home/jalond/.gradle/caches/transforms-2/files-2.1/a3af587fc483e4608c7b0f34ca8b4dd3/nativeimagefilters-2.2.0/AndroidManifest.xml:5:5-7:41
+MERGED from [com.facebook.fresco:nativeimagefilters:2.2.0] /home/jalond/.gradle/caches/transforms-2/files-2.1/a3af587fc483e4608c7b0f34ca8b4dd3/nativeimagefilters-2.2.0/AndroidManifest.xml:5:5-7:41
+MERGED from [com.facebook.fresco:memory-type-native:2.2.0] /home/jalond/.gradle/caches/transforms-2/files-2.1/c60421b3990f8e9faa2883b611d655c8/memory-type-native-2.2.0/AndroidManifest.xml:5:5-7:41
+MERGED from [com.facebook.fresco:memory-type-native:2.2.0] /home/jalond/.gradle/caches/transforms-2/files-2.1/c60421b3990f8e9faa2883b611d655c8/memory-type-native-2.2.0/AndroidManifest.xml:5:5-7:41
+MERGED from [com.facebook.fresco:memory-type-java:2.2.0] /home/jalond/.gradle/caches/transforms-2/files-2.1/54a331f85eb1537ff2e7220542bd968b/memory-type-java-2.2.0/AndroidManifest.xml:5:5-7:41
+MERGED from [com.facebook.fresco:memory-type-java:2.2.0] /home/jalond/.gradle/caches/transforms-2/files-2.1/54a331f85eb1537ff2e7220542bd968b/memory-type-java-2.2.0/AndroidManifest.xml:5:5-7:41
+MERGED from [com.facebook.fresco:imagepipeline-native:2.2.0] /home/jalond/.gradle/caches/transforms-2/files-2.1/6b63d23d70bf87a2770e82dea4995577/imagepipeline-native-2.2.0/AndroidManifest.xml:5:5-7:41
+MERGED from [com.facebook.fresco:imagepipeline-native:2.2.0] /home/jalond/.gradle/caches/transforms-2/files-2.1/6b63d23d70bf87a2770e82dea4995577/imagepipeline-native-2.2.0/AndroidManifest.xml:5:5-7:41
+MERGED from [com.facebook.fresco:memory-type-ashmem:2.2.0] /home/jalond/.gradle/caches/transforms-2/files-2.1/15c70f0a1fb51fe6af2930c9f9470ffd/memory-type-ashmem-2.2.0/AndroidManifest.xml:5:5-7:41
+MERGED from [com.facebook.fresco:memory-type-ashmem:2.2.0] /home/jalond/.gradle/caches/transforms-2/files-2.1/15c70f0a1fb51fe6af2930c9f9470ffd/memory-type-ashmem-2.2.0/AndroidManifest.xml:5:5-7:41
+MERGED from [com.facebook.fresco:imagepipeline:2.2.0] /home/jalond/.gradle/caches/transforms-2/files-2.1/b1aba8e132260bd1c4918b3b980a4ceb/imagepipeline-2.2.0/AndroidManifest.xml:5:5-7:41
+MERGED from [com.facebook.fresco:imagepipeline:2.2.0] /home/jalond/.gradle/caches/transforms-2/files-2.1/b1aba8e132260bd1c4918b3b980a4ceb/imagepipeline-2.2.0/AndroidManifest.xml:5:5-7:41
+MERGED from [com.facebook.fresco:nativeimagetranscoder:2.2.0] /home/jalond/.gradle/caches/transforms-2/files-2.1/52eb20bc71160914fe75eb7e81ca62f6/nativeimagetranscoder-2.2.0/AndroidManifest.xml:5:5-7:41
+MERGED from [com.facebook.fresco:nativeimagetranscoder:2.2.0] /home/jalond/.gradle/caches/transforms-2/files-2.1/52eb20bc71160914fe75eb7e81ca62f6/nativeimagetranscoder-2.2.0/AndroidManifest.xml:5:5-7:41
+MERGED from [com.facebook.fresco:imagepipeline-base:2.2.0] /home/jalond/.gradle/caches/transforms-2/files-2.1/291f9dbfae02190bf8ecea9a29579a8a/imagepipeline-base-2.2.0/AndroidManifest.xml:5:5-7:41
+MERGED from [com.facebook.fresco:imagepipeline-base:2.2.0] /home/jalond/.gradle/caches/transforms-2/files-2.1/291f9dbfae02190bf8ecea9a29579a8a/imagepipeline-base-2.2.0/AndroidManifest.xml:5:5-7:41
+MERGED from [com.facebook.fresco:soloader:2.2.0] /home/jalond/.gradle/caches/transforms-2/files-2.1/d47f8705e77d52119df65473758ca76c/soloader-2.2.0/AndroidManifest.xml:5:5-7:41
+MERGED from [com.facebook.fresco:soloader:2.2.0] /home/jalond/.gradle/caches/transforms-2/files-2.1/d47f8705e77d52119df65473758ca76c/soloader-2.2.0/AndroidManifest.xml:5:5-7:41
+MERGED from [com.facebook.soloader:soloader:0.9.0] /home/jalond/.gradle/caches/transforms-2/files-2.1/7437e1ac3f8fadbe5dc4a7c4ea5cddaf/soloader-0.9.0/AndroidManifest.xml:7:5-9:41
+MERGED from [com.facebook.soloader:soloader:0.9.0] /home/jalond/.gradle/caches/transforms-2/files-2.1/7437e1ac3f8fadbe5dc4a7c4ea5cddaf/soloader-0.9.0/AndroidManifest.xml:7:5-9:41
+MERGED from [com.google.firebase:firebase-firestore:21.5.0] /home/jalond/.gradle/caches/transforms-2/files-2.1/826082f26c636fb8ce9b8ba0d61f3155/jetified-firebase-firestore-21.5.0/AndroidManifest.xml:7:5-9:41
+MERGED from [com.google.firebase:firebase-firestore:21.5.0] /home/jalond/.gradle/caches/transforms-2/files-2.1/826082f26c636fb8ce9b8ba0d61f3155/jetified-firebase-firestore-21.5.0/AndroidManifest.xml:7:5-9:41
+MERGED from [io.grpc:grpc-android:1.28.0] /home/jalond/.gradle/caches/transforms-2/files-2.1/b0d4aad8d4aa2d4a202ab26365f34709/grpc-android-1.28.0/AndroidManifest.xml:7:5-9:41
+MERGED from [io.grpc:grpc-android:1.28.0] /home/jalond/.gradle/caches/transforms-2/files-2.1/b0d4aad8d4aa2d4a202ab26365f34709/grpc-android-1.28.0/AndroidManifest.xml:7:5-9:41
+MERGED from [androidx.appcompat:appcompat:1.1.0] /home/jalond/.gradle/caches/transforms-2/files-2.1/00e5eadf5755747ccbfa8141add00a51/appcompat-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.appcompat:appcompat:1.1.0] /home/jalond/.gradle/caches/transforms-2/files-2.1/00e5eadf5755747ccbfa8141add00a51/appcompat-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.appcompat:appcompat-resources:1.1.0] /home/jalond/.gradle/caches/transforms-2/files-2.1/18b3d7758ce067b4eeadffb9ca217101/appcompat-resources-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.appcompat:appcompat-resources:1.1.0] /home/jalond/.gradle/caches/transforms-2/files-2.1/18b3d7758ce067b4eeadffb9ca217101/appcompat-resources-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.vectordrawable:vectordrawable-animated:1.1.0] /home/jalond/.gradle/caches/transforms-2/files-2.1/272973bc69c3743f557a0c2e727706fc/vectordrawable-animated-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.vectordrawable:vectordrawable-animated:1.1.0] /home/jalond/.gradle/caches/transforms-2/files-2.1/272973bc69c3743f557a0c2e727706fc/vectordrawable-animated-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.interpolator:interpolator:1.0.0] /home/jalond/.gradle/caches/transforms-2/files-2.1/f6951c16849ffe6253e3e5379ed2cc9c/interpolator-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.interpolator:interpolator:1.0.0] /home/jalond/.gradle/caches/transforms-2/files-2.1/f6951c16849ffe6253e3e5379ed2cc9c/interpolator-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [com.google.firebase:firebase-auth:19.3.2] /home/jalond/.gradle/caches/transforms-2/files-2.1/df8cece3f5a0a2dfda4d0c2b07585ac3/firebase-auth-19.3.2/AndroidManifest.xml:21:5-44
+MERGED from [com.google.firebase:firebase-auth:19.3.2] /home/jalond/.gradle/caches/transforms-2/files-2.1/df8cece3f5a0a2dfda4d0c2b07585ac3/firebase-auth-19.3.2/AndroidManifest.xml:21:5-44
+MERGED from [com.google.android.gms:play-services-auth:16.0.1] /home/jalond/.gradle/caches/transforms-2/files-2.1/f8619fc701bf02cef5acb99a2dfd2649/jetified-play-services-auth-16.0.1/AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-auth:16.0.1] /home/jalond/.gradle/caches/transforms-2/files-2.1/f8619fc701bf02cef5acb99a2dfd2649/jetified-play-services-auth-16.0.1/AndroidManifest.xml:20:5-44
+MERGED from [com.google.firebase:firebase-database:19.3.1] /home/jalond/.gradle/caches/transforms-2/files-2.1/c2b74abbc98fdda9a001b26dbcec32e6/firebase-database-19.3.1/AndroidManifest.xml:19:5-21:41
+MERGED from [com.google.firebase:firebase-database:19.3.1] /home/jalond/.gradle/caches/transforms-2/files-2.1/c2b74abbc98fdda9a001b26dbcec32e6/firebase-database-19.3.1/AndroidManifest.xml:19:5-21:41
+MERGED from [com.google.android.gms:play-services-auth-api-phone:16.0.0] /home/jalond/.gradle/caches/transforms-2/files-2.1/e5cffc519915e59ac399d2134df9d752/jetified-play-services-auth-api-phone-16.0.0/AndroidManifest.xml:5:5-44
+MERGED from [com.google.android.gms:play-services-auth-api-phone:16.0.0] /home/jalond/.gradle/caches/transforms-2/files-2.1/e5cffc519915e59ac399d2134df9d752/jetified-play-services-auth-api-phone-16.0.0/AndroidManifest.xml:5:5-44
+MERGED from [com.google.android.gms:play-services-auth-base:16.0.0] /home/jalond/.gradle/caches/transforms-2/files-2.1/59f053a58acca689d999acc32a0ca7db/jetified-play-services-auth-base-16.0.0/AndroidManifest.xml:5:5-44
+MERGED from [com.google.android.gms:play-services-auth-base:16.0.0] /home/jalond/.gradle/caches/transforms-2/files-2.1/59f053a58acca689d999acc32a0ca7db/jetified-play-services-auth-base-16.0.0/AndroidManifest.xml:5:5-44
+MERGED from [com.google.firebase:firebase-auth-interop:19.0.0] /home/jalond/.gradle/caches/transforms-2/files-2.1/0589db6f430a3f7691e4397e869db8c2/firebase-auth-interop-19.0.0/AndroidManifest.xml:5:5-44
+MERGED from [com.google.firebase:firebase-auth-interop:19.0.0] /home/jalond/.gradle/caches/transforms-2/files-2.1/0589db6f430a3f7691e4397e869db8c2/firebase-auth-interop-19.0.0/AndroidManifest.xml:5:5-44
+MERGED from [com.google.firebase:firebase-database-collection:17.0.1] /home/jalond/.gradle/caches/transforms-2/files-2.1/fa268567d4a0e35866f51fa43dd8960e/firebase-database-collection-17.0.1/AndroidManifest.xml:5:5-7:41
+MERGED from [com.google.firebase:firebase-database-collection:17.0.1] /home/jalond/.gradle/caches/transforms-2/files-2.1/fa268567d4a0e35866f51fa43dd8960e/firebase-database-collection-17.0.1/AndroidManifest.xml:5:5-7:41
+MERGED from [com.google.android.gms:play-services-base:17.1.0] /home/jalond/.gradle/caches/transforms-2/files-2.1/adb89b977f9809169aeb781fd2706a62/play-services-base-17.1.0/AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-base:17.1.0] /home/jalond/.gradle/caches/transforms-2/files-2.1/adb89b977f9809169aeb781fd2706a62/play-services-base-17.1.0/AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-measurement:17.4.4] /home/jalond/.gradle/caches/transforms-2/files-2.1/4421fe9eed72257c84e9366ac7e76dfa/play-services-measurement-17.4.4/AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-measurement:17.4.4] /home/jalond/.gradle/caches/transforms-2/files-2.1/4421fe9eed72257c84e9366ac7e76dfa/play-services-measurement-17.4.4/AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-measurement-api:17.4.4] /home/jalond/.gradle/caches/transforms-2/files-2.1/bc34897f7044e8d56946ccf9e4f8c420/play-services-measurement-api-17.4.4/AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-measurement-api:17.4.4] /home/jalond/.gradle/caches/transforms-2/files-2.1/bc34897f7044e8d56946ccf9e4f8c420/play-services-measurement-api-17.4.4/AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-measurement-sdk:17.4.4] /home/jalond/.gradle/caches/transforms-2/files-2.1/7f45236b643056d8bb2d7202673e17fe/play-services-measurement-sdk-17.4.4/AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-measurement-sdk:17.4.4] /home/jalond/.gradle/caches/transforms-2/files-2.1/7f45236b643056d8bb2d7202673e17fe/play-services-measurement-sdk-17.4.4/AndroidManifest.xml:20:5-44
+MERGED from [com.google.firebase:firebase-installations:16.3.2] /home/jalond/.gradle/caches/transforms-2/files-2.1/1a57daee105f0d3fdc6feb817aa4080e/firebase-installations-16.3.2/AndroidManifest.xml:6:5-8:41
+MERGED from [com.google.firebase:firebase-installations:16.3.2] /home/jalond/.gradle/caches/transforms-2/files-2.1/1a57daee105f0d3fdc6feb817aa4080e/firebase-installations-16.3.2/AndroidManifest.xml:6:5-8:41
+MERGED from [com.google.firebase:firebase-common:19.3.0] /home/jalond/.gradle/caches/transforms-2/files-2.1/ba3cdf4986e94957fa21726019960559/jetified-firebase-common-19.3.0/AndroidManifest.xml:20:5-22:41
+MERGED from [com.google.firebase:firebase-common:19.3.0] /home/jalond/.gradle/caches/transforms-2/files-2.1/ba3cdf4986e94957fa21726019960559/jetified-firebase-common-19.3.0/AndroidManifest.xml:20:5-22:41
+MERGED from [com.google.firebase:firebase-installations-interop:16.0.0] /home/jalond/.gradle/caches/transforms-2/files-2.1/cd200ce07e4911d65e65072b1ff7982f/firebase-installations-interop-16.0.0/AndroidManifest.xml:19:5-21:41
+MERGED from [com.google.firebase:firebase-installations-interop:16.0.0] /home/jalond/.gradle/caches/transforms-2/files-2.1/cd200ce07e4911d65e65072b1ff7982f/firebase-installations-interop-16.0.0/AndroidManifest.xml:19:5-21:41
+MERGED from [com.google.android.gms:play-services-tasks:17.0.0] /home/jalond/.gradle/caches/transforms-2/files-2.1/aa0135f899f80f95650e35f5c886fcec/play-services-tasks-17.0.0/AndroidManifest.xml:5:5-44
+MERGED from [com.google.android.gms:play-services-tasks:17.0.0] /home/jalond/.gradle/caches/transforms-2/files-2.1/aa0135f899f80f95650e35f5c886fcec/play-services-tasks-17.0.0/AndroidManifest.xml:5:5-44
+MERGED from [com.google.android.gms:play-services-measurement-impl:17.4.4] /home/jalond/.gradle/caches/transforms-2/files-2.1/104a48d4182d0d31aff583a06bc10c7d/play-services-measurement-impl-17.4.4/AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-measurement-impl:17.4.4] /home/jalond/.gradle/caches/transforms-2/files-2.1/104a48d4182d0d31aff583a06bc10c7d/play-services-measurement-impl-17.4.4/AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-measurement-sdk-api:17.4.4] /home/jalond/.gradle/caches/transforms-2/files-2.1/1071f69ac53866079f13bb8bed598c6f/play-services-measurement-sdk-api-17.4.4/AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-measurement-sdk-api:17.4.4] /home/jalond/.gradle/caches/transforms-2/files-2.1/1071f69ac53866079f13bb8bed598c6f/play-services-measurement-sdk-api-17.4.4/AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-measurement-base:17.4.4] /home/jalond/.gradle/caches/transforms-2/files-2.1/d11d3aa00d5f4587ac0fc973f7981a49/play-services-measurement-base-17.4.4/AndroidManifest.xml:5:5-44
+MERGED from [com.google.android.gms:play-services-measurement-base:17.4.4] /home/jalond/.gradle/caches/transforms-2/files-2.1/d11d3aa00d5f4587ac0fc973f7981a49/play-services-measurement-base-17.4.4/AndroidManifest.xml:5:5-44
+MERGED from [com.google.android.gms:play-services-stats:17.0.0] /home/jalond/.gradle/caches/transforms-2/files-2.1/87bebd45b4d327e623111ba8b249f301/play-services-stats-17.0.0/AndroidManifest.xml:5:5-44
+MERGED from [com.google.android.gms:play-services-stats:17.0.0] /home/jalond/.gradle/caches/transforms-2/files-2.1/87bebd45b4d327e623111ba8b249f301/play-services-stats-17.0.0/AndroidManifest.xml:5:5-44
+MERGED from [com.google.android.gms:play-services-ads-identifier:17.0.0] /home/jalond/.gradle/caches/transforms-2/files-2.1/d72adb57527bca6b0127ceed2b4771d3/play-services-ads-identifier-17.0.0/AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-ads-identifier:17.0.0] /home/jalond/.gradle/caches/transforms-2/files-2.1/d72adb57527bca6b0127ceed2b4771d3/play-services-ads-identifier-17.0.0/AndroidManifest.xml:20:5-44
+MERGED from [com.google.firebase:firebase-measurement-connector:18.0.0] /home/jalond/.gradle/caches/transforms-2/files-2.1/8f7d2c25a5be819391d6b0dab715066c/firebase-measurement-connector-18.0.0/AndroidManifest.xml:20:5-44
+MERGED from [com.google.firebase:firebase-measurement-connector:18.0.0] /home/jalond/.gradle/caches/transforms-2/files-2.1/8f7d2c25a5be819391d6b0dab715066c/firebase-measurement-connector-18.0.0/AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-basement:17.0.0] /home/jalond/.gradle/caches/transforms-2/files-2.1/705985e46fab43562d44efc2fb1da36c/jetified-play-services-basement-17.0.0/AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-basement:17.0.0] /home/jalond/.gradle/caches/transforms-2/files-2.1/705985e46fab43562d44efc2fb1da36c/jetified-play-services-basement-17.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.fragment:fragment:1.1.0] /home/jalond/.gradle/caches/transforms-2/files-2.1/5f97fa39bc49301aead40ca9eabb2e37/fragment-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.fragment:fragment:1.1.0] /home/jalond/.gradle/caches/transforms-2/files-2.1/5f97fa39bc49301aead40ca9eabb2e37/fragment-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.drawerlayout:drawerlayout:1.0.0] /home/jalond/.gradle/caches/transforms-2/files-2.1/d0e396bf01324663caae1502c0ef4d76/drawerlayout-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.drawerlayout:drawerlayout:1.0.0] /home/jalond/.gradle/caches/transforms-2/files-2.1/d0e396bf01324663caae1502c0ef4d76/drawerlayout-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.viewpager:viewpager:1.0.0] /home/jalond/.gradle/caches/transforms-2/files-2.1/c471b2c8d01d54101257a0d35953f903/viewpager-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.viewpager:viewpager:1.0.0] /home/jalond/.gradle/caches/transforms-2/files-2.1/c471b2c8d01d54101257a0d35953f903/viewpager-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.legacy:legacy-support-core-utils:1.0.0] /home/jalond/.gradle/caches/transforms-2/files-2.1/c98db76038068b0af1791f6bba3612ca/legacy-support-core-utils-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.legacy:legacy-support-core-utils:1.0.0] /home/jalond/.gradle/caches/transforms-2/files-2.1/c98db76038068b0af1791f6bba3612ca/legacy-support-core-utils-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.loader:loader:1.0.0] /home/jalond/.gradle/caches/transforms-2/files-2.1/02909b992b60e090d4c412621b4249ae/loader-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.loader:loader:1.0.0] /home/jalond/.gradle/caches/transforms-2/files-2.1/02909b992b60e090d4c412621b4249ae/loader-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.activity:activity:1.0.0] /home/jalond/.gradle/caches/transforms-2/files-2.1/4ff901c9f804557a6ab4890d79d34c48/activity-1.0.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.activity:activity:1.0.0] /home/jalond/.gradle/caches/transforms-2/files-2.1/4ff901c9f804557a6ab4890d79d34c48/activity-1.0.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.vectordrawable:vectordrawable:1.1.0] /home/jalond/.gradle/caches/transforms-2/files-2.1/7672817733073394523d8d9c293a9363/vectordrawable-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.vectordrawable:vectordrawable:1.1.0] /home/jalond/.gradle/caches/transforms-2/files-2.1/7672817733073394523d8d9c293a9363/vectordrawable-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.customview:customview:1.0.0] /home/jalond/.gradle/caches/transforms-2/files-2.1/c4687084fd59486bb92a17d2bfe03ebb/customview-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.customview:customview:1.0.0] /home/jalond/.gradle/caches/transforms-2/files-2.1/c4687084fd59486bb92a17d2bfe03ebb/customview-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.core:core:1.1.0] /home/jalond/.gradle/caches/transforms-2/files-2.1/001e670d46fbed4e665b6adef32417d7/core-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.core:core:1.1.0] /home/jalond/.gradle/caches/transforms-2/files-2.1/001e670d46fbed4e665b6adef32417d7/core-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.cursoradapter:cursoradapter:1.0.0] /home/jalond/.gradle/caches/transforms-2/files-2.1/8b77a7f6f340f3a7f4e41db478e235d3/cursoradapter-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.cursoradapter:cursoradapter:1.0.0] /home/jalond/.gradle/caches/transforms-2/files-2.1/8b77a7f6f340f3a7f4e41db478e235d3/cursoradapter-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.0] /home/jalond/.gradle/caches/transforms-2/files-2.1/e388c132645b23fa07d3d5e0d68dcc53/versionedparcelable-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.0] /home/jalond/.gradle/caches/transforms-2/files-2.1/e388c132645b23fa07d3d5e0d68dcc53/versionedparcelable-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.localbroadcastmanager:localbroadcastmanager:1.0.0] /home/jalond/.gradle/caches/transforms-2/files-2.1/4bf6d2c560d2eb148895103511d936d6/localbroadcastmanager-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.localbroadcastmanager:localbroadcastmanager:1.0.0] /home/jalond/.gradle/caches/transforms-2/files-2.1/4bf6d2c560d2eb148895103511d936d6/localbroadcastmanager-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [com.google.firebase:firebase-components:16.0.0] /home/jalond/.gradle/caches/transforms-2/files-2.1/f81080c5a452c97203841ccf2cb7a627/jetified-firebase-components-16.0.0/AndroidManifest.xml:19:5-21:41
+MERGED from [com.google.firebase:firebase-components:16.0.0] /home/jalond/.gradle/caches/transforms-2/files-2.1/f81080c5a452c97203841ccf2cb7a627/jetified-firebase-components-16.0.0/AndroidManifest.xml:19:5-21:41
+MERGED from [androidx.lifecycle:lifecycle-runtime:2.1.0] /home/jalond/.gradle/caches/transforms-2/files-2.1/f37aba7b625429613ab4ce32bc3767c8/lifecycle-runtime-2.1.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-runtime:2.1.0] /home/jalond/.gradle/caches/transforms-2/files-2.1/f37aba7b625429613ab4ce32bc3767c8/lifecycle-runtime-2.1.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.1.0] /home/jalond/.gradle/caches/transforms-2/files-2.1/d6ba9115490ff8e5f9d84dfd9f34e260/lifecycle-viewmodel-2.1.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.1.0] /home/jalond/.gradle/caches/transforms-2/files-2.1/d6ba9115490ff8e5f9d84dfd9f34e260/lifecycle-viewmodel-2.1.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.savedstate:savedstate:1.0.0] /home/jalond/.gradle/caches/transforms-2/files-2.1/23a89e55ce9a0f31f90c085a237e63b1/savedstate-1.0.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.savedstate:savedstate:1.0.0] /home/jalond/.gradle/caches/transforms-2/files-2.1/23a89e55ce9a0f31f90c085a237e63b1/savedstate-1.0.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.lifecycle:lifecycle-livedata:2.0.0] /home/jalond/.gradle/caches/transforms-2/files-2.1/c5dce6db11a4eb1234074e1936899ab8/lifecycle-livedata-2.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata:2.0.0] /home/jalond/.gradle/caches/transforms-2/files-2.1/c5dce6db11a4eb1234074e1936899ab8/lifecycle-livedata-2.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.0.0] /home/jalond/.gradle/caches/transforms-2/files-2.1/91b647edea00b711700e4b2ec96d17be/lifecycle-livedata-core-2.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.0.0] /home/jalond/.gradle/caches/transforms-2/files-2.1/91b647edea00b711700e4b2ec96d17be/lifecycle-livedata-core-2.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.arch.core:core-runtime:2.0.0] /home/jalond/.gradle/caches/transforms-2/files-2.1/3bba28777c5a63e7e97e5bb0bd30c93c/core-runtime-2.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.arch.core:core-runtime:2.0.0] /home/jalond/.gradle/caches/transforms-2/files-2.1/3bba28777c5a63e7e97e5bb0bd30c93c/core-runtime-2.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.documentfile:documentfile:1.0.0] /home/jalond/.gradle/caches/transforms-2/files-2.1/02b882ed217611f149f90348ba77a1ae/documentfile-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.documentfile:documentfile:1.0.0] /home/jalond/.gradle/caches/transforms-2/files-2.1/02b882ed217611f149f90348ba77a1ae/documentfile-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.print:print:1.0.0] /home/jalond/.gradle/caches/transforms-2/files-2.1/08c4523083c5b1fa00f8bba92dd0051a/print-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.print:print:1.0.0] /home/jalond/.gradle/caches/transforms-2/files-2.1/08c4523083c5b1fa00f8bba92dd0051a/print-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [com.facebook.fresco:fbcore:2.2.0] /home/jalond/.gradle/caches/transforms-2/files-2.1/6619190333224877ff8d96d28dcffd9d/jetified-fbcore-2.2.0/AndroidManifest.xml:5:5-7:41
+MERGED from [com.facebook.fresco:fbcore:2.2.0] /home/jalond/.gradle/caches/transforms-2/files-2.1/6619190333224877ff8d96d28dcffd9d/jetified-fbcore-2.2.0/AndroidManifest.xml:5:5-7:41
+MERGED from [com.facebook.fresco:ui-common:2.2.0] /home/jalond/.gradle/caches/transforms-2/files-2.1/722263cea6ae7db58474f5b0c0eb105e/ui-common-2.2.0/AndroidManifest.xml:5:5-7:41
+MERGED from [com.facebook.fresco:ui-common:2.2.0] /home/jalond/.gradle/caches/transforms-2/files-2.1/722263cea6ae7db58474f5b0c0eb105e/ui-common-2.2.0/AndroidManifest.xml:5:5-7:41
+MERGED from [com.google.firebase:protolite-well-known-types:17.1.0] /home/jalond/.gradle/caches/transforms-2/files-2.1/5081db6321e0373113133db5c3737ac1/protolite-well-known-types-17.1.0/AndroidManifest.xml:7:5-9:41
+MERGED from [com.google.firebase:protolite-well-known-types:17.1.0] /home/jalond/.gradle/caches/transforms-2/files-2.1/5081db6321e0373113133db5c3737ac1/protolite-well-known-types-17.1.0/AndroidManifest.xml:7:5-9:41
+INJECTED from /home/jalond/projects/seroful/android/app/src/debug/AndroidManifest.xml
+INJECTED from /home/jalond/projects/seroful/android/app/src/debug/AndroidManifest.xml
+	android:targetSdkVersion
+		INJECTED from /home/jalond/projects/seroful/android/app/src/main/AndroidManifest.xml
+		INJECTED from /home/jalond/projects/seroful/android/app/src/debug/AndroidManifest.xml
+	android:minSdkVersion
+		INJECTED from /home/jalond/projects/seroful/android/app/src/main/AndroidManifest.xml
+		INJECTED from /home/jalond/projects/seroful/android/app/src/debug/AndroidManifest.xml
+uses-permission#android.permission.SYSTEM_ALERT_WINDOW
+ADDED from /home/jalond/projects/seroful/android/app/src/debug/AndroidManifest.xml:5:5-77
+	android:name
+		ADDED from /home/jalond/projects/seroful/android/app/src/debug/AndroidManifest.xml:5:22-75
+uses-permission#android.permission.ACCESS_WIFI_STATE
+ADDED from [com.facebook.flipper:flipper:0.54.0] /home/jalond/.gradle/caches/transforms-2/files-2.1/d8f57faa559a7e8d22a1c57a9e7d8865/flipper-0.54.0/AndroidManifest.xml:16:5-76
+	android:name
+		ADDED from [com.facebook.flipper:flipper:0.54.0] /home/jalond/.gradle/caches/transforms-2/files-2.1/d8f57faa559a7e8d22a1c57a9e7d8865/flipper-0.54.0/AndroidManifest.xml:16:22-73
+uses-permission#android.permission.ACCESS_NETWORK_STATE
+ADDED from [:react-native-firebase_analytics] /home/jalond/projects/seroful/node_modules/@react-native-firebase/analytics/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:11:5-79
+MERGED from [:react-native-firebase_auth] /home/jalond/projects/seroful/node_modules/@react-native-firebase/auth/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:13:5-79
+MERGED from [:react-native-firebase_auth] /home/jalond/projects/seroful/node_modules/@react-native-firebase/auth/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:13:5-79
+MERGED from [:react-native-firebase_database] /home/jalond/projects/seroful/node_modules/@react-native-firebase/database/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:13:5-79
+MERGED from [:react-native-firebase_database] /home/jalond/projects/seroful/node_modules/@react-native-firebase/database/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:13:5-79
+MERGED from [com.google.firebase:firebase-firestore:21.5.0] /home/jalond/.gradle/caches/transforms-2/files-2.1/826082f26c636fb8ce9b8ba0d61f3155/jetified-firebase-firestore-21.5.0/AndroidManifest.xml:13:5-79
+MERGED from [com.google.firebase:firebase-firestore:21.5.0] /home/jalond/.gradle/caches/transforms-2/files-2.1/826082f26c636fb8ce9b8ba0d61f3155/jetified-firebase-firestore-21.5.0/AndroidManifest.xml:13:5-79
+MERGED from [io.grpc:grpc-android:1.28.0] /home/jalond/.gradle/caches/transforms-2/files-2.1/b0d4aad8d4aa2d4a202ab26365f34709/grpc-android-1.28.0/AndroidManifest.xml:11:5-79
+MERGED from [io.grpc:grpc-android:1.28.0] /home/jalond/.gradle/caches/transforms-2/files-2.1/b0d4aad8d4aa2d4a202ab26365f34709/grpc-android-1.28.0/AndroidManifest.xml:11:5-79
+MERGED from [com.google.firebase:firebase-database:19.3.1] /home/jalond/.gradle/caches/transforms-2/files-2.1/c2b74abbc98fdda9a001b26dbcec32e6/firebase-database-19.3.1/AndroidManifest.xml:25:5-79
+MERGED from [com.google.firebase:firebase-database:19.3.1] /home/jalond/.gradle/caches/transforms-2/files-2.1/c2b74abbc98fdda9a001b26dbcec32e6/firebase-database-19.3.1/AndroidManifest.xml:25:5-79
+MERGED from [com.google.android.gms:play-services-measurement:17.4.4] /home/jalond/.gradle/caches/transforms-2/files-2.1/4421fe9eed72257c84e9366ac7e76dfa/play-services-measurement-17.4.4/AndroidManifest.xml:24:5-79
+MERGED from [com.google.android.gms:play-services-measurement:17.4.4] /home/jalond/.gradle/caches/transforms-2/files-2.1/4421fe9eed72257c84e9366ac7e76dfa/play-services-measurement-17.4.4/AndroidManifest.xml:24:5-79
+MERGED from [com.google.android.gms:play-services-measurement-api:17.4.4] /home/jalond/.gradle/caches/transforms-2/files-2.1/bc34897f7044e8d56946ccf9e4f8c420/play-services-measurement-api-17.4.4/AndroidManifest.xml:23:5-79
+MERGED from [com.google.android.gms:play-services-measurement-api:17.4.4] /home/jalond/.gradle/caches/transforms-2/files-2.1/bc34897f7044e8d56946ccf9e4f8c420/play-services-measurement-api-17.4.4/AndroidManifest.xml:23:5-79
+MERGED from [com.google.firebase:firebase-installations:16.3.2] /home/jalond/.gradle/caches/transforms-2/files-2.1/1a57daee105f0d3fdc6feb817aa4080e/firebase-installations-16.3.2/AndroidManifest.xml:10:5-79
+MERGED from [com.google.firebase:firebase-installations:16.3.2] /home/jalond/.gradle/caches/transforms-2/files-2.1/1a57daee105f0d3fdc6feb817aa4080e/firebase-installations-16.3.2/AndroidManifest.xml:10:5-79
+MERGED from [com.google.android.gms:play-services-measurement-impl:17.4.4] /home/jalond/.gradle/caches/transforms-2/files-2.1/104a48d4182d0d31aff583a06bc10c7d/play-services-measurement-impl-17.4.4/AndroidManifest.xml:24:5-79
+MERGED from [com.google.android.gms:play-services-measurement-impl:17.4.4] /home/jalond/.gradle/caches/transforms-2/files-2.1/104a48d4182d0d31aff583a06bc10c7d/play-services-measurement-impl-17.4.4/AndroidManifest.xml:24:5-79
+MERGED from [com.google.android.gms:play-services-measurement-sdk-api:17.4.4] /home/jalond/.gradle/caches/transforms-2/files-2.1/1071f69ac53866079f13bb8bed598c6f/play-services-measurement-sdk-api-17.4.4/AndroidManifest.xml:24:5-79
+MERGED from [com.google.android.gms:play-services-measurement-sdk-api:17.4.4] /home/jalond/.gradle/caches/transforms-2/files-2.1/1071f69ac53866079f13bb8bed598c6f/play-services-measurement-sdk-api-17.4.4/AndroidManifest.xml:24:5-79
+	android:name
+		ADDED from [:react-native-firebase_analytics] /home/jalond/projects/seroful/node_modules/@react-native-firebase/analytics/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:11:22-76
+uses-permission#android.permission.WAKE_LOCK
+ADDED from [:react-native-firebase_analytics] /home/jalond/projects/seroful/node_modules/@react-native-firebase/analytics/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:13:5-68
+MERGED from [:react-native-firebase_auth] /home/jalond/projects/seroful/node_modules/@react-native-firebase/auth/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:12:5-68
+MERGED from [:react-native-firebase_auth] /home/jalond/projects/seroful/node_modules/@react-native-firebase/auth/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:12:5-68
+MERGED from [:react-native-firebase_database] /home/jalond/projects/seroful/node_modules/@react-native-firebase/database/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:12:5-68
+MERGED from [:react-native-firebase_database] /home/jalond/projects/seroful/node_modules/@react-native-firebase/database/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:12:5-68
+MERGED from [com.google.android.gms:play-services-measurement:17.4.4] /home/jalond/.gradle/caches/transforms-2/files-2.1/4421fe9eed72257c84e9366ac7e76dfa/play-services-measurement-17.4.4/AndroidManifest.xml:25:5-68
+MERGED from [com.google.android.gms:play-services-measurement:17.4.4] /home/jalond/.gradle/caches/transforms-2/files-2.1/4421fe9eed72257c84e9366ac7e76dfa/play-services-measurement-17.4.4/AndroidManifest.xml:25:5-68
+MERGED from [com.google.android.gms:play-services-measurement-api:17.4.4] /home/jalond/.gradle/caches/transforms-2/files-2.1/bc34897f7044e8d56946ccf9e4f8c420/play-services-measurement-api-17.4.4/AndroidManifest.xml:24:5-68
+MERGED from [com.google.android.gms:play-services-measurement-api:17.4.4] /home/jalond/.gradle/caches/transforms-2/files-2.1/bc34897f7044e8d56946ccf9e4f8c420/play-services-measurement-api-17.4.4/AndroidManifest.xml:24:5-68
+MERGED from [com.google.android.gms:play-services-measurement-impl:17.4.4] /home/jalond/.gradle/caches/transforms-2/files-2.1/104a48d4182d0d31aff583a06bc10c7d/play-services-measurement-impl-17.4.4/AndroidManifest.xml:25:5-68
+MERGED from [com.google.android.gms:play-services-measurement-impl:17.4.4] /home/jalond/.gradle/caches/transforms-2/files-2.1/104a48d4182d0d31aff583a06bc10c7d/play-services-measurement-impl-17.4.4/AndroidManifest.xml:25:5-68
+MERGED from [com.google.android.gms:play-services-measurement-sdk-api:17.4.4] /home/jalond/.gradle/caches/transforms-2/files-2.1/1071f69ac53866079f13bb8bed598c6f/play-services-measurement-sdk-api-17.4.4/AndroidManifest.xml:25:5-68
+MERGED from [com.google.android.gms:play-services-measurement-sdk-api:17.4.4] /home/jalond/.gradle/caches/transforms-2/files-2.1/1071f69ac53866079f13bb8bed598c6f/play-services-measurement-sdk-api-17.4.4/AndroidManifest.xml:25:5-68
+	android:name
+		ADDED from [:react-native-firebase_analytics] /home/jalond/projects/seroful/node_modules/@react-native-firebase/analytics/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:13:22-65
+service#com.google.firebase.components.ComponentDiscoveryService
+ADDED from [com.google.firebase:firebase-firestore:21.5.0] /home/jalond/.gradle/caches/transforms-2/files-2.1/826082f26c636fb8ce9b8ba0d61f3155/jetified-firebase-firestore-21.5.0/AndroidManifest.xml:17:9-23:19
+MERGED from [com.google.firebase:firebase-auth:19.3.2] /home/jalond/.gradle/caches/transforms-2/files-2.1/df8cece3f5a0a2dfda4d0c2b07585ac3/firebase-auth-19.3.2/AndroidManifest.xml:33:9-39:19
+MERGED from [com.google.firebase:firebase-auth:19.3.2] /home/jalond/.gradle/caches/transforms-2/files-2.1/df8cece3f5a0a2dfda4d0c2b07585ac3/firebase-auth-19.3.2/AndroidManifest.xml:33:9-39:19
+MERGED from [com.google.firebase:firebase-database:19.3.1] /home/jalond/.gradle/caches/transforms-2/files-2.1/c2b74abbc98fdda9a001b26dbcec32e6/firebase-database-19.3.1/AndroidManifest.xml:29:9-35:19
+MERGED from [com.google.firebase:firebase-database:19.3.1] /home/jalond/.gradle/caches/transforms-2/files-2.1/c2b74abbc98fdda9a001b26dbcec32e6/firebase-database-19.3.1/AndroidManifest.xml:29:9-35:19
+MERGED from [com.google.android.gms:play-services-measurement-api:17.4.4] /home/jalond/.gradle/caches/transforms-2/files-2.1/bc34897f7044e8d56946ccf9e4f8c420/play-services-measurement-api-17.4.4/AndroidManifest.xml:27:9-33:19
+MERGED from [com.google.android.gms:play-services-measurement-api:17.4.4] /home/jalond/.gradle/caches/transforms-2/files-2.1/bc34897f7044e8d56946ccf9e4f8c420/play-services-measurement-api-17.4.4/AndroidManifest.xml:27:9-33:19
+MERGED from [com.google.firebase:firebase-installations:16.3.2] /home/jalond/.gradle/caches/transforms-2/files-2.1/1a57daee105f0d3fdc6feb817aa4080e/firebase-installations-16.3.2/AndroidManifest.xml:14:9-20:19
+MERGED from [com.google.firebase:firebase-installations:16.3.2] /home/jalond/.gradle/caches/transforms-2/files-2.1/1a57daee105f0d3fdc6feb817aa4080e/firebase-installations-16.3.2/AndroidManifest.xml:14:9-20:19
+MERGED from [com.google.firebase:firebase-common:19.3.0] /home/jalond/.gradle/caches/transforms-2/files-2.1/ba3cdf4986e94957fa21726019960559/jetified-firebase-common-19.3.0/AndroidManifest.xml:32:9-36:35
+MERGED from [com.google.firebase:firebase-common:19.3.0] /home/jalond/.gradle/caches/transforms-2/files-2.1/ba3cdf4986e94957fa21726019960559/jetified-firebase-common-19.3.0/AndroidManifest.xml:32:9-36:35
+	android:exported
+		ADDED from [com.google.firebase:firebase-firestore:21.5.0] /home/jalond/.gradle/caches/transforms-2/files-2.1/826082f26c636fb8ce9b8ba0d61f3155/jetified-firebase-firestore-21.5.0/AndroidManifest.xml:19:13-37
+	tools:targetApi
+		ADDED from [com.google.firebase:firebase-common:19.3.0] /home/jalond/.gradle/caches/transforms-2/files-2.1/ba3cdf4986e94957fa21726019960559/jetified-firebase-common-19.3.0/AndroidManifest.xml:36:13-32
+	android:directBootAware
+		ADDED from [com.google.firebase:firebase-common:19.3.0] /home/jalond/.gradle/caches/transforms-2/files-2.1/ba3cdf4986e94957fa21726019960559/jetified-firebase-common-19.3.0/AndroidManifest.xml:34:13-43
+	android:name
+		ADDED from [com.google.firebase:firebase-firestore:21.5.0] /home/jalond/.gradle/caches/transforms-2/files-2.1/826082f26c636fb8ce9b8ba0d61f3155/jetified-firebase-firestore-21.5.0/AndroidManifest.xml:18:13-84
+meta-data#com.google.firebase.components:com.google.firebase.firestore.FirestoreRegistrar
+ADDED from [com.google.firebase:firebase-firestore:21.5.0] /home/jalond/.gradle/caches/transforms-2/files-2.1/826082f26c636fb8ce9b8ba0d61f3155/jetified-firebase-firestore-21.5.0/AndroidManifest.xml:20:13-22:85
+	android:value
+		ADDED from [com.google.firebase:firebase-firestore:21.5.0] /home/jalond/.gradle/caches/transforms-2/files-2.1/826082f26c636fb8ce9b8ba0d61f3155/jetified-firebase-firestore-21.5.0/AndroidManifest.xml:22:17-82
+	android:name
+		ADDED from [com.google.firebase:firebase-firestore:21.5.0] /home/jalond/.gradle/caches/transforms-2/files-2.1/826082f26c636fb8ce9b8ba0d61f3155/jetified-firebase-firestore-21.5.0/AndroidManifest.xml:21:17-111
+activity#com.google.firebase.auth.internal.FederatedSignInActivity
+ADDED from [com.google.firebase:firebase-auth:19.3.2] /home/jalond/.gradle/caches/transforms-2/files-2.1/df8cece3f5a0a2dfda4d0c2b07585ac3/firebase-auth-19.3.2/AndroidManifest.xml:24:9-31:50
+	android:excludeFromRecents
+		ADDED from [com.google.firebase:firebase-auth:19.3.2] /home/jalond/.gradle/caches/transforms-2/files-2.1/df8cece3f5a0a2dfda4d0c2b07585ac3/firebase-auth-19.3.2/AndroidManifest.xml:26:13-46
+	android:launchMode
+		ADDED from [com.google.firebase:firebase-auth:19.3.2] /home/jalond/.gradle/caches/transforms-2/files-2.1/df8cece3f5a0a2dfda4d0c2b07585ac3/firebase-auth-19.3.2/AndroidManifest.xml:28:13-44
+	android:exported
+		ADDED from [com.google.firebase:firebase-auth:19.3.2] /home/jalond/.gradle/caches/transforms-2/files-2.1/df8cece3f5a0a2dfda4d0c2b07585ac3/firebase-auth-19.3.2/AndroidManifest.xml:27:13-36
+	android:permission
+		ADDED from [com.google.firebase:firebase-auth:19.3.2] /home/jalond/.gradle/caches/transforms-2/files-2.1/df8cece3f5a0a2dfda4d0c2b07585ac3/firebase-auth-19.3.2/AndroidManifest.xml:29:13-102
+	android:theme
+		ADDED from [com.google.firebase:firebase-auth:19.3.2] /home/jalond/.gradle/caches/transforms-2/files-2.1/df8cece3f5a0a2dfda4d0c2b07585ac3/firebase-auth-19.3.2/AndroidManifest.xml:30:13-72
+	tools:replace
+		ADDED from [com.google.firebase:firebase-auth:19.3.2] /home/jalond/.gradle/caches/transforms-2/files-2.1/df8cece3f5a0a2dfda4d0c2b07585ac3/firebase-auth-19.3.2/AndroidManifest.xml:31:13-47
+	android:name
+		ADDED from [com.google.firebase:firebase-auth:19.3.2] /home/jalond/.gradle/caches/transforms-2/files-2.1/df8cece3f5a0a2dfda4d0c2b07585ac3/firebase-auth-19.3.2/AndroidManifest.xml:25:13-85
+meta-data#com.google.firebase.components:com.google.firebase.auth.FirebaseAuthRegistrar
+ADDED from [com.google.firebase:firebase-auth:19.3.2] /home/jalond/.gradle/caches/transforms-2/files-2.1/df8cece3f5a0a2dfda4d0c2b07585ac3/firebase-auth-19.3.2/AndroidManifest.xml:36:13-38:85
+	android:value
+		ADDED from [com.google.firebase:firebase-auth:19.3.2] /home/jalond/.gradle/caches/transforms-2/files-2.1/df8cece3f5a0a2dfda4d0c2b07585ac3/firebase-auth-19.3.2/AndroidManifest.xml:38:17-82
+	android:name
+		ADDED from [com.google.firebase:firebase-auth:19.3.2] /home/jalond/.gradle/caches/transforms-2/files-2.1/df8cece3f5a0a2dfda4d0c2b07585ac3/firebase-auth-19.3.2/AndroidManifest.xml:37:17-109
+activity#com.google.android.gms.auth.api.signin.internal.SignInHubActivity
+ADDED from [com.google.android.gms:play-services-auth:16.0.1] /home/jalond/.gradle/caches/transforms-2/files-2.1/f8619fc701bf02cef5acb99a2dfd2649/jetified-play-services-auth-16.0.1/AndroidManifest.xml:23:9-27:75
+	android:excludeFromRecents
+		ADDED from [com.google.android.gms:play-services-auth:16.0.1] /home/jalond/.gradle/caches/transforms-2/files-2.1/f8619fc701bf02cef5acb99a2dfd2649/jetified-play-services-auth-16.0.1/AndroidManifest.xml:25:13-46
+	android:exported
+		ADDED from [com.google.android.gms:play-services-auth:16.0.1] /home/jalond/.gradle/caches/transforms-2/files-2.1/f8619fc701bf02cef5acb99a2dfd2649/jetified-play-services-auth-16.0.1/AndroidManifest.xml:26:13-37
+	android:theme
+		ADDED from [com.google.android.gms:play-services-auth:16.0.1] /home/jalond/.gradle/caches/transforms-2/files-2.1/f8619fc701bf02cef5acb99a2dfd2649/jetified-play-services-auth-16.0.1/AndroidManifest.xml:27:13-72
+	android:name
+		ADDED from [com.google.android.gms:play-services-auth:16.0.1] /home/jalond/.gradle/caches/transforms-2/files-2.1/f8619fc701bf02cef5acb99a2dfd2649/jetified-play-services-auth-16.0.1/AndroidManifest.xml:24:13-93
+service#com.google.android.gms.auth.api.signin.RevocationBoundService
+ADDED from [com.google.android.gms:play-services-auth:16.0.1] /home/jalond/.gradle/caches/transforms-2/files-2.1/f8619fc701bf02cef5acb99a2dfd2649/jetified-play-services-auth-16.0.1/AndroidManifest.xml:33:9-36:110
+	android:exported
+		ADDED from [com.google.android.gms:play-services-auth:16.0.1] /home/jalond/.gradle/caches/transforms-2/files-2.1/f8619fc701bf02cef5acb99a2dfd2649/jetified-play-services-auth-16.0.1/AndroidManifest.xml:35:13-36
+	android:permission
+		ADDED from [com.google.android.gms:play-services-auth:16.0.1] /home/jalond/.gradle/caches/transforms-2/files-2.1/f8619fc701bf02cef5acb99a2dfd2649/jetified-play-services-auth-16.0.1/AndroidManifest.xml:36:13-107
+	android:name
+		ADDED from [com.google.android.gms:play-services-auth:16.0.1] /home/jalond/.gradle/caches/transforms-2/files-2.1/f8619fc701bf02cef5acb99a2dfd2649/jetified-play-services-auth-16.0.1/AndroidManifest.xml:34:13-89
+meta-data#com.google.firebase.components:com.google.firebase.database.DatabaseRegistrar
+ADDED from [com.google.firebase:firebase-database:19.3.1] /home/jalond/.gradle/caches/transforms-2/files-2.1/c2b74abbc98fdda9a001b26dbcec32e6/firebase-database-19.3.1/AndroidManifest.xml:32:13-34:85
+	android:value
+		ADDED from [com.google.firebase:firebase-database:19.3.1] /home/jalond/.gradle/caches/transforms-2/files-2.1/c2b74abbc98fdda9a001b26dbcec32e6/firebase-database-19.3.1/AndroidManifest.xml:34:17-82
+	android:name
+		ADDED from [com.google.firebase:firebase-database:19.3.1] /home/jalond/.gradle/caches/transforms-2/files-2.1/c2b74abbc98fdda9a001b26dbcec32e6/firebase-database-19.3.1/AndroidManifest.xml:33:17-109
+activity#com.google.android.gms.common.api.GoogleApiActivity
+ADDED from [com.google.android.gms:play-services-base:17.1.0] /home/jalond/.gradle/caches/transforms-2/files-2.1/adb89b977f9809169aeb781fd2706a62/play-services-base-17.1.0/AndroidManifest.xml:23:9-26:75
+	android:exported
+		ADDED from [com.google.android.gms:play-services-base:17.1.0] /home/jalond/.gradle/caches/transforms-2/files-2.1/adb89b977f9809169aeb781fd2706a62/play-services-base-17.1.0/AndroidManifest.xml:25:13-37
+	android:theme
+		ADDED from [com.google.android.gms:play-services-base:17.1.0] /home/jalond/.gradle/caches/transforms-2/files-2.1/adb89b977f9809169aeb781fd2706a62/play-services-base-17.1.0/AndroidManifest.xml:26:13-72
+	android:name
+		ADDED from [com.google.android.gms:play-services-base:17.1.0] /home/jalond/.gradle/caches/transforms-2/files-2.1/adb89b977f9809169aeb781fd2706a62/play-services-base-17.1.0/AndroidManifest.xml:24:13-79
+uses-permission#com.google.android.finsky.permission.BIND_GET_INSTALL_REFERRER_SERVICE
+ADDED from [com.google.android.gms:play-services-measurement:17.4.4] /home/jalond/.gradle/caches/transforms-2/files-2.1/4421fe9eed72257c84e9366ac7e76dfa/play-services-measurement-17.4.4/AndroidManifest.xml:26:5-110
+MERGED from [com.google.android.gms:play-services-measurement-impl:17.4.4] /home/jalond/.gradle/caches/transforms-2/files-2.1/104a48d4182d0d31aff583a06bc10c7d/play-services-measurement-impl-17.4.4/AndroidManifest.xml:26:5-110
+MERGED from [com.google.android.gms:play-services-measurement-impl:17.4.4] /home/jalond/.gradle/caches/transforms-2/files-2.1/104a48d4182d0d31aff583a06bc10c7d/play-services-measurement-impl-17.4.4/AndroidManifest.xml:26:5-110
+	android:name
+		ADDED from [com.google.android.gms:play-services-measurement:17.4.4] /home/jalond/.gradle/caches/transforms-2/files-2.1/4421fe9eed72257c84e9366ac7e76dfa/play-services-measurement-17.4.4/AndroidManifest.xml:26:22-107
+receiver#com.google.android.gms.measurement.AppMeasurementReceiver
+ADDED from [com.google.android.gms:play-services-measurement:17.4.4] /home/jalond/.gradle/caches/transforms-2/files-2.1/4421fe9eed72257c84e9366ac7e76dfa/play-services-measurement-17.4.4/AndroidManifest.xml:29:9-33:20
+	android:enabled
+		ADDED from [com.google.android.gms:play-services-measurement:17.4.4] /home/jalond/.gradle/caches/transforms-2/files-2.1/4421fe9eed72257c84e9366ac7e76dfa/play-services-measurement-17.4.4/AndroidManifest.xml:31:13-35
+	android:exported
+		ADDED from [com.google.android.gms:play-services-measurement:17.4.4] /home/jalond/.gradle/caches/transforms-2/files-2.1/4421fe9eed72257c84e9366ac7e76dfa/play-services-measurement-17.4.4/AndroidManifest.xml:32:13-37
+	android:name
+		ADDED from [com.google.android.gms:play-services-measurement:17.4.4] /home/jalond/.gradle/caches/transforms-2/files-2.1/4421fe9eed72257c84e9366ac7e76dfa/play-services-measurement-17.4.4/AndroidManifest.xml:30:13-85
+service#com.google.android.gms.measurement.AppMeasurementService
+ADDED from [com.google.android.gms:play-services-measurement:17.4.4] /home/jalond/.gradle/caches/transforms-2/files-2.1/4421fe9eed72257c84e9366ac7e76dfa/play-services-measurement-17.4.4/AndroidManifest.xml:35:9-38:40
+	android:enabled
+		ADDED from [com.google.android.gms:play-services-measurement:17.4.4] /home/jalond/.gradle/caches/transforms-2/files-2.1/4421fe9eed72257c84e9366ac7e76dfa/play-services-measurement-17.4.4/AndroidManifest.xml:37:13-35
+	android:exported
+		ADDED from [com.google.android.gms:play-services-measurement:17.4.4] /home/jalond/.gradle/caches/transforms-2/files-2.1/4421fe9eed72257c84e9366ac7e76dfa/play-services-measurement-17.4.4/AndroidManifest.xml:38:13-37
+	android:name
+		ADDED from [com.google.android.gms:play-services-measurement:17.4.4] /home/jalond/.gradle/caches/transforms-2/files-2.1/4421fe9eed72257c84e9366ac7e76dfa/play-services-measurement-17.4.4/AndroidManifest.xml:36:13-84
+service#com.google.android.gms.measurement.AppMeasurementJobService
+ADDED from [com.google.android.gms:play-services-measurement:17.4.4] /home/jalond/.gradle/caches/transforms-2/files-2.1/4421fe9eed72257c84e9366ac7e76dfa/play-services-measurement-17.4.4/AndroidManifest.xml:39:9-43:72
+	android:enabled
+		ADDED from [com.google.android.gms:play-services-measurement:17.4.4] /home/jalond/.gradle/caches/transforms-2/files-2.1/4421fe9eed72257c84e9366ac7e76dfa/play-services-measurement-17.4.4/AndroidManifest.xml:41:13-35
+	android:exported
+		ADDED from [com.google.android.gms:play-services-measurement:17.4.4] /home/jalond/.gradle/caches/transforms-2/files-2.1/4421fe9eed72257c84e9366ac7e76dfa/play-services-measurement-17.4.4/AndroidManifest.xml:42:13-37
+	android:permission
+		ADDED from [com.google.android.gms:play-services-measurement:17.4.4] /home/jalond/.gradle/caches/transforms-2/files-2.1/4421fe9eed72257c84e9366ac7e76dfa/play-services-measurement-17.4.4/AndroidManifest.xml:43:13-69
+	android:name
+		ADDED from [com.google.android.gms:play-services-measurement:17.4.4] /home/jalond/.gradle/caches/transforms-2/files-2.1/4421fe9eed72257c84e9366ac7e76dfa/play-services-measurement-17.4.4/AndroidManifest.xml:40:13-87
+meta-data#com.google.firebase.components:com.google.firebase.analytics.connector.internal.AnalyticsConnectorRegistrar
+ADDED from [com.google.android.gms:play-services-measurement-api:17.4.4] /home/jalond/.gradle/caches/transforms-2/files-2.1/bc34897f7044e8d56946ccf9e4f8c420/play-services-measurement-api-17.4.4/AndroidManifest.xml:30:13-32:85
+	android:value
+		ADDED from [com.google.android.gms:play-services-measurement-api:17.4.4] /home/jalond/.gradle/caches/transforms-2/files-2.1/bc34897f7044e8d56946ccf9e4f8c420/play-services-measurement-api-17.4.4/AndroidManifest.xml:32:17-82
+	android:name
+		ADDED from [com.google.android.gms:play-services-measurement-api:17.4.4] /home/jalond/.gradle/caches/transforms-2/files-2.1/bc34897f7044e8d56946ccf9e4f8c420/play-services-measurement-api-17.4.4/AndroidManifest.xml:31:17-139
+meta-data#com.google.firebase.components:com.google.firebase.installations.FirebaseInstallationsRegistrar
+ADDED from [com.google.firebase:firebase-installations:16.3.2] /home/jalond/.gradle/caches/transforms-2/files-2.1/1a57daee105f0d3fdc6feb817aa4080e/firebase-installations-16.3.2/AndroidManifest.xml:17:13-19:85
+	android:value
+		ADDED from [com.google.firebase:firebase-installations:16.3.2] /home/jalond/.gradle/caches/transforms-2/files-2.1/1a57daee105f0d3fdc6feb817aa4080e/firebase-installations-16.3.2/AndroidManifest.xml:19:17-82
+	android:name
+		ADDED from [com.google.firebase:firebase-installations:16.3.2] /home/jalond/.gradle/caches/transforms-2/files-2.1/1a57daee105f0d3fdc6feb817aa4080e/firebase-installations-16.3.2/AndroidManifest.xml:18:17-127
+provider#com.google.firebase.provider.FirebaseInitProvider
+ADDED from [com.google.firebase:firebase-common:19.3.0] /home/jalond/.gradle/caches/transforms-2/files-2.1/ba3cdf4986e94957fa21726019960559/jetified-firebase-common-19.3.0/AndroidManifest.xml:26:9-30:39
+	android:authorities
+		ADDED from [com.google.firebase:firebase-common:19.3.0] /home/jalond/.gradle/caches/transforms-2/files-2.1/ba3cdf4986e94957fa21726019960559/jetified-firebase-common-19.3.0/AndroidManifest.xml:28:13-72
+	android:exported
+		ADDED from [com.google.firebase:firebase-common:19.3.0] /home/jalond/.gradle/caches/transforms-2/files-2.1/ba3cdf4986e94957fa21726019960559/jetified-firebase-common-19.3.0/AndroidManifest.xml:29:13-37
+	android:initOrder
+		ADDED from [com.google.firebase:firebase-common:19.3.0] /home/jalond/.gradle/caches/transforms-2/files-2.1/ba3cdf4986e94957fa21726019960559/jetified-firebase-common-19.3.0/AndroidManifest.xml:30:13-36
+	android:name
+		ADDED from [com.google.firebase:firebase-common:19.3.0] /home/jalond/.gradle/caches/transforms-2/files-2.1/ba3cdf4986e94957fa21726019960559/jetified-firebase-common-19.3.0/AndroidManifest.xml:27:13-77
+meta-data#com.google.android.gms.version
+ADDED from [com.google.android.gms:play-services-basement:17.0.0] /home/jalond/.gradle/caches/transforms-2/files-2.1/705985e46fab43562d44efc2fb1da36c/jetified-play-services-basement-17.0.0/AndroidManifest.xml:23:9-25:69
+	android:value
+		ADDED from [com.google.android.gms:play-services-basement:17.0.0] /home/jalond/.gradle/caches/transforms-2/files-2.1/705985e46fab43562d44efc2fb1da36c/jetified-play-services-basement-17.0.0/AndroidManifest.xml:25:13-66
+	android:name
+		ADDED from [com.google.android.gms:play-services-basement:17.0.0] /home/jalond/.gradle/caches/transforms-2/files-2.1/705985e46fab43562d44efc2fb1da36c/jetified-play-services-basement-17.0.0/AndroidManifest.xml:24:13-58

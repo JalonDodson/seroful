@@ -1,2 +1,4 @@
-node_modules/
-.env
+seroful-web/node_modules/
+seroful-mobile/node_modules/
+seroful-web/.env
+seroful-mobile/.env
