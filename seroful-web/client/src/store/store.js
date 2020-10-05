@@ -9,3 +9,8 @@ export const pwState = atom({
   key: "pwState",
   default: "",
 });
+
+export const msgState = atom({
+  key: "msgState",
+  default: "",
+});
