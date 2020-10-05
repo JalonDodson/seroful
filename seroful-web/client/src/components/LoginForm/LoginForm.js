@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { Button, TextField, Typography } from "@material-ui/core";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 
-import { emailState, pwState } from "../../store/store";
+import { userState } from "../../store/store";
 import { useRecoilState } from "recoil";
 
 import molecule from "../../resources/molecule.png";
@@ -13,9 +13,7 @@ export const LoginForm = (props) => {
   const styles = loginStyles();
   const [enableRegister, setEnableRegister] = useState(false);
   // eslint-disable-next-line
-  const [email, setEmail] = useRecoilState(emailState);
-  // eslint-disable-next-line
-  const [pw, setPw] = useRecoilState(pwState);
+  const [userInfo, setUserInfo] = useRecoilState(userState);
 
   return (
     <>
@@ -27,10 +25,31 @@ export const LoginForm = (props) => {
           <img className={styles.images} src={molecule} alt="molecule.png" />
           <form noValidate autoComplete="off">
             <TextField
+              label="First Name"
+              variant="outlined"
+              className={styles.email}
+              onBlur={(ev) =>
+                setUserInfo((x) => (x = { ...x, first: ev.target.value }))
+              }
+            />
+            <br />
+            <TextField
+              label="Last Name"
+              variant="outlined"
+              className={styles.password}
+              onBlur={(ev) =>
+                setUserInfo((x) => (x = { ...x, last: ev.target.value }))
+              }
+            />
+            <br />
+            <br />
+            <TextField
               label="Email"
               variant="outlined"
               className={styles.email}
-              onBlur={(ev) => setEmail((x) => ev.target.value)}
+              onBlur={(ev) =>
+                setUserInfo((x) => (x = { ...x, email: ev.target.value }))
+              }
             />
             <br />
             <TextField
@@ -38,7 +57,9 @@ export const LoginForm = (props) => {
               type="password"
               variant="outlined"
               className={styles.password}
-              onBlur={(ev) => setPw((x) => ev.target.value)}
+              onBlur={(ev) =>
+                setUserInfo((x) => (x = { ...x, pw: ev.target.value }))
+              }
             />
             <br />
             <Button
@@ -64,11 +85,13 @@ export const LoginForm = (props) => {
           </Typography>
           <img className={styles.images} src={molecule} alt="molecule.png" />
           <form noValidate autoComplete="off">
-            <TextField
+          <TextField
               label="Email"
               variant="outlined"
               className={styles.email}
-              onBlur={(ev) => setEmail((x) => ev.target.value)}
+              onBlur={(ev) =>
+                setUserInfo((x) => (x = { ...x, email: ev.target.value }))
+              }
             />
             <br />
             <TextField
@@ -76,7 +99,9 @@ export const LoginForm = (props) => {
               type="password"
               variant="outlined"
               className={styles.password}
-              onBlur={(ev) => setPw((x) => ev.target.value)}
+              onBlur={(ev) =>
+                setUserInfo((x) => (x = { ...x, pw: ev.target.value }))
+              }
             />
             <br />
             <Button

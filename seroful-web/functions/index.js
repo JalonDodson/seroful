@@ -1,23 +1,47 @@
+// DON'T TOUCH BELOW THIS LINE
 const functions = require("firebase-functions");
-
 const admin = require("firebase-admin");
-
 admin.initializeApp({
   credential: admin.credential.applicationDefault(),
   databaseURL: "https://seroful.firebaseio.com",
 });
-
 const db = admin.firestore();
+// DON'T TOUCH ABOVE THIS LINE
 
 const express = require("express");
+const cors = require("cors");
 
 const app = express();
+app.use(cors());
 
-// /messages, /users
+const decodeIDToken = async (req, res, next) => {
+  if (req.headers.authorization) {
+    if (req.headers.authorization.startsWith("Bearer ")) {
+      const idToken = req.headers.authorization.split("Bearer ")[1];
+
+      try {
+        const decodedToken = await admin.auth().verifyIdToken(idToken);
+        req["currentUser"] = decodedToken;
+      } catch (err) {
+        console.log(err);
+      }
+    }
+  }
+  next();
+};
+
+app.use(decodeIDToken);
 
 app.get("/users", async (req, res) => {
-  const results = await db.collection("users").get();
-  res.send(results);
+  const user = req["currentUser"];
+
+  if (!user) {
+    res.status(403).send("Must be logged in to do this!");
+  } else {
+    const results = await db.collection("users").get();
+    res.status(200).send(results);
+  }
 });
 
+// DO NOT TOUCH THIS LINE
 exports.api = functions.https.onRequest(app);
