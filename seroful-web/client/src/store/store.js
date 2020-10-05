@@ -20,3 +20,8 @@ export const userToken = atom({
   key: "userToken",
   default: "",
 });
+
+export const msgState = atom({
+  key: "msgState",
+  default: "",
+});
