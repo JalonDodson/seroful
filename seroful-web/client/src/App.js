@@ -9,7 +9,7 @@ import "firebase/auth";
 
 import { firebaseConfig } from "./config";
 import { useRecoilState } from "recoil";
-import { userState, userToken } from "./store/store";
+import { userState, userToken, loginHelperState, registerHelperState } from "./store/store";
 import * as api from "./util/api";
 /* 
 
@@ -24,6 +24,8 @@ function App() {
   // eslint-disable-next-line
   const [userInfo, setUserInfo] = useRecoilState(userState);
   const [token, setToken] = useRecoilState(userToken);
+  const [loginHelper, setLoginHelper] = useRecoilState(loginHelperState);
+  const [registerHelper, setRegisterHelper] = useRecoilState(registerHelperState);
 
   const onAuthStateChanged = async (user) => {
     setUser(user);
@@ -40,30 +42,28 @@ function App() {
     return subscriber;
     // eslint-disable-next-line
   }, []);
-
   const login = async () => {
     firebase
       .auth()
       .signInWithEmailAndPassword(userInfo.email, userInfo.pw)
-      .then(console.log("User logged in."))
-      .catch((err) => console.log(err));
-
-    setUserInfo({
-      email: "",
-      pw: "",
-    });
+      .then(console.log(`User has triggered a login attempt.`))
+      .catch((err) => {
+        setLoginHelper((x) => (x = { ...x, errorMsg: err.code }));
+        console.log(err);
+      });
+      setUserInfo((x) => (x = { pw: "", email: "" }));
   };
-
+// 
   const register = () => {
     firebase
       .auth()
       .createUserWithEmailAndPassword(userInfo.email, userInfo.pw)
-      .then(() => console.log("User created successfully."))
-      .catch((err) => console.log(err));
-    setUserInfo({
-      email: "",
-      pw: "",
-    });
+      .then(console.log("User has triggered a registration attempt."))
+      .catch((err) => {
+        setRegisterHelper((x) => (x = { ...x, errorMsg: err.code }));
+        console.log(err);
+      });
+      setUserInfo((x) => (x = { pw: "", email: "" }));
   };
 
   const logout = () => {

@@ -25,3 +25,22 @@ export const msgState = atom({
   key: "msgState",
   default: "",
 });
+
+export const loginHelperState = atom({
+  key: "loginHelperState",
+  default: {
+    txt: "",
+    errorMsg: "",
+    emailError: false,
+    pwError: false,
+  },
+});
+
+export const registerHelperState = atom({
+  key: "registerHelperState",
+  default: {
+    txt: "",
+    errorMsg: "",
+    emailError: false,
+  },
+});
