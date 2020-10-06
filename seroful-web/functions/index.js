@@ -19,5 +19,15 @@ app.get("/users", async (req, res) => {
   const results = await db.collection("users").get();
   res.send(results);
 });
+app.get('/profile', (req, res) => {
+  //TODO: nav to user profile
+});
+app.get('/messages', (req, res) => {
+  //TODO: nav to messages for current user 
+});
+app.post('/messages', (req, res) => {
+  //TODO: post new message for logged in user
+});
+
 
 exports.api = functions.https.onRequest(app);
