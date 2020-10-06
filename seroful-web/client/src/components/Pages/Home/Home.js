@@ -1,9 +1,17 @@
 import React from "react";
+import { Helmet } from "react-helmet";
+
+
+import { PageDrawer } from "../../PageDrawer/PageDrawer";
+import { homeStyles } from "../../../styles/homeStyles";
 
 export const Home = () => {
-    return (
-        <>
-            <h1>This is the home page.</h1>
-        </>
-    )
-}
+  return (
+    <>
+      <Helmet>
+        <title>Seroful - Home</title>
+      </Helmet>
+      <PageDrawer />
+    </>
+  );
+};
