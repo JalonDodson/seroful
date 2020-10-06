@@ -28,7 +28,10 @@
     "eject": "react-scripts eject",
     "dev": "run-p --race dev:firebase dev:react",
     "dev:firebase": "firebase serve -p 4000",
-    "dev:react": "BROWSER='google-chrome-beta' react-scripts start"
+    "dev:react": "react-scripts start",
+    "jdev": "run-p --race jdev:firebase jdev:react",
+    "jdev:firebase": "firebase serve -p 4000",
+    "jdev:react": "BROWSER='google-chrome-beta' react-scripts start"
   },
   "eslintConfig": {
     "extends": "react-app"
