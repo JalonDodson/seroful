@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Button } from "@material-ui/core";
 
 import { LoginForm } from "./components/LoginForm/LoginForm";
+import { Navigator } from "./components/Navigator/Navigator";
 import "./App.css";
 
 import firebase from "firebase/app";
@@ -80,10 +81,7 @@ function App() {
   return (
     // replace with Navigator component
     <>
-      Welcome to the party, {user.email}.
-      <Button variant="outlined" onClick={() => logout()}>
-        Log Out
-      </Button>
+      <Navigator />
     </>
   );
 }
