@@ -17,3 +17,4 @@ seroful-web/.yarn-integrity
 
 # dotenv environment variables file
 seroful-web/client/.env
+seroful-web/client/src/config.js

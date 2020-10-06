@@ -33,5 +33,12 @@ export const loginStyles = makeStyles((theme) => ({
     },
     password: {
         width: "20%",
+    },
+    helper: {
+        fontStyle: "italic",
+        color: "#FF0000",
+        fontSize: 20,
+        fontFamily: "Happy Monkey",
+        textTransform: "capitalize"
     }
 }))
