@@ -29,3 +29,15 @@ Tell us about your team, who was involved, what role did they fulfill and what d
 |Waleed Saleh          |`Dev`| Fill me out... |
 |Zach Baca          |`Dev`| Fill me out... |
 
+### PROJECT NOTES (for devs) ###
+> Helpful Material-UI components that we can use for a variety of things (mainly just making this list for myself bc I'm forgetful and like to have a list) - Jalon
+- Snackbar
+ - We can use this for things like new messsages/notifications we'd like to show the user.
+- Avatar
+ - We can use this to display an avatar for the user. Since it's a hybdrid social media application (I REALLY DO NOOOOOT WANT IT TO BE A SOCIAL MEDIA APP!!! But it can have aspects of it!!!) we can display a profile picture etc, Avatar is the way to go for that.
+- Badge
+ - We can use this for new messages etc/message icon
+- Rating
+ - We will use this for the 'check in' feature.
+- Drawer
+ - We will use this feature as a substitution for the app bar -- it will allow us to have a vertical menu. 
