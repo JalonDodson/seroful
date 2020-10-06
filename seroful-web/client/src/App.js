@@ -9,20 +9,29 @@ import "firebase/auth";
 
 import { firebaseConfig } from "./config";
 import { useRecoilState } from "recoil";
-import { emailState, pwState } from "./store/store";
+import { userState, userToken } from "./store/store";
+import * as api from "./util/api";
+/* 
 
+  api.users() // then some shit here
+*/
 firebase.initializeApp(firebaseConfig);
 
 function App() {
   const [init, setInit] = useState(true);
   const [user, setUser] = useState();
-  // eslint-disable-next-line
-  const [email, setEmail] = useRecoilState(emailState);
-  // eslint-disable-next-line
-  const [pw, setPw] = useRecoilState(pwState);
 
-  const onAuthStateChanged = (user) => {
+  // eslint-disable-next-line
+  const [userInfo, setUserInfo] = useRecoilState(userState);
+  const [token, setToken] = useRecoilState(userToken);
+
+  const onAuthStateChanged = async (user) => {
     setUser(user);
+    if (user) {
+      const token = await user.getIdToken();
+      setToken(token);
+    }
+
     if (init) setInit(false);
   };
 
@@ -32,28 +41,29 @@ function App() {
     // eslint-disable-next-line
   }, []);
 
-  useEffect(() => {
-    console.log(email);
-  }, [email]);
-
-  const login = () => {
+  const login = async () => {
     firebase
       .auth()
-      .signInWithEmailAndPassword(email, pw)
-      .then(() => console.log("User logged in."))
+      .signInWithEmailAndPassword(userInfo.email, userInfo.pw)
+      .then(console.log("User logged in."))
       .catch((err) => console.log(err));
-    setEmail("");
-    setPw("");
+
+    setUserInfo({
+      email: "",
+      pw: "",
+    });
   };
 
   const register = () => {
     firebase
       .auth()
-      .createUserWithEmailAndPassword(email, pw)
+      .createUserWithEmailAndPassword(userInfo.email, userInfo.pw)
       .then(() => console.log("User created successfully."))
       .catch((err) => console.log(err));
-    setEmail("");
-    setPw("");
+    setUserInfo({
+      email: "",
+      pw: "",
+    });
   };
 
   const logout = () => {
@@ -68,6 +78,7 @@ function App() {
     return <LoginForm login={() => login()} register={() => register()} />;
   }
   return (
+    // replace with Navigator component
     <>
       Welcome to the party, {user.email}.
       <Button variant="outlined" onClick={() => logout()}>
