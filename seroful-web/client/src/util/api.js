@@ -33,3 +33,11 @@ export const profile = async () => {
     console.log(error);
   }
 };
+export const videoRoom = async () => {
+  try {
+    const res = await axios.get('/video-room');
+    return res;
+  } catch (error) {
+    console.log(error)    
+  }
+};

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Button } from "@material-ui/core";
 
 import { LoginForm } from "./components/LoginForm/LoginForm";
+import { VideoRoom } from './components/VideoRoom/VideoRoom';
 import "./App.css";
 
 import firebase from "firebase/app";
@@ -84,6 +85,8 @@ function App() {
       <Button variant="outlined" onClick={() => logout()}>
         Log Out
       </Button>
+      <br />
+      <VideoRoom />
     </>
   );
 }
