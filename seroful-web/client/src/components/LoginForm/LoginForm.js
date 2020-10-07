@@ -4,6 +4,9 @@ import { Button, TextField, Typography } from "@material-ui/core";
 import { ThemeProvider } from "@material-ui/core/styles";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 
+import firebase from "firebase/app";
+import "firebase/auth";
+
 import {
   userState,
   loginHelperState,
@@ -38,7 +41,31 @@ export const LoginForm = (props) => {
       setPwHelpers((x) => (x = { error: false, helperText: "" }));
     }
   }, [pwConfirm]);
-  // auth/invalid-email auth/user-not-found auth/wrong-password
+
+  const login = async () => {
+    firebase
+      .auth()
+      .signInWithEmailAndPassword(userInfo.email, userInfo.pw)
+      .then(console.log(`User has triggered a login attempt.`))
+      .catch((err) => {
+        setLoginHelper((x) => (x = { ...x, errorMsg: err.code }));
+        console.log(err);
+      });
+      setUserInfo((x) => (x = { pw: "", email: "" }));
+  };
+// 
+  const register = () => {
+    firebase
+      .auth()
+      .createUserWithEmailAndPassword(userInfo.email, userInfo.pw)
+      .then(console.log("User has triggered a registration attempt."))
+      .catch((err) => {
+        setRegisterHelper((x) => (x = { ...x, errorMsg: err.code }));
+        console.log(err);
+      });
+      setUserInfo((x) => (x = { pw: "", email: "" }));
+  };
+
   useEffect(() => {
     if (loginHelper.errorMsg) {
       if (loginHelper.errorMsg === "auth/invalid-email") {
@@ -64,7 +91,7 @@ export const LoginForm = (props) => {
           (x) =>
             (x = {
               ...x,
-              txt:
+              pwText:
                 "Aw man, that's the wrong password! Remember, it's case-sensitive!",
               pwError: true,
             })
@@ -132,11 +159,11 @@ export const LoginForm = (props) => {
                 variant="filled"
                 className={styles.password}
                 error={loginHelper.pwError}
-                helperText={loginHelper.txt}
+                helperText={loginHelper.pwText}
                 value={userInfo.pw}
                 InputLabelProps={styles.labelProps}
                 onFocus={() =>
-                  setLoginHelper((x) => (x = { ...x, pwError: false, txt: "" }))
+                  setLoginHelper((x) => (x = { ...x, pwError: false, pwText: "" }))
                 }
                 onChange={(ev) =>
                   setUserInfo((x) => (x = { ...x, pw: ev.target.value }))
@@ -146,7 +173,7 @@ export const LoginForm = (props) => {
               <Button
                 variant="contained"
                 className={styles.button1}
-                onClick={props.login}
+                onClick={() => login()}
               >
                 Login
               </Button>
@@ -222,7 +249,7 @@ export const LoginForm = (props) => {
               <Button
                 variant="contained"
                 className={styles.button2}
-                onClick={props.register}
+                onClick={() => register()}
               >
                 Register
               </Button>

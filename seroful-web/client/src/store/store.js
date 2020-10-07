@@ -40,6 +40,7 @@ export const registerHelperState = atom({
   key: "registerHelperState",
   default: {
     txt: "",
+    pwText: "",
     errorMsg: "",
     emailError: false,
   },
