@@ -6,6 +6,7 @@ import { PageDrawer } from "../../PageDrawer/PageDrawer";
 import { settingsStyles } from "../../../styles/settingsStyles";
 
 export const Settings = () => {
+  const styles = settingsStyles();
   return (
     <>
       <Helmet>
