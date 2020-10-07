@@ -10,8 +10,9 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import Avatar from '@material-ui/core/Avatar';
 import { deepPurple } from '@material-ui/core/colors';
+import { DataGrid } from '@material-ui/data-grid';
 
-
+// Material UI Class Styles
 const useStyles = makeStyles((theme) => ({
   root: {
     maxWidth: 345,
@@ -36,6 +37,18 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
+// Settings For Data Table [Production PLan Goals]
+
+const columns = [
+  { field: 'id', headerName: 'ID', width: 70 },
+  { field: 'goalItem', headerName: 'Goal', width: 130 },
+  { field: 'goalDescription', headerName: 'Description', width: 130 },
+];
+
+const rows = [
+  { id: 1, goalItem: 'Example Goal', goalDescription: 'Example Description'},
+];
+
 export const Profile = (props) => {
   const classes = useStyles();
   return (
@@ -54,6 +67,8 @@ export const Profile = (props) => {
         </CardContent>
       </CardActionArea>
     </Card>
-    
+    <div style={{ height: 400, width: '100%' }}>
+      <DataGrid rows={rows} columns={columns} pageSize={5} checkboxSelection />
+    </div>
   </>);
 };
