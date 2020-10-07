@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { Button } from "@material-ui/core";
 
 import { LoginForm } from "./components/LoginForm/LoginForm";
 import { Navigator } from "./components/Navigator/Navigator";
@@ -10,12 +9,8 @@ import "firebase/auth";
 
 import { firebaseConfig } from "./config";
 import { useRecoilState } from "recoil";
-import { userState, userToken, loginHelperState, registerHelperState } from "./store/store";
-import * as api from "./util/api";
-/* 
+import { userToken } from "./store/store";
 
-  api.users() // then some shit here
-*/
 firebase.initializeApp(firebaseConfig);
 
 function App() {

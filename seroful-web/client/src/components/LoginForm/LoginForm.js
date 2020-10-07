@@ -6,6 +6,7 @@ import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 
 import firebase from "firebase/app";
 import "firebase/auth";
+import * as api from "../../util/api";
 
 import {
   userState,
@@ -31,40 +32,6 @@ export const LoginForm = (props) => {
     error: false,
     helperText: "",
   });
-
-  useEffect(() => {
-    if (pwConfirm && pwConfirm !== userInfo.pw) {
-      setPwHelpers(
-        (x) => (x = { error: true, helperText: "Passwords do not match!" })
-      );
-    } else {
-      setPwHelpers((x) => (x = { error: false, helperText: "" }));
-    }
-  }, [pwConfirm]);
-
-  const login = async () => {
-    firebase
-      .auth()
-      .signInWithEmailAndPassword(userInfo.email, userInfo.pw)
-      .then(console.log(`User has triggered a login attempt.`))
-      .catch((err) => {
-        setLoginHelper((x) => (x = { ...x, errorMsg: err.code }));
-        console.log(err);
-      });
-      setUserInfo((x) => (x = { pw: "", email: "" }));
-  };
-// 
-  const register = () => {
-    firebase
-      .auth()
-      .createUserWithEmailAndPassword(userInfo.email, userInfo.pw)
-      .then(console.log("User has triggered a registration attempt."))
-      .catch((err) => {
-        setRegisterHelper((x) => (x = { ...x, errorMsg: err.code }));
-        console.log(err);
-      });
-      setUserInfo((x) => (x = { pw: "", email: "" }));
-  };
 
   useEffect(() => {
     if (loginHelper.errorMsg) {
@@ -125,6 +92,50 @@ export const LoginForm = (props) => {
     }
   }, [registerHelper.errorMsg]);
 
+  useEffect(() => {
+    if (pwConfirm && pwConfirm !== userInfo.pw) {
+      setPwHelpers(
+        (x) => (x = { error: true, helperText: "Passwords do not match!" })
+      );
+    } else {
+      setPwHelpers((x) => (x = { error: false, helperText: "" }));
+    }
+  }, [pwConfirm]);
+
+  const login = async () => {
+    firebase
+      .auth()
+      .signInWithEmailAndPassword(userInfo.email, userInfo.pw)
+      .then(console.log(`User has triggered a login attempt.`))
+      .catch((err) => {
+        setLoginHelper((x) => (x = { ...x, errorMsg: err.code }));
+        console.log(err);
+      });
+    setUserInfo(
+      (x) => (x = { pw: "", email: "", username: "", displayName: "" })
+    );
+  };
+  //
+  const register = () => {
+    const { username, displayName, email, pw } = userInfo;
+    console.log(username, displayName, email);
+    try {
+      firebase.auth().createUserWithEmailAndPassword(email, pw);
+      // .then(console.log("User has triggered a registration attempt."))
+      // .catch((err) => {
+      //   setRegisterHelper((x) => (x = { ...x, errorMsg: err.code }));
+      //   console.log(err);
+      // });
+      api.createUser(username, displayName, email);
+    } catch (err) {
+      setRegisterHelper((x) => (x = { ...x, errorMsg: err.code }));
+      console.log(err);
+    }
+    setUserInfo(
+      (x) => (x = { pw: "", email: "", username: "", displayName: "" })
+    );
+  };
+
   return (
     <>
       {!enableRegister ? (
@@ -161,9 +172,10 @@ export const LoginForm = (props) => {
                 error={loginHelper.pwError}
                 helperText={loginHelper.pwText}
                 value={userInfo.pw}
-                InputLabelProps={styles.labelProps}
                 onFocus={() =>
-                  setLoginHelper((x) => (x = { ...x, pwError: false, pwText: "" }))
+                  setLoginHelper(
+                    (x) => (x = { ...x, pwError: false, pwText: "" })
+                  )
                 }
                 onChange={(ev) =>
                   setUserInfo((x) => (x = { ...x, pw: ev.target.value }))
@@ -196,8 +208,34 @@ export const LoginForm = (props) => {
             <img className={styles.images} src={molecule} alt="molecule.png" />
             <form noValidate autoComplete="off">
               <TextField
+                name="display"
+                label="Display Name"
+                variant="filled"
+                className={styles.names}
+                value={userInfo.displayName}
+                onChange={(ev) =>
+                  setUserInfo(
+                    (x) => (x = { ...x, displayName: ev.target.value })
+                  )
+                }
+              />
+              <br />
+              <TextField
+                name="username"
+                label="Username"
+                variant="filled"
+                className={styles.username}
+                value={userInfo.username}
+                onChange={(ev) =>
+                  setUserInfo((x) => (x = { ...x, username: ev.target.value }))
+                }
+              />
+              <br />
+              <br />
+              <TextField
                 error={registerHelper.emailError}
                 helperText={registerHelper.txt}
+                name="email"
                 onFocus={() =>
                   setRegisterHelper(
                     (x) => (x = { ...x, emailError: false, txt: "" })
@@ -207,13 +245,13 @@ export const LoginForm = (props) => {
                 variant="filled"
                 className={styles.email}
                 value={userInfo.email}
-                InputLabelProps={styles.labelProps}
                 onChange={(ev) =>
                   setUserInfo((x) => (x = { ...x, email: ev.target.value }))
                 }
               />
               <br />
               <TextField
+                name="password"
                 label="Password"
                 type="password"
                 variant="filled"
