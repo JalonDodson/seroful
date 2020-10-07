@@ -5,6 +5,7 @@ admin.initializeApp({
   credential: admin.credential.applicationDefault(),
   databaseURL: "https://seroful.firebaseio.com",
 });
+
 const db = admin.firestore();
 const nanoid = require('nanoid');
 // DON'T TOUCH ABOVE THIS LINE
@@ -45,6 +46,17 @@ app.get("/users", async (req, res) => {
     res.status(200).send(results);
   }
 });
+
+app.post("/users", async (req, res) => {
+    const user  = req["currentUser"];
+
+    if (!user) {
+      res.status(403).send("Must be logged in to do this!");
+    } else {
+      const results = await db.collection("users").doc(req.params.username)
+    }
+})
+
 app.get('/profile', (req, res) => {
   //TODO: nav to user profile
 });
