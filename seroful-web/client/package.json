@@ -16,6 +16,7 @@
     "npm-run-all": "^4.1.5",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
+    "react-helmet": "^6.1.0",
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.3",
     "recoil": "0.0.13",
@@ -28,7 +29,14 @@
     "eject": "react-scripts eject",
     "dev": "run-p --race dev:firebase dev:react",
     "dev:firebase": "firebase serve -p 4000",
+<<<<<<< HEAD
     "dev:react": "react-scripts start"
+=======
+    "dev:react": "react-scripts start",
+    "jdev": "run-p --race jdev:firebase jdev:react",
+    "jdev:firebase": "firebase serve -p 4000",
+    "jdev:react": "BROWSER='google-chrome-beta' react-scripts start"
+>>>>>>> 30043d0c663acbbdefd33e3afb75f82cfc86bed0
   },
   "eslintConfig": {
     "extends": "react-app"

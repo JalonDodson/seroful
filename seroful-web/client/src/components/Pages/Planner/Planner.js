@@ -1,17 +1,16 @@
 import React from "react";
 import { Helmet } from "react-helmet";
 
-
 import { PageDrawer } from "../../PageDrawer/PageDrawer";
-import { homeStyles } from "../../../styles/homeStyles";
 
-export const Home = () => {
+export const Planner = (props) => {
   return (
     <>
       <Helmet>
-        <title>Seroful - Home</title>
+        <title> Seroful - User's Production Planner</title>
       </Helmet>
       <PageDrawer />
+      <h1>something here</h1>
     </>
   );
 };
