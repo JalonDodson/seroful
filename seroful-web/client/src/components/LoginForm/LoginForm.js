@@ -6,6 +6,8 @@ import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 
 import firebase from "firebase/app";
 import "firebase/auth";
+import "firebase/firestore";
+
 import * as api from "../../util/api";
 
 import {
@@ -19,14 +21,26 @@ import molecule from "../../resources/molecule.png";
 import { loginStyles, textTheme } from "../../styles/loginStyles";
 
 export const LoginForm = (props) => {
+  const [userInfo, setUserInfo] = useRecoilState(userState);
+
   const styles = loginStyles();
   const [enableRegister, setEnableRegister] = useState(false);
-  // eslint-disable-next-line
-  const [loginHelper, setLoginHelper] = useRecoilState(loginHelperState);
-  const [registerHelper, setRegisterHelper] = useRecoilState(
-    registerHelperState
-  );
-  const [userInfo, setUserInfo] = useRecoilState(userState);
+  const [loginHelper, setLoginHelper] = useState({
+    txt: "",
+    errorMsg: "",
+    emailError: false,
+    pwError: false,
+  });
+
+  const [registerHelper, setRegisterHelper] = useState({
+    txt: "",
+    pwText: "",
+    userTxt: "",
+    emailError: false,
+    pwError: false,
+    userError: false,
+  });
+
   const [pwConfirm, setPwConfirm] = useState("");
   const [pwHelpers, setPwHelpers] = useState({
     error: false,
@@ -102,6 +116,51 @@ export const LoginForm = (props) => {
     }
   }, [pwConfirm]);
 
+  const checkIfUsed = () => {
+    setRegisterHelper(
+      (x) =>
+        (x = {
+          ...x,
+          txt: "",
+          userTxt: "",
+          userError: false,
+          emailError: false,
+        })
+    );
+
+    if (userInfo.email.includes("@") || userInfo.username.length >= 4) {
+      firebase
+        .firestore()
+        .collection("users")
+        .get()
+        .then((query) => {
+          query.forEach((docs) => {
+            const { email, username } = docs.data();
+            if (email === userInfo.email) {
+              setRegisterHelper(
+                (x) =>
+                  (x = {
+                    ...x,
+                    txt: "That email has already been taken!",
+                    emailError: true,
+                  })
+              );
+            }
+
+            if (username === userInfo.username) {
+              setRegisterHelper(
+                (x) =>
+                  (x = {
+                    ...x,
+                    userTxt: "That username has already been taken!",
+                    userError: true,
+                  })
+              );
+            }
+          });
+        });
+    }
+  };
   const login = async () => {
     firebase
       .auth()
@@ -121,11 +180,6 @@ export const LoginForm = (props) => {
     console.log(username, displayName, email);
     try {
       firebase.auth().createUserWithEmailAndPassword(email, pw);
-      // .then(console.log("User has triggered a registration attempt."))
-      // .catch((err) => {
-      //   setRegisterHelper((x) => (x = { ...x, errorMsg: err.code }));
-      //   console.log(err);
-      // });
       api.createUser(username, displayName, email);
     } catch (err) {
       setRegisterHelper((x) => (x = { ...x, errorMsg: err.code }));
@@ -221,11 +275,14 @@ export const LoginForm = (props) => {
               />
               <br />
               <TextField
+                error={registerHelper.userError}
+                helperText={registerHelper.userTxt}
                 name="username"
                 label="Username"
                 variant="filled"
                 className={styles.username}
                 value={userInfo.username}
+                onBlur={() => checkIfUsed()}
                 onChange={(ev) =>
                   setUserInfo((x) => (x = { ...x, username: ev.target.value }))
                 }
@@ -236,6 +293,7 @@ export const LoginForm = (props) => {
                 error={registerHelper.emailError}
                 helperText={registerHelper.txt}
                 name="email"
+                onBlur={() => checkIfUsed()}
                 onFocus={() =>
                   setRegisterHelper(
                     (x) => (x = { ...x, emailError: false, txt: "" })
@@ -251,6 +309,12 @@ export const LoginForm = (props) => {
               />
               <br />
               <TextField
+                error={userInfo.pw.length < 6 && userInfo.pw !== ""}
+                helperText={
+                  userInfo.pw.length < 6 && userInfo.pw !== ""
+                    ? "Your password must be at least 6 characters!"
+                    : ""
+                }
                 name="password"
                 label="Password"
                 type="password"
@@ -287,6 +351,12 @@ export const LoginForm = (props) => {
               <Button
                 variant="contained"
                 className={styles.button2}
+                disabled={
+                  userInfo.pw.length < 6 ||
+                  registerHelper.emailError ||
+                  registerHelper.userError ||
+                  pwConfirm !== userInfo.pw
+                }
                 onClick={() => register()}
               >
                 Register

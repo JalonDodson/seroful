@@ -40,7 +40,9 @@ export const registerHelperState = atom({
   default: {
     txt: "",
     pwText: "",
-    errorMsg: "",
+    userTxt: "",
     emailError: false,
+    pwError: false,
+    userError: false,
   },
 });

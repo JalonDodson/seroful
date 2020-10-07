@@ -58,7 +58,7 @@ app.use(decodeIDToken);
 app.post("/users", async (req, res) => {
   await db
     .collection("users")
-    .doc(req.body.username)
+    .doc(req.body.email)
     .set({
       displayName: req.body.displayName,
       email: req.body.email,
