@@ -4,6 +4,11 @@ import axios from "axios";
   When built, only /path should be used in the axios requests.
 */
 
+/*
+  import sendgrid here
+  import sendgrid api key here
+*/
+
 export const users = async (token) => {
   try {
     const res = await axios.get("http://localhost:4000/users", {
@@ -41,3 +46,9 @@ export const videoRoom = async () => {
     console.log(error)    
   }
 };
+
+/*
+  registration, cancellation functions here
+  call the registration function (for the email) inside
+  register function in LoginForm.js
+*/
