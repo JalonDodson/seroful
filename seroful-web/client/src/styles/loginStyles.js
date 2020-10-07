@@ -29,9 +29,12 @@ export const loginStyles = makeStyles((theme) => ({
     width: "9.5%",
   },
   email: {
-    "& label.Mui-focused": {
-      color: "#F2EDEB",
-    },
+    width: "20%",
+  },
+  username: {
+    width: "20%",
+  },
+  names: {
     width: "20%",
   },
   password: {
