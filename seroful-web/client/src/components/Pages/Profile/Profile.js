@@ -67,7 +67,9 @@ export const Profile = (props) => {
         </CardContent>
       </CardActionArea>
     </Card>
-    <div style={{ height: 400, width: '100%' }}>
+    <hr />
+    <br />
+    <div style={{ height: 400, width: '100%', backgroundColor: '#fff' }}>
       <DataGrid rows={rows} columns={columns} pageSize={5} checkboxSelection />
     </div>
   </>);
