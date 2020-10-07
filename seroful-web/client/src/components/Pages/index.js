@@ -1,5 +1,6 @@
-import { Profile } from "./Profile/Profile";
 import { Home } from "./Home/Home";
 import { NotFound } from "./NotFound/NotFound";
+import { Planner } from "./Planner/Planner";
+import { Profile } from "./Profile/Profile";
 
-export { Profile, Home, NotFound }
+export { Home, NotFound, Planner, Profile };

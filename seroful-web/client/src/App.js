@@ -43,6 +43,7 @@ function App() {
     return subscriber;
     // eslint-disable-next-line
   }, []);
+  
   const login = async () => {
     firebase
       .auth()
@@ -67,19 +68,12 @@ function App() {
       setUserInfo((x) => (x = { pw: "", email: "" }));
   };
 
-  const logout = () => {
-    firebase
-      .auth()
-      .signOut()
-      .then(() => console.log("User signed out."));
-  };
 
   if (init) return null;
   if (!user) {
     return <LoginForm login={() => login()} register={() => register()} />;
   }
   return (
-    // replace with Navigator component
     <>
       <Navigator />
     </>
