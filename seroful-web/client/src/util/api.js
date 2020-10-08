@@ -1,4 +1,5 @@
 import axios from "axios";
+import { nanoid } from 'nanoid';
 /*
   While in development, http://localhost:4000/ should be used for all API requests.
   When built, only /path should be used in the axios requests.
@@ -70,13 +71,17 @@ export const profile = async () => {
     console.log(error);
   }
 };
-
-export const videoRoom = async () => {
+export const videoRoom = async (roomId) => {
   try {
-    const res = await axios.get("/video-room");
+    const res = null;
+    if (roomId) {
+      res = await axios.get(`/video-room/${roomId}`);
+    } else {
+      res = await axios.get(`/video-chat/${nanoid()}`)
+    }
     return res;
   } catch (error) {
-    console.log(error);
+    console.log(error)
   }
 };
 
