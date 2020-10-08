@@ -1,23 +1,32 @@
 import axios from "axios";
-import { nanoid } from 'nanoid';
+import { nanoid } from "nanoid";
+
+import firebase from "firebase/app";
+import "firebase/auth";
+
 /*
   While in development, http://localhost:4000/ should be used for all API requests.
   When built, only /path should be used in the axios requests.
 */
+const instance = axios.create({ baseURL: "http://localhost:4000" });
 
-/*
-  import sendgrid here
-  import sendgrid api key here
-*/
+instance.interceptors.request.use(
+  async (config) => {
+    const token = await firebase.auth().currentUser.getIdToken();
+    if (config.cancelToken) config.cancelToken.throwIfRequested();
 
-export const users = async (token) => {
+    if (token) config.headers["Authorization"] = `Bearer ${token}`;
+    return config;
+  },
+  (err) => Promise.reject(err)
+);
+
+export const getActiveUser = async (email) => {
   try {
-    const res = await axios.get("http://localhost:4000/users", {
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
-    });
+    const res = await instance
+      .get(`/users?email=${email}`)
+      .then((resp) => resp.data);
+    console.log(res);
     return res;
   } catch (err) {
     console.log(err);
@@ -26,7 +35,7 @@ export const users = async (token) => {
 
 export const createUser = async (username, displayName, email) => {
   try {
-    const res = await axios.post(`http://localhost:4000/users`, {
+    const res = await axios.post(`/users`, {
       displayName: displayName,
       email: email,
       username: username,
@@ -39,7 +48,7 @@ export const createUser = async (username, displayName, email) => {
 
 export const updateUser = async (userData) => {
   try {
-    const res = await axios.patch(`http://localhost:4000/users`, {
+    const res = await axios.patch(`/users`, {
       username: userData.username,
       email: userData.email,
       displayName: userData.displayName,
@@ -68,16 +77,10 @@ export const videoRoom = async (roomId) => {
     if (roomId) {
       res = await axios.get(`/video-chat/${roomId}`);
     } else {
-      res = await axios.get(`/video-chat/${nanoid()}`)
+      res = await axios.get(`/video-chat/${nanoid()}`);
     }
     return res;
   } catch (error) {
-    console.log(error)
+    console.log(error);
   }
 };
-
-/*
-  registration, cancellation functions here
-  call the registration function (for the email) inside
-  register function in LoginForm.js
-*/
