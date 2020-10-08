@@ -36,7 +36,6 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-<<<<<<< HEAD
 // Settings For Data Table [Production PLan Goals]
 
 const columns = [
@@ -44,10 +43,8 @@ const columns = [
   { field: 'goalItem', headerName: 'Goal', width: 130 },
   { field: 'goalDescription', headerName: 'Description', width: 130 },
 ];
-=======
 export const Profile = () => {
   const styles = profileStyles();
->>>>>>> 1b26c35b4f18e00570ed751fcc31ef241737b80b
 
 const rows = [
   { id: 1, goalItem: 'Example Goal', goalDescription: 'Example Description'},
