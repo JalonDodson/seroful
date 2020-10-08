@@ -43,8 +43,7 @@ const columns = [
   { field: 'goalItem', headerName: 'Goal', width: 130 },
   { field: 'goalDescription', headerName: 'Description', width: 130 },
 ];
-export const Profile = () => {
-  const styles = profileStyles();
+
 
 const rows = [
   { id: 1, goalItem: 'Example Goal', goalDescription: 'Example Description'},
