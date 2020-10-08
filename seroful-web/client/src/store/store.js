@@ -7,11 +7,10 @@ export const userState = atom({
     email: "",
     pw: "",
     displayName: "",
-    photoURL: "",
-    gradeLevel: 0,
-    medicines: [{}],
-    illnesses: [{}],
-    plans: [{}],
+    photo: {},
+    medicines: [],
+    illnesses: [],
+    plans: [],
   },
 });
 
@@ -45,4 +44,9 @@ export const registerHelperState = atom({
     pwError: false,
     userError: false,
   },
+});
+
+export const newUser = atom({
+  key: "newUser",
+  default: false,
 });

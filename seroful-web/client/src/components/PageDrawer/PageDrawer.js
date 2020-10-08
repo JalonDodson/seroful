@@ -14,6 +14,7 @@ import {
 
 import firebase from "firebase/app";
 import "firebase/auth";
+import "firebase/firestore";
 
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import FolderOpenIcon from "@material-ui/icons/FolderOpen";
@@ -34,7 +35,6 @@ export const PageDrawer = () => {
       .signOut()
       .then(() => console.log("User signed out."));
   };
-
   return (
     <>
       <Drawer
@@ -80,7 +80,7 @@ export const PageDrawer = () => {
               onClick={() => console.log("put a menu here soon")}
             />
           </ListItem>
-          <ListItem button key="Journal">
+          <ListItem button key="Journal" onClick={null}>
             <ListItemIcon>
               <MenuBookIcon />
             </ListItemIcon>
