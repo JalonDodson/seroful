@@ -23,12 +23,19 @@ function App() {
   const onAuthStateChanged = async (user) => {
     setUser(user);
     if (user) {
+      console.log(user);
       const token = await user.getIdToken();
       setToken(token);
     }
 
     if (init) setInit(false);
   };
+
+  // useEffect(() => {
+  //   const subscriber = firebase.firestore()
+  //   .collection("users")
+  //   .doc(user.email)
+  // })
 
   useEffect(() => {
     const subscriber = firebase.auth().onAuthStateChanged(onAuthStateChanged);
