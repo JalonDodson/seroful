@@ -50,9 +50,9 @@ export const loginStyles = makeStyles((theme) => ({
 }));
 
 export const textTheme = createMuiTheme({
-    palette: {
-      primary: {
-          main: "#F2EDEB"
-      }
+  palette: {
+    primary: {
+      main: "#F2EDEB",
     },
+  },
 });
