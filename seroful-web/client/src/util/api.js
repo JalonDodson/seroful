@@ -25,11 +25,27 @@ export const users = async (token) => {
 
 export const createUser = async (username, displayName, email) => {
   try {
-
     const res = await axios.post(`http://localhost:4000/users`, {
-      username: username,
       displayName: displayName,
       email: email,
+      username: username,
+    });
+    return res;
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+export const updateUser = async (userData) => {
+  try {
+    const res = await axios.patch(`http://localhost:4000/users`, {
+      username: userData.username,
+      email: userData.email,
+      displayName: userData.displayName,
+      photo: userData.photo,
+      medicines: userData.medicines,
+      illnesses: userData.illnesses,
+      plans: userData.plans,
     });
     return res;
   } catch (err) {
