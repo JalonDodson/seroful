@@ -98,9 +98,16 @@ app.patch("/users", async (req, res) => {
 // app.post('/planner', (req, res) => {
 //   //TODO: post new planner content for current user
 // });
-// app.get('/journal', (req, res) => {
-//   //TODO: nav to user journal
-// });
+app.get('/journal', async (req, res) => {  
+  //TODO: nav to user journal
+  try {
+    await db.collection("users").get({displayName: res.body.displayName});
+    res.status(200);
+  } catch (error) {
+    res.status(400);
+    console.log(error);
+  }
+});
 // app.post('/journal', (req, res) => {
 //   //TODO: add content to user journal
 // });

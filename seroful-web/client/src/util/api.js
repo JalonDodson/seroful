@@ -54,11 +54,19 @@ export const updateUser = async (userData) => {
   }
 };
 
+export const createEntry = async (entry, timestamp) => {
+  try {
+    const res = await axios.post(`http://localhost:4000/users/${}`, {entry: entry, timestamp: Date().now()})
+  } catch (error) {
+    console.log(error);
+  }
+}; 
+
 export const videoRoom = async (roomId) => {
   try {
     let res = null;
     if (roomId) {
-      res = await axios.get(`/video-room/${roomId}`);
+      res = await axios.get(`/video-chat/${roomId}`);
     } else {
       res = await axios.get(`/video-chat/${nanoid()}`)
     }
