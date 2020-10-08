@@ -3,16 +3,14 @@ import { atom } from "recoil";
 export const userState = atom({
   key: "userState",
   default: {
-    first: "",
-    last: "",
+    username: "",
     email: "",
     pw: "",
     displayName: "",
-    photoURL: "",
-    gradeLevel: 0,
-    medicines: [{}],
-    illnesses: [{}],
-    plans: [{}],
+    photo: {},
+    medicines: [],
+    illnesses: [],
+    plans: [],
   },
 });
 
@@ -41,7 +39,14 @@ export const registerHelperState = atom({
   default: {
     txt: "",
     pwText: "",
-    errorMsg: "",
+    userTxt: "",
     emailError: false,
+    pwError: false,
+    userError: false,
   },
+});
+
+export const newUser = atom({
+  key: "newUser",
+  default: false,
 });
