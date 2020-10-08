@@ -80,11 +80,35 @@ app.patch("/users", async (req, res) => {
 app.get("/profile", (req, res) => {
   //TODO: nav to user profile
 });
-app.get("/messages", (req, res) => {
-  //TODO: nav to messages for current user
+app.get('/profile', (req, res) => {
+  //TODO: nav to user profile
 });
-app.post("/messages", (req, res) => {
-  //TODO: post new message for logged in user
+app.post('/profile', (req, res) => {
+  //TODO: nav to user profile
+});
+app.get('/friends', (req, res) => {
+  //TODO: nav to user friend list
+});
+app.post('/friends', (req, res) => {
+  //TODO: nav to user friend list
+});
+app.get('/planner', (req, res) => {
+  //TODO: nav to planner for current user 
+});
+app.post('/planner', (req, res) => {
+  //TODO: post new planner content for current user
+});
+app.get('/journal', (req, res) => {
+  //TODO: nav to user journal
+});
+app.post('/journal', (req, res) => {
+  //TODO: add content to user journal
+});
+app.get('/settings', (req, res) => {
+  //TODO: nav to user settings
+});
+app.post('/settings', (req, res) => {
+  //TODO: make changes to user settings
 });
 app.get("/video-chat", (req, res) => {
   res.redirect(`/video-chat/:${nanoid()}`);
