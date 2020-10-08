@@ -7,7 +7,7 @@ import { journalStyles } from "../../../styles/journalStyles";
 import { userState } from '../../../store/store';
 
 export const Journal = () => {
-  const styles = journalStyles();
+  // const styles = journalStyles();
   return (
     <>
       <Helmet>

@@ -1,7 +1,7 @@
 import React from "react";
 
 import {
-  Button,
+  // Button,
   Divider,
   Typography,
   Drawer,
@@ -9,7 +9,7 @@ import {
   ListItem,
   ListItemIcon,
   ListItemText,
-  Link,
+  // Link,
 } from "@material-ui/core/";
 
 import firebase from "firebase/app";

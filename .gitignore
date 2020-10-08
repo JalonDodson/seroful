@@ -18,4 +18,5 @@ seroful-web/.yarn-integrity
 # dotenv environment variables file
 seroful-web/client/.env
 seroful-web/client/src/config.js
+seroful-web/functions/seroful-firebase-adminsdk-ry93d-5b49e47b83.json
 seroful-web/client/.firebaserc

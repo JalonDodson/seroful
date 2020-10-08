@@ -2,10 +2,10 @@ import React from "react";
 import { Helmet } from "react-helmet";
 
 import { PageDrawer } from "../../PageDrawer/PageDrawer";
-import { plannerStyles } from '../../../styles/plannerStyles';
+// import { plannerStyles } from "../../../styles/plannerStyles";
 
 export const Planner = (props) => {
-  const styles = plannerStyles();
+  // const styles = plannerStyles();
   return (
     <>
       <Helmet>

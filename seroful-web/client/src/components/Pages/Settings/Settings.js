@@ -3,10 +3,10 @@ import { Helmet } from "react-helmet";
 
 
 import { PageDrawer } from "../../PageDrawer/PageDrawer";
-import { settingsStyles } from "../../../styles/settingsStyles";
+// import { settingsStyles } from "../../../styles/settingsStyles";
 
 export const Settings = () => {
-  const styles = settingsStyles();
+  // const styles = settingsStyles();
   return (
     <>
       <Helmet>

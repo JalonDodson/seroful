@@ -54,26 +54,9 @@ export const updateUser = async (userData) => {
   }
 };
 
-export const messages = async () => {
-  try {
-    const res = await axios.get("/messages");
-    return res;
-  } catch (error) {
-    console.log(error);
-  }
-};
-
-export const profile = async () => {
-  try {
-    const res = await axios.get("/profile");
-    return res;
-  } catch (error) {
-    console.log(error);
-  }
-};
 export const videoRoom = async (roomId) => {
   try {
-    const res = null;
+    let res = null;
     if (roomId) {
       res = await axios.get(`/video-room/${roomId}`);
     } else {
