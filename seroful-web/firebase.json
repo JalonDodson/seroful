@@ -11,10 +11,6 @@
     "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
     "rewrites": [
       {
-        "source": "/users/**",
-        "function": "api"
-      },
-      {
         "source": "/users",
         "function": "api"
       },
@@ -23,7 +19,7 @@
         "function": "api"
       },
       {
-        "source": "**",
+        "source": "/",
         "destination": "/index.html"
       }
     ]
