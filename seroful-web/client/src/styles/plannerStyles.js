@@ -7,8 +7,20 @@ export const plannerStyles = makeStyles((theme) => ({
     alignItems: "baseline",
   },
   accordion: {
-    top: "25vh",
-    width: "25vw",
-    left: "15vw",
-  }
+    top: "20vh",
+    width: "30vw",
+    left: "8.5vw",
+  },
+  newPlanner: {
+    margin: "0 auto",
+    display: "flex",
+  },
+  planner: {
+    marginLeft: "50vw",
+    width: "30%"
+  },
+  formControl: {
+    margin: theme.spacing(1),
+    minWidth: 120,
+  },
 }));

@@ -17,12 +17,12 @@ import "firebase/auth";
 import "firebase/firestore";
 
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
-import FolderOpenIcon from "@material-ui/icons/FolderOpen";
 import HomeIcon from "@material-ui/icons/Home";
 import MenuBookIcon from "@material-ui/icons/MenuBook";
 import PeopleIcon from "@material-ui/icons/People";
 import PersonIcon from "@material-ui/icons/Person";
 import SettingsIcon from "@material-ui/icons/Settings";
+import AssignmentIcon from '@material-ui/icons/Assignment';
 
 import { drawerStyles } from "../../styles/drawerStyles";
 
@@ -73,7 +73,7 @@ export const PageDrawer = () => {
           </ListItem>
           <ListItem button key="Planner" component="a" href="/planner">
             <ListItemIcon>
-              <FolderOpenIcon />
+              <AssignmentIcon />
             </ListItemIcon>
             <ListItemText
               primary="Planner"
