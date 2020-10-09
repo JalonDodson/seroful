@@ -89,13 +89,12 @@ export const createEntry = async (entry, email) => {
   const token =
     firebase.auth().currentUser &&
     (await firebase.auth().currentUser.getIdToken());
-
   try {
-    const res = await instance.post(
+    const res = await instance.patch(
       `/users/entries?email=${email}`,
       {
         entry: entry,
-        timestamp: Date().now(),
+        timestamp: Date.now(),
       },
       {
         headers: {
@@ -103,6 +102,7 @@ export const createEntry = async (entry, email) => {
         },
       }
     );
+    console.log(res)
     return res;
   } catch (err) {
     console.log(err);

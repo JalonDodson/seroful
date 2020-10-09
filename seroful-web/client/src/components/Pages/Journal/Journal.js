@@ -4,7 +4,7 @@ import { PageDrawer } from "../../PageDrawer/PageDrawer";
 import { journalStyles } from "../../../styles/journalStyles";
 import { useRecoilState, useSetRecoilState } from "recoil";
 import { userState } from "../../../store/store";
-import { createEntry } from '../../../util/api';
+import { createEntry, getEntries } from '../../../util/api';
 
 import {
   Button,
@@ -72,22 +72,12 @@ export const Journal = () => {
   const [user, setUser] = useRecoilState(userState);
   console.log(user);
 
-  const entries = [];
+  // const entries = getEntries(user.email);
 
-  const getEntries = async (id) => {
-    // const entries = await firebase.firestore().collection('users').get().then((querySnapshot) => {
-    //   querySnapshot.forEach((doc) => {
-    //     doc.userID === user.id ? entries.push(doc) : null;
-    //   })
-    // });
-  };
   const entryHelper = () => {};
 
    const assignNewEntry = (val) => {
-     //TODO: api call to send the thing
      ent = val;
-
-    console.log(ent)
    };
 
   return (
@@ -104,7 +94,8 @@ export const Journal = () => {
           </Typography>
           <hr />
         </header>
-        <div>
+        <div className={styles.inter}>
+        <div className={styles.pastEntries}>
           {//TODO: instance.get(all of users entries and map through them to return these bastards on one side, new entry on the others)
           }
             <Accordion square expanded={expanded === 'panel1'} onChange={handleChange('panel1')}>
@@ -120,22 +111,28 @@ export const Journal = () => {
               </AccordionDetails>
             </Accordion>        
             </div>
-        <br />
-        <br />
-        <form className={styles.form}>
+        <div className={styles.form}>
+        <form>
           <TextField
             label="New Entry"
             type="text"
             variant="filled"
             className={styles.newEntry}
-            onChange={(ev) => assignNewEntry(ev.target.value)}
+            onChange={(ev) => {assignNewEntry(ev.target.value)
+            
+            }}
           />
           <br />
           <Button
+          className={styles.submit}
             variant="contained"
-            onClick={() => (createEntry(ent))}
+            onClick={(ev) => {
+              ev.persist()
+              createEntry(ent, user.email)}}
           >Add Journal Entry</Button>
         </form>
+        </div>
+        </div>
       </div>
     </>
   );
