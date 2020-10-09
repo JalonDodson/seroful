@@ -63,9 +63,16 @@ export const updateUser = async (userData) => {
   }
 };
 
-export const createEntry = async (entry, timestamp) => {
+export const createEntry = async (userData, entry) => {
   try {
-    const res = await axios.post(`http://localhost:4000/users/${}`, {entry: entry, timestamp: Date().now()})
+    if (userData) {
+      const res = await instance.patch(`http://localhost:4000/users=${userData.email}`, {entry: entry, timestamp: Date.now()}, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        }
+      }) ;
+      return res;
+    }
   } catch (error) {
     console.log(error);
   }
