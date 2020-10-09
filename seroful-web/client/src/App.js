@@ -8,8 +8,8 @@ import firebase from "firebase/app";
 import "firebase/auth";
 
 import { firebaseConfig } from "./config";
-import { useRecoilState } from "recoil";
-import { userState } from "./store/store";
+import { useRecoilState, useSetRecoilState } from "recoil";
+import { userState, userToken } from "./store/store";
 import * as api from "./util/api";
 
 firebase.initializeApp(firebaseConfig);
@@ -22,12 +22,8 @@ function App() {
 
   const onAuthStateChanged = async (user) => {
     setUser(user);
-    if (user) {
-      const data = await api.getActiveUser(user.email)
-      setActive(data);
-      console.log(activeUser);
-    }
-
+    if (user)
+      await api.getActiveUser(user.email).then((resp) => setActive(resp));
     if (init) setInit(false);
   };
 

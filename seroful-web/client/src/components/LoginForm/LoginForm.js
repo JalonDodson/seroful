@@ -1,188 +1,165 @@
-import React, { useEffect, useState } from "react";
-import { Helmet } from "react-helmet";
-
-import { Button, TextField, Typography } from "@material-ui/core";
-import { ThemeProvider } from "@material-ui/core/styles";
-import ArrowBackIcon from "@material-ui/icons/ArrowBack";
-
-import firebase from "firebase/app";
-import "firebase/auth";
-import "firebase/firestore";
-
-import * as api from "../../util/api";
-
-import { userState, newUser } from "../../store/store";
-import { useRecoilState, useSetRecoilState} from "recoil";
-
-import molecule from "../../resources/molecule.png";
-import { loginStyles, textTheme } from "../../styles/loginStyles";
+import React, { useEffect, useState } from "react"; // react
+import { Helmet } from "react-helmet"; // react
+import { Button, TextField, Typography } from "@material-ui/core"; // material-ui
+import { ThemeProvider } from "@material-ui/core/styles"; // material-ui
+import ArrowBackIcon from "@material-ui/icons/ArrowBack"; // material-ui
+import firebase from "firebase/app"; // firebase
+import "firebase/auth"; // firebase
+import "firebase/firestore"; // firebase
+import * as api from "../../util/api"; // api
+import { userState, newUser } from "../../store/store"; // state
+import { useRecoilState, useSetRecoilState } from "recoil"; // state
+import molecule from "../../resources/molecule.png"; // logo
+import { loginStyles, textTheme } from "../../styles/loginStyles"; // styles
 
 export const LoginForm = () => {
   const styles = loginStyles();
 
-  const [userInfo, setUserInfo] = useRecoilState(userState);
-  const setNewUser = useSetRecoilState(newUser);
-  const [enableRegister, setEnableRegister] = useState(false);
+  const [userInfo, setUserInfo] = useRecoilState(userState),
+    setNewUser = useSetRecoilState(newUser),
+    [enableRegister, setEnableRegister] = useState(!1);
 
   const [loginHelper, setLoginHelper] = useState({
-    txt: "",
-    errorMsg: "",
-    emailError: false,
-    pwError: false,
-  });
-  const [registerHelper, setRegisterHelper] = useState({
-    txt: "",
-    pwText: "",
-    userTxt: "",
-    emailError: false,
-    pwError: false,
-    userError: false,
-  });
-  const [pwHelpers, setPwHelpers] = useState({
-    error: false,
-    helperText: "",
-  });
-  const [pwConfirm, setPwConfirm] = useState("");
+      txt: "",
+      errorMsg: "",
+      emailError: !1,
+      pwError: !1,
+    }),
+    [registerHelper, setRegisterHelper] = useState({
+      txt: "",
+      pwText: "",
+      userTxt: "",
+      emailError: !1,
+      pwError: !1,
+      userError: !1,
+    }),
+    [pwHelpers, setPwHelpers] = useState({ error: !1, helperText: "" }),
+    [pwConfirm, setPwConfirm] = useState("");
 
   useEffect(() => {
-    if (loginHelper.errorMsg) {
-      if (loginHelper.errorMsg === "auth/invalid-email") {
-        setLoginHelper(
-          (x) =>
-            (x = {
-              ...x,
-              txt: "Oh noes, that's an invalid email!",
-              emailError: true,
-            })
-        );
-      } else if (loginHelper.errorMsg === "auth/user-not-found") {
-        setLoginHelper(
-          (x) =>
-            (x = {
-              ...x,
-              txt: "Dangit, that email isn't registered!",
-              emailError: true,
-            })
-        );
-      } else if (loginHelper.errorMsg === "auth/wrong-password") {
-        setLoginHelper(
-          (x) =>
-            (x = {
-              ...x,
-              pwText:
-                "Aw man, that's the wrong password! Remember, it's case-sensitive!",
-              pwError: true,
-            })
-        );
-      }
-    }
-
-    if (registerHelper.errorMsg) {
-      if (registerHelper.errorMsg === "auth/email-already-in-use") {
-        setRegisterHelper(
-          (x) =>
-            (x = {
-              ...x,
-              txt:
-                "Aw snap, that email is already in use! Did you mean to login?",
-              emailError: true,
-            })
-        );
-      } else if (registerHelper.errorMsg === "auth/invalid-email") {
-        setRegisterHelper(
-          (x) =>
-            (x = {
-              ...x,
-              txt: "Oh noes, that's an invalid email!",
-              emailError: true,
-            })
-        );
-      }
-    }
-
-    if (pwConfirm && pwConfirm !== userInfo.pw) {
-      setPwHelpers(
-        (x) => (x = { error: true, helperText: "Passwords do not match!" })
-      );
-    } else {
-      setPwHelpers((x) => (x = { error: false, helperText: "" }));
-    }
+    return (
+      loginHelper.errorMsg &&
+        ("auth/invalid-email" === loginHelper.errorMsg
+          ? setLoginHelper(
+              (a) =>
+                (a = {
+                  ...a,
+                  txt: "Oh noes, that's an invalid email!",
+                  emailError: !0,
+                })
+            )
+          : "auth/user-not-found" === loginHelper.errorMsg
+          ? setLoginHelper(
+              (a) =>
+                (a = {
+                  ...a,
+                  txt: "Dangit, that email isn't registered!",
+                  emailError: !0,
+                })
+            )
+          : "auth/wrong-password" === loginHelper.errorMsg &&
+            setLoginHelper(
+              (a) =>
+                (a = {
+                  ...a,
+                  pwText:
+                    "Aw man, that's the wrong password! Remember, it's case-sensitive!",
+                  pwError: !0,
+                })
+            )),
+      registerHelper.errorMsg &&
+        ("auth/email-already-in-use" === registerHelper.errorMsg
+          ? setRegisterHelper(
+              (a) =>
+                (a = {
+                  ...a,
+                  txt:
+                    "Aw snap, that email is already in use! Did you mean to login?",
+                  emailError: !0,
+                })
+            )
+          : "auth/invalid-email" === registerHelper.errorMsg &&
+            setRegisterHelper(
+              (a) =>
+                (a = {
+                  ...a,
+                  txt: "Oh noes, that's an invalid email!",
+                  emailError: !0,
+                })
+            )),
+      pwConfirm && pwConfirm !== userInfo.pw
+        ? setPwHelpers(
+            (a) => (a = { error: !0, helperText: "Passwords do not match!" })
+          )
+        : setPwHelpers((a) => (a = { error: !1, helperText: "" }))
+    );
     // eslint-disable-next-line
   }, [loginHelper.errorMsg, registerHelper.errorMsg, pwConfirm]);
 
   const checkIfUsed = () => {
     setRegisterHelper(
-      (x) =>
-        (x = {
-          ...x,
-          txt: "",
-          userTxt: "",
-          userError: false,
-          emailError: false,
-        })
+      (a) => (a = { ...a, txt: "", userTxt: "", userError: !1, emailError: !1 })
     );
 
-    if (userInfo.email.includes("@") || userInfo.username.length >= 4) {
+    return (
+      (userInfo.email.includes("@") || 4 <= userInfo.username.length) &&
       firebase
         .firestore()
         .collection("users")
         .get()
-        .then((query) => {
-          query.forEach((docs) => {
-            const { email, username } = docs.data();
-            // eslint-disable-next-line
-            const emailExists =
-              email === userInfo.email
-                ? setRegisterHelper(
-                    (x) =>
-                      (x = {
-                        ...x,
-                        txt: "That email has already been taken!",
-                        emailError: true,
-                      })
-                  )
-                : null;
-
-            // eslint-disable-next-line
-            const userExists =
-              username === userInfo.username
-                ? setRegisterHelper(
-                    (x) =>
-                      (x = {
-                        ...x,
-                        userTxt: "That username has already been taken!",
-                        userError: true,
-                      })
-                  )
-                : null;
+        .then((a) => {
+          a.forEach((a) => {
+            const { email: b, username: c } = a.data(),
+              // eslint-disable-next-line
+              d =
+                b === userInfo.email
+                  ? setRegisterHelper(
+                      (a) =>
+                        (a = {
+                          ...a,
+                          txt: "That email has already been taken!",
+                          emailError: !0,
+                        })
+                    )
+                  : null,
+              // eslint-disable-next-line
+              e =
+                c === userInfo.username
+                  ? setRegisterHelper(
+                      (a) =>
+                        (a = {
+                          ...a,
+                          userTxt: "That username has already been taken!",
+                          userError: !0,
+                        })
+                    )
+                  : null;
           });
-        });
-    }
+        })
+    );
   };
+
   const login = async () => {
     firebase
       .auth()
       .signInWithEmailAndPassword(userInfo.email, userInfo.pw)
       .then(console.log(`User has triggered a login attempt.`))
-      .catch((err) => {
-        setLoginHelper((x) => (x = { ...x, errorMsg: err.code }));
-        console.log(err);
+      .catch((e) => {
+        setLoginHelper((h) => (h = { ...h, errorMsg: e.code }));
+        console.log(e);
       });
-
   };
+
   //
   const register = () => {
     const { username, displayName, email, pw } = userInfo;
-    console.log(username, displayName, email);
     try {
       firebase.auth().createUserWithEmailAndPassword(email, pw);
       api.createUser(username, displayName, email);
-    } catch (err) {
-      setRegisterHelper((x) => (x = { ...x, errorMsg: err.code }));
-      console.log(err);
+    } catch (e) {
+      setRegisterHelper((h) => (h = { ...h, errorMsg: e.code }));
     }
-
-    setNewUser(true);
+    setNewUser(!0);
   };
 
   return (
@@ -322,9 +299,11 @@ export const LoginForm = () => {
                 />
                 <br />
                 <TextField
-                  error={userInfo.pw.length < 6 && userInfo.pw !== ""}
+                  error={
+                    userInfo.pw && userInfo.pw.length < 6 && userInfo.pw !== ""
+                  }
                   helperText={
-                    userInfo.pw.length < 6 && userInfo.pw !== ""
+                    userInfo.pw && userInfo.pw.length < 6 && userInfo.pw !== ""
                       ? "Your password must be at least 6 characters!"
                       : ""
                   }
@@ -364,7 +343,7 @@ export const LoginForm = () => {
                   variant="contained"
                   className={styles.button2}
                   disabled={
-                    userInfo.pw.length < 6 ||
+                    (userInfo.pw && userInfo.pw.length < 6) ||
                     registerHelper.emailError ||
                     registerHelper.userError ||
                     pwConfirm !== userInfo.pw
