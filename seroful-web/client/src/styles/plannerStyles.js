@@ -1,8 +1,14 @@
 import { makeStyles } from "@material-ui/core/styles";
 
 export const plannerStyles = makeStyles((theme) => ({
-  root: {
-    display: "flex",
-    marginLeft: 151.5,
+  accordions: {
+    margin: "0 auto",
+    display: "inline-flex",
+    alignItems: "baseline",
   },
+  accordion: {
+    top: "25vh",
+    width: "25vw",
+    left: "15vw",
+  }
 }));
