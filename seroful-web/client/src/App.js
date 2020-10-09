@@ -8,8 +8,8 @@ import firebase from "firebase/app";
 import "firebase/auth";
 
 import { firebaseConfig } from "./config";
-import { useRecoilState, useSetRecoilState } from "recoil";
-import { userState, userToken } from "./store/store";
+import { useSetRecoilState } from "recoil";
+import { userState } from "./store/store";
 import * as api from "./util/api";
 
 firebase.initializeApp(firebaseConfig);
@@ -17,7 +17,7 @@ firebase.initializeApp(firebaseConfig);
 function App() {
   const [init, setInit] = useState(true);
   const [user, setUser] = useState();
-  const [activeUser, setActive] = useRecoilState(userState);
+  const setActive = useSetRecoilState(userState);
   // eslint-disable-next-line
 
   const onAuthStateChanged = async (user) => {

@@ -15,7 +15,12 @@ import { loginStyles, textTheme } from "../../styles/loginStyles"; // styles
 export const LoginForm = () => {
   const styles = loginStyles();
 
-  const [userInfo, setUserInfo] = useRecoilState(userState),
+  const [userInfo, setUserInfo] = useState({
+      email: "",
+      pw: "",
+      displayName: "",
+      username: "",
+    }),
     setNewUser = useSetRecoilState(newUser),
     [enableRegister, setEnableRegister] = useState(!1);
 
@@ -148,6 +153,7 @@ export const LoginForm = () => {
         setLoginHelper((h) => (h = { ...h, errorMsg: e.code }));
         console.log(e);
       });
+    setUserInfo((x) => (x = { email: "", pw: "" }));
   };
 
   //
@@ -159,6 +165,7 @@ export const LoginForm = () => {
     } catch (e) {
       setRegisterHelper((h) => (h = { ...h, errorMsg: e.code }));
     }
+    setUserInfo((x) => (x = { email: "", pw: "" }));
     setNewUser(!0);
   };
 
@@ -194,9 +201,10 @@ export const LoginForm = () => {
                       (x) => (x = { ...x, emailError: false, txt: "" })
                     )
                   }
-                  onChange={(ev) =>
-                    setUserInfo((x) => (x = { ...x, email: ev.target.value }))
-                  }
+                  onChange={(ev) => {
+                    ev.persist();
+                    setUserInfo((x) => (x = { ...x, email: ev.target.value }));
+                  }}
                 />
                 <br />
                 <TextField
@@ -212,9 +220,10 @@ export const LoginForm = () => {
                       (x) => (x = { ...x, pwError: false, pwText: "" })
                     )
                   }
-                  onChange={(ev) =>
-                    setUserInfo((x) => (x = { ...x, pw: ev.target.value }))
-                  }
+                  onChange={(ev) => {
+                    ev.persist();
+                    setUserInfo((x) => (x = { ...x, pw: ev.target.value }));
+                  }}
                 />
                 <br />
                 <Button
@@ -256,11 +265,10 @@ export const LoginForm = () => {
                   variant="filled"
                   className={styles.names}
                   value={userInfo.displayName}
-                  onChange={(ev) =>
-                    setUserInfo(
-                      (x) => (x = { ...x, displayName: ev.target.value })
-                    )
-                  }
+                  onChange={(ev) => {
+                    ev.persist();
+                    setUserInfo((x) => (x = { ...x, displayName: ev.target.value }));
+                  }}
                 />
                 <br />
                 <TextField
@@ -271,11 +279,10 @@ export const LoginForm = () => {
                   className={styles.username}
                   value={userInfo.username}
                   onBlur={() => checkIfUsed()}
-                  onChange={(ev) =>
-                    setUserInfo(
-                      (x) => (x = { ...x, username: ev.target.value })
-                    )
-                  }
+                  onChange={(ev) => {
+                    ev.persist();
+                    setUserInfo((x) => (x = { ...x, username: ev.target.value }));
+                  }}
                 />
                 <br />
                 <br />
@@ -293,9 +300,10 @@ export const LoginForm = () => {
                   variant="filled"
                   className={styles.email}
                   value={userInfo.email}
-                  onChange={(ev) =>
-                    setUserInfo((x) => (x = { ...x, email: ev.target.value }))
-                  }
+                  onChange={(ev) => {
+                    ev.persist();
+                    setUserInfo((x) => (x = { ...x, email: ev.target.value }));
+                  }}
                 />
                 <br />
                 <TextField
@@ -312,9 +320,10 @@ export const LoginForm = () => {
                   variant="filled"
                   className={styles.password}
                   value={userInfo.pw}
-                  onChange={(ev) =>
-                    setUserInfo((x) => (x = { ...x, pw: ev.target.value }))
-                  }
+                  onChange={(ev) => {
+                    ev.persist();
+                    setUserInfo((x) => (x = { ...x, pw: ev.target.value }));
+                  }}
                 />
                 <br />
                 <TextField
@@ -334,7 +343,11 @@ export const LoginForm = () => {
                 <Button
                   variant="contained"
                   className={styles.button1}
-                  onClick={() => setEnableRegister(false)}
+                  onClick={() => {
+                    setEnableRegister(false);
+                    setUserInfo((x) => (x = { email: "", pw: "" }));
+                    return;
+                  }}
                   startIcon={<ArrowBackIcon />}
                 >
                   Back to Login
