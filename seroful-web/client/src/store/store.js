@@ -11,6 +11,7 @@ export const userState = atom({
     medicines: [],
     illnesses: [],
     plans: [],
+    journals: [],
   },
 });
 

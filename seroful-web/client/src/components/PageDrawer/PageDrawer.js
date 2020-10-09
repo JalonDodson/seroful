@@ -1,7 +1,7 @@
 import React from "react";
 
 import {
-  Button,
+  // Button,
   Divider,
   Typography,
   Drawer,
@@ -9,7 +9,7 @@ import {
   ListItem,
   ListItemIcon,
   ListItemText,
-  Link,
+  // Link,
 } from "@material-ui/core/";
 
 import firebase from "firebase/app";
@@ -62,7 +62,7 @@ export const PageDrawer = () => {
             </ListItemIcon>
             <ListItemText primary="Profile" />
           </ListItem>
-          <ListItem button key="Friends">
+          <ListItem button key="Friends" component="a" href="/friends">
             <ListItemIcon>
               <PeopleIcon />
             </ListItemIcon>
@@ -71,7 +71,7 @@ export const PageDrawer = () => {
               onClick={() => console.log("put a menu here soon")}
             />
           </ListItem>
-          <ListItem button key="Planner">
+          <ListItem button key="Planner" component="a" href="/planner">
             <ListItemIcon>
               <FolderOpenIcon />
             </ListItemIcon>
@@ -80,13 +80,13 @@ export const PageDrawer = () => {
               onClick={() => console.log("put a menu here soon")}
             />
           </ListItem>
-          <ListItem button key="Journal" onClick={null}>
+          <ListItem button key="Journal" component="a" href="/journal">
             <ListItemIcon>
               <MenuBookIcon />
             </ListItemIcon>
             <ListItemText primary="Journal" />
           </ListItem>
-          <ListItem button key="Settings">
+          <ListItem button key="Settings" component="a" href="/settings">
             <ListItemIcon>
               <SettingsIcon />
             </ListItemIcon>

@@ -2,11 +2,14 @@
 const functions = require("firebase-functions");
 const admin = require("firebase-admin");
 const credential = require("./seroful-firebase-adminsdk-ry93d-5b49e47b83.json");
+
+const url = require("url");
 /* WHEN IN DEV MODE ASSIGN CREDENTIAL TO admin.credential.cert(credential) 
   AND GET THE FILE FROM DISCORD
   when deploying to firebase (firebase deploy). set it to admin.credential.applicationDefault()
 */
 admin.initializeApp({
+  // credential: admin.credential.cert(credential),
   credential: admin.credential.cert(credential),
   databaseURL: "https://seroful.firebaseio.com",
 });
@@ -32,7 +35,6 @@ const decodeIDToken = async (req, res, next) => {
   if (req.headers.authorization) {
     if (req.headers.authorization.startsWith("Bearer ")) {
       const idToken = req.headers.authorization.split("Bearer ")[1];
-
       try {
         const decodedToken = await admin.auth().verifyIdToken(idToken);
         req["currentUser"] = decodedToken;
@@ -46,12 +48,37 @@ const decodeIDToken = async (req, res, next) => {
 
 app.use(decodeIDToken);
 
+app.get("/users", async (req, res) => {
+  const searchParam = req.url.split("=")[1];
+  const user = req["currentUser"];
+
+  if (user) {
+    try {
+      await db
+        .collection("users")
+        .doc(searchParam)
+        .get()
+        .then((snapshot) => res.status(200).send(snapshot.data()));
+    } catch (err) {
+      console.log(err);
+      res.status(400).send(err);
+    }
+  } else {
+    res.status(403).send("Unauthorized!");
+  }
+});
+
 app.post("/users", async (req, res) => {
   try {
     await db.collection("users").doc(req.body.email).set({
       displayName: req.body.displayName,
       email: req.body.email,
       username: req.body.username,
+      photoURL: {},
+      medicines: [],
+      illnesses: [],
+      plans: [],
+      journals: [],
     });
     res.status(201).send("User created.");
   } catch (err) {
@@ -77,18 +104,50 @@ app.patch("/users", async (req, res) => {
   }
 });
 
-app.get("/profile", (req, res) => {
-  //TODO: nav to user profile
+// app.get("/profile", (req, res) => {
+//   //TODO: nav to user profile
+// });
+// app.get('/profile', (req, res) => {
+//   //TODO: nav to user profile
+// });
+// app.post('/profile', (req, res) => {
+//   //TODO: nav to user profile
+// });
+// app.get('/friends', (req, res) => {
+//   //TODO: nav to user friend list
+// });
+// app.post('/friends', (req, res) => {
+//   //TODO: nav to user friend list
+// });
+// app.get('/planner', (req, res) => {
+//   //TODO: nav to planner for current user
+// });
+// app.post('/planner', (req, res) => {
+//   //TODO: post new planner content for current user
+// });
+app.get('/journal', async (req, res) => {  
+  //TODO: nav to user journal
+  try {
+    await db.collection("users").get({displayName: res.body.displayName});
+    res.status(200);
+  } catch (error) {
+    res.status(400);
+    console.log(error);
+  }
 });
-app.get("/messages", (req, res) => {
-  //TODO: nav to messages for current user
-});
-app.post("/messages", (req, res) => {
-  //TODO: post new message for logged in user
-});
+// app.post('/journal', (req, res) => {
+//   //TODO: add content to user journal
+// });
+// app.get('/settings', (req, res) => {
+//   //TODO: nav to user settings
+// });
+// app.post('/settings', (req, res) => {
+//   //TODO: make changes to user settings
+// });
 app.get("/video-chat", (req, res) => {
   res.redirect(`/video-chat/:${nanoid()}`);
 });
+
 app.get("/video-chat/:room", (req, res) => {
   res.status(200).send("", { roomId: req.params.room });
   console.log(req.params.room);

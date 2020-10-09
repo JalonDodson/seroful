@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import Autocomplete from "@material-ui/lab/Autocomplete";
 
@@ -41,9 +41,10 @@ export const Splash = () => {
   };
 
   const handleSecond = () => {
-    api.updateUser(userIllnesses)
+    api.updateUser(userIllnesses);
     setNewUser(false);
-  }
+  };
+  
   useEffect(() => {
     let illnessList = [];
     firebase

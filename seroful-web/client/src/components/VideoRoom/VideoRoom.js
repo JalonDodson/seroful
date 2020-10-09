@@ -1,10 +1,10 @@
-import React from 'react';
-import { UserMedia } from './UserMedia';
+import React from "react";
+import { UserMedia } from "./UserMedia";
 
 export const VideoRoom = () => {
-    return (
-        <>
-            <UserMedia />
-        </>
-    );
+  return (
+    <>
+      <UserMedia />
+    </>
+  );
 };

@@ -12,7 +12,7 @@ import "firebase/firestore";
 import * as api from "../../util/api";
 
 import { userState, newUser } from "../../store/store";
-import { useRecoilState } from "recoil";
+import { useRecoilState, useSetRecoilState} from "recoil";
 
 import molecule from "../../resources/molecule.png";
 import { loginStyles, textTheme } from "../../styles/loginStyles";
@@ -21,7 +21,7 @@ export const LoginForm = () => {
   const styles = loginStyles();
 
   const [userInfo, setUserInfo] = useRecoilState(userState);
-  const [userNew, setNewUser] = useRecoilState(newUser);
+  const setNewUser = useSetRecoilState(newUser);
   const [enableRegister, setEnableRegister] = useState(false);
 
   const [loginHelper, setLoginHelper] = useState({

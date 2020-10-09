@@ -9,26 +9,33 @@ import "firebase/auth";
 
 import { firebaseConfig } from "./config";
 import { useRecoilState } from "recoil";
-import { userToken } from "./store/store";
+import { userState } from "./store/store";
+import * as api from "./util/api";
 
 firebase.initializeApp(firebaseConfig);
 
 function App() {
   const [init, setInit] = useState(true);
   const [user, setUser] = useState();
-
+  const [activeUser, setActive] = useRecoilState(userState);
   // eslint-disable-next-line
-  const [token, setToken] = useRecoilState(userToken);
 
   const onAuthStateChanged = async (user) => {
     setUser(user);
     if (user) {
-      const token = await user.getIdToken();
-      setToken(token);
+      const data = await api.getActiveUser(user.email)
+      setActive(data);
+      console.log(activeUser);
     }
 
     if (init) setInit(false);
   };
+
+  // useEffect(() => {
+  //   const subscriber = firebase.firestore()
+  //   .collection("users")
+  //   .doc(user.email)
+  // })
 
   useEffect(() => {
     const subscriber = firebase.auth().onAuthStateChanged(onAuthStateChanged);
