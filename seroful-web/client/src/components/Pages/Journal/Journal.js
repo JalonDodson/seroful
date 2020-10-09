@@ -97,7 +97,7 @@ export const Journal = () => {
       </Helmet>
       <PageDrawer />
       <div className={styles.container}>
-        <header className={styles.header} >
+        <header className={styles.header}>
           <hr />
           <Typography variant="h3" className={styles.title}>
             {user.displayName}'s Journal Entries
