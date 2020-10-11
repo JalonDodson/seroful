@@ -146,19 +146,20 @@ export const videoRoom = async (roomId) => {
   }
 };
 
-export const getPlans = async (userData) => {
+export const getPlans = async (email) => {
   const token =
     firebase.auth().currentUser &&
     (await firebase.auth().currentUser.getIdToken());
   try {
     const res = await instance.get(
-      `/users?plans=${userData.plans}`,
+      `/users/plans?email=${email}`,
       {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       }
-    );
+    )
+    .then((res) => res.data);
     return res;
   } catch (err) {
     console.log(err);
