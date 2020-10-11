@@ -11,6 +11,8 @@ import Typography from '@material-ui/core/Typography';
 import Avatar from '@material-ui/core/Avatar';
 import { deepPurple } from '@material-ui/core/colors';
 import { DataGrid } from '@material-ui/data-grid';
+import { userState, planState, planQuery } from "../../../store/store";
+import { useSetRecoilState, useRecoilValue } from 'recoil';
 
 // Material UI Class Styles
 const useStyles = makeStyles((theme) => ({
@@ -50,7 +52,13 @@ const rows = [
   { id: 1, goalItem: 'Example Goal', goalDescription: 'Example Description'},
 ];
 
+
+
 export const Profile = (props) => {
+  const currentUser = useSetRecoilState(userState);
+  const plans = useRecoilValue(planQuery);
+  console.log(plans);
+  console.log(currentUser);
   const classes = useStyles();
   return (
   <>

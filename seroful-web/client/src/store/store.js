@@ -1,4 +1,5 @@
-import { atom } from "recoil";
+import { atom, selector } from "recoil";
+import { getPlans } from "../util/api";
 
 export const userState = atom({
   key: "userState",
@@ -51,3 +52,17 @@ export const newUser = atom({
   key: "newUser",
   default: false,
 });
+
+export const planState = atom({
+  key: 'planState',
+  default: []
+});
+
+export const planQuery = selector({
+  key: 'planState',
+  get: async () => {
+    const plans = await getPlans();
+
+    return plans;
+  }
+})
