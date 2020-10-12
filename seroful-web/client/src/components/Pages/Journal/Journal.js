@@ -66,6 +66,7 @@ export const Journal = () => {
   };
 
   const [user, setUser] = useRecoilState(userState);
+  console.log(user)
 
   useEffect(() => {
     return async () => {
@@ -97,7 +98,7 @@ export const Journal = () => {
             {
               //TODO: instance.get(all of users entries and map through them to return these bastards on one side, new entry on the others)
             }
-            {user.journals.map((x, i) => {
+            {user.journals&&user.journals.map((x, i) => {
               const newDate = new Date(x.timestamp).toString();
               return (
                 <Accordion
