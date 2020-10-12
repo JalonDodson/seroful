@@ -11,7 +11,7 @@ import Typography from '@material-ui/core/Typography';
 import Avatar from '@material-ui/core/Avatar';
 import { deepPurple } from '@material-ui/core/colors';
 import { DataGrid } from '@material-ui/data-grid';
-
+import { PageDrawer } from "../../PageDrawer/PageDrawer"
 // Material UI Class Styles
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -57,6 +57,7 @@ export const Profile = (props) => {
   const classes = useStyles();
   return (
   <>
+  <PageDrawer />
     <h1>Welcome To Your Profile!</h1>
     <Card className={classes.root}>
       <CardActionArea className={classes.main}>
