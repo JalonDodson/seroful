@@ -1,7 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 
 import {
-  // Button,
+  ButtonBase,
   Divider,
   Typography,
   Drawer,
@@ -9,6 +9,8 @@ import {
   ListItem,
   ListItemIcon,
   ListItemText,
+  Menu,
+  MenuItem
   // Link,
 } from "@material-ui/core/";
 
@@ -29,6 +31,11 @@ import { drawerStyles } from "../../styles/drawerStyles";
 export const PageDrawer = () => {
   const styles = drawerStyles();
 
+  const [anchor, setAnchor] = useState(null);
+
+  const friendsMenu = ev => setAnchor(ev.currentTarget);
+  const friendsClose = () => setAnchor(null);
+  
   const logout = () => {
     firebase
       .auth()
@@ -62,14 +69,11 @@ export const PageDrawer = () => {
             </ListItemIcon>
             <ListItemText primary="Profile" />
           </ListItem>
-          <ListItem button key="Friends" component="a" href="/friends">
+          <ListItem key="Friends">
             <ListItemIcon>
               <PeopleIcon />
             </ListItemIcon>
-            <ListItemText
-              primary="Friends"
-              onClick={() => console.log("put a menu here soon")}
-            />
+            <ButtonBase aria-controls="friends-menu" variant="text" className={styles.friendsButton} aria-haspopup="true" onClick={friendsMenu}>Friends</ButtonBase>
           </ListItem>
           <ListItem button key="Planner" component="a" href="/planner">
             <ListItemIcon>
@@ -100,6 +104,16 @@ export const PageDrawer = () => {
           </ListItem>
         </List>
       </Drawer>
+      <Menu
+        id="friends-menu"
+        anchorEl={anchor}
+        keepMounted
+        open={Boolean(anchor)}
+        onClose={friendsClose}>
+            <MenuItem onClick={null}>Friends List</MenuItem>
+            <MenuItem onClick={null}>Messages</MenuItem>
+            <MenuItem onClick={null}>Add by Username</MenuItem>
+        </Menu>
     </>
   );
 };

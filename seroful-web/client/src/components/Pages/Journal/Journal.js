@@ -1,3 +1,4 @@
+
 import React, { createRef, useEffect, useState } from "react";
 import { Helmet } from "react-helmet";
 import { PageDrawer } from "../../PageDrawer/PageDrawer";
@@ -98,7 +99,7 @@ export const Journal = () => {
             {
               //TODO: instance.get(all of users entries and map through them to return these bastards on one side, new entry on the others)
             }
-            {user.journals&&user.journals.map((x, i) => {
+            {user.journals && user.journals.map((x, i) => {
               const newDate = new Date(x.timestamp).toString();
               return (
                 <Accordion
@@ -110,9 +111,8 @@ export const Journal = () => {
                     aria-controls={`panel${i}-content`}
                     id={`panel${i}-header`}
                   >
-                    <Typography>{`${newDate.split(" ")[1]} ${
-                      newDate.split(" ")[2]
-                    } ${newDate.split(" ")[4]}`}</Typography>
+                    <Typography>{`${newDate.split(" ")[1]} ${newDate.split(" ")[2]
+                      } ${newDate.split(" ")[4]}`}</Typography>
                   </AccordionSummary>
                   <AccordionDetails>
                     <Typography>

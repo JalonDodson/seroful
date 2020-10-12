@@ -34,3 +34,15 @@ export const journalStyles = makeStyles((themes) => ({
     },
 
 }));
+
+
+
+
+
+
+
+
+
+
+
+

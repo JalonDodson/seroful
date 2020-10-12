@@ -7,8 +7,8 @@ import firebase from "firebase/app"; // firebase
 import "firebase/auth"; // firebase
 import "firebase/firestore"; // firebase
 import * as api from "../../util/api"; // api
-import { userState, newUser } from "../../store/store"; // state
-import { useRecoilState, useSetRecoilState } from "recoil"; // state
+import { newUser } from "../../store/store"; // state
+import { useSetRecoilState } from "recoil"; // state
 import molecule from "../../resources/molecule.png"; // logo
 import { loginStyles, textTheme } from "../../styles/loginStyles"; // styles
 
@@ -308,7 +308,7 @@ export const LoginForm = () => {
                 <br />
                 <TextField
                   error={
-                    userInfo.pw && userInfo.pw.length < 6 && userInfo.pw !== "" || false
+                    userInfo.pw && userInfo.pw.length < 6 && userInfo.pw !== ""
                   }
                   helperText={
                     userInfo.pw && userInfo.pw.length < 6 && userInfo.pw !== ""
