@@ -11,6 +11,13 @@ import { userState } from "../../../store/store";
 export const Settings = () => {
   const styles = settingsStyles();
   const [user, setUser] = useRecoilState(userState);
+
+  const handleUpdate = ({}) => {
+    setUser({
+
+    })
+  };
+
   return (
     <>
       <Helmet>
@@ -26,6 +33,7 @@ export const Settings = () => {
           <hr />
         </header>
         <form method='PATCH' action='/users'>
+
           
         </form>
       </div>

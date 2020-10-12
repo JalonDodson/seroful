@@ -1,3 +1,4 @@
+
 import React, { createRef, useEffect, useState } from "react";
 import { Helmet } from "react-helmet";
 import { PageDrawer } from "../../PageDrawer/PageDrawer";
@@ -12,9 +13,10 @@ import MuiAccordion from "@material-ui/core/Accordion";
 import MuiAccordionSummary from "@material-ui/core/AccordionSummary";
 import MuiAccordionDetails from "@material-ui/core/AccordionDetails";
 import { responsiveFontSizes, withStyles } from "@material-ui/core/styles";
-// import firebase from "firebase/app";
+import firebase from "firebase/app";
 import "firebase/auth";
 
+let ent = "";
 export const Journal = () => {
   const styles = journalStyles();
   const Accordion = withStyles({
@@ -67,8 +69,6 @@ export const Journal = () => {
   const [user, setUser] = useRecoilState(userState);
   console.log(user)
 
-  console.log(`${user} is not showing up`)
-
   useEffect(() => {
     return async () => {
       await getEntries().then((resp) => {
@@ -77,7 +77,7 @@ export const Journal = () => {
         setUpdated(false);
       });
     };
-  }, [setUser, isUpdated]);
+  }, [isUpdated]);
 
   const inputRef = createRef();
   return (
@@ -99,7 +99,7 @@ export const Journal = () => {
             {
               //TODO: instance.get(all of users entries and map through them to return these bastards on one side, new entry on the others)
             }
-            {user.journals&&user.journals.map((x, i) => {
+            {user.journals && user.journals.map((x, i) => {
               const newDate = new Date(x.timestamp).toString();
               return (
                 <Accordion
@@ -111,9 +111,8 @@ export const Journal = () => {
                     aria-controls={`panel${i}-content`}
                     id={`panel${i}-header`}
                   >
-                    <Typography>{`${newDate.split(" ")[1]} ${
-                      newDate.split(" ")[2]
-                    } ${newDate.split(" ")[4]}`}</Typography>
+                    <Typography>{`${newDate.split(" ")[1]} ${newDate.split(" ")[2]
+                      } ${newDate.split(" ")[4]}`}</Typography>
                   </AccordionSummary>
                   <AccordionDetails>
                     <Typography>

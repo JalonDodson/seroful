@@ -1,3 +1,4 @@
+
 import React from "react";
 // , ThemeProvider
 import { Helmet } from "react-helmet";
@@ -30,16 +31,14 @@ const rows = [
   { id: 1, goalItem: 'Example Goal', goalDescription: 'Example Description' },
 ];
 
-
-
 export const Profile = (props) => {
   const styles = profileStyles();
   const [user, setUser] = useRecoilState(userState);
   return (
     <>
-    <Helmet>
-      <title>Seroful - Profile</title>
-    </Helmet>
+      <Helmet>
+        <title>Seroful - Profile</title>
+      </Helmet>
       <PageDrawer />
       <div className={styles.container}>
         <header className={styles.header}>
@@ -51,7 +50,7 @@ export const Profile = (props) => {
         </header>
         <Card className={styles.root}>
           <CardActionArea className={styles.main}>
-            <Avatar className={styles.purple}>{user.photo ? <img src={user.photo} /> : user.displayName ? user.displayName[0] : "S" }</Avatar>
+            <Avatar className={styles.purple}>{user.photo ? <img src={user.photo} /> : user.displayName ? user.displayName[0] : "S"}</Avatar>
             <CardContent className={styles.content}>
               <Typography gutterBottom variant="h5" component="h2">
                 {user.displayName}
