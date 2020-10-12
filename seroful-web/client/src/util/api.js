@@ -142,7 +142,7 @@ export const videoRoom = async (roomId) => {
   }
 };
 
-export const getPlans = async (email) => {
+export const getPlans = async () => {
   const token =
     firebase.auth().currentUser &&
     (await firebase.auth().currentUser.getIdToken());
@@ -151,10 +151,6 @@ export const getPlans = async (email) => {
     firebase.auth().currentUser && (await firebase.auth().currentUser.email);
 
   try {
-<<<<<<< HEAD
-    const res = await instance.get(
-      `/users/plans?email=${email}`,
-=======
     const res = await instance
       .get(`/users/planner/plans?email=${email}`, {
         headers: {
@@ -188,7 +184,6 @@ export const createPlan = async (userData) => {
         appt: userData.appt,
         goals: userData.goals,
       },
->>>>>>> fb42fadf8e0a12a3d38300198310056578dfc689
       {
         headers: {
           Authorization: `Bearer ${token}`,

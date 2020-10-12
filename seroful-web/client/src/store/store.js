@@ -52,17 +52,3 @@ export const newUser = atom({
   key: "newUser",
   default: false,
 });
-
-export const planState = atom({
-  key: 'planState',
-  default: []
-});
-
-export const planQuery = selector({
-  key: 'planState',
-  get: async () => {
-    const plans = await getPlans();
-
-    return plans;
-  }
-})
