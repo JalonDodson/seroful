@@ -50,7 +50,10 @@ const rows = [
   { id: 1, goalItem: 'Example Goal', goalDescription: 'Example Description'},
 ];
 
+
+
 export const Profile = (props) => {
+
   const classes = useStyles();
   return (
   <>
