@@ -35,7 +35,7 @@
     "dev:react": "react-scripts start",
     "jdev": "run-p --race jdev:firebase jdev:react",
     "jdev:firebase": "firebase serve -p 4000",
-    "jdev:react": "BROWSER='google-chrome-beta' react-scripts start"
+    "jdev:react": "BROWSER='google-chrome-stable' react-scripts start"
   },
   "eslintConfig": {
     "extends": "react-app"
