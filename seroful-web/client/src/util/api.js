@@ -142,7 +142,7 @@ export const videoRoom = async (roomId) => {
   }
 };
 
-export const getPlans = async (userData) => {
+export const getPlans = async () => {
   const token =
     firebase.auth().currentUser &&
     (await firebase.auth().currentUser.getIdToken());
@@ -189,7 +189,8 @@ export const createPlan = async (userData) => {
           Authorization: `Bearer ${token}`,
         },
       }
-    );
+    )
+    .then((res) => res.data);
     return res;
   } catch (err) {
     console.log(err);

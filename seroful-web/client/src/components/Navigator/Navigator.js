@@ -24,7 +24,9 @@ export const Navigator = () => {
           render={() => (userNew ? <Splash /> : <Home />)}
         />
         {/* // TODO: Make route for profile /users/(username or uid)/profile */}
+        <React.Suspense fallback={ <div>Loading...</div> }>
         <Route path="/profile" render={() => <Profile />} />
+        </React.Suspense>
         {/* // TODO: Make route for planner /users/(username or uid)/planner */}
         <Route path="/friends" render={() => <Friends />} />
         <Route path="/planner" render={() => <Planner />} />

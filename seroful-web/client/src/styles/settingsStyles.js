@@ -12,4 +12,25 @@ export const settingsStyles = makeStyles((themes) => ({
         textAlign: 'center',
         margin: 'auto'
     },
+    inter: {
+        display: 'flex',
+        width: '60%',
+        alignSelf: 'center',
+        justifyContent: 'space-between'
+
+    },
+    pastEntries: {
+        width: '30%',
+        marginTop: '7%',
+        marginLeft: '20%',
+    },
+    form: {
+        flexGrow: 1,
+        border: '1px solid',
+        width: '30%',        
+    },
+    submit: {
+        alignSelf: 'flex-end',
+    },
+
 }));

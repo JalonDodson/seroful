@@ -4,10 +4,9 @@ import { Helmet } from "react-helmet";
 
 import { PageDrawer } from "../../PageDrawer/PageDrawer";
 import { settingsStyles } from "../../../styles/settingsStyles";
+import Typography from '@material-ui/core/Typography';
 import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 import { userState } from "../../../store/store";
-
-import { Button, TextField, Typography } from "@material-ui/core";
 
 export const Settings = () => {
   const styles = settingsStyles();
@@ -26,6 +25,9 @@ export const Settings = () => {
           </Typography>
           <hr />
         </header>
+        <form method='PATCH' action='/users'>
+          
+        </form>
       </div>
     </>
   );
