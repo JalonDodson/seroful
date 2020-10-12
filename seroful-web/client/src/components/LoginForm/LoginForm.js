@@ -308,12 +308,12 @@ export const LoginForm = () => {
                 <br />
                 <TextField
                   error={
-                    userInfo.pw && userInfo.pw.length < 6 && userInfo.pw !== ""
+                    userInfo.pw && userInfo.pw.length < 6 && userInfo.pw !== "" || false
                   }
                   helperText={
                     userInfo.pw && userInfo.pw.length < 6 && userInfo.pw !== ""
                       ? "Your password must be at least 6 characters!"
-                      : ""
+                      : null
                   }
                   label="Password"
                   type="password"

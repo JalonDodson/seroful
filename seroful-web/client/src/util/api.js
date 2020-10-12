@@ -32,24 +32,12 @@ export const getActiveUser = async (email) => {
 };
 
 export const createUser = async (username, displayName, email) => {
-  const token =
-    firebase.auth().currentUser &&
-    (await firebase.auth().currentUser.getIdToken());
-
   try {
-    const res = await instance.post(
-      `/users`,
-      {
-        displayName: displayName,
-        email: email,
-        username: username,
-      },
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      }
-    );
+    const res = await instance.post(`/users`, {
+      displayName: displayName,
+      email: email,
+      username: username,
+    });
     return res;
   } catch (err) {
     console.log(err);
@@ -60,6 +48,7 @@ export const updateUser = async (userData) => {
   const token =
     firebase.auth().currentUser &&
     (await firebase.auth().currentUser.getIdToken());
+
   try {
     const res = await instance.patch(
       `/users?email=${userData.email}`,
@@ -85,13 +74,17 @@ export const updateUser = async (userData) => {
   }
 };
 
-export const createEntry = async (entry, email) => {
+export const createEntry = async (entry) => {
   const token =
     firebase.auth().currentUser &&
     (await firebase.auth().currentUser.getIdToken());
+
+  const email =
+    firebase.auth().currentUser && (await firebase.auth().currentUser.email);
+
   try {
     const res = await instance.patch(
-      `/users/entries?email=${email}`,
+      `/users/journal/entries?email=${email}`,
       {
         entry: entry,
         timestamp: Date.now(),
@@ -102,21 +95,24 @@ export const createEntry = async (entry, email) => {
         },
       }
     );
-    console.log(res)
+    console.log(res);
     return res;
   } catch (err) {
     console.log(err);
   }
 };
 
-export const getEntries = async (email) => {
+export const getEntries = async () => {
   const token =
     firebase.auth().currentUser &&
     (await firebase.auth().currentUser.getIdToken());
 
+  const email =
+    firebase.auth().currentUser && (await firebase.auth().currentUser.email);
+
   try {
     const res = await instance
-      .get(`/users/entries?email=${email}`, {
+      .get(`/users/journal/entries?email=${email}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -150,9 +146,49 @@ export const getPlans = async (email) => {
   const token =
     firebase.auth().currentUser &&
     (await firebase.auth().currentUser.getIdToken());
+
+  const email =
+    firebase.auth().currentUser && (await firebase.auth().currentUser.email);
+
   try {
+<<<<<<< HEAD
     const res = await instance.get(
       `/users/plans?email=${email}`,
+=======
+    const res = await instance
+      .get(`/users/planner/plans?email=${email}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((resp) => resp.data);
+    return res;
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+export const createPlan = async (userData) => {
+  const token =
+    firebase.auth().currentUser &&
+    (await firebase.auth().currentUser.getIdToken());
+
+  const email =
+    firebase.auth().currentUser && (await firebase.auth().currentUser.email);
+
+  try {
+    const res = await instance.patch(
+      `/users/planner/plans?email=${email}`,
+      {
+        timestamp: Date.now(),
+        dayLength: userData.dayLength,
+        homework: userData.homework,
+        mealtimes: userData.mealtimes,
+        breaks: userData.breaks,
+        appt: userData.appt,
+        goals: userData.goals,
+      },
+>>>>>>> fb42fadf8e0a12a3d38300198310056578dfc689
       {
         headers: {
           Authorization: `Bearer ${token}`,

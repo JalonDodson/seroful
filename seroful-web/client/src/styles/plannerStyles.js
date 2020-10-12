@@ -7,7 +7,6 @@ export const plannerStyles = makeStyles((theme) => ({
     alignItems: "baseline",
   },
   accordion: {
-    top: "20vh",
     width: "30vw",
     left: "8.5vw",
   },
