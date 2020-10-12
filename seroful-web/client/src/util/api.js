@@ -74,6 +74,25 @@ export const updateUser = async (userData) => {
   }
 };
 
+export const addFriend = async (username) => {
+  const token = 
+  firebase.auth().currentUser &&
+    (await firebase.auth().currentUser.getIdToken());
+
+    const email = 
+    firebase.auth().currentUser && (await firebase.auth().currentUser.email);
+
+    try {
+      const res = await instance.post(`/users/friends?email=${email}&isPending=true`, {
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      })
+    }
+}
+
 export const createEntry = async (entry) => {
   const token =
     firebase.auth().currentUser &&

@@ -11,15 +11,11 @@ import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import Avatar from '@material-ui/core/Avatar';
 import { DataGrid } from '@material-ui/data-grid';
-<<<<<<< HEAD
-import { PageDrawer } from "../../PageDrawer/PageDrawer"
-=======
 import { PageDrawer } from '../../PageDrawer/PageDrawer';
 import { profileStyles } from '../../../styles/profileStyles';
 import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 import { userState } from "../../../store/store";
 
->>>>>>> 1948d253b72e5d00150c261fa605993a8f505329
 // Material UI Class Styles
 
 // Settings For Data Table [Production PLan Goals]
@@ -39,17 +35,6 @@ export const Profile = (props) => {
   const styles = profileStyles();
   const [user, setUser] = useRecoilState(userState);
   return (
-<<<<<<< HEAD
-  <>
-  <PageDrawer />
-    <h1>Welcome To Your Profile!</h1>
-    <Card className={classes.root}>
-      <CardActionArea className={classes.main}>
-        <Avatar className={classes.purple}>S</Avatar>
-        <CardContent className={classes.content}>
-          <Typography gutterBottom variant="h5" component="h2">
-            My Name
-=======
     <>
       <Helmet>
         <title>Seroful - Profile</title>
@@ -60,7 +45,6 @@ export const Profile = (props) => {
           <hr />
           <Typography variant="h3" className={styles.title}>
             {user.displayName}'s Profile
->>>>>>> 1948d253b72e5d00150c261fa605993a8f505329
           </Typography>
           <hr />
         </header>
