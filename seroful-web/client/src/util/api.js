@@ -74,15 +74,44 @@ export const updateUser = async (userData) => {
   }
 };
 
-export const addFriend = async (username) => {
-  const token = 
-  firebase.auth().currentUser &&
+export const addFriend = async (senderName, requesteeName) => {
+  const token =
+    firebase.auth().currentUser &&
     (await firebase.auth().currentUser.getIdToken());
 
-    const email = 
+  const email =
     firebase.auth().currentUser && (await firebase.auth().currentUser.email);
+console.log(requesteeName);
 
+  try {
+    const res = await instance.post(
+      `/users/friends?email=${email}&isPending=true`,
+      {
+        username: senderName,
+        requestee: requesteeName,
+        email: email
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    ).then(resp => resp.data);
+    return res;
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+export const acceptFriend = async (acceptedName, accepteeName) => {
+  const token = 
+    firebase.auth().currentUser &&
+    (await firebase.auth().currentUser.getIdToken());
+    
+    const email =
+    firebase.auth().currentUser && (await firebase.auth().currentUser.email);
     try {
+<<<<<<< HEAD
       const res = await instance.post(`/users/friends?email=${email}&isPending=true`, {
         
           headers: {
@@ -92,6 +121,44 @@ export const addFriend = async (username) => {
       )
     }
     catch (err) {
+=======
+      const res = await instance.post(`/users/friends?email=${email}&isPending=false`, 
+      {
+        username: acceptedName,
+        acceptee: accepteeName,
+        email: email
+      }, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        }
+      }).then(resp => resp.data);
+      return res;
+    } catch (err) {
+      console.log(err);
+    }
+}
+
+export const deleteRequest = async (deniedName, denierName) => {
+  const token = 
+    firebase.auth().currentUser &&
+    (await firebase.auth().currentUser.getIdToken());
+    
+    const email =
+    firebase.auth().currentUser && (await firebase.auth().currentUser.email);
+    try {
+      const res = await instance.delete(`/users/friends?email=${email}?isRejection=true`, 
+      {
+        username: deniedName,
+        denier: denierName,
+        email: email
+      }, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        }
+      }).then(resp => resp.data);
+      return res;
+    } catch (err) {
+>>>>>>> e9e45b5fe785f5827bb853fc9094d54efca8eb0b
       console.log(err);
     }
     }
@@ -196,24 +263,25 @@ export const createPlan = async (userData) => {
     firebase.auth().currentUser && (await firebase.auth().currentUser.email);
 
   try {
-    const res = await instance.patch(
-      `/users/planner/plans?email=${email}`,
-      {
-        timestamp: Date.now(),
-        dayLength: userData.dayLength,
-        homework: userData.homework,
-        mealtimes: userData.mealtimes,
-        breaks: userData.breaks,
-        appt: userData.appt,
-        goals: userData.goals,
-      },
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
+    const res = await instance
+      .patch(
+        `/users/planner/plans?email=${email}`,
+        {
+          timestamp: Date.now(),
+          dayLength: userData.dayLength,
+          homework: userData.homework,
+          mealtimes: userData.mealtimes,
+          breaks: userData.breaks,
+          appt: userData.appt,
+          goals: userData.goals,
         },
-      }
-    )
-    .then((res) => res.data);
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      )
+      .then((res) => res.data);
     return res;
   } catch (err) {
     console.log(err);
