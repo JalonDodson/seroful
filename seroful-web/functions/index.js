@@ -1,7 +1,13 @@
 // DON'T TOUCH BELOW THIS LINE
+require("dotenv-safe").config();
 const functions = require("firebase-functions");
 const admin = require("firebase-admin");
 const credential = require("./seroful-firebase-adminsdk-ry93d-5b49e47b83.json");
+const accountSid = process.env.TWILIO_ACCOUNT_SID;
+const authToken = process.env.TWILIO_AUTH_TOKEN;
+const client = require("twilio")(accountSid, authToken);
+const AccessToken = require("twilio").jwt.AccessToken;
+const VideoGrant = AccessToken.VideoGrant;
 
 const url = require("url");
 /* WHEN IN DEV MODE ASSIGN CREDENTIAL TO admin.credential.cert(credential)
@@ -52,32 +58,45 @@ app.get("/users", async (req, res) => {
   const emailQuery = req.url.split("?email=")[1];
   const user = req["currentUser"];
   let filterQuery = req.url.split("?filterAll=")[1];
-  filterQuery = (filterQuery === "true");
-
+  console.log(filterQuery);
   if (filterQuery) {
     try {
-      await db.collection("users").get().then(allUsers => res.status(200).send(allUsers.data()))
-    } catch (err) {
-      console.log(err);
-      res.status(400).send(err);
-    }
-  }
-  if (user) {
-    try {
       await db
-        .collection("users")
-        .doc(emailQuery)
-        .get()
-        .then((snapshot) => res.status(200).send(snapshot.data()));
+      .collection("users")
+      .get()
+      .then(allUsers => {
+        let data = [];
+        allUsers.forEach(doc => {
+          let docData = doc.data();
+          data.push(docData);
+        })
+        console.log(data);
+        res.status(200).send(data)
+      })
+      
     } catch (err) {
       console.log(err);
       res.status(400).send(err);
     }
   } else {
-    res.status(403).send("Unauthorized!");
-  }
-});
 
+    if (user) {
+      try {
+        await db
+        .collection("users")
+        .doc(emailQuery)
+        .get()
+        .then((snapshot) => res.status(200).send(snapshot.data()));
+      } catch (err) {
+        console.log(err);
+        res.status(400).send(err);
+      }
+    } else {
+      res.status(403).send("Unauthorized!");
+    }
+  }
+  });
+  
 app.post("/users", async (req, res) => {
   try {
     await db.collection("users").doc(req.body.email).set({
@@ -344,27 +363,6 @@ app.post("/users/friends", async (req, res) => {
   }
 });
 
-// app.get("/profile", (req, res) => {
-//   //TODO: nav to user profile
-// });
-// app.get('/profile', (req, res) => {
-//   //TODO: nav to user profile
-// });
-// app.post('/profile', (req, res) => {
-//   //TODO: nav to user profile
-// });
-// app.get('/friends', (req, res) => {
-//   //TODO: nav to user friend list
-// });
-// app.post('/friends', (req, res) => {
-//   //TODO: nav to user friend list
-// });
-// app.get('/planner', (req, res) => {
-//   //TODO: nav to planner for current user
-// });
-// app.post('/planner', (req, res) => {
-//   //TODO: post new planner content for current user
-// });
 app.get("/journal", async (req, res) => {
   try {
     await db.collection("users").get({ displayName: res.body.displayName });
@@ -374,22 +372,32 @@ app.get("/journal", async (req, res) => {
     console.log(error);
   }
 });
-// app.post('/journal', (req, res) => {
-//   //TODO: add content to user journal
-// });
-// app.get('/settings', (req, res) => {
-//   //TODO: nav to user settings
-// });
-// app.post('/settings', (req, res) => {
-//   //TODO: make changes to user settings
-// });
-app.get("/video-chat", (req, res) => {
-  res.redirect(`/video-chat/:${nanoid()}`);
-});
 
-app.get("/video-chat/:room", (req, res) => {
-  res.status(200).send("", { roomId: req.params.room });
-  console.log(req.params.room);
+app.post("/video", (req, res) => {
+  const user = req["currentUser"]
+  let roomQuery = req.url.split("?createRoom=")[1];
+  roomQuery = roomQuery === "true";
+  if (roomQuery) {
+    if (user) {
+      try {
+        client.video.rooms
+        .create({ 
+          recordParticipantsOnConnect: true, 
+          statusCallback: `https://seroful.tech/videoRoomEvents/`,
+          uniqueName: req.body.roomName,
+          type: "group" })
+        .then(room => console.log(room.sid));
+        res.status(200).send();
+      } catch (err) {
+        console.log(err);
+        res.status(400).send("Error grabbing video room.");
+      }
+    } else {
+      res.status(403).send("Unauthorized");
+    }
+  } else {
+    res.status(200).send("Nothing happened. Exiting.");
+  }
 });
 
 // DO NOT TOUCH THIS LINE

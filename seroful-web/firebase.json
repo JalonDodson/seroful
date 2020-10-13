@@ -31,6 +31,18 @@
         "function": "api"
       },
       {
+        "source": "/video-chat",
+        "function": "api"
+      },
+      {
+        "source": "/video/token",
+        "function": "api"
+      },
+      {
+        "source": "/video",
+        "function": "api"
+      },
+      {
         "source": "/",
         "destination": "/index.html"
       }
