@@ -10,7 +10,13 @@ import {
   ListItemIcon,
   ListItemText,
   Menu,
-  MenuItem
+  MenuItem,
+  Badge,
+  Modal,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogContentText,
   // Link,
 } from "@material-ui/core/";
 
@@ -24,18 +30,23 @@ import MenuBookIcon from "@material-ui/icons/MenuBook";
 import PeopleIcon from "@material-ui/icons/People";
 import PersonIcon from "@material-ui/icons/Person";
 import SettingsIcon from "@material-ui/icons/Settings";
-import AssignmentIcon from '@material-ui/icons/Assignment';
+import AssignmentIcon from "@material-ui/icons/Assignment";
+
+import { userState } from "../../store/store";
+import { useRecoilValue } from "recoil";
 
 import { drawerStyles } from "../../styles/drawerStyles";
 
 export const PageDrawer = () => {
+  const activeUser = useRecoilValue(userState);
   const styles = drawerStyles();
 
   const [anchor, setAnchor] = useState(null);
+  const [requestOpen, setRequest] = useState(false);
 
-  const friendsMenu = ev => setAnchor(ev.currentTarget);
+  const friendsMenu = (ev) => setAnchor(ev.currentTarget);
   const friendsClose = () => setAnchor(null);
-  
+
   const logout = () => {
     firebase
       .auth()
@@ -71,9 +82,26 @@ export const PageDrawer = () => {
           </ListItem>
           <ListItem key="Friends">
             <ListItemIcon>
-              <PeopleIcon />
+              <Badge
+                badgeContent={
+                  activeUser.friends.pending.length
+                    ? activeUser.friends.pending.length
+                    : 0
+                }
+                color="primary"
+              >
+                <PeopleIcon />
+              </Badge>
             </ListItemIcon>
-            <ButtonBase aria-controls="friends-menu" variant="text" className={styles.friendsButton} aria-haspopup="true" onClick={friendsMenu}>Friends</ButtonBase>
+            <ButtonBase
+              aria-controls="friends-menu"
+              variant="text"
+              className={styles.friendsButton}
+              aria-haspopup="true"
+              onClick={friendsMenu}
+            >
+              Friends
+            </ButtonBase>
           </ListItem>
           <ListItem button key="Planner" component="a" href="/planner">
             <ListItemIcon>
@@ -109,11 +137,27 @@ export const PageDrawer = () => {
         anchorEl={anchor}
         keepMounted
         open={Boolean(anchor)}
-        onClose={friendsClose}>
-            <MenuItem onClick={null}>Friends List</MenuItem>
-            <MenuItem onClick={null}>Messages</MenuItem>
-            <MenuItem onClick={null}>Add by Username</MenuItem>
-        </Menu>
+        onClose={friendsClose}
+      >
+        <MenuItem onClick={null}>Friends List</MenuItem>
+        <MenuItem onClick={() => setRequest(true)}>Requests</MenuItem>
+        <MenuItem onClick={null}>Messages</MenuItem>
+        <MenuItem onClick={null}>Add by Username</MenuItem>
+      </Menu>
+      // Dialogs
+      <Dialog
+        open={requestOpen}
+        onClose={() => setRequest(false)}
+        aria-labelledby="requests-modal"
+        aria-describedby="requests-modal-desc"
+      >
+        <DialogTitle id="requests-title">Friend Requests</DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+            {activeUser.friends.pending.length ? 1 === activeUser.friends.pending.length ? "You have one new friend request!" : `You have ${activeUser.friends.pending.length} new friend requests!` : "You don't have any new friend requests right now."}
+          </DialogContentText>
+        </DialogContent>
+      </Dialog>
     </>
   );
 };

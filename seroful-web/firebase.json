@@ -11,6 +11,10 @@
     "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
     "rewrites": [
       {
+        "source": "/users/friends",
+        "function": "api"
+      },
+      {
         "source": "/users/journal/entries",
         "function": "api"
       },

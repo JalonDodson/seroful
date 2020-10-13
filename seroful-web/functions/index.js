@@ -79,6 +79,7 @@ app.post("/users", async (req, res) => {
       illnesses: [],
       plans: [],
       journals: [],
+      friends: {},
     });
     res.status(201).send("User created.");
   } catch (err) {
@@ -183,7 +184,7 @@ app.get("/users/journal/entries", async (req, res) => {
         });
     } catch (err) {
       console.log(err);
-      res.status(401).send("Error retrieving information.");
+      res.status(400).send("Error retrieving information.");
     }
   } else {
     res.status(403).send("Unauthorized.");
@@ -207,7 +208,7 @@ app.get("/users/planner/plans", async (req, res) => {
         });
     } catch (err) {
       console.log(err);
-      res.status(401).send("Error retrieving information.");
+      res.status(400).send("Error retrieving information.");
     }
   } else {
     res.status(403).send("Unauthorized");
@@ -237,10 +238,99 @@ app.patch("/users/planner/plans", async (req, res) => {
         .then(res.status(200).send("Updated plans successfully."));
     } catch (err) {
       console.log(err);
-      res.status(401).send("Error retrieving information.");
+      res.status(400).send("Error retrieving information.");
     }
   } else {
     res.status(403).send("Unauthorized");
+  }
+});
+/*
+ */
+app.post("/users/friends", async (req, res) => {
+  const emailQuery = req.url.split("?email=")[1].split("&isPending=")[0];
+  let isPending = req.url.split("?email=")[1].split("&isPending=")[1];
+  isPending = isPending === "true";
+  const user = req["currentUser"];
+  if (user) {
+    if (isPending) {
+      try {
+        await db
+          .collection("users")
+          .where("username", "==", req.body.username)
+          .get()
+          .then((query) => {
+            query.docs.forEach((doc) => {
+              const docRef = db.collection("users").doc(doc.id);
+              docRef.update({
+                friends: {
+                  pending: admin.firestore.FieldValue.arrayUnion({
+                    username: req.body.requestee,
+                    requestDate: Date.now(),
+                  }),
+                },
+              });
+            });
+          });
+        await db
+          .collection("users")
+          .doc(emailQuery)
+          .update({
+            friends: {
+              sent: admin.firestore.FieldValue.arrayUnion({
+                username: req.body.username,
+                requestDate: Date.now(),
+              }),
+            },
+          });
+        res.status(201).send("Successfully sent friend request.");
+      } catch (err) {
+        console.log(err);
+        res.status(400).send("Unable to send friend request.");
+      }
+    } else {
+      try {
+        db.collection("users")
+          .where("username", "==", req.body.username)
+          .get()
+          .then((query) => {
+            query.docs.forEach((doc) => {
+              const docRef = db.collection("users").doc(doc.id);
+              docRef.update({
+                friends: {
+                  pending: admin.firestore.FieldValue.arrayRemove({
+                    username: req.body.requestee,
+                  }),
+                  current: admin.firestore.FieldValue.arrayUnion({
+                    username: req.body.requestee,
+                    friendSince: Date.now(),
+                  }),
+                },
+              });
+            });
+          });
+        await db
+          .collection("users")
+          .doc(emailQuery)
+          .update({
+            friends: {
+              sent: admin.firestore.FieldValue.arrayRemove({
+                username: req.body.username,
+                requested: Date.now(),
+              }),
+              current: admin.firestore.FieldValue.arrayUnion({
+                username: req.body.username,
+                friendSince: Date.now(),
+              }),
+            },
+          })
+          .then(res.status(201).send("Friend successfully added."));
+      } catch (err) {
+        console.log(err);
+        res.status(400).send("Unable to accept friend request.");
+      }
+    }
+  } else {
+    res.status(403).send("Unauthorized!");
   }
 });
 
