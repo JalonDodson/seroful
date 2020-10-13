@@ -1,10 +1,13 @@
 import React, { useState } from "react";
 
 import {
+  Button,
+  ButtonGroup,
   ButtonBase,
   Divider,
   Typography,
   Drawer,
+  IconButton,
   List,
   ListItem,
   ListItemIcon,
@@ -12,13 +15,15 @@ import {
   Menu,
   MenuItem,
   Badge,
-  Modal,
   Dialog,
   DialogTitle,
   DialogContent,
   DialogContentText,
   // Link,
 } from "@material-ui/core/";
+
+import PersonAddIcon from "@material-ui/icons/PersonAdd";
+import DeleteIcon from '@material-ui/icons/Delete';
 
 import firebase from "firebase/app";
 import "firebase/auth";
@@ -31,6 +36,8 @@ import PeopleIcon from "@material-ui/icons/People";
 import PersonIcon from "@material-ui/icons/Person";
 import SettingsIcon from "@material-ui/icons/Settings";
 import AssignmentIcon from "@material-ui/icons/Assignment";
+
+import * as api from "../../util/api";
 
 import { userState } from "../../store/store";
 import { useRecoilValue } from "recoil";
@@ -84,7 +91,7 @@ export const PageDrawer = () => {
             <ListItemIcon>
               <Badge
                 badgeContent={
-                  activeUser.friends.pending.length
+                  activeUser.friends !== undefined
                     ? activeUser.friends.pending.length
                     : 0
                 }
@@ -154,8 +161,19 @@ export const PageDrawer = () => {
         <DialogTitle id="requests-title">Friend Requests</DialogTitle>
         <DialogContent>
           <DialogContentText>
-            {activeUser.friends.pending.length ? 1 === activeUser.friends.pending.length ? "You have one new friend request!" : `You have ${activeUser.friends.pending.length} new friend requests!` : "You don't have any new friend requests right now."}
+            {activeUser.friends ? 1 === activeUser.friends.pending.length ? "You have one new friend request!" : `You have ${activeUser.friends.pending.length} new friend requests!` : "You don't have any new friend requests right now."}
           </DialogContentText>
+          {activeUser.friends &&
+          <List>
+            {activeUser.friends.pending.map(x => {
+              return (
+              <ListItem>
+                <ButtonGroup className={styles.buttonGroup} aria-label="request-handlers"><IconButton color="primary" onClick={() => api.acceptFriend(x.username, activeUser.username)}><PersonAddIcon /></IconButton><IconButton color="secondary" onClick={() => api.deleteRequest(x.username, activeUser.username)}><DeleteIcon /></IconButton></ButtonGroup> {x.username}
+              </ListItem>)
+            })}
+          </List>
+          }
+            
         </DialogContent>
       </Dialog>
     </>

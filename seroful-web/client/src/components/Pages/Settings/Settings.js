@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useRef } from "react";
 import { Helmet } from "react-helmet";
 import multer from "multer";
+import path from 'path';
 
 import { PageDrawer } from "../../PageDrawer/PageDrawer";
 import { settingsStyles } from "../../../styles/settingsStyles";
@@ -14,18 +15,23 @@ import { userState } from "../../../store/store";
 export const Settings = () => {
   const styles = settingsStyles();
   const [user, setUser] = useRecoilState(userState);
+  const ref = useRef(null);
 
-  const handleUpdate = ({}) => {
-    setUser({});
+  const buttonClick = () => {
+    ref.current.click();
   };
-  /*
-  basically have a new collection in firestore called 'friends'
-  collection has two (docs? idk wtf you call them) called wait fuck hang on
-  ok so scratch that shit
-  user has a new collection called 'friends' and inside there is called 'current' and 'pending'
-  all pending friend requests go there and shit and yeah and shit and fuck shit and fuck
-  and shit
-*/
+
+  const handleSubmit = (ev) => {
+    ev.stopPropagation();
+    ev.preventDefault();
+    let newImg = ev.target.files[0];
+    console.log(newImg)
+
+    // const imgFiles = /jpeg|jpg|png|gif/;
+    // const extName = fileTypes.test(path.extname(ev.originalname).toLowerCase());
+
+  };
+
   return (
     <>
       <Helmet>
@@ -50,37 +56,37 @@ export const Settings = () => {
           action="/users"
           encType="multipart/form-data"
         >
-          <label htmlFor="input">
-            <input id='input' className={styles.input} type="file" />
-              <ButtonBase
-                focusRipple
-                key="Profile Photo"
-                className={styles.image}
-                focusVisibleClassName={styles.focusVisible}
-                style={{
-                  width: "200px",
-                }}
+          <input id="input" className={styles.input} ref={ref} type="file" />
+          <ButtonBase
+            focusRipple
+            key="Profile Photo"
+            className={styles.image}
+            focusVisibleClassName={styles.focusVisible}
+            onChange={handleSubmit}
+            style={{
+              width: "200px",
+            }}
+            onClick={(ev) => buttonClick(ev)}
+          >
+            <span
+              className={styles.imageSrc}
+              // style={{
+              //   backgroundImage: ref.current.files. ? `url(${ref.current.value})` : user.photo ? `url(${user.photo})` :  `url("../../../resources/molecule.png")`
+              // }}
+            />
+            <span className={styles.imageBackdrop} />
+            <span className={styles.imageButton}>
+              <Typography
+                component="span"
+                variant="subtitle1"
+                color="inherit"
+                className={styles.imageTitle}
               >
-                <span
-                  className={styles.imageSrc}
-                  style={{
-                    backgroundImage: `url(${user.photo})`,
-                  }}
-                />
-                <span className={styles.imageBackdrop} />
-                <span className={styles.imageButton}>
-                  <Typography
-                    component="span"
-                    variant="subtitle1"
-                    color="inherit"
-                    className={styles.imageTitle}
-                  >
-                    {user.username}
-                    <span className={styles.imageMarked} />
-                  </Typography>
-                </span>
-              </ButtonBase>
-          </label>
+                {user.username}
+                <span className={styles.imageMarked} />
+              </Typography>
+            </span>
+          </ButtonBase>
           <TextField
             error
             helperText
@@ -121,7 +127,7 @@ export const Settings = () => {
             onBlur
             onChange
           ></TextField>
-          <TextField
+          {/* <TextField
             error
             helperText
             label="Current Medicines"
@@ -140,7 +146,8 @@ export const Settings = () => {
             placeholder={user.illnesses}
             onBlur
             onChange
-          ></TextField>
+          ></TextField> */}
+          <Button type='submit' className='btn' onClick={handleSubmit}>Submit New User Info</Button>
         </form>
       </div>
     </>

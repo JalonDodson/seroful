@@ -13,19 +13,19 @@ import { TextField } from "@material-ui/core";
 export const Home = () => {
   const activeUser = useRecoilValue(userState);
   const inputRef = useRef();
-
   return (
     <>
       <Helmet>
         <title>Seroful - Home</title>
       </Helmet>
       <TextField inputRef={inputRef} label="Add Friend Test Shit" />
-      <Button onClick={() => api.addFriend(inputRef.current.value, activeUser.username)}>
+      <Button
+        onClick={() => {
+          api.addFriend(inputRef.current.value, activeUser.username);
+        }}
+      >
         Add Friend or Some Shit
       </Button>
-      {/* <Button onClick={() => api.acceptRequest(inputRef.current.value, activeUser.username)}>
-        Confirm Friend or Some Shit
-      </Button> */}
       <PageDrawer />
     </>
   );

@@ -30,5 +30,8 @@ export const drawerStyles = makeStyles((theme) => ({
     lineHeight: 1.5,
     letterSpacing: "0.00938.em",
     background: "none",
+  },
+  buttonGroup: {
+    marginLeft: "-15%",
   }
 }));
