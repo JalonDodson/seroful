@@ -103,6 +103,54 @@ console.log(requesteeName);
   }
 };
 
+export const acceptFriend = async (acceptedName, accepteeName) => {
+  const token = 
+    firebase.auth().currentUser &&
+    (await firebase.auth().currentUser.getIdToken());
+    
+    const email =
+    firebase.auth().currentUser && (await firebase.auth().currentUser.email);
+    try {
+      const res = await instance.post(`/users/friends?email=${email}&isPending=false`, 
+      {
+        username: acceptedName,
+        acceptee: accepteeName,
+        email: email
+      }, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        }
+      }).then(resp => resp.data);
+      return res;
+    } catch (err) {
+      console.log(err);
+    }
+}
+
+export const deleteRequest = async (deniedName, denierName) => {
+  const token = 
+    firebase.auth().currentUser &&
+    (await firebase.auth().currentUser.getIdToken());
+    
+    const email =
+    firebase.auth().currentUser && (await firebase.auth().currentUser.email);
+    try {
+      const res = await instance.delete(`/users/friends?email=${email}?isRejection=true`, 
+      {
+        username: deniedName,
+        denier: denierName,
+        email: email
+      }, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        }
+      }).then(resp => resp.data);
+      return res;
+    } catch (err) {
+      console.log(err);
+    }
+}
+
 export const createEntry = async (entry) => {
   const token =
     firebase.auth().currentUser &&
