@@ -298,10 +298,10 @@ app.post("/users/friends", async (req, res) => {
               docRef.update({
                 friends: {
                   pending: admin.firestore.FieldValue.arrayRemove({
-                    username: req.body.requestee,
+                    username: req.body.acceptee,
                   }),
                   current: admin.firestore.FieldValue.arrayUnion({
-                    username: req.body.requestee,
+                    username: req.body.acceptee,
                     friendSince: Date.now(),
                   }),
                 },

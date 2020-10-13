@@ -23,7 +23,7 @@ import {
 } from "@material-ui/core/";
 
 import PersonAddIcon from "@material-ui/icons/PersonAdd";
-import DeleteIcon from '@material-ui/icons/Delete';
+import DeleteIcon from "@material-ui/icons/Delete";
 
 import firebase from "firebase/app";
 import "firebase/auth";
@@ -50,7 +50,7 @@ export const PageDrawer = () => {
 
   const [anchor, setAnchor] = useState(null);
   const [requestOpen, setRequest] = useState(false);
-
+  const [isChecked, setChecked] = useState(false);
   const friendsMenu = (ev) => setAnchor(ev.currentTarget);
   const friendsClose = () => setAnchor(null);
 
@@ -91,7 +91,7 @@ export const PageDrawer = () => {
             <ListItemIcon>
               <Badge
                 badgeContent={
-                  activeUser.friends !== undefined
+                  activeUser.friends.pending !== undefined
                     ? activeUser.friends.pending.length
                     : 0
                 }
@@ -161,19 +161,56 @@ export const PageDrawer = () => {
         <DialogTitle id="requests-title">Friend Requests</DialogTitle>
         <DialogContent>
           <DialogContentText>
-            {activeUser.friends ? 1 === activeUser.friends.pending.length ? "You have one new friend request!" : `You have ${activeUser.friends.pending.length} new friend requests!` : "You don't have any new friend requests right now."}
+            {activeUser.friends.pending
+              ? 1 === activeUser.friends.pending.length
+                ? "You have one new friend request!"
+                : `You have ${activeUser.friends.pending.length} new friend requests!`
+              : "You don't have any new friend requests right now."}
           </DialogContentText>
-          {activeUser.friends &&
-          <List>
-            {activeUser.friends.pending.map(x => {
-              return (
-              <ListItem>
-                <ButtonGroup className={styles.buttonGroup} aria-label="request-handlers"><IconButton color="primary" onClick={() => api.acceptFriend(x.username, activeUser.username)}><PersonAddIcon /></IconButton><IconButton color="secondary" onClick={() => api.deleteRequest(x.username, activeUser.username)}><DeleteIcon /></IconButton></ButtonGroup> {x.username}
-              </ListItem>)
-            })}
-          </List>
-          }
-            
+          {activeUser.friends.pending && (
+            <List>
+              {activeUser.friends.pending.map((x) => {
+                return (
+                  <ListItem>
+                    {!isChecked ? (
+                      <>
+                        <ButtonGroup
+                          className={styles.buttonGroup}
+                          aria-label="request-handlers"
+                        >
+                          <IconButton
+                            color="primary"
+                            onClick={() => {
+                              api.acceptFriend(x.username, activeUser.username);
+                              setChecked(true);
+                            }}
+                          >
+                            <PersonAddIcon />
+                          </IconButton>
+                          <IconButton
+                            color="secondary"
+                            onClick={() => {
+                              api.deleteRequest(
+                                x.username,
+                                activeUser.username
+                              );
+                            }}
+                          >
+                            <DeleteIcon />
+                          </IconButton>
+                        </ButtonGroup>
+                        <Typography>{x.username}</Typography>
+                      </>
+                    ) : (
+                      <Typography>
+                        {x.username} was succesfully added!
+                      </Typography>
+                    )}
+                  </ListItem>
+                );
+              })}
+            </List>
+          )}
         </DialogContent>
       </Dialog>
     </>
