@@ -51,7 +51,17 @@ app.use(decodeIDToken);
 app.get("/users", async (req, res) => {
   const emailQuery = req.url.split("?email=")[1];
   const user = req["currentUser"];
+  let filterQuery = req.url.split("?filterAll=")[1];
+  filterQuery = (filterQuery === "true");
 
+  if (filterQuery) {
+    try {
+      await db.collection("users").get().then(allUsers => res.status(200).send(allUsers.data()))
+    } catch (err) {
+      console.log(err);
+      res.status(400).send(err);
+    }
+  }
   if (user) {
     try {
       await db
