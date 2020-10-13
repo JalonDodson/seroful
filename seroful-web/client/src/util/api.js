@@ -84,14 +84,18 @@ export const addFriend = async (username) => {
 
     try {
       const res = await instance.post(`/users/friends?email=${email}&isPending=true`, {
-        {
+        
           headers: {
             Authorization: `Bearer ${token}`,
           },
         }
-      })
+      )
     }
-}
+    catch (err) {
+      console.log(err);
+    }
+    }
+
 
 export const createEntry = async (entry) => {
   const token =

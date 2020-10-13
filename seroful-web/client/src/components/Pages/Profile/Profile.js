@@ -44,16 +44,16 @@ export const Profile = (props) => {
         <header className={styles.header}>
           <hr />
           <Typography variant="h3" className={styles.title}>
-            {user.displayName}'s Profile
+            Exapmle's Profile
           </Typography>
           <hr />
         </header>
         <Card className={styles.root}>
           <CardActionArea className={styles.main}>
-            <Avatar className={styles.purple}>{user.photo ? <img src={user.photo} /> : user.displayName ? user.displayName[0] : "S"}</Avatar>
+            <Avatar className={styles.purple}>S</Avatar>
             <CardContent className={styles.content}>
               <Typography gutterBottom variant="h5" component="h2">
-                {user.displayName}
+                Example Display Name
               </Typography>
               <Typography variant="body2" color="textSecondary" component="p">
                 This is my profile page.

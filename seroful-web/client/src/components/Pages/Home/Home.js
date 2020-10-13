@@ -19,9 +19,9 @@ export const Home = () => {
         <title>Seroful - Home</title>
       </Helmet>
       <TextField inputRef={inputRef} label="Add Friend Test Shit" />
-      <Button onClick={() => {
+      {/*<Button onClick={() => {
         api.addFriend(username)
-      }}>Add Friend or Some Shit</Button>
+      }}>Add Friend or Some Shit</Button>*/}
       <PageDrawer />
     </>
   );

@@ -18,11 +18,11 @@ export const Navigator = () => {
   return (
     <BrowserRouter>
       <Switch>
-        <Route
+       <Route
           exact
           path="/"
           render={() => (userNew ? <Splash /> : <Home />)}
-        />
+  /> 
         {/* // TODO: Make route for profile /users/(username or uid)/profile */}
         <Route path="/profile" render={() => <Profile />} />
         {/* // TODO: Make route for planner /users/(username or uid)/planner */}
