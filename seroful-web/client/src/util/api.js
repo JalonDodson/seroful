@@ -111,17 +111,6 @@ export const acceptFriend = async (acceptedName, accepteeName) => {
     const email =
     firebase.auth().currentUser && (await firebase.auth().currentUser.email);
     try {
-<<<<<<< HEAD
-      const res = await instance.post(`/users/friends?email=${email}&isPending=true`, {
-        
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      )
-    }
-    catch (err) {
-=======
       const res = await instance.post(`/users/friends?email=${email}&isPending=false`, 
       {
         username: acceptedName,
@@ -158,7 +147,6 @@ export const deleteRequest = async (deniedName, denierName) => {
       }).then(resp => resp.data);
       return res;
     } catch (err) {
->>>>>>> e9e45b5fe785f5827bb853fc9094d54efca8eb0b
       console.log(err);
     }
     }
