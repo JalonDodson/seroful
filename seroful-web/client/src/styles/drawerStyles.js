@@ -33,5 +33,10 @@ export const drawerStyles = makeStyles((theme) => ({
   },
   buttonGroup: {
     marginLeft: "-15%",
+  },
+  addButton: {
+    textTransform: "capitalize",
+    fontFamily: "'Roboto', 'Helvetica', 'Arial', sans-serif;",
+    backgroundColor: "#E9DFE3",
   }
 }));

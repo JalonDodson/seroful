@@ -1,42 +1,61 @@
-import { StylesContext } from '@material-ui/styles';
-import React, { useState, useEffect } from 'react';
-import Video from 'twilio-video';
-// i love u bro
+import { StylesContext } from "@material-ui/styles";
+import React, { useState, useEffect } from "react";
+import Video from "twilio-video";
+import { Participant } from './Participant';
+
 export const Room = ({ roomName, token, handleLogout }) => {
-    const [room, setRoom] = useState(null);
-    const [participants, setParticipants] = useState([]);
-    const remoteParticipants = participants.map((part) => (
-        <p key={part.sid}>{part.identity}</p>
-    ));
-    useEffect(() => {
-        const partiConnected = (participant) => {
-            setParticipants((prevParti) => [...prevParti, participant])
-        };
-        const partiDisconnected = (participant) => {
-            setParticipants((prevParti) => prevParti.filter((part) => part !== participant));
-        };
-        Video.connect(token, {
-            name: roomName,
-        }).then((room) => {
-            setRoom(room);
-            room.on('participantConnected', partiConnected);
-            room.on('participantDisconnected', partiDisconnected);
-        });
+  const [room, setRoom] = useState(null);
+  const [participants, setParticipants] = useState([]);
+  const remoteParticipants = participants.map((part) => (
+    <Participant key={part.sid} participant={part} />
+  ));
+  useEffect(() => {
+    const partiConnected = (participant) => {
+      setParticipants((prevParti) => [...prevParti, participant]);
+    };
+    const partiDisconnected = (participant) => {
+      setParticipants((prevParti) =>
+        prevParti.filter((part) => part !== participant)
+      );
+    };
+    Video.connect(token, {
+      name: roomName,
+    }).then((room) => {
+      setRoom(room);
+      room.on("participantConnected", partiConnected);
+      room.on("participantDisconnected", partiDisconnected);
+      room.participants.forEach(partiConnected);
     });
-    // wAT THE FUCK WHY
-    return (
-        <div className='room'>
-            <h4>Room: {roomName}</h4>
-            <button onClick={handleLogout}>Logout</button>
-            <div className='local-participant'>
-                {room ? (
-                    <p key={room.localParticipant.sid}>{room.localParticipant.identity}</p>
-                ) : (
-                    ''
-                )}
-            </div>
-            <h6>Remote Participants</h6>
-            <div className='remote-participants'>{remoteParticipants}</div>
-        </div>
-    );
+    return () => {
+      setRoom((currentRoom) => {
+        if (currentRoom && currentRoom.localParticipant.state === "connected") {
+          currentRoom.localParticipant.tracks.forEach((trackPublication) => {
+            trackPublication.track.stop();
+          });
+          currentRoom.disconnect();
+          return null;
+        } else {
+          return currentRoom;
+        }
+      });
+    };
+  }, [roomName, token]);
+  return (
+      <div className='room'>
+          <h4>Room: {roomName}</h4>
+      <button onClick={handleLogout}>Log out</button>
+      <div className="local-participant">
+        {room ? (
+          <Participant
+          key={room.localParticipant.sid}
+          participant={room.localParticipant}
+        />
+        ) : (
+          ''
+        )}
+      </div>
+      <h3>Remote Participants</h3>
+      <div className="remote-participants">{remoteParticipants}</div>
+      </div>
+  );
 };
