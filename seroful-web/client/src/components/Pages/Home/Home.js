@@ -3,7 +3,7 @@ import React, { useRef } from "react";
 import { Helmet } from "react-helmet";
 
 import { userState } from "../../../store/store";
-import { useRecoilValue, useRecoilState } from "recoil";
+import { useRecoilValue } from "recoil";
 
 import { PageDrawer } from "../../PageDrawer/PageDrawer";
 import * as api from "../../../util/api";
@@ -14,7 +14,6 @@ import { VideoChat } from '../VideoStuff/VideoChat';
 export const Home = () => {
   const styles = homeStyles();
   const activeUser = useRecoilValue(userState);
-  const [user, setUser] = useRecoilState(userState);
   const inputRef = useRef();
   return (
     <>
@@ -25,7 +24,7 @@ export const Home = () => {
       <header className={styles.header}>
           <hr />
           <Typography variant="h3" className={styles.title}>
-            You're Home {user.displayName}!
+            You're Home {activeUser && activeUser.displayName}!
           </Typography>
           <hr />
         </header>

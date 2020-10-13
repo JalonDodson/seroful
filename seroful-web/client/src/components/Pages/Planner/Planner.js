@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { Helmet } from "react-helmet";
 
 import {
-  Grid,
   Paper,
   Accordion,
   AccordionSummary,
@@ -29,9 +28,9 @@ import { userState } from "../../../store/store";
 import {
   CheckCircle,
   CheckCircleOutline,
-  Favorite,
-  FavoriteBorder,
-  SettingsRemoteSharp,
+  // Favorite,
+  // FavoriteBorder,
+  // SettingsRemoteSharp,
 } from "@material-ui/icons";
 import * as api from "../../../util/api";
 
@@ -83,6 +82,7 @@ export const Planner = (props) => {
         setUpdated(false);
       });
     };
+    //eslint-disable-next-line
   }, [isUpdated]);
   return (
     <>

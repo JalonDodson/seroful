@@ -180,7 +180,6 @@ export const PageDrawer = () => {
         <MenuItem onClick={null}>Messages</MenuItem>
         <MenuItem onClick={() => setAddBy(true)}>Add by Username</MenuItem>
       </Menu>
-      // Dialogs
       <Dialog
         open={requestOpen}
         onClose={() => setRequest(false)}

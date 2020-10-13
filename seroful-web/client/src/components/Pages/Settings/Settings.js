@@ -1,15 +1,15 @@
 import React, { useRef } from "react";
 import { Helmet } from "react-helmet";
-import multer from "multer";
-import path from 'path';
+// import multer from "multer";
+// import path from 'path';
 
 import { PageDrawer } from "../../PageDrawer/PageDrawer";
 import { settingsStyles } from "../../../styles/settingsStyles";
-import FloatingActionButton from "@material-ui/core/Fab";
+// import FloatingActionButton from "@material-ui/core/Fab";
 import ButtonBase from "@material-ui/core/ButtonBase";
 import Typography from "@material-ui/core/Typography";
 import { Button, TextField } from "@material-ui/core";
-import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
+import { useRecoilState } from "recoil";
 import { userState } from "../../../store/store";
 import { updateUser } from '../../../util/api';
 

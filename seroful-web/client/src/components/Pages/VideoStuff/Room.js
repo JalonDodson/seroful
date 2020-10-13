@@ -1,4 +1,3 @@
-import { StylesContext } from "@material-ui/styles";
 import React, { useState, useEffect } from "react";
 import Video from "twilio-video";
 import { Participant } from './Participant';

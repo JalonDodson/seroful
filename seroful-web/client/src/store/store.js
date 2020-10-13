@@ -1,5 +1,4 @@
-import { atom, selector } from "recoil";
-import { getPlans } from "../util/api";
+import { atom } from "recoil";
 
 export const userState = atom({
   key: "userState",

@@ -11,10 +11,10 @@ export const VideoChat = () => {
 
   const handleUsernameChange = useCallback((ev) => {
     setUsername(ev.target.value);
-  },{}); 
+  },[]); 
   const handleRoomNameChange = useCallback((ev) => {
     setRoomName(ev.target.value);
-  },{});
+  },[]);
   const handleSubmit = useCallback(async (ev) => {
     console.log(username, roomName);
       ev.preventDefault();

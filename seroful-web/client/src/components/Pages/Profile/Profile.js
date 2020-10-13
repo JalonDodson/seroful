@@ -13,7 +13,7 @@ import Avatar from '@material-ui/core/Avatar';
 import { DataGrid } from '@material-ui/data-grid';
 import { PageDrawer } from '../../PageDrawer/PageDrawer';
 import { profileStyles } from '../../../styles/profileStyles';
-import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
+import { useRecoilValue } from "recoil";
 import { userState } from "../../../store/store";
 
 // Material UI Class Styles
@@ -33,7 +33,7 @@ const rows = [
 
 export const Profile = (props) => {
   const styles = profileStyles();
-  const [user, setUser] = useRecoilState(userState);
+  const user = useRecoilValue(userState);
   return (
     <>
       <Helmet>
@@ -50,7 +50,7 @@ export const Profile = (props) => {
         </header>
         <Card className={styles.root}>
           <CardActionArea className={styles.main}>
-            <Avatar className={styles.purple}>{user.photo ? <img src={user.photo} /> : user.displayName ? user.displayName[0] : "S"}</Avatar>
+            <Avatar className={styles.purple}>{user.photo ? <img src={user.photo} alt={`${user.username}`}/> : user.displayName ? user.displayName[0] : "S"}</Avatar>
             <CardContent className={styles.content}>
               <Typography gutterBottom variant="h5" component="h2">
                 {user.displayName}

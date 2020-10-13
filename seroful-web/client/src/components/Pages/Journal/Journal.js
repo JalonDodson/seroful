@@ -3,7 +3,7 @@ import React, { createRef, useEffect, useState } from "react";
 import { Helmet } from "react-helmet";
 import { PageDrawer } from "../../PageDrawer/PageDrawer";
 import { journalStyles } from "../../../styles/journalStyles";
-import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
+import { useRecoilState } from "recoil";
 import { userState } from "../../../store/store";
 import { createEntry, getEntries } from "../../../util/api";
 
@@ -12,11 +12,9 @@ import { Button, TextField, Typography } from "@material-ui/core";
 import MuiAccordion from "@material-ui/core/Accordion";
 import MuiAccordionSummary from "@material-ui/core/AccordionSummary";
 import MuiAccordionDetails from "@material-ui/core/AccordionDetails";
-import { responsiveFontSizes, withStyles } from "@material-ui/core/styles";
-import firebase from "firebase/app";
+import { withStyles } from "@material-ui/core/styles";
 import "firebase/auth";
 
-let ent = "";
 export const Journal = () => {
   const styles = journalStyles();
   const Accordion = withStyles({
@@ -77,6 +75,7 @@ export const Journal = () => {
         setUpdated(false);
       });
     };
+    //eslint-disable-next-line
   }, [isUpdated]);
 
   const inputRef = createRef();
