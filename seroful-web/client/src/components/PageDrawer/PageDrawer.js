@@ -89,7 +89,7 @@ export const PageDrawer = () => {
           </ListItem>
           <ListItem key="Friends">
             <ListItemIcon>
-              <Badge
+              {/*<Badge
                 badgeContent={
                   activeUser.friends.pending !== undefined
                     ? activeUser.friends.pending.length
@@ -98,7 +98,7 @@ export const PageDrawer = () => {
                 color="primary"
               >
                 <PeopleIcon />
-              </Badge>
+              </Badge>*/}
             </ListItemIcon>
             <ButtonBase
               aria-controls="friends-menu"
@@ -160,14 +160,14 @@ export const PageDrawer = () => {
       >
         <DialogTitle id="requests-title">Friend Requests</DialogTitle>
         <DialogContent>
-          <DialogContentText>
+          {/*<DialogContentText>
             {activeUser.friends.pending
               ? 1 === activeUser.friends.pending.length
                 ? "You have one new friend request!"
                 : `You have ${activeUser.friends.pending.length} new friend requests!`
               : "You don't have any new friend requests right now."}
-          </DialogContentText>
-          {activeUser.friends.pending && (
+            </DialogContentText>*/}
+          {/*activeUser.friends.pending && (
             <List>
               {activeUser.friends.pending.map((x) => {
                 return (
@@ -210,9 +210,9 @@ export const PageDrawer = () => {
                 );
               })}
             </List>
-          )}
+            )*/}
         </DialogContent>
-      </Dialog>
+            </Dialog>
     </>
   );
 };

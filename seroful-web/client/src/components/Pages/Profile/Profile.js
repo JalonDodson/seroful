@@ -44,7 +44,7 @@ export const Profile = (props) => {
         <header className={styles.header}>
           <hr />
           <Typography variant="h3" className={styles.title}>
-            Exapmle's Profile
+            Example
           </Typography>
           <hr />
         </header>
