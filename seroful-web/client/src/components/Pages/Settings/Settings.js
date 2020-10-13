@@ -11,6 +11,7 @@ import Typography from "@material-ui/core/Typography";
 import { Button, TextField } from "@material-ui/core";
 import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 import { userState } from "../../../store/store";
+import { updateUser } from '../../../util/api';
 
 export const Settings = () => {
   const styles = settingsStyles();
@@ -21,11 +22,13 @@ export const Settings = () => {
     ref.current.click();
   };
 
-  const handleSubmit = (ev) => {
+  const handleChange = (ev) => {
     ev.stopPropagation();
     ev.preventDefault();
-    let newImg = ev.target.files[0];
-    console.log(newImg)
+    const newImg = ev.target.files[0];
+    setUser({...user, photoURL: newImg.name});
+    updateUser(user)
+    console.log(newImg.name)
 
     // const imgFiles = /jpeg|jpg|png|gif/;
     // const extName = fileTypes.test(path.extname(ev.originalname).toLowerCase());
@@ -56,13 +59,12 @@ export const Settings = () => {
           action="/users"
           encType="multipart/form-data"
         >
-          <input id="input" className={styles.input} ref={ref} type="file" />
+          <input id="input" className={styles.input} ref={ref} type="file" onChange={(ev) => handleChange(ev)} />
           <ButtonBase
             focusRipple
             key="Profile Photo"
             className={styles.image}
             focusVisibleClassName={styles.focusVisible}
-            onChange={handleSubmit}
             style={{
               width: "200px",
             }}
@@ -70,9 +72,9 @@ export const Settings = () => {
           >
             <span
               className={styles.imageSrc}
-              // style={{
-              //   backgroundImage: ref.current.files. ? `url(${ref.current.value})` : user.photo ? `url(${user.photo})` :  `url("../../../resources/molecule.png")`
-              // }}
+              style={{
+                backgroundImage: ref.current ? `url(${ref.current.files.name})` : user.photoURL ? `url(${user.photoURL})` : `url("../../../resources/molecule.png")`
+              }}
             />
             <span className={styles.imageBackdrop} />
             <span className={styles.imageButton}>
@@ -147,7 +149,7 @@ export const Settings = () => {
             onBlur
             onChange
           ></TextField> */}
-          <Button type='submit' className='btn' onClick={handleSubmit}>Submit New User Info</Button>
+          <Button type='submit' className='btn' onClick>Submit New User Info</Button>
         </form>
       </div>
     </>
