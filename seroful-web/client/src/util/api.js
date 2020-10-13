@@ -74,6 +74,15 @@ export const updateUser = async (userData) => {
   }
 };
 
+export const getUserList = async () => {
+  try {
+    const res = await instance.get(`/users?filterAll=true`).then(resp => resp.data())
+    return res;
+  } catch (err) {
+    console.log(err);
+  }
+}
+
 export const addFriend = async (senderName, requesteeName) => {
   const token =
     firebase.auth().currentUser &&
@@ -199,24 +208,6 @@ export const getEntries = async () => {
     return res;
   } catch (err) {
     console.log(err);
-  }
-};
-
-export const videoRoom = async (roomId) => {
-  const token =
-    firebase.auth().currentUser &&
-    (await firebase.auth().currentUser.getIdToken());
-
-  try {
-    let res = null;
-    if (roomId) {
-      res = await instance.get(`/video-chat/${roomId}`);
-    } else {
-      res = await instance.get(`/video-chat/${nanoid()}`);
-    }
-    return res;
-  } catch (error) {
-    console.log(error);
   }
 };
 

@@ -1,6 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import {
+  Autocomplete,
+  TextField,
   Button,
   ButtonGroup,
   ButtonBase,
@@ -51,6 +53,10 @@ export const PageDrawer = () => {
   const [anchor, setAnchor] = useState(null);
   const [requestOpen, setRequest] = useState(false);
   const [isChecked, setChecked] = useState(false);
+  const [searchOpen, setSearch] = useState(false);
+  const [options, setOptions] = useState([]);
+  const loading = searchOpen && options.length === 0;
+
   const friendsMenu = (ev) => setAnchor(ev.currentTarget);
   const friendsClose = () => setAnchor(null);
 
@@ -60,6 +66,31 @@ export const PageDrawer = () => {
       .signOut()
       .then(() => console.log("User signed out."));
   };
+
+  useEffect(() => {
+    let active = true;
+
+    if (!loading) {
+      return undefined;
+    }
+
+    (async () => {
+      const resp = await api.getUserList();
+      const users = await resp.json();
+      console.log(users);
+      // if (active) setOptions(users.map(x => ))
+    })()
+
+    return () => {
+      active = false;
+    };
+  }, [loading])
+
+  useEffect(() => {
+    if (!searchOpen) {
+      setOptions([]);
+    }
+  }, [searchOpen])
   return (
     <>
       <Drawer
@@ -91,10 +122,9 @@ export const PageDrawer = () => {
             <ListItemIcon>
               {/*<Badge
                 badgeContent={
-                  activeUser.friends.pending !== undefined
-                    ? activeUser.friends.pending.length
-                    : 0
-                }
+                  activeUser.friends
+                  ? activeUser.friends.pending && activeUser.friends.pending.length
+                  : 0}
                 color="primary"
               >
                 <PeopleIcon />
@@ -156,10 +186,11 @@ export const PageDrawer = () => {
         open={requestOpen}
         onClose={() => setRequest(false)}
         aria-labelledby="requests-modal"
-        aria-describedby="requests-modal-desc"
+        aria-describedby="requests-modal"
       >
         <DialogTitle id="requests-title">Friend Requests</DialogTitle>
         <DialogContent>
+<<<<<<< HEAD
           {/*<DialogContentText>
             {activeUser.friends.pending
               ? 1 === activeUser.friends.pending.length
@@ -168,6 +199,17 @@ export const PageDrawer = () => {
               : "You don't have any new friend requests right now."}
             </DialogContentText>*/}
           {/*activeUser.friends.pending && (
+=======
+          <DialogContentText>
+            {activeUser.friends &&
+              (activeUser.friends.pending
+              ? 1 === activeUser.friends.pending.length
+              ? "You have one new friend request!"
+              : `You have ${activeUser.friends.pending.length} new friend requests!`
+              : "You have no pending friend requests.")}
+          </DialogContentText>
+          {activeUser.friends.pending && (
+>>>>>>> 04042a2a78e10fd30331db55ce1f4bca2b74fb9d
             <List>
               {activeUser.friends.pending.map((x) => {
                 return (
@@ -212,7 +254,19 @@ export const PageDrawer = () => {
             </List>
             )*/}
         </DialogContent>
+<<<<<<< HEAD
             </Dialog>
+=======
+      </Dialog>
+              <Dialog open={searchOpen} onClose={() => setSearch(false)} 
+              aria-labelledby="requests-dialog" 
+              aria-describedby="search-dialog">
+                <DialogTitle id="search-title">Add by Username</DialogTitle>
+                <DialogContentText>Do you have a friend that uses Seroful you'd like to add? Feel free to search for their username and add them here!</DialogContentText>
+                {/* <Autocomplete */}
+                <Button onClick={() => setSearch(true)}>Suck Dick</Button>
+              </Dialog>
+>>>>>>> 04042a2a78e10fd30331db55ce1f4bca2b74fb9d
     </>
   );
 };
