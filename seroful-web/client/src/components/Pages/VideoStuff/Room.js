@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Video from "twilio-video";
-import { Participant } from './Participant';
-
+import { Participant } from "./Participant";
+import * as api from "../../../util/api";
 export const Room = ({ roomName, token, handleLogout }) => {
   const [room, setRoom] = useState(null);
   const [participants, setParticipants] = useState([]);
@@ -10,6 +10,7 @@ export const Room = ({ roomName, token, handleLogout }) => {
   ));
   useEffect(() => {
     const partiConnected = (participant) => {
+      console.log(participant);
       setParticipants((prevParti) => [...prevParti, participant]);
     };
     const partiDisconnected = (participant) => {
@@ -17,14 +18,17 @@ export const Room = ({ roomName, token, handleLogout }) => {
         prevParti.filter((part) => part !== participant)
       );
     };
+
     Video.connect(token, {
       name: roomName,
-    }).then((room) => {
+    }).then(async (room) => {
       setRoom(room);
+      console.log(room.participants);
       room.on("participantConnected", partiConnected);
       room.on("participantDisconnected", partiDisconnected);
       room.participants.forEach(partiConnected);
     });
+    
     return () => {
       setRoom((currentRoom) => {
         if (currentRoom && currentRoom.localParticipant.state === "connected") {
@@ -39,22 +43,23 @@ export const Room = ({ roomName, token, handleLogout }) => {
       });
     };
   }, [roomName, token]);
+
   return (
-      <div className='room'>
-          <h4>Room: {roomName}</h4>
+    <div className="room">
+      <h4>Room: {roomName}</h4>
       <button onClick={handleLogout}>Log out</button>
       <div className="local-participant">
         {room ? (
           <Participant
-          key={room.localParticipant.sid}
-          participant={room.localParticipant}
-        />
+            key={room.localParticipant.sid}
+            participant={room.localParticipant}
+          />
         ) : (
-          ''
+          ""
         )}
       </div>
       <h3>Remote Participants</h3>
       <div className="remote-participants">{remoteParticipants}</div>
-      </div>
+    </div>
   );
 };

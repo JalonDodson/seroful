@@ -75,13 +75,15 @@ export const updateUser = async (userData) => {
 
 export const getUserList = async () => {
   try {
-    const res = await instance.get(`/users?filterAll=true`).then(resp => resp.data)
+    const res = await instance
+      .get(`/users?filterAll=true`)
+      .then((resp) => resp.data);
     console.log(res);
     return res;
   } catch (err) {
     console.log(err);
   }
-}
+};
 
 export const addFriend = async (to, from) => {
   const token =
@@ -92,19 +94,21 @@ export const addFriend = async (to, from) => {
     firebase.auth().currentUser && (await firebase.auth().currentUser.email);
 
   try {
-    const res = await instance.post(
-      `/users/friends?email=${email}&isPending=true`,
-      {
-        username: to,
-        requestee: from,
-        email: email
-      },
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
+    const res = await instance
+      .post(
+        `/users/friends?email=${email}&isPending=true`,
+        {
+          username: to,
+          requestee: from,
+          email: email,
         },
-      }
-    ).then(resp => resp.data);
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      )
+      .then((resp) => resp.data);
     return res;
   } catch (err) {
     console.log(err);
@@ -112,52 +116,62 @@ export const addFriend = async (to, from) => {
 };
 
 export const acceptFriend = async (acceptedName, accepteeName) => {
-  const token = 
+  const token =
     firebase.auth().currentUser &&
     (await firebase.auth().currentUser.getIdToken());
-    
-    const email =
+
+  const email =
     firebase.auth().currentUser && (await firebase.auth().currentUser.email);
-    try {
-      const res = await instance.post(`/users/friends?email=${email}&isPending=false`, 
-      {
-        username: acceptedName,
-        acceptee: accepteeName,
-        email: email
-      }, {
-        headers: {
-          Authorization: `Bearer ${token}`,
+  try {
+    const res = await instance
+      .post(
+        `/users/friends?email=${email}&isPending=false`,
+        {
+          username: acceptedName,
+          acceptee: accepteeName,
+          email: email,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
         }
-      }).then(resp => resp.data);
-      return res;
-    } catch (err) {
-      console.log(err);
-    }
-}
+      )
+      .then((resp) => resp.data);
+    return res;
+  } catch (err) {
+    console.log(err);
+  }
+};
 
 export const deleteRequest = async (deniedName, denierName) => {
-  const token = 
+  const token =
     firebase.auth().currentUser &&
     (await firebase.auth().currentUser.getIdToken());
-    
-    const email =
+
+  const email =
     firebase.auth().currentUser && (await firebase.auth().currentUser.email);
-    try {
-      const res = await instance.delete(`/users/friends?email=${email}?isRejection=true`, 
-      {
-        username: deniedName,
-        denier: denierName,
-        email: email
-      }, {
-        headers: {
-          Authorization: `Bearer ${token}`,
+  try {
+    const res = await instance
+      .delete(
+        `/users/friends?email=${email}?isRejection=true`,
+        {
+          username: deniedName,
+          denier: denierName,
+          email: email,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
         }
-      }).then(resp => resp.data);
-      return res;
-    } catch (err) {
-      console.log(err);
-    }
-}
+      )
+      .then((resp) => resp.data);
+    return res;
+  } catch (err) {
+    console.log(err);
+  }
+};
 
 export const createEntry = async (entry) => {
   const token =
@@ -265,23 +279,54 @@ export const createPlan = async (userData) => {
   }
 };
 
-export const getVideoToken = async (username, roomName) => {
-  const token = 
-  firebase.auth().currentUser &&
-  (await firebase.auth().currentUser.getIdToken());
+export const createRoom = async (username, roomName) => {
+  const token =
+    firebase.auth().currentUser &&
+    (await firebase.auth().currentUser.getIdToken());
 
   try {
-    const res = instance.post(`/video/token`, {
-      identity: username,
-      room: roomName, 
-    }, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-        "Content-Type": "application/json",
-    }})
+    const res = await instance
+      .post(
+        `/video`,
+        {
+          identity: username,
+          roomName: roomName,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      )
+      .then((resp) => resp.data);
     console.log(res);
     return res;
   } catch (err) {
     console.log(err);
   }
-}
+};
+// await instance.get(`/video?room=${roomName}
+export const connectToRoom = async (identity, roomName) => {
+  const token =
+    firebase.auth().currentUser &&
+    (await firebase.auth().currentUser.getIdToken());
+
+  try {
+    const res = await instance
+      .post(
+        `/video?room=${roomName}&newConnection=true`,
+        {
+          identity: identity,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      )
+      .then((resp) => resp.data);
+    return res;
+  } catch (err) {
+    console.log(err);
+  }
+};

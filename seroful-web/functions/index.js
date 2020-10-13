@@ -1,13 +1,17 @@
 // DON'T TOUCH BELOW THIS LINE
-require("dotenv-safe").config();
+require("dotenv-safe").config({ allowEmptyValues: true });
+const config = require("./config");
 const functions = require("firebase-functions");
 const admin = require("firebase-admin");
 const credential = require("./seroful-firebase-adminsdk-ry93d-5b49e47b83.json");
 const accountSid = process.env.TWILIO_ACCOUNT_SID;
-const authToken = process.env.TWILIO_AUTH_TOKEN;
+const authToken = process.env.TWILIO_ACCOUNT_AUTH_TOKEN;
+const apiKey = process.env.TWILIO_API_KEY;
+const apiSecret = process.env.TWILIO_API_SECRET;
 const client = require("twilio")(accountSid, authToken);
 const AccessToken = require("twilio").jwt.AccessToken;
 const VideoGrant = AccessToken.VideoGrant;
+const VoiceGrant = AccessToken.VoiceGrant;
 
 const url = require("url");
 /* WHEN IN DEV MODE ASSIGN CREDENTIAL TO admin.credential.cert(credential)
@@ -23,7 +27,7 @@ admin.initializeApp({
 const db = admin.firestore();
 db.settings({ ignoreUndefinedProperties: true });
 
-const nanoid = require("nanoid");
+// const nanoid = require("nanoid");
 // DON'T TOUCH ABOVE THIS LINE
 
 const express = require("express");
@@ -31,8 +35,8 @@ const cors = require("cors");
 const { urlencoded } = require("express");
 
 const app = express();
-const server = require("http").Server(app);
-const io = require("socket.io")(server);
+// const server = require("http").Server(app);
+// const io = require("socket.io")(server);
 app.use(cors());
 app.use(express.json());
 app.use(urlencoded({ extended: true }));
@@ -52,6 +56,37 @@ const decodeIDToken = async (req, res, next) => {
   next();
 };
 
+const genToken = (cfg) => {
+  return new AccessToken(
+    cfg.twilio.accountSid,
+    cfg.twilio.apiKey,
+    cfg.twilio.apiSecret
+  );
+};
+
+const videoToken = (id, room, cfg) => {
+  let videoGrant;
+  if (typeof room !== "undefined") videoGrant = new VideoGrant({ room });
+  else videoGrant = new VideoGrant();
+  const token = genToken(cfg);
+  token.addGrant(videoGrant);
+  token.identity = id;
+  return token;
+};
+
+const voiceToken = (id, cfg) => {
+  let voiceGrant;
+  if (typeof cfg.twilio.outgoingApplicationSid !== "undefined")
+    voiceGrant = new VoiceGrant({
+      outgoingApplicationSid: cfg.twilio.outgoingApplicationSid,
+      incomingAllow: cfg.twilio.incomingAllow,
+    });
+  else voiceGrant = new VoiceGrant({ incomingAllow: cfg.twilio.incomingAllow });
+  const token = genToken(cfg);
+  token.addGrant(voiceGrant);
+  token.identity = id;
+};
+
 app.use(decodeIDToken);
 
 app.get("/users", async (req, res) => {
@@ -62,31 +97,29 @@ app.get("/users", async (req, res) => {
   if (filterQuery) {
     try {
       await db
-      .collection("users")
-      .get()
-      .then(allUsers => {
-        let data = [];
-        allUsers.forEach(doc => {
-          let docData = doc.data();
-          data.push(docData);
-        })
-        console.log(data);
-        res.status(200).send(data)
-      })
-      
+        .collection("users")
+        .get()
+        .then((allUsers) => {
+          let data = [];
+          allUsers.forEach((doc) => {
+            let docData = doc.data();
+            data.push(docData);
+          });
+          console.log(data);
+          res.status(200).send(data);
+        });
     } catch (err) {
       console.log(err);
       res.status(400).send(err);
     }
   } else {
-
     if (user) {
       try {
         await db
-        .collection("users")
-        .doc(emailQuery)
-        .get()
-        .then((snapshot) => res.status(200).send(snapshot.data()));
+          .collection("users")
+          .doc(emailQuery)
+          .get()
+          .then((snapshot) => res.status(200).send(snapshot.data()));
       } catch (err) {
         console.log(err);
         res.status(400).send(err);
@@ -95,8 +128,8 @@ app.get("/users", async (req, res) => {
       res.status(403).send("Unauthorized!");
     }
   }
-  });
-  
+});
+
 app.post("/users", async (req, res) => {
   try {
     await db.collection("users").doc(req.body.email).set({
@@ -374,29 +407,47 @@ app.get("/journal", async (req, res) => {
 });
 
 app.post("/video", (req, res) => {
-  const user = req["currentUser"]
-  let roomQuery = req.url.split("?createRoom=")[1];
-  roomQuery = roomQuery === "true";
-  if (roomQuery) {
-    if (user) {
+  const user = req["currentUser"];
+  if (user) {
+    if (req.query.newConnection) {
+      const token = videoToken(req.body.identity, req.query.room, config);
+      res.contentType("application/json");
+      console.log(token);
+      res.status(201).send(
+        JSON.stringify({
+          token: token.toJwt(),
+        })
+      );
+    } else {
       try {
         client.video.rooms
-        .create({ 
-          recordParticipantsOnConnect: true, 
-          statusCallback: `https://seroful.tech/videoRoomEvents/`,
-          uniqueName: req.body.roomName,
-          type: "group" })
-        .then(room => console.log(room.sid));
-        res.status(200).send();
+          .create({
+            recordParticipantsOnConnect: true,
+            uniqueName: req.body.roomName,
+            type: "group",
+          })
+          .then((room) => {
+            console.log(room);
+            const token = videoToken(
+              req.body.identity,
+              req.body.roomName,
+              config
+            );
+            console.log(token);
+            res.contentType("application/json");
+            res.status(201).send(
+              JSON.stringify({
+                token: token.toJwt(),
+              })
+            );
+          });
       } catch (err) {
         console.log(err);
         res.status(400).send("Error grabbing video room.");
       }
-    } else {
-      res.status(403).send("Unauthorized");
     }
   } else {
-    res.status(200).send("Nothing happened. Exiting.");
+    res.status(403).send("Unauthorized");
   }
 });
 
