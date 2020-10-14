@@ -7,7 +7,7 @@ import "firebase/auth";
   When built, only /path should be used in the axios requests.
 */
 // axios stuff
-const instance = axios.create();
+const instance = axios.create({ baseURL: "http://localhost:4000"});
 
 export const getActiveUser = async (email) => {
   const token =
@@ -47,18 +47,19 @@ export const updateUser = async (userData) => {
     firebase.auth().currentUser &&
     (await firebase.auth().currentUser.getIdToken());
 
+    const email =
+    firebase.auth().currentUser && (await firebase.auth().currentUser.email);
+
   try {
     const res = await instance.patch(
-      `/users?email=${userData.email}`,
+      `/users?email=${email}`,
       {
         username: userData.username,
         email: userData.email,
         displayName: userData.displayName,
-        photo: userData.photo,
+        photoURL: userData.photoURL,
         medicines: userData.medicines,
         illnesses: userData.illnesses,
-        plans: userData.plans,
-        journals: userData.journals,
       },
       {
         headers: {
@@ -71,6 +72,25 @@ export const updateUser = async (userData) => {
     console.log(err);
   }
 };
+
+export const uploadPhoto = async (photo) => {
+  const token =
+  firebase.auth().currentUser &&
+  (await firebase.auth().currentUser.getIdToken());
+
+try {
+  const res = await instance.post("/users/photo/upload", photo, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+      "Content-Type": `multipart/form-data; boundary=${photo._boundary}`
+    }
+  }).then(res => res.data);
+  console.log(res);
+  return res;
+} catch (err) {
+  console.log(err);
+}
+}
 
 export const getUserList = async () => {
   try {

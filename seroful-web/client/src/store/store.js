@@ -7,7 +7,7 @@ export const userState = atom({
     email: "",
     pw: "",
     displayName: "",
-    photo: {},
+    photoURL: "",
     medicines: [],
     illnesses: [],
     plans: [],

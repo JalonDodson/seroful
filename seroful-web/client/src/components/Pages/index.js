@@ -6,5 +6,6 @@ import { Journal } from "./Journal/Journal";
 import { Settings } from "./Settings/Settings";
 import { NotFound } from "./NotFound/NotFound";
 import { Splash } from "./Splash/Splash";
+import { VideoChat } from './VideoStuff/VideoChat';
 
-export { Home, Profile, Friends, Planner, Journal, Settings, NotFound, Splash };
+export { Home, Profile, Friends, Planner, Journal, Settings, NotFound, Splash, VideoChat };

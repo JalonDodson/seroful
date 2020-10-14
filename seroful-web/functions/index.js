@@ -1,36 +1,34 @@
 //  DON'T TOUCH BELOW THIS LINE
-require("dotenv").config();
-//  const config = require("./config");
-
 // const accountSid = functions.config().twilio.account_sid || process.env.TWILIO_ACCOUNT_SID;
 // const authToken = functions.config().twilio.auth_token || process.env.TWILIO_ACCOUNT_AUTH_TOKEN;
 // const apiKey = functions.config().twilio.api_key || process.env.TWILIO_API_KEY;
 // const apiSecret = functions.config().twilio.api_secret || process.env.TWILIO_API_SECRET;
-
 const functions = require("firebase-functions");
 const logMe = functions.logger;
 const admin = require("firebase-admin");
 const credential = require("./seroful-firebase-adminsdk-ry93d-5b49e47b83.json");
-// const accountSid = functions.config().twilio.account_sid;
-const accountSid = "ACaff2dcc898bd0c99f580686d0930ba29";
 
+const accountSid = "ACaff2dcc898bd0c99f580686d0930ba29";
 const authToken = "9e707b439242c0419c1167ebe98e76bb";
 const apiKey = "SK333bf3bf1227add7aa31b2a4aea6f39f";
-const apiSecret = "CUtV11AjCsyC0odAJbE885Le64E8HvT1"
+const apiSecret = "CUtV11AjCsyC0odAJbE885Le64E8HvT1";
 const client = require("twilio")(accountSid, authToken);
 const AccessToken = require("twilio").jwt.AccessToken;
 const VideoGrant = AccessToken.VideoGrant;
+const uploadMiddleware = require("busboy-firebase");
+
 /* WHEN IN DEV MODE ASSIGN CREDENTIAL TO admin.credential.cert(credential)
   AND GET THE FILE FROM DISCORD
   when deploying to firebase (firebase deploy). set it to admin.credential.applicationDefault()
 */
 admin.initializeApp({
   //  credential: admin.credential.cert(credential),
-  credential: admin.credential.applicationDefault(),
+  credential: admin.credential.cert(credential),
   databaseURL: "https:seroful.firebaseio.com",
+  storageBucket: "gs://seroful.appspot.com",
 });
-
 const db = admin.firestore();
+const storage = admin.storage().bucket();
 db.settings({ ignoreUndefinedProperties: true });
 
 //  const nanoid = require("nanoid");
@@ -61,6 +59,7 @@ const decodeIDToken = async (req, res, next) => {
   }
   next();
 };
+
 const videoToken = (id, room) => {
   let videoGrant;
   if (typeof room !== "undefined") videoGrant = new VideoGrant({ room });
@@ -122,13 +121,51 @@ app.get("/users", async (req, res) => {
   }
 });
 
+app.post("/users/photo/upload", uploadMiddleware, (req, res) => {
+  console.log(req.files[0]);
+  const user = req["currentUser"];
+  if (user) {
+    console.log(req.body, req.files[0]);
+    try {
+      if (!req.files[0]) {
+        console.log("suck a dick chip");
+        res.status(400).send("No file uploaded!");
+        return;
+      }
+      const blob = storage.file(req.files[0].originalname);
+      const blobStream = blob.createWriteStream({
+        metadata: {
+          contentType: req.files[0].mimetype
+        }
+      })
+      blobStream.on("error", err => next(err));
+      blobStream.on("finish", () => {
+        const photoUrl = `https://firebasestorage.googleapis.com/v0/b/${
+          storage.name
+        }/o/${encodeURI(blob.name)}?alt=media`;
+        res.status(200).send({ fileName: req.files[0].originalname, fileLocation: photoUrl })
+      })
+      blobStream.end(req.files[0].buffer);
+
+    } catch (err) {
+      console.log(err);
+      res.status(400).send(
+        `Failed to upload the image: ${err}`
+      )
+      return;
+    }
+  } else {
+    res.status(403).send("Unauthorized")
+  }
+})
+
 app.post("/users", async (req, res) => {
   try {
     await db.collection("users").doc(req.body.email).set({
       displayName: req.body.displayName,
       email: req.body.email,
       username: req.body.username,
-      photoURL: {},
+      photoURL: "",
       medicines: [],
       illnesses: [],
       plans: [],
@@ -148,13 +185,13 @@ app.patch("/users", async (req, res) => {
     try {
       const userData = await db
         .collection("users")
-        .doc(req.body.email)
+        .doc(req.query.email)
         .get()
         .then((query) => query.data());
 
       await db
         .collection("users")
-        .doc(req.body.email)
+        .doc(req.query.email)
         .update({
           username: req.body.username
             ? req.body.username
@@ -175,7 +212,7 @@ app.patch("/users", async (req, res) => {
             ? req.body.photoURL
             : userData.photoURL
             ? userData.photoURL
-            : {},
+            : "",
           medicines: req.body.medicines
             ? req.body.medicines
             : userData.medicines
@@ -450,6 +487,8 @@ app.post("/video", (req, res) => {
     res.status(403).send("Unauthorized");
   }
 });
+
+app.patch('/users/')
 
 //  DO NOT TOUCH THIS LINE
 exports.api = functions.https.onRequest(app);

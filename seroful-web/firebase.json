@@ -22,6 +22,11 @@
         "source": "/users/planner/plans",
         "function": "api"
       },
+
+      {
+        "source": "/users/photo/upload",
+        "function": "api"
+      },
       {
         "source": "/users",
         "function": "api"

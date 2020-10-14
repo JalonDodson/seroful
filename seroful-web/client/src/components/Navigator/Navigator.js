@@ -9,6 +9,7 @@ import {
   Settings,
   NotFound,
   Splash,
+  VideoChat
 } from "../Pages/index";
 
 import { newUser } from "../../store/store";
@@ -23,10 +24,9 @@ export const Navigator = () => {
           path="/"
           render={() => (userNew ? <Splash /> : <Home />)}
         />
-        {/* // TODO: Make route for profile /users/(username or uid)/profile */}
         <Route path="/profile" render={() => <Profile />} />
-        {/* // TODO: Make route for planner /users/(username or uid)/planner */}
         <Route path="/friends" render={() => <Friends />} />
+        <Route path="/video-chat" render={() => <VideoChat />} />
         <Route path="/planner" render={() => <Planner />} />
         <Route path="/journal" render={() => <Journal />} />
         <Route path="/settings" render={() => <Settings />} />

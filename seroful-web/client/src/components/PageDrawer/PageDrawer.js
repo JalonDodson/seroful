@@ -38,6 +38,7 @@ import PersonIcon from "@material-ui/icons/Person";
 import SettingsIcon from "@material-ui/icons/Settings";
 import AssignmentIcon from "@material-ui/icons/Assignment";
 import CircularProgress from "@material-ui/core/CircularProgress";
+import VideoCallIcon from "@material-ui/icons/VideoCall";
 
 import * as api from "../../util/api";
 
@@ -51,17 +52,22 @@ export const PageDrawer = () => {
   const styles = drawerStyles();
 
   const [anchor, setAnchor] = useState(null);
+  const [videoAnchor, setVideoAnchor] = useState(null);
   const [requestOpen, setRequest] = useState(false);
   const [isChecked, setChecked] = useState(false);
   const [searchOpen, setSearch] = useState(false);
   const [addByOpen, setAddBy] = useState(false);
   const [options, setOptions] = useState([]);
   const [currentSearch, setCurrentSearch] = useState(null);
+  const [joinReq, setJoinReq] = useState(false);
+  const [createReq, setCreateReq] = useState(false);
 
   const loading = searchOpen && options.length === 0;
 
   const friendsMenu = (ev) => setAnchor(ev.currentTarget);
   const friendsClose = () => setAnchor(null);
+  const videoMenu = (ev) => setVideoAnchor(ev.currentTarget);
+  const videoMenuClose = () => setVideoAnchor(null);
 
   const logout = () => {
     firebase
@@ -139,6 +145,20 @@ export const PageDrawer = () => {
               onClick={friendsMenu}
             >
               Friends
+            </ButtonBase>
+          </ListItem>
+          <ListItem button key="VideoChat">
+            <ListItemIcon>
+              <VideoCallIcon />
+            </ListItemIcon>
+            <ButtonBase
+              aria-controls="video-menu"
+              aria-haspopup="true"
+              variant="text"
+              className={styles.videoButton}
+              onClick={videoMenu}
+            >
+              Video Chat
             </ButtonBase>
           </ListItem>
           <ListItem button key="Planner" component="a" href="/planner">
@@ -319,6 +339,45 @@ export const PageDrawer = () => {
           >
             Cancel
           </Button>
+        </DialogContent>
+      </Dialog>
+      <Menu
+        id="video-menu"
+        anchorEl={videoAnchor}
+        keepMounted
+        open={Boolean(videoAnchor)}
+        onClose={videoMenuClose}
+      >
+        <MenuItem onClick={null}>Join Room</MenuItem>
+        <MenuItem onClick={null}>Create Room</MenuItem>
+      </Menu>
+      <Dialog
+        open={joinReq}
+        onClose={() => setJoinReq(false)}
+        aria-labelledby="join-modal"
+        aria-describedby="join-modal"
+      >
+        <DialogTitle id="join-title">Join Conference Room</DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+            Please enter the name of the Room you would like to join, as well as the Screen Name you would like people to use when they
+            address you as
+            <TextField />
+          </DialogContentText>
+        </DialogContent>
+      </Dialog>
+      <Dialog
+        open={createReq}
+        onClose={() => setCreateReq(false)}
+        aria-labelledby="create-modal"
+        aria-describedby="create-modal"
+      >
+        <DialogTitle id="create-title">Create Conference Room</DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+            Please enter the name of the Room you would like to create, as well as the Screen Name you would like people to use when they
+            address you as
+          </DialogContentText>
         </DialogContent>
       </Dialog>
     </>

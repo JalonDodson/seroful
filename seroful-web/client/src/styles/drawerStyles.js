@@ -31,6 +31,15 @@ export const drawerStyles = makeStyles((theme) => ({
     letterSpacing: "0.00938.em",
     background: "none",
   },
+  videoButton: {
+    textTransform: "capitalize",
+    fontSize: "1rem",
+    fontFamily: "'Roboto', 'Helvetica', 'Arial', sans-serif;",
+    fontWeight: 400,
+    lineHeight: 1.5,
+    letterSpacing: "0.00938.em",
+    background: "none",
+  },
   buttonGroup: {
     marginLeft: "-15%",
   },

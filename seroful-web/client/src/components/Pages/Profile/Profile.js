@@ -41,8 +41,8 @@ export const Profile = (props) => {
         <Card className={styles.root}>
           <CardActionArea className={styles.main}>
             <Avatar className={styles.purple}>
-              {user.photo ? (
-                <img src={user.photo} alt={`${user.username}`} />
+              {user.photoURL ? (
+                <img src={user.photoURL} alt={`${user.username}`} />
               ) : user.displayName ? (
                 user.displayName[0]
               ) : (
