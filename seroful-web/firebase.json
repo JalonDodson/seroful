@@ -43,7 +43,11 @@
         "function": "api"
       },
       {
-        "source": "/",
+        "source": "**",
+        "headers": [{
+          "key": "Cache-Control",
+          "value": "max-age=0"
+        }],
         "destination": "/index.html"
       }
     ]

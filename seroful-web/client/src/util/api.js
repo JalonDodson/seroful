@@ -1,6 +1,5 @@
 import axios from "axios";
-
-import firebase from "firebase/app";
+import firebase from "firebase";
 import "firebase/auth";
 
 /*
@@ -8,7 +7,7 @@ import "firebase/auth";
   When built, only /path should be used in the axios requests.
 */
 // axios stuff
-const instance = axios.create({ baseURL: "http://localhost:4000" });
+const instance = axios.create();
 
 export const getActiveUser = async (email) => {
   const token =

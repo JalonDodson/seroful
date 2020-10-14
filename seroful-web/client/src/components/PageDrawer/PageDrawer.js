@@ -22,7 +22,7 @@ import {
   DialogContentText,
   // Link,
 } from "@material-ui/core/";
-import Autocomplete from "@material-ui/lab/Autocomplete"
+import Autocomplete from "@material-ui/lab/Autocomplete";
 import PersonAddIcon from "@material-ui/icons/PersonAdd";
 import DeleteIcon from "@material-ui/icons/Delete";
 
@@ -37,7 +37,7 @@ import PeopleIcon from "@material-ui/icons/People";
 import PersonIcon from "@material-ui/icons/Person";
 import SettingsIcon from "@material-ui/icons/Settings";
 import AssignmentIcon from "@material-ui/icons/Assignment";
-import CircularProgress from '@material-ui/core/CircularProgress';
+import CircularProgress from "@material-ui/core/CircularProgress";
 
 import * as api from "../../util/api";
 
@@ -84,12 +84,12 @@ export const PageDrawer = () => {
     return () => {
       active = false;
     };
-  }, [loading])
+  }, [loading]);
 
   useEffect(() => {
     if (!searchOpen) setOptions([]);
-  }, [searchOpen])
-  
+  }, [searchOpen]);
+
   return (
     <>
       <Drawer
@@ -122,8 +122,10 @@ export const PageDrawer = () => {
               <Badge
                 badgeContent={
                   activeUser.friends
-                  ? activeUser.friends.pending && activeUser.friends.pending.length
-                  : 0}
+                    ? activeUser.friends.pending &&
+                      activeUser.friends.pending.length
+                    : 0
+                }
                 color="primary"
               >
                 <PeopleIcon />
@@ -191,10 +193,10 @@ export const PageDrawer = () => {
           <DialogContentText>
             {activeUser.friends &&
               (activeUser.friends.pending === void 0
-              ? "You have no pending friend requests."
-              : 1 === activeUser.friends.pending.length
-              ? "You have one new friend request!"
-              : `You have ${activeUser.friends.pending.length} new friend requests!`)}
+                ? "You have no pending friend requests."
+                : 1 === activeUser.friends.pending.length
+                ? "You have one new friend request!"
+                : `You have ${activeUser.friends.pending.length} new friend requests!`)}
           </DialogContentText>
           {activeUser.friends && activeUser.friends.pending && (
             <List>
@@ -242,60 +244,83 @@ export const PageDrawer = () => {
           )}
         </DialogContent>
       </Dialog>
-              <Dialog open={addByOpen} onClose={() => setAddBy(false)} 
-              aria-labelledby="requests-dialog" 
-              aria-describedby="search-dialog">
-                <DialogTitle id="search-title">Add by Username</DialogTitle>
-                <DialogContentText>Do you have a friend that uses Seroful you'd like to add? Feel free to search for their username and add them here!</DialogContentText>
-                <DialogContent>
-                  <Autocomplete 
-                    id="async-user-search" 
-                    open={searchOpen} 
-                    onOpen={() => setSearch(true)}
-                    onClose={() => setSearch(false)}
-                    getOptionSelected={(opt, val) => opt.username === val.username}
-                    getOptionLabel={opt => opt.username}
-                    options={options}
-                    loading={loading}
-                    onChange={(ev, val) => setCurrentSearch(val)}
-                    renderInput={params => (
-                      <TextField
-                      {...params}
-                      label="Add by Username"
-                      variant="outlined"
-                      InputProps={{
-                        ...params.InputProps,
-                        endAdornment: (
-                          <>
-                          {loading ? <CircularProgress color="inherit" size={20} /> : null}
-                          {params.InputProps.endAdornment}
-                          </>
-                        ),
-                      }}
-                      error={currentSearch && currentSearch.username === activeUser.username}
-                      helperText={currentSearch && currentSearch.username === activeUser.username ? "You can't add yourself as a friend, silly (although, love yourself ♡)!" : ""}
-                      />
-                      )}
-                      />
-                  {currentSearch ? <Button 
-                                      disabled={currentSearch && currentSearch.username === activeUser.username} 
-                                      className={styles.addButton} 
-                                      onClick={() => { 
-                                        api.addFriend(currentSearch.username, activeUser.username)
-                                        setCurrentSearch(null);
-                                        }}>
-                                        Add Friend
-                                    </Button> 
-                                  : null}
-                  <Button 
-                    style={{ float: "right" }} 
-                    className={styles.addButton} 
-                    onClick={() => {
-                      setAddBy(false)
-                      setCurrentSearch(null);
-                    }}>Cancel</Button>
-                </DialogContent>
-              </Dialog>
+      <Dialog
+        open={addByOpen}
+        onClose={() => setAddBy(false)}
+        aria-labelledby="requests-dialog"
+        aria-describedby="search-dialog"
+      >
+        <DialogTitle id="search-title">Add by Username</DialogTitle>
+        <DialogContentText>
+          Do you have a friend that uses Seroful you'd like to add? Feel free to
+          search for their username and add them here!
+        </DialogContentText>
+        <DialogContent>
+          <Autocomplete
+            id="async-user-search"
+            open={searchOpen}
+            onOpen={() => setSearch(true)}
+            onClose={() => setSearch(false)}
+            getOptionSelected={(opt, val) => opt.username === val.username}
+            getOptionLabel={(opt) => opt.username}
+            options={options}
+            loading={loading}
+            onChange={(ev, val) => setCurrentSearch(val)}
+            renderInput={(params) => (
+              <TextField
+                {...params}
+                label="Add by Username"
+                variant="outlined"
+                InputProps={{
+                  ...params.InputProps,
+                  endAdornment: (
+                    <>
+                      {loading ? (
+                        <CircularProgress color="inherit" size={20} />
+                      ) : null}
+                      {params.InputProps.endAdornment}
+                    </>
+                  ),
+                }}
+                error={
+                  currentSearch &&
+                  currentSearch.username === activeUser.username
+                }
+                helperText={
+                  currentSearch &&
+                  currentSearch.username === activeUser.username
+                    ? "You can't add yourself as a friend, silly (although, love yourself ♡)!"
+                    : ""
+                }
+              />
+            )}
+          />
+          {currentSearch ? (
+            <Button
+              disabled={
+                currentSearch && currentSearch.username === activeUser.username
+              }
+              className={styles.addButton}
+              onClick={() => {
+                api.addFriend(currentSearch.username, activeUser.username);
+                setCurrentSearch(null);
+              }}
+            >
+              Add Friend
+            </Button>
+          ) : null}
+          <Button
+            style={{ float: "right" }}
+            className={styles.addButton}
+            onClick={() => {
+              setAddBy(false);
+              setCurrentSearch(null);
+            }}
+          >
+            Cancel
+          </Button>
+        </DialogContent>
+      </Dialog>
     </>
   );
 };

@@ -1,4 +1,3 @@
-
 import React, { createRef, useEffect, useState } from "react";
 import { Helmet } from "react-helmet";
 import { PageDrawer } from "../../PageDrawer/PageDrawer";
@@ -65,7 +64,7 @@ export const Journal = () => {
   };
 
   const [user, setUser] = useRecoilState(userState);
-  console.log(user)
+  console.log(user);
 
   useEffect(() => {
     return async () => {
@@ -98,30 +97,32 @@ export const Journal = () => {
             {
               //TODO: instance.get(all of users entries and map through them to return these bastards on one side, new entry on the others)
             }
-            {user.journals && user.journals.map((x, i) => {
-              const newDate = new Date(x.timestamp).toString();
-              return (
-                <Accordion
-                  square
-                  expanded={expanded === `panel-${i}`}
-                  onChange={handleChange(`panel-${i}`)}
-                >
-                  <AccordionSummary
-                    aria-controls={`panel${i}-content`}
-                    id={`panel${i}-header`}
+            {user.journals &&
+              user.journals.map((x, i) => {
+                const newDate = new Date(x.timestamp).toString();
+                return (
+                  <Accordion
+                    square
+                    expanded={expanded === `panel-${i}`}
+                    onChange={handleChange(`panel-${i}`)}
                   >
-                    <Typography>{`${newDate.split(" ")[1]} ${newDate.split(" ")[2]
+                    <AccordionSummary
+                      aria-controls={`panel${i}-content`}
+                      id={`panel${i}-header`}
+                    >
+                      <Typography>{`${newDate.split(" ")[1]} ${
+                        newDate.split(" ")[2]
                       } ${newDate.split(" ")[4]}`}</Typography>
-                  </AccordionSummary>
-                  <AccordionDetails>
-                    <Typography>
-                      {console.log(x)}
-                      {x.entry}
-                    </Typography>
-                  </AccordionDetails>
-                </Accordion>
-              );
-            })}
+                    </AccordionSummary>
+                    <AccordionDetails>
+                      <Typography>
+                        {console.log(x)}
+                        {x.entry}
+                      </Typography>
+                    </AccordionDetails>
+                  </Accordion>
+                );
+              })}
           </div>
           <div className={styles.form}>
             <form>
