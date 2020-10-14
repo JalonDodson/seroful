@@ -190,7 +190,6 @@ export const PageDrawer = () => {
       >
         <DialogTitle id="requests-title">Friend Requests</DialogTitle>
         <DialogContent>
-<<<<<<< HEAD
           {/*<DialogContentText>
             {activeUser.friends.pending
               ? 1 === activeUser.friends.pending.length
@@ -199,17 +198,6 @@ export const PageDrawer = () => {
               : "You don't have any new friend requests right now."}
             </DialogContentText>*/}
           {/*activeUser.friends.pending && (
-=======
-          <DialogContentText>
-            {activeUser.friends &&
-              (activeUser.friends.pending
-              ? 1 === activeUser.friends.pending.length
-              ? "You have one new friend request!"
-              : `You have ${activeUser.friends.pending.length} new friend requests!`
-              : "You have no pending friend requests.")}
-          </DialogContentText>
-          {activeUser.friends.pending && (
->>>>>>> 04042a2a78e10fd30331db55ce1f4bca2b74fb9d
             <List>
               {activeUser.friends.pending.map((x) => {
                 return (
@@ -254,9 +242,6 @@ export const PageDrawer = () => {
             </List>
             )*/}
         </DialogContent>
-<<<<<<< HEAD
-            </Dialog>
-=======
       </Dialog>
               <Dialog open={searchOpen} onClose={() => setSearch(false)} 
               aria-labelledby="requests-dialog" 
@@ -266,7 +251,6 @@ export const PageDrawer = () => {
                 {/* <Autocomplete */}
                 <Button onClick={() => setSearch(true)}>Suck Dick</Button>
               </Dialog>
->>>>>>> 04042a2a78e10fd30331db55ce1f4bca2b74fb9d
     </>
   );
 };
