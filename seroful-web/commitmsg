@@ -1,1 +1,1 @@
--m "[LIVE SHARE SESSION]—[Jalon]: Worked on friends list autofill/autocomplete functionality, [Chip]:"
+-m "[LIVE SHARE SESSION]—[Jalon]: Worked on friends list autofill/autocomplete functionality, [Chip]: refactored VideoChat (slightly) to throw functionality of Lobby component into Menu/Dialog components: need to force Dialogs to actually pop up for Join/Create Rooms, then throw those values to the creation/joining of rooms"

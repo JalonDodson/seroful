@@ -15,11 +15,6 @@ export const userState = atom({
   },
 });
 
-export const userToken = atom({
-  key: "userToken",
-  default: "",
-});
-
 export const msgState = atom({
   key: "msgState",
   default: "",
@@ -51,3 +46,13 @@ export const newUser = atom({
   key: "newUser",
   default: false,
 });
+
+export const videoToken = atom({
+  key: "videoToken",
+  default: "",
+})
+
+export const roomData = atom({
+  key: "roomData",
+  default: ""
+})

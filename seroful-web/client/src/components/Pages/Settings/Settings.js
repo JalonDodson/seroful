@@ -125,24 +125,3 @@ export const Settings = () => {
     </>
   );
 };
-
-{/* <TextField
-  error
-  helperText
-  label="Current Medicines"
-  variant="filled"
-  className
-  placeholder={user.medicines}
-  onBlur
-  onChange
-></TextField>
-<TextField
-  error
-  helperText
-  label="Current Illnesses"
-  variant="filled"
-  className
-  placeholder={user.illnesses}
-  onBlur
-  onChange
-></TextField> */}

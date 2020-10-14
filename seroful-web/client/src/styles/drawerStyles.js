@@ -37,8 +37,10 @@ export const drawerStyles = makeStyles((theme) => ({
     fontFamily: "'Roboto', 'Helvetica', 'Arial', sans-serif;",
     fontWeight: 400,
     lineHeight: 1.5,
-    letterSpacing: "0.00938.em",
+    letterSpacing: "0.0025.em",
     background: "none",
+    whiteSpace: "nowrap",
+    right: "10%",
   },
   buttonGroup: {
     marginLeft: "-15%",
@@ -47,5 +49,10 @@ export const drawerStyles = makeStyles((theme) => ({
     textTransform: "capitalize",
     fontFamily: "'Roboto', 'Helvetica', 'Arial', sans-serif;",
     backgroundColor: "#E9DFE3",
+  },
+  inputCont: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    marginTop: '4%'
   }
 }));

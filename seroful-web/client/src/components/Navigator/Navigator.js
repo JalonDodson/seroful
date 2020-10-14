@@ -26,7 +26,7 @@ export const Navigator = () => {
         />
         <Route path="/profile" render={() => <Profile />} />
         <Route path="/friends" render={() => <Friends />} />
-        <Route path="/video-chat" render={() => <VideoChat />} />
+        <Route path="/video" render={() => <VideoChat />} />
         <Route path="/planner" render={() => <Planner />} />
         <Route path="/journal" render={() => <Journal />} />
         <Route path="/settings" render={() => <Settings />} />
