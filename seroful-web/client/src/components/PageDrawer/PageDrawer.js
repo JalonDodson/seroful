@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 
 import {
-  Autocomplete,
   TextField,
   Button,
   ButtonGroup,
@@ -23,7 +22,7 @@ import {
   DialogContentText,
   // Link,
 } from "@material-ui/core/";
-
+import Autocomplete from "@material-ui/lab/Autocomplete";
 import PersonAddIcon from "@material-ui/icons/PersonAdd";
 import DeleteIcon from "@material-ui/icons/Delete";
 
@@ -38,6 +37,8 @@ import PeopleIcon from "@material-ui/icons/People";
 import PersonIcon from "@material-ui/icons/Person";
 import SettingsIcon from "@material-ui/icons/Settings";
 import AssignmentIcon from "@material-ui/icons/Assignment";
+import CircularProgress from "@material-ui/core/CircularProgress";
+import VideoCallIcon from "@material-ui/icons/VideoCall";
 
 import * as api from "../../util/api";
 
@@ -51,14 +52,22 @@ export const PageDrawer = () => {
   const styles = drawerStyles();
 
   const [anchor, setAnchor] = useState(null);
+  const [videoAnchor, setVideoAnchor] = useState(null);
   const [requestOpen, setRequest] = useState(false);
   const [isChecked, setChecked] = useState(false);
   const [searchOpen, setSearch] = useState(false);
+  const [addByOpen, setAddBy] = useState(false);
   const [options, setOptions] = useState([]);
+  const [currentSearch, setCurrentSearch] = useState(null);
+  const [joinReq, setJoinReq] = useState(false);
+  const [createReq, setCreateReq] = useState(false);
+
   const loading = searchOpen && options.length === 0;
 
   const friendsMenu = (ev) => setAnchor(ev.currentTarget);
   const friendsClose = () => setAnchor(null);
+  const videoMenu = (ev) => setVideoAnchor(ev.currentTarget);
+  const videoMenuClose = () => setVideoAnchor(null);
 
   const logout = () => {
     firebase
@@ -70,27 +79,23 @@ export const PageDrawer = () => {
   useEffect(() => {
     let active = true;
 
-    if (!loading) {
-      return undefined;
-    }
+    if (!loading) return undefined;
 
     (async () => {
       const resp = await api.getUserList();
-      const users = await resp.json();
-      console.log(users);
-      // if (active) setOptions(users.map(x => ))
-    })()
+      const users = await resp;
+      if (active) setOptions(users);
+    })();
 
     return () => {
       active = false;
     };
-  }, [loading])
+  }, [loading]);
 
   useEffect(() => {
-    if (!searchOpen) {
-      setOptions([]);
-    }
-  }, [searchOpen])
+    if (!searchOpen) setOptions([]);
+  }, [searchOpen]);
+
   return (
     <>
       <Drawer
@@ -123,8 +128,10 @@ export const PageDrawer = () => {
               {/*<Badge
                 badgeContent={
                   activeUser.friends
-                  ? activeUser.friends.pending && activeUser.friends.pending.length
-                  : 0}
+                    ? activeUser.friends.pending &&
+                      activeUser.friends.pending.length
+                    : 0
+                }
                 color="primary"
               >
                 <PeopleIcon />
@@ -138,6 +145,20 @@ export const PageDrawer = () => {
               onClick={friendsMenu}
             >
               Friends
+            </ButtonBase>
+          </ListItem>
+          <ListItem button key="VideoChat">
+            <ListItemIcon>
+              <VideoCallIcon />
+            </ListItemIcon>
+            <ButtonBase
+              aria-controls="video-menu"
+              aria-haspopup="true"
+              variant="text"
+              className={styles.videoButton}
+              onClick={videoMenu}
+            >
+              Video Chat
             </ButtonBase>
           </ListItem>
           <ListItem button key="Planner" component="a" href="/planner">
@@ -179,9 +200,8 @@ export const PageDrawer = () => {
         <MenuItem onClick={null}>Friends List</MenuItem>
         <MenuItem onClick={() => setRequest(true)}>Requests</MenuItem>
         <MenuItem onClick={null}>Messages</MenuItem>
-        <MenuItem onClick={null}>Add by Username</MenuItem>
+        <MenuItem onClick={() => setAddBy(true)}>Add by Username</MenuItem>
       </Menu>
-      // Dialogs
       <Dialog
         open={requestOpen}
         onClose={() => setRequest(false)}
@@ -190,6 +210,7 @@ export const PageDrawer = () => {
       >
         <DialogTitle id="requests-title">Friend Requests</DialogTitle>
         <DialogContent>
+<<<<<<< HEAD
           {/*<DialogContentText>
             {activeUser.friends.pending
               ? 1 === activeUser.friends.pending.length
@@ -198,6 +219,17 @@ export const PageDrawer = () => {
               : "You don't have any new friend requests right now."}
             </DialogContentText>*/}
           {/*activeUser.friends.pending && (
+=======
+          <DialogContentText>
+            {activeUser.friends &&
+              (activeUser.friends.pending === void 0
+                ? "You have no pending friend requests."
+                : 1 === activeUser.friends.pending.length
+                ? "You have one new friend request!"
+                : `You have ${activeUser.friends.pending.length} new friend requests!`)}
+          </DialogContentText>
+          {activeUser.friends && activeUser.friends.pending && (
+>>>>>>> d1cc2c766914fa750f3e9ce376422bdde0f266df
             <List>
               {activeUser.friends.pending.map((x) => {
                 return (
@@ -243,14 +275,122 @@ export const PageDrawer = () => {
             )*/}
         </DialogContent>
       </Dialog>
-              <Dialog open={searchOpen} onClose={() => setSearch(false)} 
-              aria-labelledby="requests-dialog" 
-              aria-describedby="search-dialog">
-                <DialogTitle id="search-title">Add by Username</DialogTitle>
-                <DialogContentText>Do you have a friend that uses Seroful you'd like to add? Feel free to search for their username and add them here!</DialogContentText>
-                {/* <Autocomplete */}
-                <Button onClick={() => setSearch(true)}>Suck Dick</Button>
-              </Dialog>
+      <Dialog
+        open={addByOpen}
+        onClose={() => setAddBy(false)}
+        aria-labelledby="requests-dialog"
+        aria-describedby="search-dialog"
+      >
+        <DialogTitle id="search-title">Add by Username</DialogTitle>
+        <DialogContentText>
+          Do you have a friend that uses Seroful you'd like to add? Feel free to
+          search for their username and add them here!
+        </DialogContentText>
+        <DialogContent>
+          <Autocomplete
+            id="async-user-search"
+            open={searchOpen}
+            onOpen={() => setSearch(true)}
+            onClose={() => setSearch(false)}
+            getOptionSelected={(opt, val) => opt.username === val.username}
+            getOptionLabel={(opt) => opt.username}
+            options={options}
+            loading={loading}
+            onChange={(ev, val) => setCurrentSearch(val)}
+            renderInput={(params) => (
+              <TextField
+                {...params}
+                label="Add by Username"
+                variant="outlined"
+                InputProps={{
+                  ...params.InputProps,
+                  endAdornment: (
+                    <>
+                      {loading ? (
+                        <CircularProgress color="inherit" size={20} />
+                      ) : null}
+                      {params.InputProps.endAdornment}
+                    </>
+                  ),
+                }}
+                error={
+                  currentSearch &&
+                  currentSearch.username === activeUser.username
+                }
+                helperText={
+                  currentSearch &&
+                  currentSearch.username === activeUser.username
+                    ? "You can't add yourself as a friend, silly (although, love yourself ♡)!"
+                    : ""
+                }
+              />
+            )}
+          />
+          {currentSearch ? (
+            <Button
+              disabled={
+                currentSearch && currentSearch.username === activeUser.username
+              }
+              className={styles.addButton}
+              onClick={() => {
+                api.addFriend(currentSearch.username, activeUser.username);
+                setCurrentSearch(null);
+              }}
+            >
+              Add Friend
+            </Button>
+          ) : null}
+          <Button
+            style={{ float: "right" }}
+            className={styles.addButton}
+            onClick={() => {
+              setAddBy(false);
+              setCurrentSearch(null);
+            }}
+          >
+            Cancel
+          </Button>
+        </DialogContent>
+      </Dialog>
+      <Menu
+        id="video-menu"
+        anchorEl={videoAnchor}
+        keepMounted
+        open={Boolean(videoAnchor)}
+        onClose={videoMenuClose}
+      >
+        <MenuItem onClick={null}>Join Room</MenuItem>
+        <MenuItem onClick={null}>Create Room</MenuItem>
+      </Menu>
+      <Dialog
+        open={joinReq}
+        onClose={() => setJoinReq(false)}
+        aria-labelledby="join-modal"
+        aria-describedby="join-modal"
+      >
+        <DialogTitle id="join-title">Join Conference Room</DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+            Please enter the name of the Room you would like to join, as well as the Screen Name you would like people to use when they
+            address you as
+            <TextField />
+          </DialogContentText>
+        </DialogContent>
+      </Dialog>
+      <Dialog
+        open={createReq}
+        onClose={() => setCreateReq(false)}
+        aria-labelledby="create-modal"
+        aria-describedby="create-modal"
+      >
+        <DialogTitle id="create-title">Create Conference Room</DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+            Please enter the name of the Room you would like to create, as well as the Screen Name you would like people to use when they
+            address you as
+          </DialogContentText>
+        </DialogContent>
+      </Dialog>
     </>
   );
 };

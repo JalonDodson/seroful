@@ -22,6 +22,11 @@
         "source": "/users/planner/plans",
         "function": "api"
       },
+
+      {
+        "source": "/users/photo/upload",
+        "function": "api"
+      },
       {
         "source": "/users",
         "function": "api"
@@ -31,7 +36,23 @@
         "function": "api"
       },
       {
-        "source": "/",
+        "source": "/video-chat",
+        "function": "api"
+      },
+      {
+        "source": "/video/token",
+        "function": "api"
+      },
+      {
+        "source": "/video",
+        "function": "api"
+      },
+      {
+        "source": "**",
+        "headers": [{
+          "key": "Cache-Control",
+          "value": "max-age=0"
+        }],
         "destination": "/index.html"
       }
     ]

@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { Helmet } from "react-helmet";
 
 import {
-  Grid,
   Paper,
   Accordion,
   AccordionSummary,
@@ -29,9 +28,9 @@ import { userState } from "../../../store/store";
 import {
   CheckCircle,
   CheckCircleOutline,
-  Favorite,
-  FavoriteBorder,
-  SettingsRemoteSharp,
+  // Favorite,
+  // FavoriteBorder,
+  // SettingsRemoteSharp,
 } from "@material-ui/icons";
 import * as api from "../../../util/api";
 
@@ -83,6 +82,7 @@ export const Planner = (props) => {
         setUpdated(false);
       });
     };
+    //eslint-disable-next-line
   }, [isUpdated]);
   return (
     <>
@@ -304,7 +304,9 @@ export const Planner = (props) => {
               value={userPlan.goals.first}
               onChange={(ev) => {
                 const value = ev.target.value;
-                setPlan((x) => (x = { ...x, goals: { ...x.goals, first: value } }));
+                setPlan(
+                  (x) => (x = { ...x, goals: { ...x.goals, first: value } })
+                );
               }}
             />
             <br />
@@ -314,7 +316,9 @@ export const Planner = (props) => {
               value={userPlan.goals.second}
               onChange={(ev) => {
                 const value = ev.target.value;
-                setPlan((x) => (x = { ...x, goals: { ...x.goals, second: value } }));
+                setPlan(
+                  (x) => (x = { ...x, goals: { ...x.goals, second: value } })
+                );
               }}
             />
             <br />
@@ -324,7 +328,9 @@ export const Planner = (props) => {
               value={userPlan.goals.third}
               onChange={(ev) => {
                 const value = ev.target.value;
-                setPlan((x) => (x = { ...x, goals: { ...x.goals, third: value } }));
+                setPlan(
+                  (x) => (x = { ...x, goals: { ...x.goals, third: value } })
+                );
               }}
             />
           </form>
@@ -420,7 +426,6 @@ export const Planner = (props) => {
                           id="test2"
                           primary={
                             <i>
-
                               {x.goals.second
                                 ? x.goals.second
                                 : "No Goal Listed!"}
@@ -442,7 +447,6 @@ export const Planner = (props) => {
                           id="test2"
                           primary={
                             <i>
-
                               {x.goals.third
                                 ? x.goals.third
                                 : "No Goal Listed!"}
@@ -452,8 +456,7 @@ export const Planner = (props) => {
                       </ListItem>
                     </List>
                     <Divider style={{ marginLeft: "-5%", width: "158.5%" }} />
-                        {/* do something with the rest of the data */}
-
+                    {/* do something with the rest of the data */}
                   </Typography>
                 </AccordionDetails>
               </Accordion>

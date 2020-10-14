@@ -1,39 +1,49 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import { Helmet } from "react-helmet";
-import multer from "multer";
-import path from 'path';
+// import multer from "multer";
+// import path from 'path';
 
 import { PageDrawer } from "../../PageDrawer/PageDrawer";
 import { settingsStyles } from "../../../styles/settingsStyles";
-import FloatingActionButton from "@material-ui/core/Fab";
+// import FloatingActionButton from "@material-ui/core/Fab";
 import ButtonBase from "@material-ui/core/ButtonBase";
 import Typography from "@material-ui/core/Typography";
-import { Button, TextField } from "@material-ui/core";
-import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
+import { Button, TextField, Fab } from "@material-ui/core";
+import { useRecoilState } from "recoil";
 import { userState } from "../../../store/store";
-import { updateUser } from '../../../util/api';
-
+import AddAPhotoIcon from "@material-ui/icons/AddAPhoto"
+import * as api from "../../../util/api";
 export const Settings = () => {
   const styles = settingsStyles();
   const [user, setUser] = useRecoilState(userState);
+  const [img, setImg] = useState(null);
   const ref = useRef(null);
 
   const buttonClick = () => {
+
     ref.current.click();
   };
 
-  const handleChange = (ev) => {
-    ev.stopPropagation();
+  const uploadPhoto = async (ev) => {
     ev.preventDefault();
-    const newImg = ev.target.files[0];
-    setUser({...user, photoURL: newImg.name});
-    updateUser(user)
-    console.log(newImg.name)
 
-    // const imgFiles = /jpeg|jpg|png|gif/;
-    // const extName = fileTypes.test(path.extname(ev.originalname).toLowerCase());
+    try {
+      if (img) {
+        let formData = new FormData();
+        formData.set("image", img, `${Date.now()}-${img.name}`)
 
-  };
+        const data = await api.uploadPhoto(formData);
+        if (data) {
+          const userPhoto = { photoURL: data.fileLocation };
+          const user = await api.updateUser(userPhoto);
+          console.log(user);
+          setUser(x => x = {...x, photoURL: data.fileLocation })
+        }
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  }
 
   return (
     <>
@@ -53,42 +63,22 @@ export const Settings = () => {
         <Typography className={styles.instructor} variant="h6">
           Insert Updates Below:
         </Typography>
-        <form
-          className={styles.form}
-          method="PATCH"
-          action="/users"
-          encType="multipart/form-data"
-        >
-          <input id="input" className={styles.input} ref={ref} type="file" onChange={(ev) => handleChange(ev)} />
-          <ButtonBase
-            focusRipple
-            key="Profile Photo"
-            className={styles.image}
-            focusVisibleClassName={styles.focusVisible}
-            style={{
-              width: "200px",
-            }}
-            onClick={(ev) => buttonClick(ev)}
-          >
-            <span
-              className={styles.imageSrc}
-              style={{
-                backgroundImage: ref.current ? `url(${ref.current.files.name})` : user.photoURL ? `url(${user.photoURL})` : `url("../../../resources/molecule.png")`
-              }}
-            />
-            <span className={styles.imageBackdrop} />
-            <span className={styles.imageButton}>
-              <Typography
-                component="span"
-                variant="subtitle1"
-                color="inherit"
-                className={styles.imageTitle}
-              >
-                {user.username}
-                <span className={styles.imageMarked} />
-              </Typography>
-            </span>
-          </ButtonBase>
+      <form className={styles.imgForm} onSubmit={(ev) => uploadPhoto(ev)}>
+        <label htmlFor="image">
+
+        <input id="image" name="image" type="file" style={{ display: "none" }} onChange={(ev) => setImg(ev.target.files[0])}/>
+        <Fab color="secondary" size="small" component="span" aria-label="add" variant="extended">
+          <AddAPhotoIcon /> Upload Photo
+        </Fab>
+        {img ? 
+        <Fab color="secondary" size="small" type="submit" component="button" aria-label="add" variant="extended">
+          Confirm
+        </Fab>
+      : null}
+      </label>
+      </form>
+
+            <form className={styles.textForm}>
           <TextField
             error
             helperText
@@ -129,29 +119,30 @@ export const Settings = () => {
             onBlur
             onChange
           ></TextField>
-          {/* <TextField
-            error
-            helperText
-            label="Current Medicines"
-            variant="filled"
-            className
-            placeholder={user.medicines}
-            onBlur
-            onChange
-          ></TextField>
-          <TextField
-            error
-            helperText
-            label="Current Illnesses"
-            variant="filled"
-            className
-            placeholder={user.illnesses}
-            onBlur
-            onChange
-          ></TextField> */}
           <Button type='submit' className='btn' onClick>Submit New User Info</Button>
         </form>
       </div>
     </>
   );
 };
+
+{/* <TextField
+  error
+  helperText
+  label="Current Medicines"
+  variant="filled"
+  className
+  placeholder={user.medicines}
+  onBlur
+  onChange
+></TextField>
+<TextField
+  error
+  helperText
+  label="Current Illnesses"
+  variant="filled"
+  className
+  placeholder={user.illnesses}
+  onBlur
+  onChange
+></TextField> */}
