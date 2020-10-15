@@ -18,20 +18,12 @@ function App() {
   const [init, setInit] = useState(true);
   const [user, setUser] = useState();
   const setActive = useSetRecoilState(userState);
-  // eslint-disable-next-line
 
   const onAuthStateChanged = async (user) => {
     setUser(user);
-    if (user)
-      await api.getActiveUser(user.email).then((resp) => setActive(resp));
+    if (user) await api.getActiveUser(user.email).then((resp) => setActive(resp));
     if (init) setInit(false);
   };
-
-  // useEffect(() => {
-  //   const subscriber = firebase.firestore()
-  //   .collection("users")
-  //   .doc(user.email)
-  // })
 
   useEffect(() => {
     const subscriber = firebase.auth().onAuthStateChanged(onAuthStateChanged);
@@ -40,13 +32,7 @@ function App() {
   }, []);
 
   if (init) return null;
-  if (!user) {
-    return <LoginForm />;
-  }
-  return (
-    <>
-      <Navigator />
-    </>
-  );
+  if (!user) return <LoginForm />;
+  else return <Navigator />;
 }
 export default App;
