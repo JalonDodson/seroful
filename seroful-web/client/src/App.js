@@ -17,7 +17,7 @@ firebase.initializeApp(firebaseConfig);
 function App() {
   const [init, setInit] = useState(true);
   const [user, setUser] = useState();
-  const setActive = useSetRecoilState(userState);
+  const setActive = useSetRecoilState(userState);  // eslint-disable-next-line
 
   const onAuthStateChanged = async (user) => {
     setUser(user);
