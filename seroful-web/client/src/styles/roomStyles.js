@@ -12,4 +12,21 @@ export const roomStyles = makeStyles((theme) => ({
         textAlign: 'center',
         margin: 'auto'
     },
+    title: {},
+    locPart: {
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'centered'
+    },
+    logoutButt: {
+        marginTop: '5px',
+        boxShadow: '5px 2px 2px slategrey',
+        width: '25%'
+    },
+    buttCont: {
+        display: 'flex',
+        justifyContent: 'space-around',
+    },
+    remParts: {},
+
 }));

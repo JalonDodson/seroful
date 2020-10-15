@@ -17,8 +17,7 @@ firebase.initializeApp(firebaseConfig);
 function App() {
   const [init, setInit] = useState(true);
   const [user, setUser] = useState();
-  const setActive = useSetRecoilState(userState);
-  // eslint-disable-next-line
+  const setActive = useSetRecoilState(userState);  // eslint-disable-next-line
 
   const onAuthStateChanged = async (user) => {
     setUser(user);
@@ -27,11 +26,11 @@ function App() {
     if (init) setInit(false);
   };
 
-  // useEffect(() => {
-  //   const subscriber = firebase.firestore()
-  //   .collection("users")
-  //   .doc(user.email)
-  // })
+  useEffect(() => {
+    const subscriber = firebase.auth().onAuthStateChanged(onAuthStateChanged);
+    return subscriber;
+    // eslint-disable-next-line
+  }, []);
 
   useEffect(() => {
     const subscriber = firebase.auth().onAuthStateChanged(onAuthStateChanged);
@@ -40,13 +39,7 @@ function App() {
   }, []);
 
   if (init) return null;
-  if (!user) {
-    return <LoginForm />;
-  }
-  return (
-    <>
-      <Navigator />
-    </>
-  );
+  if (!user) return <LoginForm />;
+  else return <Navigator />;
 }
 export default App;

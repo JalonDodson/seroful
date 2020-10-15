@@ -1,20 +1,25 @@
 import React, { useState, useEffect, useRef } from "react";
 
-import Card from "@material-ui/core/Card";
-import CardActionArea from "@material-ui/core/CardActionArea";
-import CardActions from "@material-ui/core/CardActions";
-import CardContent from "@material-ui/core/CardContent";
-import MuiCardMedia from "@material-ui/core/CardMedia";
 import ButtonBase from "@material-ui/core/ButtonBase";
+import MicIcon from "@material-ui/icons/Mic";
+import MicOffIcon from "@material-ui/icons/MicOff";
+import VideocamIcon from "@material-ui/icons/Videocam";
+import VideocamOffIcon from "@material-ui/icons/VideocamOff";
 import Typography from "@material-ui/core/Typography";
 import { participantStyles } from "../../../styles/participantStyles";
+import { userState } from "../../../store/store";
+import { useRecoilValue } from "recoil";
 
 export const Participant = ({ participant }) => {
+  const styles = participantStyles();
   const [videoTracks, setVideoTracks] = useState([]);
   const [audioTracks, setAudioTracks] = useState([]);
   const videoRef = useRef();
   const audioRef = useRef();
-  const styles = participantStyles();
+  const [audTogg, setAudTogg] = useState(false);
+  const [vidTogg, setVidTogg] = useState(false);
+  const image = useRecoilValue(userState);
+  console.log(image);
 
   const trackpubsToTracks = (trackMap) =>
     Array.from(trackMap.values())
@@ -68,43 +73,67 @@ export const Participant = ({ participant }) => {
   }, [audioTracks]);
   return (
     <>
-      <Card>
-        <CardActionArea>
-          <CardContent>
-            <Typography gutterBottom variant="h5" component="h2">
-              {participant.identity}
-            </Typography>
-          </CardContent>
-          <MuiCardMedia
-          component='video'
-            alt={`${participant.identity}`}
-            height="140"
-            src={videoRef}
+      <div className={styles.container}>
+        <h4 className={styles.header}>{participant.identity}</h4>
+        {!vidTogg ? (
+          <video
+            controls
+            className={styles.partVid}
+            ref={videoRef}
             autoPlay={true}
-            
+            hidden={vidTogg}
           />
-          <MuiCardMedia
-            component="audio"
-            src={audioRef}
-            autoPlay={true}
-            muted={false}
-          />
-        </CardActionArea>
-        <CardActions>
-          <ButtonBase size="small" color="primary">
-            {/*TODO: conditionally render MuteIcon/MutedIcon*/}
+        ) : image.photoURL ? (
+          <img src={image.photoURL} />
+        ) : null}
+        <audio ref={audioRef} autoPlay={true} muted={audTogg} />
+        <div className={styles.butts}>
+          <ButtonBase
+            onClick={() => setAudTogg(!audTogg)}
+            className={styles.muteButt}
+          >
+            {audTogg === false ? <MicIcon /> : <MicOffIcon />}
           </ButtonBase>
-          <ButtonBase size="small" color="primary">
-            {/*TODO: conditionally render VideoIcon/VideoOffIcon*/}
+          <ButtonBase
+            onClick={() => setVidTogg(!vidTogg)}
+            className={styles.vidButt}
+          >
+            {!vidTogg ? <VideocamIcon /> : <VideocamOffIcon />}
           </ButtonBase>
-        </CardActions>
-      </Card>
+        </div>
+      </div>
     </>
   );
 };
 
-{/* <div className="participant">
-  <h4>{participant.identity}</h4>
-  <video ref={videoRef} autoPlay={true} />
-  <audio ref={audioRef} autoPlay={true} muted={false} />
-</div>; */}
+// <Card>
+//   <CardActionArea>
+//     <CardContent>
+//       <Typography gutterBottom variant="h5" component="h2">
+//         {participant.identity}
+//       </Typography>
+//     </CardContent>
+//     <MuiCardMedia
+//     component='video'
+//       alt={`${participant.identity}`}
+//       height="140"
+//       src={videoRef}
+//       autoPlay={true}
+
+//     />
+//     <MuiCardMedia
+//       component="audio"
+//       src={audioRef}
+//       autoPlay={true}
+//       muted={false}
+//     />
+//   </CardActionArea>
+//   <CardActions>
+//     <ButtonBase size="small" color="primary">
+//       {/*TODO: conditionally render MuteIcon/MutedIcon*/}
+//     </ButtonBase>
+//     <ButtonBase size="small" color="primary">
+//       {/*TODO: conditionally render VideoIcon/VideoOffIcon*/}
+//     </ButtonBase>
+//   </CardActions>
+// </Card>
