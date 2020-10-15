@@ -31,7 +31,7 @@ export const Navigator = () => {
 >>>>>>> d1cc2c766914fa750f3e9ce376422bdde0f266df
         <Route path="/profile" render={() => <Profile />} />
         <Route path="/friends" render={() => <Friends />} />
-        <Route path="/video-chat" render={() => <VideoChat />} />
+        <Route path="/video" render={() => <VideoChat />} />
         <Route path="/planner" render={() => <Planner />} />
         <Route path="/journal" render={() => <Journal />} />
         <Route path="/settings" render={() => <Settings />} />

@@ -9,7 +9,6 @@ import { PageDrawer } from "../../PageDrawer/PageDrawer";
 import * as api from "../../../util/api";
 import { homeStyles } from "../../../styles/homeStyles";
 import { TextField, Typography } from "@material-ui/core";
-import { VideoChat } from "../VideoStuff/VideoChat";
 
 export const Home = () => {
   const styles = homeStyles();
@@ -36,7 +35,6 @@ export const Home = () => {
         >
           Add Friend or Some Shit
         </Button>
-        <VideoChat />
         <PageDrawer />
       </div>
     </>

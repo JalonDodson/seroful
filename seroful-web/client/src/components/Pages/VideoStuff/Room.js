@@ -2,7 +2,11 @@ import React, { useState, useEffect } from "react";
 import Video from "twilio-video";
 import { Participant } from "./Participant";
 import * as api from "../../../util/api";
-export const Room = ({ roomName, token, handleLogout }) => {
+import { roomStyles } from "../../../styles/roomStyles";
+
+export const Room = ({ roomName, token, handleExit }) => {
+  const styles = roomStyles();
+
   const [room, setRoom] = useState(null);
   const [participants, setParticipants] = useState([]);
   const remoteParticipants = participants.map((part) => (
@@ -45,9 +49,9 @@ export const Room = ({ roomName, token, handleLogout }) => {
   }, [roomName, token]);
 
   return (
-    <div className="room">
+    <div className={styles.container}>
       <h4>Room: {roomName}</h4>
-      <button onClick={handleLogout}>Log out</button>
+      <button onClick={handleExit}>Log out</button>
       <div className="local-participant">
         {room ? (
           <Participant
