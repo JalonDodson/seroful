@@ -51,7 +51,7 @@ export const Profile = (props) => {
             </Avatar>
             <CardContent className={styles.content}>
               <Typography gutterBottom variant="h5" component="h2">
-                Example Display Name
+                {user.displayName}
               </Typography>
               <Typography variant="body2" color="textSecondary" component="p">
                 This is my profile page.
