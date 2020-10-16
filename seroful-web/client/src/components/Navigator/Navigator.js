@@ -23,12 +23,7 @@ export const Navigator = () => {
           exact
           path="/"
           render={() => (userNew ? <Splash /> : <Home />)}
-<<<<<<< HEAD
-  /> 
-        {/* // TODO: Make route for profile /users/(username or uid)/profile */}
-=======
         />
->>>>>>> d1cc2c766914fa750f3e9ce376422bdde0f266df
         <Route path="/profile" render={() => <Profile />} />
         <Route path="/friends" render={() => <Friends />} />
         <Route path="/video" render={() => <VideoChat />} />

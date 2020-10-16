@@ -233,16 +233,6 @@ export const PageDrawer = () => {
       >
         <DialogTitle id="requests-title">Friend Requests</DialogTitle>
         <DialogContent>
-<<<<<<< HEAD
-          {/*<DialogContentText>
-            {activeUser.friends.pending
-              ? 1 === activeUser.friends.pending.length
-                ? "You have one new friend request!"
-                : `You have ${activeUser.friends.pending.length} new friend requests!`
-              : "You don't have any new friend requests right now."}
-            </DialogContentText>*/}
-          {/*activeUser.friends.pending && (
-=======
           <DialogContentText>
             {activeUser.friends &&
               (activeUser.friends.pending === void 0
@@ -252,7 +242,6 @@ export const PageDrawer = () => {
                 : `You have ${activeUser.friends.pending.length} new friend requests!`)}
           </DialogContentText>
           {activeUser.friends && activeUser.friends.pending && (
->>>>>>> d1cc2c766914fa750f3e9ce376422bdde0f266df
             <List>
               {activeUser.friends.pending.map((x) => {
                 return (
@@ -295,7 +284,7 @@ export const PageDrawer = () => {
                 );
               })}
             </List>
-            )*/}
+            )}
         </DialogContent>
       </Dialog>
       <Dialog

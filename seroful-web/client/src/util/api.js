@@ -184,15 +184,6 @@ export const deleteRequest = async (deniedName, denierName) => {
             Authorization: `Bearer ${token}`,
           },
         }
-<<<<<<< HEAD
-      }).then(resp => resp.data);
-      return res;
-    } catch (err) {
-      console.log(err);
-    }
-    }
-
-=======
       )
       .then((resp) => resp.data);
     return res;
@@ -200,7 +191,6 @@ export const deleteRequest = async (deniedName, denierName) => {
     console.log(err);
   }
 };
->>>>>>> d1cc2c766914fa750f3e9ce376422bdde0f266df
 
 export const createEntry = async (entry) => {
   const token =
