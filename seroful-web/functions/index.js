@@ -116,7 +116,7 @@ app.get("/users", async (req, res) => {
         res.status(400).send(err);
       }
     } else {
-      res.status(403).send("Unauthorized!");
+      res.status(401).send("Unauthorized!");
     }
   }
 });
@@ -155,7 +155,7 @@ app.post("/users/photo/upload", uploadMiddleware, (req, res) => {
       return;
     }
   } else {
-    res.status(403).send("Unauthorized")
+    res.status(401).send("Unauthorized")
   }
 })
 
@@ -231,7 +231,7 @@ app.patch("/users", async (req, res) => {
       res.status(400).send("Request failed.");
     }
   } else {
-    res.status(403).send("Unauthorized.");
+    res.status(401).send("Unauthorized.");
   }
 });
 
@@ -255,7 +255,7 @@ app.patch("/users/journal/entries", async (req, res) => {
       res.status(400).send("Failed to update journal entries.");
     }
   } else {
-    res.status(403).send("Unauthorized.");
+    res.status(401).send("Unauthorized.");
   }
 });
 
@@ -279,7 +279,7 @@ app.get("/users/journal/entries", async (req, res) => {
       res.status(400).send("Error retrieving information.");
     }
   } else {
-    res.status(403).send("Unauthorized.");
+    res.status(401).send("Unauthorized.");
   }
 });
 
@@ -303,7 +303,7 @@ app.get("/users/planner/plans", async (req, res) => {
       res.status(400).send("Error retrieving information.");
     }
   } else {
-    res.status(403).send("Unauthorized");
+    res.status(401).send("Unauthorized");
   }
 });
 
@@ -332,7 +332,7 @@ app.patch("/users/planner/plans", async (req, res) => {
       res.status(400).send("Error retrieving information.");
     }
   } else {
-    res.status(403).send("Unauthorized");
+    res.status(401).send("Unauthorized");
   }
 });
 /*
@@ -433,7 +433,7 @@ app.post("/users/friends", async (req, res) => {
       }
     }
   } else {
-    res.status(403).send("Unauthorized!");
+    res.status(401).send("Unauthorized!");
   }
 });
 
@@ -484,11 +484,31 @@ app.post("/video", (req, res) => {
       }
     }
   } else {
-    res.status(403).send("Unauthorized");
+    res.status(401).send("Unauthorized");
   }
 });
 
-app.patch('/users/')
+app.get("/video", (req, res) => {
+  const user = req["currentUser"];
+
+  if (user) {
+    try {
+      client.video.rooms.list({ status: "in-progress", limit: 15 })
+      .then(rooms => {
+        const roomList = [];
+        rooms.forEach(r => roomList.push(r));
+        res.status(201).send(roomList)
+      })
+
+    } catch (e) {
+      console.log(e);
+      res.status(400).send("Error grabbing room lists.")
+    }
+  } else {
+    res.status(401).send("Unauthorized.");
+  }
+})
+
 
 //  DO NOT TOUCH THIS LINE
 exports.api = functions.https.onRequest(app);
