@@ -34,7 +34,7 @@ export const Profile = (props) => {
         <header className={styles.header}>
           <hr />
           <Typography variant="h3" className={styles.title}>
-            {user.displayName}'s Profile
+            Example
           </Typography>
           <hr />
         </header>

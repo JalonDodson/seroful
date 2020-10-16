@@ -144,7 +144,7 @@ export const PageDrawer = () => {
           </ListItem>
           <ListItem key="Friends">
             <ListItemIcon>
-              <Badge
+              {/*<Badge
                 badgeContent={
                   activeUser.friends
                     ? activeUser.friends.pending &&
@@ -154,7 +154,7 @@ export const PageDrawer = () => {
                 color="primary"
               >
                 <PeopleIcon />
-              </Badge>
+              </Badge>*/}
             </ListItemIcon>
             <ButtonBase
               aria-controls="friends-menu"
@@ -280,7 +280,7 @@ export const PageDrawer = () => {
                 );
               })}
             </List>
-          )}
+            )}
         </DialogContent>
       </Dialog>
       <Dialog

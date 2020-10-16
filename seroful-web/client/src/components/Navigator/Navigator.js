@@ -19,7 +19,7 @@ export const Navigator = () => {
   return (
     <BrowserRouter>
       <Switch>
-        <Route
+       <Route
           exact
           path="/"
           render={() => (userNew ? <Splash /> : <Home />)}
