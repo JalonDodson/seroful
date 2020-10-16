@@ -20,12 +20,11 @@ import {
   DialogTitle,
   DialogContent,
   DialogContentText,
-  // Link,
 } from "@material-ui/core/";
 import Autocomplete from "@material-ui/lab/Autocomplete";
 import PersonAddIcon from "@material-ui/icons/PersonAdd";
 import DeleteIcon from "@material-ui/icons/Delete";
-import VideocamIcon from '@material-ui/icons/Videocam';
+import VideocamIcon from "@material-ui/icons/Videocam";
 
 import firebase from "firebase/app";
 import "firebase/auth";
@@ -45,13 +44,13 @@ import EmojiEmotionsIcon from "@material-ui/icons/EmojiEmotions";
 import * as api from "../../util/api";
 
 import { userState, videoToken, roomData } from "../../store/store";
-import { useRecoilValue, useRecoilState } from "recoil";
+import { useRecoilValue, useRecoilState, useSetRecoilState } from "recoil";
 
 import { drawerStyles } from "../../styles/drawerStyles";
 
 export const PageDrawer = () => {
   const activeUser = useRecoilValue(userState);
-  const [token, setToken] = useRecoilState(videoToken);
+  const setToken = useSetRecoilState(videoToken);
   const styles = drawerStyles();
 
   const [anchor, setAnchor] = useState(null);
@@ -65,8 +64,8 @@ export const PageDrawer = () => {
   const [joinReq, setJoinReq] = useState(false);
   const [createReq, setCreateReq] = useState(false);
   const [viewRooms, setViewReq] = useState(false);
-  const [joinUser, setJoinUser] = useState('');
-  const [createUser, setCreateUser] = useState('');
+  const [joinUser, setJoinUser] = useState("");
+  const [createUser, setCreateUser] = useState("");
   const [newRoomData, setData] = useRecoilState(roomData);
 
   const loading = searchOpen && options.length === 0;
@@ -76,14 +75,11 @@ export const PageDrawer = () => {
   const videoMenu = (ev) => setVideoAnchor(ev.currentTarget);
   const videoMenuClose = () => setVideoAnchor(null);
 
-  const createRoom = useCallback(
-    async () => {
-      console.log(createUser, roomData);
-      const data = await api.createRoom(createUser, roomData);
-      data && setToken(data.token);
-    },
-    [createUser, roomData]
-  );
+  const createRoom = useCallback(async () => {
+    console.log(createUser, roomData);
+    const data = await api.createRoom(createUser, roomData);
+    data && setToken(data.token);
+  }, [createUser, roomData]);
 
   const connectToRoom = async () => {
     console.log(joinUser, roomData);
@@ -387,16 +383,29 @@ export const PageDrawer = () => {
             Please enter the name of the Room you would like to join, as well as
             the Screen Name by which you would like to be addressed
             <form>
-            <div className={styles.inputCont}>
-              <TextField value={newRoomData} onChange={(ev) => setData(ev.target.value)} label="Existing Conference Room" variant="outlined" />
-              <TextField value={joinUser} onChange={(ev) => setJoinUser(ev.target.value)} label="Desired Username" variant="outlined" />
-            </div>
-            <Link to="/video" onClick={() => {
-              connectToRoom();
-            }}>
-              <EmojiEmotionsIcon />
-              Join Room
-            </Link>
+              <div className={styles.inputCont}>
+                <TextField
+                  value={newRoomData}
+                  onChange={(ev) => setData(ev.target.value)}
+                  label="Existing Conference Room"
+                  variant="outlined"
+                />
+                <TextField
+                  value={joinUser}
+                  onChange={(ev) => setJoinUser(ev.target.value)}
+                  label="Desired Username"
+                  variant="outlined"
+                />
+              </div>
+              <Link
+                to="/video"
+                onClick={() => {
+                  connectToRoom();
+                }}
+              >
+                <EmojiEmotionsIcon />
+                Join Room
+              </Link>
             </form>
           </DialogContentText>
         </DialogContent>
@@ -413,36 +422,59 @@ export const PageDrawer = () => {
             Please enter the name of the Room you would like to create, as well
             as the Screen Name by which you would like to be addressed
             <form>
-            <div className={styles.inputCont}>
-              <TextField value={newRoomData} onChange={(ev) => setData(ev.target.value)} label="Create Conference Room" variant="outlined" />
-              <TextField value={createUser} onChange={(ev) => setCreateUser(ev.target.value)} label="Desired Username" variant="outlined" />
-            </div>
-            <Link to="/video" onClick={() => {
-              createRoom();
-            }}>
-              <EmojiEmotionsIcon />
-              Create Room
-            </Link>
+              <div className={styles.inputCont}>
+                <TextField
+                  value={newRoomData}
+                  onChange={(ev) => setData(ev.target.value)}
+                  label="Create Conference Room"
+                  variant="outlined"
+                />
+                <TextField
+                  value={createUser}
+                  onChange={(ev) => setCreateUser(ev.target.value)}
+                  label="Desired Username"
+                  variant="outlined"
+                />
+              </div>
+              <Link
+                to="/video"
+                onClick={() => {
+                  createRoom();
+                }}
+              >
+                <EmojiEmotionsIcon />
+                Create Room
+              </Link>
             </form>
           </DialogContentText>
         </DialogContent>
       </Dialog>
-      <Dialog open={viewRooms} onClose={() => setViewReq(false)} aria-labelledby="view-modal" aria-describedby="view-video-rooms">
+      <Dialog
+        open={viewRooms}
+        onClose={() => setViewReq(false)}
+        aria-labelledby="view-modal"
+        aria-describedby="view-video-rooms"
+      >
         <DialogContent>
           <DialogContentText>
             <h4 className={styles.activeHeader}>List of Active Video Rooms</h4>
           </DialogContentText>
-          // TODO: Map through array of rooms obtained via back-end, list them here
-          // TODO: Add a 'join' button that brings up the 'Join Room' dialog with the user's username and the video name as both of the values
+          // TODO: Map through array of rooms obtained via back-end, list them
+          here // TODO: Add a 'join' button that brings up the 'Join Room'
+          dialog with the user's username and the video name as both of the
+          values
           <List>
             <ListItem>
               <ListItemIcon>
                 <VideocamIcon />
               </ListItemIcon>
               <ListItemText>
-              <strong>Room Name:</strong> <i>Daddy Dick</i><br />
-              <strong>Created By:</strong> <i>Mommy Vagene</i><br />
-              <strong> Active Since:</strong> <i>Grandma</i><br />
+                <strong>Room Name:</strong> <i>Daddy Dick</i>
+                <br />
+                <strong>Created By:</strong> <i>Mommy Vagene</i>
+                <br />
+                <strong> Active Since:</strong> <i>Grandma</i>
+                <br />
               </ListItemText>
             </ListItem>
           </List>
@@ -453,9 +485,12 @@ export const PageDrawer = () => {
                 <VideocamIcon />
               </ListItemIcon>
               <ListItemText>
-                <strong>Room Name:</strong> <i>Booby Face</i><br />
-                <strong>Created By:</strong> <i>Clitter Blitter</i><br />
-                <strong>Active Since:</strong> <i>Mom</i><br />
+                <strong>Room Name:</strong> <i>Booby Face</i>
+                <br />
+                <strong>Created By:</strong> <i>Clitter Blitter</i>
+                <br />
+                <strong>Active Since:</strong> <i>Mom</i>
+                <br />
               </ListItemText>
             </ListItem>
           </List>
