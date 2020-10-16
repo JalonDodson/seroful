@@ -25,8 +25,8 @@ Tell us about your team, who was involved, what role did they fulfill and what d
 |Zach Baca          |`QA`            |Fill me out...            |
 |Jalon Dodson          |`Product Owner`| The initial project/brainstorming, Trello board, numerous components, Firebase Auth/Firebase connectivity, general project maintenance |
 |Jalon Dodson          |`Scrum Master`| Specialized in team organization, getting the Trello & retrospective set up, maintained team organization and responsiveness, stayed on top of tasks and any arising issues. |
-|Chip Pickering          |`Dev`| Fill me out... |
-|Waleed Saleh          |`Dev`| Fill me out... |
+|Chip Pickering          |`Dev, QA`| Focused on Implementation of new Technologies, Construction && Styling of various components, Bug Hunter Extraordinaire, Rubber Ducking 101 |
+|Waleed Saleh          |`Dev`| Excommunicated |
 |Zach Baca          |`Dev`| Fill me out... |
 
 ### PROJECT NOTES (for devs) ###
