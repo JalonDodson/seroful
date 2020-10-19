@@ -142,8 +142,8 @@ export const PageDrawer = () => {
           setMessages(
             (x) =>
               (x = {
-                sent: data.sent && data.sent,
-                received: data.received && data.received,
+                sent: data.sent ? data.sent : [],
+                received: data.received ? data.received : [],
               })
           );
         },
