@@ -80,7 +80,7 @@ export const PageDrawer = () => {
   const [joinUser, setJoinUser] = useState("");
   const [createUser, setCreateUser] = useState("");
   const [newRoomData, setData] = useRecoilState(roomData);
-  const [messages, setMessages] = useState(null);
+  const [messages, setMessages] = useState({ sent: [], received: []});
   const [messageBox, setMessageBox] = useState(false);
   // const [chatBox, setChatBox] = useState(null);
   const [newMessage, setNewMessage] = useState(null);
