@@ -140,7 +140,11 @@ export const PageDrawer = () => {
         (docSnapshot) => {
           const data = docSnapshot.data();
           setMessages(
-            (x) => (x = { sent: data.sent, received: data.received })
+            (x) =>
+              (x = {
+                sent: data.sent && data.sent,
+                received: data.received && data.received,
+              })
           );
         },
         (e) => console.log(e)
@@ -577,41 +581,41 @@ export const PageDrawer = () => {
               {messages &&
                 messagesArray.map((x, i) => {
                   return x && x.sender !== activeUser.username ? (
-                      <Fragment key={i}>
-                        <ListItem>
-                          <ListItemAvatar>
-                            {(x.photoURL !== {}) | "" ? (
-                              <Avatar alt={`${x.username}`} src={x.photoURL} />
-                            ) : (
-                              <Avatar>{x.sender[0]}</Avatar>
-                            )}
-                          </ListItemAvatar>
-                          <ListItemText
-                            primary={x.sender}
-                            secondary={x.message && x.message}
-                          />
-                          <span style={{ float: "right" }}>
-                            <IconButton
-                              onClick={() =>
-                                setNewMessage(
-                                  (y) =>
-                                    (y = {
-                                      bool: true,
-                                      recipient: x.sender,
-                                      sender: x.recipient,
-                                      targetMessage: x.message,
-                                    })
-                                )
-                              }
-                            >
-                              <ReplyIcon />
-                            </IconButton>
-                            <IconButton>
-                              <DeleteIcon />
-                            </IconButton>
-                          </span>
-                        </ListItem>
-                      </Fragment>
+                    <Fragment key={i}>
+                      <ListItem>
+                        <ListItemAvatar>
+                          {(x.photoURL !== {}) | "" ? (
+                            <Avatar alt={`${x.username}`} src={x.photoURL} />
+                          ) : (
+                            <Avatar>{x.sender[0]}</Avatar>
+                          )}
+                        </ListItemAvatar>
+                        <ListItemText
+                          primary={x.sender}
+                          secondary={x.message && x.message}
+                        />
+                        <span style={{ float: "right" }}>
+                          <IconButton
+                            onClick={() =>
+                              setNewMessage(
+                                (y) =>
+                                  (y = {
+                                    bool: true,
+                                    recipient: x.sender,
+                                    sender: x.recipient,
+                                    targetMessage: x.message,
+                                  })
+                              )
+                            }
+                          >
+                            <ReplyIcon />
+                          </IconButton>
+                          <IconButton>
+                            <DeleteIcon />
+                          </IconButton>
+                        </span>
+                      </ListItem>
+                    </Fragment>
                   ) : null;
                 })}
             </List>
