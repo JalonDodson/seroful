@@ -21,9 +21,12 @@ const rows = [
   { id: 1, goalItem: "Example Goal", goalDescription: "Example Description" },
 ];
 
+
+
 export const Profile = (props) => {
   const styles = profileStyles();
   const user = useRecoilValue(userState);
+  console.log(user.plans);
   return (
     <>
       <Helmet>
@@ -34,7 +37,7 @@ export const Profile = (props) => {
         <header className={styles.header}>
           <hr />
           <Typography variant="h3" className={styles.title}>
-            Example
+          {`${user.displayName}'s Profile Page`}
           </Typography>
           <hr />
         </header>
@@ -54,7 +57,7 @@ export const Profile = (props) => {
                 {user.displayName}
               </Typography>
               <Typography variant="body2" color="textSecondary" component="p">
-                This is my profile page.
+                {`${user.displayName}'s Profile Page`}
               </Typography>
             </CardContent>
           </CardActionArea>
