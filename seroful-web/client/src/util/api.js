@@ -7,7 +7,7 @@ import "firebase/auth";
   When built, only /path should be used in the axios requests.
 */
 // axios stuff
-const instance = axios.create({ baseURL: "http://localhost:4000"});
+const instance = axios.create({ baseURL: "http://localhost:4000" });
 
 export const getActiveUser = async (email) => {
   const token =
@@ -47,7 +47,7 @@ export const updateUser = async (userData) => {
     firebase.auth().currentUser &&
     (await firebase.auth().currentUser.getIdToken());
 
-    const email =
+  const email =
     firebase.auth().currentUser && (await firebase.auth().currentUser.email);
 
   try {
@@ -75,22 +75,24 @@ export const updateUser = async (userData) => {
 
 export const uploadPhoto = async (photo) => {
   const token =
-  firebase.auth().currentUser &&
-  (await firebase.auth().currentUser.getIdToken());
+    firebase.auth().currentUser &&
+    (await firebase.auth().currentUser.getIdToken());
 
-try {
-  const res = await instance.post("/users/photo/upload", photo, {
-    headers: {
-      Authorization: `Bearer ${token}`,
-      "Content-Type": `multipart/form-data; boundary=${photo._boundary}`
-    }
-  }).then(res => res.data);
-  console.log(res);
-  return res;
-} catch (err) {
-  console.log(err);
-}
-}
+  try {
+    const res = await instance
+      .post("/users/photo/upload", photo, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": `multipart/form-data; boundary=${photo._boundary}`,
+        },
+      })
+      .then((res) => res.data);
+    console.log(res);
+    return res;
+  } catch (err) {
+    console.log(err);
+  }
+};
 
 export const getUserList = async () => {
   try {
@@ -101,6 +103,23 @@ export const getUserList = async () => {
     return res;
   } catch (err) {
     console.log(err);
+  }
+};
+
+export const getUser = async (target) => {
+  const token =
+    firebase.auth().currentUser &&
+    (await firebase.auth().currentUser.getIdToken());
+
+  try {
+    const res = await instance.get(`/users?username=${target}`, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    console.log(res);
+    return res;
+  } catch (err) {
+    console.log(err);
+    return err;
   }
 };
 
@@ -189,6 +208,83 @@ export const deleteRequest = async (deniedName, denierName) => {
     return res;
   } catch (err) {
     console.log(err);
+  }
+};
+
+export const sendMessage = async (sender, recipient, message) => {
+  const token =
+    firebase.auth().currentUser &&
+    (await firebase.auth().currentUser.getIdToken());
+  const email =
+    firebase.auth().currentUser && (await firebase.auth().currentUser.email);
+
+  try {
+    const res = await instance
+      .post(
+        `/users/messages?email=${email}`,
+        {
+          sender: sender,
+          recipient: recipient,
+          message: message,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      )
+      .then((resp) => resp.data);
+    console.log(res);
+    return res;
+  } catch (err) {
+    console.log(err);
+    return err;
+  }
+};
+
+export const getAllMessages = async () => {
+  const token =
+    firebase.auth().currentUser &&
+    (await firebase.auth().currentUser.getIdToken());
+  const email =
+    firebase.auth().currentUser && (await firebase.auth().currentUser.email);
+
+  try {
+    const res = await instance
+      .get(`/users/messages?email=${email}&grabAll=true`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((resp) => resp.data);
+    console.log(res);
+    return res;
+  } catch (err) {
+    console.log(err);
+    return err;
+  }
+};
+
+export const getMessages = async (target) => {
+  const token =
+    firebase.auth().currentUser &&
+    (await firebase.auth().currentUser.getIdToken());
+  const email =
+    firebase.auth().currentUser && (await firebase.auth().currentUser.email);
+
+  try {
+    const res = await instance
+      .get(`/users/messages?email=${email}&target=${target}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((resp) => resp.data);
+    console.log(res);
+    return res;
+  } catch (err) {
+    console.log(err);
+    return err;
   }
 };
 
