@@ -43,7 +43,7 @@ export const drawerStyles = makeStyles((theme) => ({
     right: "10%",
   },
   buttonGroup: {
-    marginLeft: "-15%",
+    marginLeft: "15%",
   },
   addButton: {
     textTransform: "capitalize",
@@ -67,23 +67,17 @@ export const drawerStyles = makeStyles((theme) => ({
     position: "absolute",
     bottom: 0,
     paddingBottom: 5,
-    width: "25%",
+    margin: "0 auto",
+    width: "20%",
   },
   paperClosed: {
     textAlign: "center",
     position: "absolute",
     bottom: 0,
+    left: "8%",
     paddingBottom: 5,
-    width: "25%",
-  },
-  chatPaper: {
-    textAlign: "center",
-    position: "absolute",
-    bottom: 0,
-    paddingBottom: 5,
-    width: "25%",
-    left: "25%",
-    cursor: "pointer",
+    margin: "0 auto",
+    width: "15%",
   },
   list: {
     marginBottom: theme.spacing(2),

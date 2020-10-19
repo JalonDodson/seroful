@@ -12,32 +12,23 @@ export const profileStyles = makeStyles((theme) => ({
       textAlign: 'center',
       margin: 'auto'
   },
-  root: {
-    maxWidth: 345,
-    height: 400,
-  },
-  // avatar: {
-  //   display: 'flex',
-  //   marginLeft: '150px',
-  // },
-  content: {
+  card: {
     display: 'flex',
-    marginLeft: '100px',
-  },
-  purple: {
-    display: 'flex',
-    marginLeft: '150px',
-    // backgroundColor: deepPurple[500],
-  },
-  main: {
-    marginTop: '30%',
-    display: "flex",
-    justifyContent: "baseline",
+    justifyContent: 'center',
+    flexDirection: 'row',
+    height: '60%',
+    width: '45%',
+    marginLeft: '20%',
   },
   avatar: {
-    width: 100,
-    height: 100,
-    top: "5vh",
-    left: "20vw",
+    width: theme.spacing(7),
+    height: theme.spacing(7),
+    margin: 'auto'
+    // top: "5vh",
+    // left: "20vw",
+  },
+  content: {
+    display: 'flex',
+    flexDirection: 'column',
   },
 }));
