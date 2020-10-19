@@ -131,22 +131,22 @@ export const PageDrawer = () => {
     if (!searchOpen) setOptions([]);
   }, [searchOpen]);
 
-  useEffect(() => {
-    const subscriber = firebase
-      .firestore()
-      .collection("messages")
-      .doc(firebase.auth().currentUser.email)
-      .onSnapshot(
-        (docSnapshot) => {
-          const data = docSnapshot.data();
-          setMessages(
-            (x) => (x = { sent: data.sent, received: data.received })
-          );
-        },
-        (e) => console.log(e)
-      );
-    return () => subscriber();
-  }, []);
+  // useEffect(() => {
+  //   const subscriber = firebase
+  //     .firestore()
+  //     .collection("messages")
+  //     .doc(firebase.auth().currentUser.email)
+  //     .onSnapshot(
+  //       (docSnapshot) => {
+  //         const data = docSnapshot.data();
+  //         setMessages(
+  //           (x) => (x = { sent: data.sent, received: data.received })
+  //         );
+  //       },
+  //       (e) => console.log(e)
+  //     );
+  //   return () => subscriber();
+  // }, []);
 
   useEffect(() => {
     console.log(messages);
