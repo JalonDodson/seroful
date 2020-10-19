@@ -80,7 +80,7 @@ export const PageDrawer = () => {
   const [joinUser, setJoinUser] = useState("");
   const [createUser, setCreateUser] = useState("");
   const [newRoomData, setData] = useRecoilState(roomData);
-  const [messages, setMessages] = useState({ sent: [], received: []});
+  const [messages, setMessages] = useState(null);
   const [messageBox, setMessageBox] = useState(false);
   // const [chatBox, setChatBox] = useState(null);
   const [newMessage, setNewMessage] = useState(null);
@@ -142,8 +142,8 @@ export const PageDrawer = () => {
           setMessages(
             (x) =>
               (x = {
-                sent: data.sent ? data.sent : [],
-                received: data.received ? data.received : [],
+                sent: data.sent !== undefined ? data.sent : [],
+                received: data.received !== undefined ? data.received : [],
               })
           );
         },
