@@ -65,11 +65,7 @@ const videoToken = (id, room) => {
   if (typeof room !== "undefined") videoGrant = new VideoGrant({ room });
   else videoGrant = new VideoGrant();
 
-  const token = new AccessToken(
-    accountSid,
-    apiKey,
-    apiSecret
-  );
+  const token = new AccessToken(accountSid, apiKey, apiSecret);
 
   token.addGrant(videoGrant);
   token.identity = id;
@@ -135,29 +131,29 @@ app.post("/users/photo/upload", uploadMiddleware, (req, res) => {
       const blob = storage.file(req.files[0].originalname);
       const blobStream = blob.createWriteStream({
         metadata: {
-          contentType: req.files[0].mimetype
-        }
-      })
-      blobStream.on("error", err => next(err));
+          contentType: req.files[0].mimetype,
+        },
+      });
+      blobStream.on("error", (err) => next(err));
       blobStream.on("finish", () => {
         const photoUrl = `https://firebasestorage.googleapis.com/v0/b/${
           storage.name
         }/o/${encodeURI(blob.name)}?alt=media`;
-        res.status(200).send({ fileName: req.files[0].originalname, fileLocation: photoUrl })
-      })
+        res.status(200).send({
+          fileName: req.files[0].originalname,
+          fileLocation: photoUrl,
+        });
+      });
       blobStream.end(req.files[0].buffer);
-
     } catch (err) {
       console.log(err);
-      res.status(400).send(
-        `Failed to upload the image: ${err}`
-      )
+      res.status(400).send(`Failed to upload the image: ${err}`);
       return;
     }
   } else {
-    res.status(401).send("Unauthorized")
+    res.status(401).send("Unauthorized");
   }
-})
+});
 
 app.post("/users", async (req, res) => {
   try {
@@ -339,6 +335,7 @@ app.patch("/users/planner/plans", async (req, res) => {
  */
 app.post("/users/friends", async (req, res) => {
   const isPending = req.query.isPending === "true";
+  const email = req.query.email;
   const user = req["currentUser"];
   if (user) {
     if (isPending) {
@@ -351,12 +348,10 @@ app.post("/users/friends", async (req, res) => {
             query.docs.forEach((doc) => {
               const docRef = db.collection("users").doc(doc.id);
               docRef.update({
-                friends: {
-                  pending: admin.firestore.FieldValue.arrayUnion({
-                    username: req.body.requestee,
-                    requestDate: Date.now(),
-                  }),
-                },
+                "friends.pending": admin.firestore.FieldValue.arrayUnion({
+                  username: req.body.requestee,
+                  requestDate: Date.now(),
+                }),
               });
             });
 
@@ -366,12 +361,10 @@ app.post("/users/friends", async (req, res) => {
           .collection("users")
           .doc(req.query.email)
           .update({
-            friends: {
-              sent: admin.firestore.FieldValue.arrayUnion({
-                username: req.body.username,
-                requestDate: Date.now(),
-              }),
-            },
+            "friends.sent": admin.firestore.FieldValue.arrayUnion({
+              username: req.body.username,
+              requestDate: Date.now(),
+            }),
           });
         res.status(201).send("Successfully sent friend request.");
       } catch (err) {
@@ -381,51 +374,71 @@ app.post("/users/friends", async (req, res) => {
       }
     } else {
       try {
-        db.collection("users")
+        let accepteeData;
+        await db
+          .collection("users")
+          .doc(email)
+          .get()
+          .then((snapshot) => {
+            accepteeData = snapshot.data();
+          });
+
+        let addedData;
+        await db
+          .collection("users")
+          .where("username", "==", req.body.username)
+          .get()
+          .then((querySnapshot) => {
+            querySnapshot.docs.forEach((x) => (addedData = x.data()));
+          });
+
+        const accepteeRef = db.collection("users").doc(email);
+        const accepteeBatch = db.batch();
+        accepteeBatch.update(accepteeRef, {
+          "friends.current": admin.firestore.FieldValue.arrayUnion({
+            username: req.body.acceptee,
+            photoURL: accepteeData.photoURL,
+            displayName: accepteeData.displayName,
+            friendSince: Date.now(),
+          }),
+        });
+        accepteeBatch.update(accepteeRef, {
+          "friends.pending": admin.firestore.FieldValue.arrayRemove(
+            accepteeData.friends.pending.find(
+              (x) => (x.username = addedData.username)
+            )
+          ),
+        });
+        accepteeBatch.commit();
+
+        await db
+          .collection("users")
           .where("username", "==", req.body.username)
           .get()
           .then((query) => {
             query.docs.forEach((doc) => {
               const docRef = db.collection("users").doc(doc.id);
-              docRef.update({
-                friends: {
-                  pending: admin.firestore.FieldValue.arrayRemove({
-                    username: req.body.acceptee,
-                  }),
-                  current: admin.firestore.FieldValue.arrayUnion({
-                    username: req.body.acceptee,
-                    friendSince: Date.now(),
-                  }),
-                },
+              const addedBatch = db.batch();
+              addedBatch.update(docRef, {
+                "friends.current": admin.firestore.FieldValue.arrayUnion({
+                  username: req.body.acceptee,
+                  photoURL: addedData.photoURL,
+                  displayName: addedData.displayName,
+                  friendSince: Date.now(),
+                }),
               });
+              addedBatch.update(docRef, {
+                "friends.sent": admin.firestore.FieldValue.arrayRemove(
+                  addedData.friends.sent.find(
+                    (x) => (x.username = accepteeData.username)
+                  )
+                ),
+              });
+              addedBatch.commit();
             });
+          });
 
-            return null;
-          })
-          .catch((err) => {
-            logMe.log(err);
-            console.log(err);
-            res.status(400).send("Error grabbing video room.");
-          });
-        await db
-          .collection("users")
-          .doc(req.query.email)
-          .update({
-            friends: {
-              sent: admin.firestore.FieldValue.arrayRemove({
-                username: req.body.username,
-                requested: Date.now(),
-              }),
-              current: admin.firestore.FieldValue.arrayUnion({
-                username: req.body.username,
-                friendSince: Date.now(),
-              }),
-            },
-          })
-          .then(() => {
-            res.status(201).send("Friend successfully added.");
-            return null;
-          });
+        res.status(201).send("Successfully added user.");
       } catch (err) {
         logMe.log(err);
         console.log(err);
@@ -437,8 +450,75 @@ app.post("/users/friends", async (req, res) => {
   }
 });
 
-app.post("/video", (req, res) => {
-  const newConnection = req.query.newConnection === "true"
+app.post("/users/messages", async (req, res) => {
+  const user = req["currentUser"];
+  const sender = req.body.sender;
+  const recipient = req.body.recipient;
+  const message = req.body.message;
+  const email = req.query.email;
+
+  if (user) {
+    try {
+      let recipientData;
+      await db
+        .collection("users")
+        .where("username", "==", recipient)
+        .get()
+        .then((querySnapshot) => {
+          querySnapshot.docs.forEach((x) => (recipientData = x.data()));
+        });
+        console.log(recipient);
+      const senderData = await db.collection("messages").doc(email);
+      senderData.update({
+        sent: admin.firestore.FieldValue.arrayUnion({
+          message: message,
+          recipient: recipient,
+          sender: sender,
+          photoURL: recipientData.photoURL,
+          sentAt: Date.now(),
+        }),
+      });
+      console.log(senderData, "this is the sender data")
+      console.log(recipientData, "this is the recipient data")
+
+      const recipientUpdate =
+        recipientData &&
+        (await db.collection("messages").doc(recipientData.email));
+      recipientUpdate.update({
+        received: admin.firestore.FieldValue.arrayUnion({
+          message: message,
+          recipient: recipient,
+          sender: sender,
+          photoURL: senderData.photoURL,
+          sentAt: Date.now(),
+        }),
+      });
+      res.status(201).send("Successfully sent message.");
+    } catch (e) {
+      console.log(e);
+      res.status(400).send("Unable to send message.");
+    }
+  } else {
+    res.status(401).send("Unauthorized.");
+  }
+});
+
+// .collection("users")
+// .where("username", "==", req.body.username)
+// .get()
+// .then((query) => {
+//   query.docs.forEach((doc) => {
+//     const docRef = db.collection("users").doc(doc.id);
+//     docRef.update({
+//       "friends.pending": admin.firestore.FieldValue.arrayUnion({
+//         username: req.body.requestee,
+//         requestDate: Date.now(),
+//       }),
+//     });
+//   });
+
+app.post("/video", async (req, res) => {
+  const newConnection = req.query.newConnection === "true";
   const user = req["currentUser"];
   if (user) {
     if (newConnection) {
@@ -460,9 +540,7 @@ app.post("/video", (req, res) => {
           })
           .then((room) => {
             console.log(room);
-            const token = videoToken(
-              req.body.identity,
-              req.body.roomName);
+            const token = videoToken(req.body.identity, req.body.roomName);
             console.log(token);
             res.contentType("application/json");
             res.status(201).send(
@@ -488,27 +566,26 @@ app.post("/video", (req, res) => {
   }
 });
 
-app.get("/video", (req, res) => {
+app.get("/video", async (req, res) => {
   const user = req["currentUser"];
 
   if (user) {
     try {
-      client.video.rooms.list({ status: "in-progress", limit: 15 })
-      .then(rooms => {
-        const roomList = [];
-        rooms.forEach(r => roomList.push(r));
-        res.status(201).send(roomList)
-      })
-
+      client.video.rooms
+        .list({ status: "in-progress", limit: 15 })
+        .then((rooms) => {
+          const roomList = [];
+          rooms.forEach((r) => roomList.push(r));
+          res.status(201).send(roomList);
+        });
     } catch (e) {
       console.log(e);
-      res.status(400).send("Error grabbing room lists.")
+      res.status(400).send("Error grabbing room lists.");
     }
   } else {
     res.status(401).send("Unauthorized.");
   }
-})
-
+});
 
 //  DO NOT TOUCH THIS LINE
 exports.api = functions.https.onRequest(app);

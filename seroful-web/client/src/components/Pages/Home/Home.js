@@ -27,14 +27,15 @@ export const Home = () => {
           </Typography>
           <hr />
         </header>
-        <TextField inputRef={inputRef} label="Add Friend Test Shit" />
+        <TextField inputRef={inputRef} label="Send Test Message" />
         <Button
           onClick={() => {
-            api.addFriend(inputRef.current.value, activeUser.username);
+            api.sendMessage(activeUser.username, "jd99", inputRef.current.value);
           }}
         >
           Add Friend or Some Shit
         </Button>
+        <Button onClick={() => api.getAllMessages()}>Get All Messages Test</Button>
         <PageDrawer />
       </div>
     </>

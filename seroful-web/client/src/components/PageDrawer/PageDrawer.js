@@ -1,4 +1,10 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, {
+  useState,
+  useEffect,
+  useCallback,
+  Fragment,
+  useRef,
+} from "react";
 import { Link } from "react-router-dom";
 import {
   TextField,
@@ -20,6 +26,10 @@ import {
   DialogTitle,
   DialogContent,
   DialogContentText,
+  CssBaseline,
+  Paper,
+  ListItemAvatar,
+  Avatar,
 } from "@material-ui/core/";
 import Autocomplete from "@material-ui/lab/Autocomplete";
 import PersonAddIcon from "@material-ui/icons/PersonAdd";
@@ -40,6 +50,9 @@ import AssignmentIcon from "@material-ui/icons/Assignment";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import VideoCallIcon from "@material-ui/icons/VideoCall";
 import EmojiEmotionsIcon from "@material-ui/icons/EmojiEmotions";
+import ReplyIcon from "@material-ui/icons/Reply";
+import SendIcon from "@material-ui/icons/Send";
+import CloseIcon from "@material-ui/icons/Close";
 
 import * as api from "../../util/api";
 
@@ -67,7 +80,10 @@ export const PageDrawer = () => {
   const [joinUser, setJoinUser] = useState("");
   const [createUser, setCreateUser] = useState("");
   const [newRoomData, setData] = useRecoilState(roomData);
-
+  const [messages, setMessages] = useState(null);
+  const [messageBox, setMessageBox] = useState(false);
+  // const [chatBox, setChatBox] = useState(null);
+  const [newMessage, setNewMessage] = useState(null);
   const loading = searchOpen && options.length === 0;
 
   const friendsMenu = (ev) => setAnchor(ev.currentTarget);
@@ -115,6 +131,38 @@ export const PageDrawer = () => {
     if (!searchOpen) setOptions([]);
   }, [searchOpen]);
 
+  useEffect(() => {
+    const subscriber = firebase
+      .firestore()
+      .collection("messages")
+      .doc(firebase.auth().currentUser.email)
+      .onSnapshot(
+        (docSnapshot) => {
+          const data = docSnapshot.data();
+          setMessages(
+            (x) => (x = { sent: data.sent, received: data.received })
+          );
+        },
+        (e) => console.log(e)
+      );
+    return () => subscriber();
+  }, []);
+
+  useEffect(() => {
+    console.log(messages);
+  }, [messages]);
+  const messagesArray = messages && [messages.sent, messages.received].flat();
+  const inputMsgRef = useRef();
+  // const [chatBool, setChatBool] = useState(false);
+  // const chatTab = (sender, photo, message, recipient) => {
+  //   return (
+  //     <>
+  //       <Paper onClick={() => setChatBool(!chatBool)} className={!chatBool ? styles.chatPaper : styles.chatPaperClosed}>
+
+  //       </Paper>
+  //     </>
+  //   );
+  // };
   return (
     <>
       <Drawer
@@ -144,9 +192,9 @@ export const PageDrawer = () => {
           </ListItem>
           <ListItem key="Friends">
             <ListItemIcon>
-              {/*<Badge
+              <Badge
                 badgeContent={
-                  activeUser.friends
+                  activeUser && activeUser.friends
                     ? activeUser.friends.pending &&
                       activeUser.friends.pending.length
                     : 0
@@ -154,7 +202,7 @@ export const PageDrawer = () => {
                 color="primary"
               >
                 <PeopleIcon />
-              </Badge>*/}
+              </Badge>
             </ListItemIcon>
             <ButtonBase
               aria-controls="friends-menu"
@@ -216,9 +264,13 @@ export const PageDrawer = () => {
         open={Boolean(anchor)}
         onClose={friendsClose}
       >
-        <MenuItem onClick={null}>Friends List</MenuItem>
+        <Link
+          style={{ textDecoration: "none", color: "inherit" }}
+          to="/friends"
+        >
+          <MenuItem>Friends List</MenuItem>
+        </Link>
         <MenuItem onClick={() => setRequest(true)}>Requests</MenuItem>
-        <MenuItem onClick={null}>Messages</MenuItem>
         <MenuItem onClick={() => setAddBy(true)}>Add by Username</MenuItem>
       </Menu>
       <Dialog
@@ -230,14 +282,15 @@ export const PageDrawer = () => {
         <DialogTitle id="requests-title">Friend Requests</DialogTitle>
         <DialogContent>
           <DialogContentText>
-            {activeUser.friends &&
+            {activeUser &&
+              activeUser.friends &&
               (activeUser.friends.pending === void 0
                 ? "You have no pending friend requests."
                 : 1 === activeUser.friends.pending.length
                 ? "You have one new friend request!"
                 : `You have ${activeUser.friends.pending.length} new friend requests!`)}
           </DialogContentText>
-          {activeUser.friends && activeUser.friends.pending && (
+          {activeUser && activeUser.friends && activeUser.friends.pending && (
             <List>
               {activeUser.friends.pending.map((x) => {
                 return (
@@ -280,7 +333,7 @@ export const PageDrawer = () => {
                 );
               })}
             </List>
-            )}
+          )}
         </DialogContent>
       </Dialog>
       <Dialog
@@ -497,6 +550,116 @@ export const PageDrawer = () => {
           <Divider />
         </DialogContent>
       </Dialog>
+
+      {!messageBox ? (
+        <>
+          <CssBaseline />
+          <Paper square className={styles.paperClosed}>
+            <ButtonBase
+              className={styles.text}
+              onClick={() => setMessageBox(true)}
+            >
+              Messages
+            </ButtonBase>
+          </Paper>
+        </>
+      ) : (
+        <>
+          <CssBaseline />
+          <Paper square className={styles.paper}>
+            <ButtonBase
+              className={styles.boxText}
+              onClick={() => setMessageBox(false)}
+            >
+              Messages
+            </ButtonBase>
+            <List className={styles.list}>
+              {messages &&
+                messagesArray.map((x, i) => {
+                  return x && x.sender !== activeUser.username ? (
+                      <Fragment key={i}>
+                        <ListItem>
+                          <ListItemAvatar>
+                            {(x.photoURL !== {}) | "" ? (
+                              <Avatar alt={`${x.username}`} src={x.photoURL} />
+                            ) : (
+                              <Avatar>{x.sender[0]}</Avatar>
+                            )}
+                          </ListItemAvatar>
+                          <ListItemText
+                            primary={x.sender}
+                            secondary={x.message && x.message}
+                          />
+                          <span style={{ float: "right" }}>
+                            <IconButton
+                              onClick={() =>
+                                setNewMessage(
+                                  (y) =>
+                                    (y = {
+                                      bool: true,
+                                      recipient: x.sender,
+                                      sender: x.recipient,
+                                      targetMessage: x.message,
+                                    })
+                                )
+                              }
+                            >
+                              <ReplyIcon />
+                            </IconButton>
+                            <IconButton>
+                              <DeleteIcon />
+                            </IconButton>
+                          </span>
+                        </ListItem>
+                      </Fragment>
+                  ) : null;
+                })}
+            </List>
+          </Paper>
+          {newMessage && (
+            <Dialog open={newMessage.bool} onClose={() => setNewMessage(null)}>
+              <DialogTitle>New Message To: {newMessage.recipient}</DialogTitle>
+              <DialogContent>
+                <span style={{ textAlign: "center" }}>
+                  <Typography component="h3">Their Message:</Typography>
+                  <Typography>{newMessage.targetMessage}</Typography>
+                  <br />
+                  <br />
+                </span>
+                <TextField
+                  variant="outlined"
+                  value={newMessage.newMessage}
+                  inputRef={inputMsgRef}
+                  label="Message Content"
+                  style={{ width: 400 }}
+                />
+                <Divider />
+                <Button
+                  startIcon={<CloseIcon />}
+                  onClick={() => setNewMessage(null)}
+                >
+                  Cancel
+                </Button>
+                <Button
+                  style={{ float: "right" }}
+                  startIcon={<SendIcon />}
+                  onClick={() => {
+                    api
+                      .sendMessage(
+                        newMessage.sender,
+                        newMessage.recipient,
+                        inputMsgRef.current.value
+                      )
+                      .then(setNewMessage(null));
+                  }}
+                >
+                  Send Message
+                </Button>
+              </DialogContent>
+            </Dialog>
+          )}
+        </>
+      )}
     </>
   );
 };

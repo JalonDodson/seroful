@@ -54,5 +54,38 @@ export const drawerStyles = makeStyles((theme) => ({
     display: 'flex',
     justifyContent: 'space-between',
     marginTop: '4%'
-  }
+  },
+  text: {
+    padding: theme.spacing(2, 2, 0),
+  },
+  boxText: {
+    padding: theme.spacing(2, 2, 0),
+    fontSize: "24px",
+  },
+  paper: {
+    textAlign: "center",
+    position: "absolute",
+    bottom: 0,
+    paddingBottom: 5,
+    width: "25%",
+  },
+  paperClosed: {
+    textAlign: "center",
+    position: "absolute",
+    bottom: 0,
+    paddingBottom: 5,
+    width: "25%",
+  },
+  chatPaper: {
+    textAlign: "center",
+    position: "absolute",
+    bottom: 0,
+    paddingBottom: 5,
+    width: "25%",
+    left: "25%",
+    cursor: "pointer",
+  },
+  list: {
+    marginBottom: theme.spacing(2),
+  },
 }));

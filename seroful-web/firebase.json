@@ -19,10 +19,13 @@
         "function": "api"
       },
       {
+        "source": "/users/messages",
+        "function": "api"
+      },
+      {
         "source": "/users/planner/plans",
         "function": "api"
       },
-
       {
         "source": "/users/photo/upload",
         "function": "api"
@@ -49,10 +52,12 @@
       },
       {
         "source": "**",
-        "headers": [{
-          "key": "Cache-Control",
-          "value": "max-age=0"
-        }],
+        "headers": [
+          {
+            "key": "Cache-Control",
+            "value": "max-age=0"
+          }
+        ],
         "destination": "/index.html"
       }
     ]
