@@ -8,7 +8,7 @@ import "firebase/firestore";
   When built, only /path should be used in the axios requests.
 */
 // axios stuff
-const instance = axios.create({ });
+const instance = axios.create({});
 
 export const getActiveUser = async (email) => {
   const token =
@@ -202,30 +202,15 @@ export const acceptFriend = async (acceptedName, accepteeName) => {
   }
 };
 
-export const mittens = async (username) => {
-  const token =
-    firebase.auth().currentUser &&
-    (await firebase.auth().currentUser.getIdToken());
-
-    const email =
-    firebase.auth().currentUser && (await firebase.auth().currentUser.email);
-
+export const mittens = async (username, email) => {
   try {
     const res = await instance
-      .post(
-        `/users/friends?email=${email}&newUser=true`,
-        {
-          username: username,
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      )
+      .post(`/users/friends?email=${email}&newUser=true`, {
+        username: username,
+      })
       .then((resp) => resp.data);
-      console.log(res);
-      return res;
+    console.log(res);
+    return res;
   } catch (e) {
     console.log(e);
   }

@@ -168,7 +168,7 @@ export const LoginForm = () => {
     } catch (e) {
       setRegisterHelper((h) => (h = { ...h, errorMsg: e.code }));
     }
-    api.mittens(username)
+    api.mittens(username, email)
     setUserInfo((x) => (x = { email: "", pw: "" }));
     setNewUser(!0);
     
