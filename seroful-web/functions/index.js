@@ -372,23 +372,14 @@ app.post("/users/friends", async (req, res) => {
 
       await db
         .collection("users")
-        .where("username", "==", req.body.username)
-        .get()
-        .then((query) => {
-          query.docs.forEach((doc) => {
-            const docRef = db.collection("users").doc(doc.id);
-            const newUserBatch = db.batch();
-            newUserBatch.update(docRef, {
-              "friends.current": admin.firestore.FieldValue.arrayUnion({
-                username: "Mittens",
-                photoURL: mittensData.photoURL,
-                displayName: mittensData.displayName,
-                friendSince: Date.now(),
-              }),
-            });
-            newUserBatch.commit();
-          });
-          return null;
+        .doc(req.body.email)
+        .update({
+          "friends.current": admin.firestore.FieldValue.arrayUnion({
+            username: "Mittens",
+            photoURL: mittensData.photoURL,
+            displayName: mittensData.displayName,
+            friendSince: Date.now(),
+          }),
         });
       res.status(201).send("Added mittens!");
     } catch (e) {
