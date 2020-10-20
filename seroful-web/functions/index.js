@@ -378,6 +378,7 @@ app.post("/users/friends", async (req, res) => {
           .get()
           .then((snapshot) => {
             accepteeData = snapshot.data();
+            return null;
           });
 
         let addedData;
@@ -387,6 +388,7 @@ app.post("/users/friends", async (req, res) => {
           .get()
           .then((querySnapshot) => {
             querySnapshot.docs.forEach((x) => (addedData = x.data()));
+            return null;
           });
 
         const accepteeRef = db.collection("users").doc(email);
@@ -433,6 +435,7 @@ app.post("/users/friends", async (req, res) => {
               });
               addedBatch.commit();
             });
+            return null;
           });
 
         res.status(201).send("Successfully added user.");
@@ -463,6 +466,7 @@ app.post("/users/messages", async (req, res) => {
         .get()
         .then((querySnapshot) => {
           querySnapshot.docs.forEach((x) => (recipientData = x.data()));
+          return null;
         });
         console.log(recipient);
       const senderData = await db.collection("messages").doc(email);
@@ -568,12 +572,13 @@ app.get("/video", async (req, res) => {
 
   if (user) {
     try {
-      client.video.rooms
+      return client.video.rooms
         .list({ status: "in-progress", limit: 15 })
         .then((rooms) => {
           const roomList = [];
           rooms.forEach((r) => roomList.push(r));
           res.status(201).send(roomList);
+          return null;
         });
     } catch (e) {
       console.log(e);

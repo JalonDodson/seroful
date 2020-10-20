@@ -8,7 +8,6 @@ import "firebase/firestore";
   When built, only /path should be used in the axios requests.
 */
 // axios stuff
-const quotes = axios.create({ baseURL: `https:quotes.rest` });
 const instance = axios.create({ });
 
 export const getActiveUser = async (email) => {
@@ -487,13 +486,14 @@ export const connectToRoom = async (identity, roomName) => {
 
 export const getQuote = async () => {
   try {
-    const res = await quotes
-      .get("/qod?language=en", {
+    const res = await axios
+      .get("https://quotes.rest/qod?language=en", {
         headers: {
           accept: "application/json",
         },
       })
       .then((resp) => resp.data);
+      console.log(res);
     return res;
   } catch (error) {
     console.log(error);

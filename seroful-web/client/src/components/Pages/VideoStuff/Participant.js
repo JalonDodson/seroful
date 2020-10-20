@@ -54,26 +54,26 @@ export const Participant = ({ participant }) => {
     };
   }, [participant]);
 
-  useEffect(() => {
-    toggleVideo();
-    //eslint-disable-next-line
-  }, [vidTogg]);
+  // useEffect(() => {
+  //   toggleVideo();
+  //   //eslint-disable-next-line
+  // }, [vidTogg]);
 
-  useEffect(() => {
-    toggleAudio();
-    //eslint-disable-next-line
-  }, [audTogg]);
+  // useEffect(() => {
+  //   toggleAudio();
+  //   //eslint-disable-next-line
+  // }, [audTogg]);
 
-  const toggleVideo = () => {
-    if (participant.videoTracks) {
-      return vidTogg ? participant.videoTracks.forEach((tracks) => tracks.track.disable()) : participant.videoTracks.forEach((tracks) => tracks.track.enable());
-    } else return null;
-  }
-  const toggleAudio = () => {
-    if (participant.audioTracks) {
-      return audTogg ? participant.audioTracks.forEach((tracks) => tracks.track.disable()) : participant.audioTracks.forEach((tracks) => tracks.track.enable());
-    } else return null;  
-  }
+  // const toggleVideo = () => {
+  //   if (participant.videoTracks) {
+  //     return vidTogg ? participant.videoTracks.forEach((tracks) => tracks.track.disable()) : participant.videoTracks.forEach((tracks) => tracks.track.enable());
+  //   } else return null;
+  // }
+  // const toggleAudio = () => {
+  //   if (participant.audioTracks) {
+  //     return audTogg ? participant.audioTracks.forEach((tracks) => tracks.track.disable()) : participant.audioTracks.forEach((tracks) => tracks.track.enable());
+  //   } else return null;  
+  // }
 
   useEffect(() => {
     const videoTrack = videoTracks[0];
@@ -104,7 +104,7 @@ export const Participant = ({ participant }) => {
           />
           {/* <img src={image.photoURL} /> */}
         <audio ref={audioRef} autoPlay={true} />
-        <div className={styles.butts}>
+        {/* <div className={styles.butts}>
           <ButtonBase
             onClick={() => setAudTogg(!audTogg)}
             className={styles.muteButt}
@@ -117,7 +117,7 @@ export const Participant = ({ participant }) => {
           >
             {!vidTogg ? <VideocamIcon />: <VideocamOffIcon />}
           </ButtonBase>
-        </div>
+        </div> */}
       </div>
     </>
   );

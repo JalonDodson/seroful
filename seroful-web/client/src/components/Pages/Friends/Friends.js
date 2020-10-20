@@ -77,7 +77,7 @@ export const Friends = () => {
             </ListItem>
           </Fragment>)
         }) : null}
-        {user.friends.current.length === 0 ? <h3>{`No friends found. I'll be your friend? <3`}</h3> : null}
+        {user.friends && user.friends.current && user.friends.current.length === 0 ? <h3>{`No friends found. I'll be your friend? <3`}</h3> : null}
         </List>
         </Paper>
       <PageDrawer />

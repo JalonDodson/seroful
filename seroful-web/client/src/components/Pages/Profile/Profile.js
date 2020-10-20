@@ -23,7 +23,7 @@ export const Profile = (props) => {
   const styles = profileStyles();
   const user = useRecoilValue(userState);
   let todaysGoals =
-    user.goals &&
+    user.goals ? 
     user.goals.filter((g) => {
       const goalDate = `${new Date(g.date).toString().split(" ")[1]} ${
         new Date(g.date).toString().split(" ")[2]
@@ -35,7 +35,7 @@ export const Profile = (props) => {
 
       console.log(goalDate, todaysDate);
       return goalDate === todaysDate;
-    });
+    }) : null;
   // console.log(todaysGoals);
   // const rows = todaysGoals
   //   ? todaysGoals &&
@@ -91,14 +91,14 @@ export const Profile = (props) => {
             }}
           >
             <List>
-              {todaysGoals[0].goals.map((x, i) => {
+              {todaysGoals ? todaysGoals[0].goals.map((x, i) => {
                 const type = ["first", "second", "third"];
                 return (
                   <ListItem key={i}>
                     ID: {i + 1} --- Goal: {x[type[i]]}
                   </ListItem>
                 );
-              })}
+              }) : "No Goals available!"}
             </List>
             {/* {todaysGoals && (
             <DataGrid

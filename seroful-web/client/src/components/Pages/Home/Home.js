@@ -39,7 +39,7 @@ export const Home = () => {
         <main styles={{ textAlign: "center" }}>
           <Typography component="h4">What would you like to do?</Typography>
           Also, have a random kitty because I don't know what else to put here, this website was supposed to be for a mobile application:<br />
-          {randomKittyUrl && <img src={randomKittyUrl} alt="random kitty" />}
+          {randomKittyUrl && <img width={400} height={400} src={randomKittyUrl} alt="random kitty" />}
         </main>
         <PageDrawer />
       </div>

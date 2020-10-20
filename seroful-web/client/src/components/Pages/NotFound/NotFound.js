@@ -15,7 +15,7 @@ export const NotFound = () => {
       <Typography>
         Ruh-Roh, you're not supposed to be here. Click on the doggy to go home.
       </Typography>
-      <Link to="/">{randomPuppy && <img src={randomPuppy} alt="issa puppy" />}</Link>
+      <Link to="/">{randomPuppy && <img width={400} height={400} src={randomPuppy} alt="issa puppy" />}</Link>
     </>
   );
 };
