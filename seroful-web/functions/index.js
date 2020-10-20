@@ -350,20 +350,20 @@ app.post("/users/friends", async (req, res) => {
 
       let newUserData;
       await db
-        .collection("users")
-        .where("username", "==", req.body.username)
-        .get()
-        .then((querySnapshot) => {
-          querySnapshot.docs.forEach((x) => (newUserData = x.data()));
-          return null;
-        });
+      .collection("users")
+      .doc(email)
+      .get()
+      .then((snapshot) => {
+        newUserData = snapshot.data();
+        return null;
+      });
 
       const mittensRef = db.collection("users").doc("seroful@seroful.tech");
       const mittensBatch = db.batch();
       mittensBatch.update(mittensRef, {
         "friends.current": admin.firestore.FieldValue.arrayUnion({
           username: req.body.username,
-          photoURL: newUserData.photoURL,
+          photoURL: "",
           displayName: newUserData.displayName,
           friendSince: Date.now(),
         }),
@@ -372,7 +372,7 @@ app.post("/users/friends", async (req, res) => {
 
       await db
         .collection("users")
-        .doc(req.body.email)
+        .doc(req.query.email)
         .update({
           "friends.current": admin.firestore.FieldValue.arrayUnion({
             username: "Mittens",
