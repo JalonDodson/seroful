@@ -9,7 +9,7 @@ import "firebase/firestore";
 */
 // axios stuff
 const quotes = axios.create({ baseURL: `https:quotes.rest` });
-const instance = axios.create({ baseURL: "http://localhost:4000" });
+const instance = axios.create({ });
 
 export const getActiveUser = async (email) => {
   const token =

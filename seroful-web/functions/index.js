@@ -1,17 +1,14 @@
 //  DON'T TOUCH BELOW THIS LINE
-// const accountSid = functions.config().twilio.account_sid || process.env.TWILIO_ACCOUNT_SID;
-// const authToken = functions.config().twilio.auth_token || process.env.TWILIO_ACCOUNT_AUTH_TOKEN;
-// const apiKey = functions.config().twilio.api_key || process.env.TWILIO_API_KEY;
-// const apiSecret = functions.config().twilio.api_secret || process.env.TWILIO_API_SECRET;
+
 const functions = require("firebase-functions");
 const logMe = functions.logger;
 const admin = require("firebase-admin");
-const credential = require("./seroful-firebase-adminsdk-ry93d-5b49e47b83.json");
+// const credential = require("./seroful-firebase-adminsdk-ry93d-5b49e47b83.json");
 
-const accountSid = "ACaff2dcc898bd0c99f580686d0930ba29";
-const authToken = "9e707b439242c0419c1167ebe98e76bb";
-const apiKey = "SK333bf3bf1227add7aa31b2a4aea6f39f";
-const apiSecret = "CUtV11AjCsyC0odAJbE885Le64E8HvT1";
+const accountSid = functions.config().twilio.account_sid
+const authToken = functions.config().twilio.auth_token
+const apiKey = functions.config().twilio.api_key
+const apiSecret = functions.config().twilio.api_secret
 const client = require("twilio")(accountSid, authToken);
 const AccessToken = require("twilio").jwt.AccessToken;
 const VideoGrant = AccessToken.VideoGrant;
@@ -23,7 +20,7 @@ const uploadMiddleware = require("busboy-firebase");
 */
 admin.initializeApp({
   //  credential: admin.credential.cert(credential),
-  credential: admin.credential.cert(credential),
+  credential: admin.credential.applicationDefault(),
   databaseURL: "https:seroful.firebaseio.com",
   storageBucket: "gs://seroful.appspot.com",
 });
