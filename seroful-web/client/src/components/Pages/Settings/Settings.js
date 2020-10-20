@@ -3,6 +3,9 @@ import { Helmet } from "react-helmet";
 // import multer from "multer";
 // import path from 'path';
 
+import firebase from "firebase/app";
+import "firebase/auth";
+
 import { PageDrawer } from "../../PageDrawer/PageDrawer";
 import { settingsStyles } from "../../../styles/settingsStyles";
 // import FloatingActionButton from "@material-ui/core/Fab";
@@ -11,18 +14,14 @@ import Typography from "@material-ui/core/Typography";
 import { Button, TextField, Fab } from "@material-ui/core";
 import { useRecoilState } from "recoil";
 import { userState } from "../../../store/store";
-import AddAPhotoIcon from "@material-ui/icons/AddAPhoto"
+import AddAPhotoIcon from "@material-ui/icons/AddAPhoto";
 import * as api from "../../../util/api";
 export const Settings = () => {
   const styles = settingsStyles();
   const [user, setUser] = useRecoilState(userState);
   const [img, setImg] = useState(null);
+  const [newData, setNewData] = useState(null);
   const ref = useRef(null);
-
-  const buttonClick = () => {
-
-    ref.current.click();
-  };
 
   const uploadPhoto = async (ev) => {
     ev.preventDefault();
@@ -30,19 +29,26 @@ export const Settings = () => {
     try {
       if (img) {
         let formData = new FormData();
-        formData.set("image", img, `${Date.now()}-${img.name}`)
+        formData.set("image", img, `${Date.now()}-${img.name}`);
 
         const data = await api.uploadPhoto(formData);
         if (data) {
           const userPhoto = { photoURL: data.fileLocation };
           const user = await api.updateUser(userPhoto);
           console.log(user);
-          setUser(x => x = {...x, photoURL: data.fileLocation })
+          setUser((x) => (x = { ...x, photoURL: data.fileLocation }));
         }
       }
     } catch (err) {
       console.log(err);
     }
+  };
+
+  const handleUserInfo = async ev => {
+    console.log(newData);
+    if (newData && newData.email) firebase.auth().currentUser.updateEmail(newData.email);
+
+    api.updateUser(newData);
   }
 
   return (
@@ -59,68 +65,71 @@ export const Settings = () => {
           </Typography>
           <hr />
         </header>
-        {/* cause we're (chip) fuckin nerds */}
         <Typography className={styles.instructor} variant="h6">
           Insert Updates Below:
         </Typography>
-      <form className={styles.imgForm} onSubmit={(ev) => uploadPhoto(ev)}>
-        <label htmlFor="image">
-
-        <input id="image" name="image" type="file" style={{ display: "none" }} onChange={(ev) => setImg(ev.target.files[0])}/>
-        <Fab color="secondary" size="small" component="span" aria-label="add" variant="extended">
-          <AddAPhotoIcon /> Upload Photo
-        </Fab>
-        {img ? 
-        <Fab color="secondary" size="small" type="submit" component="button" aria-label="add" variant="extended">
-          Confirm
-        </Fab>
-      : null}
-      </label>
-      </form>
-
-            <form className={styles.textForm}>
+        <form
+          style={{ textAlign: "center" }}
+          onSubmit={(ev) => uploadPhoto(ev)}
+        >
+          <label htmlFor="image">
+            <input
+              id="image"
+              name="image"
+              type="file"
+              style={{ display: "none" }}
+              onChange={(ev) => setImg(ev.target.files[0])}
+            />
+            <Fab
+              color="secondary"
+              size="small"
+              component="span"
+              aria-label="add"
+              variant="extended"
+            >
+              <AddAPhotoIcon /> Upload Photo
+            </Fab>
+            {img ? (
+              <Fab
+                color="secondary"
+                size="small"
+                type="submit"
+                component="button"
+                aria-label="add"
+                variant="extended"
+              >
+                Confirm
+              </Fab>
+            ) : null}
+          </label>
+        </form><br />
+        <div className={styles.inputs}>
+          <Typography variant="caption">* Any options left blank will not be changed.</Typography><br />
           <TextField
-            error
-            helperText
-            label="Current Username"
-            variant="filled"
-            className
-            placeholder={user.username}
-            onBlur
-            onChange
-          ></TextField>
+            onChange={(ev) => {
+              const value = ev.target.value;
+              setNewData((x) =>  x = { ...x, username: value })
+            }}
+            label="New Username"
+          /><br />
           <TextField
-            error
-            helperText
-            label="Current Email"
-            variant="filled"
-            className
-            placeholder={user.email}
-            onBlur
-            onChange
-          ></TextField>
+            onChange={(ev) => {
+              const value = ev.target.value;
+              setNewData((x) =>  x = { ...x, displayName: value })
+            }}
+            label="New Display Name"
+          /><br />
           <TextField
-            error
-            helperText
-            label="Current Password"
-            variant="filled"
-            className
-            placeholder={user.pw}
-            onBlur
-            onChange
-          ></TextField>
-          <TextField
-            error
-            helperText
-            label="Current Display Name"
-            variant="filled"
-            className
-            placeholder={user.displayName}
-            onBlur
-            onChange
-          ></TextField>
-          <Button type='submit' className='btn' onClick>Submit New User Info</Button>
-        </form>
+          onChange={(ev) => {
+            const value = ev.target.value;
+            setNewData((x) =>  x = { ...x, email: value })
+          }}
+            label="New Email"
+          />
+        </div>
+        <Button className="btn" onClick={() => handleUserInfo()}>
+          Submit New User Info
+        </Button>
       </div>
     </>
   );

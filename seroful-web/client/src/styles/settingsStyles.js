@@ -108,4 +108,7 @@ export const settingsStyles = makeStyles((theme) => ({
     visibility: "hidden",
     ref: "fileUploader",
   },
+  inputs: {
+    textAlign: "center"
+  }
 }));

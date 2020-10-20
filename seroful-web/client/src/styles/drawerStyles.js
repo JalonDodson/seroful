@@ -51,9 +51,9 @@ export const drawerStyles = makeStyles((theme) => ({
     backgroundColor: "#E9DFE3",
   },
   inputCont: {
-    display: 'flex',
-    justifyContent: 'space-between',
-    marginTop: '4%'
+    display: "flex",
+    justifyContent: "space-between",
+    marginTop: "4%",
   },
   text: {
     padding: theme.spacing(2, 2, 0),
@@ -69,12 +69,13 @@ export const drawerStyles = makeStyles((theme) => ({
     paddingBottom: 5,
     margin: "0 auto",
     width: "20%",
+    left: "9%",
   },
   paperClosed: {
     textAlign: "center",
     position: "absolute",
     bottom: 0,
-    left: "8%",
+    left: "9%",
     paddingBottom: 5,
     margin: "0 auto",
     width: "15%",

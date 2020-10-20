@@ -59,8 +59,7 @@ export const Planner = (props) => {
       durations: 0.25,
     },
     appt: 0,
-    goals: [
-    ],
+    goals: [],
   });
 
   const [expanded, setExpanded] = useState("panel1");
@@ -302,9 +301,9 @@ export const Planner = (props) => {
               onBlur={(ev) => {
                 const value = ev.target.value;
                 value !== "" &&
-                setPlan(
-                  (x) => (x = { ...x, goals: [ ...x.goals, { first: value }] })
-                );
+                  setPlan(
+                    (x) => (x = { ...x, goals: [...x.goals, { first: value }] })
+                  );
               }}
             />
             <br />
@@ -315,9 +314,10 @@ export const Planner = (props) => {
               onBlur={(ev) => {
                 const value = ev.target.value;
                 value !== "" &&
-                setPlan(
-                  (x) => (x = { ...x, goals: [ ...x.goals, { second: value }] })
-                );
+                  setPlan(
+                    (x) =>
+                      (x = { ...x, goals: [...x.goals, { second: value }] })
+                  );
               }}
             />
             <br />
@@ -328,9 +328,9 @@ export const Planner = (props) => {
               onBlur={(ev) => {
                 const value = ev.target.value;
                 value !== "" &&
-                setPlan(
-                  (x) => (x = { ...x, goals: [ ...x.goals, { third: value }] })
-                );
+                  setPlan(
+                    (x) => (x = { ...x, goals: [...x.goals, { third: value }] })
+                  );
               }}
             />
           </form>
@@ -376,24 +376,22 @@ export const Planner = (props) => {
             console.log(x);
             return (
               <Fragment key={i}>
-              <Accordion
-                expanded={expanded === `panel-${i}`}
-                onChange={handlePanel(`panel-${i}`)}
-                className={styles.accordion}
-              >
-                <AccordionSummary
-                  aria-controls={`panel${i}-content`}
-                  id={`panel-${i}`}
+                <Accordion
+                  expanded={expanded === `panel-${i}`}
+                  onChange={handlePanel(`panel-${i}`)}
+                  className={styles.accordion}
                 >
-                  <Typography>{`${date.split(" ")[1]} ${date.split(" ")[2]} ${
-                    date.split(" ")[4]
-                  }`}</Typography>
-                </AccordionSummary>
-                <Divider />
-                <AccordionDetails>
-                  <Typography>
-                    Today's Goals:
-                    </Typography>
+                  <AccordionSummary
+                    aria-controls={`panel${i}-content`}
+                    id={`panel-${i}`}
+                  >
+                    <Typography>{`${date.split(" ")[1]} ${date.split(" ")[2]} ${
+                      date.split(" ")[4]
+                    }`}</Typography>
+                  </AccordionSummary>
+                  <Divider />
+                  <AccordionDetails>
+                    <Typography>Today's Goals:</Typography>
                     <List dense component="div" role="list">
                       <ListItem key={`${i}-goal1`} role="listitem">
                         <ListItemIcon>
@@ -407,13 +405,7 @@ export const Planner = (props) => {
                         </ListItemIcon>
                         <ListItemText
                           id="test2"
-                          primary={
-                            <i>
-                              {x.goals && x.goals[0].first
-                                ? x.goals[0].first
-                                : "No Goal Listed!"}
-                            </i>
-                          }
+                          primary={<i>{x.goals[0].first}</i>}
                         />
                       </ListItem>
                       <ListItem key={`${i}-goal2`} role="listitem">
@@ -428,13 +420,7 @@ export const Planner = (props) => {
                         </ListItemIcon>
                         <ListItemText
                           id="test2"
-                          primary={
-                            <i>
-                              {x.goals && x.goals[1].second
-                                ? x.goals[1].second
-                                : "No Goal Listed!"}
-                            </i>
-                          }
+                          primary={<i>{x.goals[1].second}</i>}
                         />
                       </ListItem>
                       <ListItem key={`${i}-goal3`} role="listitem">
@@ -449,19 +435,79 @@ export const Planner = (props) => {
                         </ListItemIcon>
                         <ListItemText
                           id="test2"
-                          primary={
-                            <i>
-                              {x.goals && x.goals[2].third
-                                ? x.goals[2].third
-                                : "No Goal Listed!"}
-                            </i>
-                          }
+                          primary={<i>{x.goals[2].third}</i>}
                         />
                       </ListItem>
                     </List>
-                    {/* do something with the rest of the data */}
-                </AccordionDetails>
-              </Accordion>
+                    {`You have ${x.dayLength} hour(s) in your school day. ${
+                      x.appt
+                        ? `You also have ${
+                            x.appt
+                          } hours in appointments today, which reduces your school day length to ${
+                            x.dayLength - x.appt
+                          } hour(s).`
+                        : "You don't have any appointments today, so that won't affect your school day."
+                    } You also chose to take ${
+                      x.breaks.count
+                    } breaks, lasting ${
+                      x.breaks.durations < 1.0
+                        ? x.breaks.durations.toString().split(".")[1]
+                        : x.breaks.durations
+                    } ${
+                      x.breaks.durations < 1.0 ? "minutes" : "hours"
+                    } each. With breakfast at ${
+                      x.mealtimes.breakfast % 1 === 0
+                        ? x.mealtimes.breakfast
+                        : `${
+                            x.mealtimes.breakfast.toString().split(".")[0]
+                          }:${Math.floor(
+                            Math.abs(
+                              Number(
+                                x.mealtimes.breakfast.toString().split(".")[1]
+                              ) * 60
+                            ) / 10
+                          )}`
+                    }, you should try to allot yourself around 15 minutes for breakfast.`}
+                    <br />
+                    {` ${
+                      x.homework !== 0
+                        ? `You have ${
+                            x.homework
+                          } assignment(s). Since you have ${
+                            x.dayLength - x.appt
+                          } hours in your school day, you should try to shoot for approximately one assignment per ${
+                            x.homework / x.dayLength
+                          } hour(s).`
+                        : "You don't have any homework assignments today, so you could catch up on some studying or take some time for yourself today."
+                    }`}
+                    <br />
+                    {`Also, remember that you have lunch at around ${
+                      x.mealtimes.lunch % 1 === 0
+                        ? x.mealtimes.lunch < 12 ? x.mealtimes.lunch : x.mealtimes.lunch - 12
+                        : `${
+                            (x.mealtimes.lunch < 12 ? x.mealtimes.lunch : x.mealtimes.lunch - 12).toString().split(".")[0]
+                          }:${Math.floor(
+                            Math.abs(
+                              Number(
+                                (x.mealtimes.lunch < 12 ? x.mealtimes.lunch : x.mealtimes.lunch - 12).toString().split(".")[1]
+                              ) * 60
+                            ) / 10
+                          )}`
+                    } o'clock, and dinner at approximately ${
+                      x.mealtimes.dinner % 1 === 0
+                        ? (x.mealtimes.dinner - 12)
+                        : `${
+                            (x.mealtimes.dinner - 12).toString().split(".")[0]
+                          }:${Math.floor(
+                            Math.abs(
+                              Number(
+                                (x.mealtimes.dinner - 12).toString().split(".")[1]
+                              ) * 60
+                            ) / 10
+                          )}`
+                    } o'clock. Have a great day, and make sure to take time to yourself and focus. Breathe. You got this.`}
+                  </AccordionDetails>
+                </Accordion>
               </Fragment>
             );
           })}

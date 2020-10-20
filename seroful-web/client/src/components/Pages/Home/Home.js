@@ -1,5 +1,5 @@
-import { Button } from "@material-ui/core";
-import React, { useRef } from "react";
+import { Button, List, ListItem } from "@material-ui/core";
+import React, { useEffect, useRef, useState } from "react";
 import { Helmet } from "react-helmet";
 
 import { userState } from "../../../store/store";
@@ -14,6 +14,18 @@ export const Home = () => {
   const styles = homeStyles();
   const activeUser = useRecoilValue(userState);
   const inputRef = useRef();
+  const [randomKittyUrl, setRandomKitty] = useState(null);
+  useEffect(() => {
+    fetch("https://api.thecatapi.com/v1/images/search", {
+      method: "GET",
+      headers: {
+        // don't dock me points on this it's a free api
+        "x-api-key": "a81bf42f-4b2d-4858-8557-33c41cd9e8b1",
+      },
+    })
+      .then((resp) => resp.json())
+      .then((resp) => setRandomKitty(resp[0].url));
+  }, []);
   return (
     <>
       <Helmet>
@@ -27,15 +39,11 @@ export const Home = () => {
           </Typography>
           <hr />
         </header>
-        <TextField inputRef={inputRef} label="Send Test Message" />
-        <Button
-          onClick={() => {
-            api.sendMessage(activeUser.username, "jd99", inputRef.current.value);
-          }}
-        >
-          Add Friend or Some Shit
-        </Button>
-        <Button onClick={() => api.getAllMessages()}>Get All Messages Test</Button>
+        <main styles={{ textAlign: "center" }}>
+          <Typography component="h4">What would you like to do?</Typography>
+          Also, have a random kitty because I don't know what else to put here, this website was supposed to be for a mobile application:<br />
+          {randomKittyUrl && <img src={randomKittyUrl} alt="random kitty" />}
+        </main>
         <PageDrawer />
       </div>
     </>

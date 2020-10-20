@@ -11,11 +11,11 @@ import { profileStyles } from "../../../styles/profileStyles";
 import { useRecoilValue } from "recoil";
 import { userState } from "../../../store/store";
 import { getQuote } from "../../../util/api";
+import { List, ListItem } from "@material-ui/core";
 
 const columns = [
   { field: "id", headerName: "ID", width: 70 },
   { field: "goalItem", headerName: "Goal", width: 130 },
-  
 ];
 
 const quote = () => {
@@ -27,7 +27,6 @@ const quote = () => {
 };
 const whatever = quote();
 export const Profile = (props) => {
-  let goalCount = 0;
   const styles = profileStyles();
   const user = useRecoilValue(userState);
   let todaysGoals =
@@ -44,28 +43,28 @@ export const Profile = (props) => {
       console.log(goalDate, todaysDate);
       return goalDate === todaysDate;
     });
-    console.log(todaysGoals)
-  const rows = todaysGoals
-    ? todaysGoals &&
-      todaysGoals[todaysGoals.length - 1].goals.map((x, i) => {
-        console.log(x)
-        goalCount++;
-        const type = ["first", "second", "third"];
-        return {
-        id: goalCount,
-        goalItem: x[type[i]] }}
-      )
-    : {
-        id: 0,
-        goalItem: "N/A",
-      };
-      console.log(rows)
+  // console.log(todaysGoals);
+  // const rows = todaysGoals
+  //   ? todaysGoals &&
+  //     todaysGoals[todaysGoals.length - 1].goals.map((x, i) => {
+  //       console.log(x);
+  //       const type = ["first", "second", "third"];
+  //       return {
+  //         id: i,
+  //         goalItem: x[type[i]],
+  //       };
+  //     })
+  //   : {
+  //       id: 0,
+  //       goalItem: "N/A",
+  //     };
+  // console.log(rows);
   // const goals = user.goals && user.goals;
   // user.goals returns an array of objects, each object contains 3 goals (nested object of 3 strings) and a date in which the goals were made
   return (
     <>
       <Helmet>
-        <title>Seroful - Profile</title>
+        <title>Seroful - {user.username}'s Profile</title>
       </Helmet>
       <div className={styles.container}>
         <header className={styles.header}>
@@ -76,7 +75,11 @@ export const Profile = (props) => {
           <hr />
         </header>
         <Card className={styles.card}>
-          {user && user.photoURL ? <Avatar src={user.photoURL} alt={`${user.username}`} /> : <Avatar></Avatar>user.displayName[0]}
+          {user && user.photoURL ? (
+            <Avatar src={user.photoURL} alt={`${user.username}`} />
+          ) : (
+            <Avatar>{user.displayName[0]}</Avatar>
+          )}
           <CardContent className={styles.content}>
             <Typography gutterBottom variant="h4">
               {user.displayName}
@@ -89,17 +92,35 @@ export const Profile = (props) => {
         </Card>
         <hr />
         <br />
-        <div style={{ margin: 'auto', float: "right",height: '70%', width: "35%", backgroundColor: "#fff" }}>
-          {todaysGoals &&
-          <DataGrid
-          rows={rows}
-          columns={columns}
-          pageSize={3}
-          checkboxSelection
-          />
-        }
+        <div
+          style={{
+            margin: "auto",
+            float: "right",
+            height: "70%",
+            width: "35%",
+            backgroundColor: "#fff",
+          }}
+        >
+          <List>
+            {todaysGoals[0].goals.map((x, i) => {
+              const type = ["first", "second", "third"];
+              return (
+                <ListItem key={i}>
+                  ID: {i + 1} --- Goal: {x[type[i]]}
+                </ListItem>
+              )
+            })}
+          </List>
+          {/* {todaysGoals && (
+            <DataGrid
+              rows={rows}
+              columns={columns}
+              pageSize={3}
+              checkboxSelection
+            />
+          )} */}
         </div>
-<PageDrawer />
+        <PageDrawer />
       </div>
     </>
   );
