@@ -45,7 +45,7 @@ export const Profile = (props) => {
   const styles = profileStyles();
   const classes = useStyles();
   const user = useRecoilValue(userState);
-  console.log(user.plans);
+  console.log(user.plans[0].goals);
   return (
     <>
       <Helmet>
