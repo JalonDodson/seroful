@@ -10,7 +10,7 @@ Once your project has been completed please fill out the links below. These are 
 **[Scrum Board URL](https://trello.com/b/7bJ37LDJ/seroful-capstone-project)** | 
 **[Deployment URL](https://seroful.tech)** | 
 **[Kapstone Pitch URL](https://docs.google.com/document/d/1GLS_j6O64RZIgqvdXMCn12iOWR1Dj2yuyJE63-B191Q/view)** | 
-**[Group Retrospective Document URL](https://google.com/)** |
+**[Group Retrospective Document URL](https://docs.google.com/document/d/1vJrpinEAX1rb5RsPWL1-spZJHkFoo6YsmRC_TuRYN8Y/edit?usp=sharing)** |
 **[Kapstone Feedback Form](https://docs.google.com/forms/d/1yeIyQH6ZE6y5Z0qB2i8yW5_1Gzfxs8YiJsNlcyjR0WA/edit)**
 
 > **Note:**  **Points will be deducted** if this is not filled in correctly. Also each one of these **MUST** live in their own document. For example DO **NOT** put your retrospective in your scrum board as it will not be counted and you will lose points.
