@@ -136,6 +136,28 @@ export const PageDrawer = () => {
     if (!searchOpen) setOptions([]);
   }, [searchOpen]);
 
+<<<<<<< HEAD
+  // useEffect(() => {
+  //   const subscriber = firebase
+  //     .firestore()
+  //     .collection("messages")
+  //     .doc(firebase.auth().currentUser.email)
+  //     .onSnapshot(
+  //       (docSnapshot) => {
+  //         const data = docSnapshot.data();
+  //         setMessages(
+  //           (x) => (x = { sent: data.sent, received: data.received })
+  //         );
+  //       },
+  //       (e) => console.log(e)
+  //     );
+  //   return () => subscriber();
+  // }, []);
+
+  useEffect(() => {
+    console.log(messages);
+  }, [messages]);
+=======
   useEffect(() => {
     let active = true;
 
@@ -178,6 +200,7 @@ export const PageDrawer = () => {
     return () => subscriber();
   }, []);
   
+>>>>>>> ba46134875069e9b94a64f58493ce660f74deee4
   const messagesArray = messages && [messages.sent, messages.received].flat();
   const inputMsgRef = useRef();
   const composeRef = useRef();
