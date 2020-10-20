@@ -22,9 +22,7 @@ Tell us about your team, who was involved, what role did they fulfill and what d
 |      Name          |Scrum Role                          |I worked on                         |
 |----------------|-------------------------------|-----------------------------|
 |Jake|`Product Investor`            |Investing            |
-|Zach Baca          |`QA`            | I tested stuff           | Testing stuff
-|Jalon Dodson          |`Product Owner`| The initial project/brainstorming, Trello board, numerous components, Firebase Auth/Firebase connectivity, general project maintenance |
-|Jalon Dodson          |`Scrum Master`| Specialized in team organization, getting the Trello & retrospective set up, maintained team organization and responsiveness, stayed on top of tasks and any arising issues. |
+|Jalon Dodson          |`Product Owner, Scrum Master`| The initial project/brainstorming, Trello board, numerous components, Firebase Auth/Firebase connectivity, general project maintenance. Also worked on video chat, API requests, most of backend. Worked on the friends system, messaging system, planner system, alongside various frontend/backend features. Specialized in team organization, getting the Trello & retrospective set up, maintained team organization and responsiveness, stayed on top of tasks and any arising issues. |
 |Chip Pickering          |`Dev, QA`| Focused on Implementation of new Technologies, Construction && Styling of various components, Bug Hunter Extraordinaire, Rubber Ducking 101 |
 |Waleed Saleh          |`Dev`| Excommunicated |
-|Zach Baca          |`Dev`| Fill me out... |
+|Zach Baca          |`Dev`| I was responsible for the Profile Page and 404 Page |
