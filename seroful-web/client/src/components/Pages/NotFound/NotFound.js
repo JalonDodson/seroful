@@ -1,9 +1,21 @@
-import React from "react";
-import bottle from '../../../resources/empty-blank-bottle.png';
+import { Typography } from "@material-ui/core";
+import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 export const NotFound = () => {
+  const [randomPuppy, setRandomPuppy] = useState(null);
+  useEffect(() => {
+    fetch("https://dog.ceo/api/breeds/image/random", { method: "GET" })
+      .then((resp) => resp.json())
+      .then((resp) => setRandomPuppy(resp.message));
+  }, []);
+  
   return (
-  <>
-  <img src={bottle} alt="empty medicine bottle with 404 label" />
-  </>
-  )};
+    <>
+      <Typography>
+        Ruh-Roh, you're not supposed to be here. Click on the doggy to go home.
+      </Typography>
+      <Link to="/">{randomPuppy && <img src={randomPuppy} alt="issa puppy" />}</Link>
+    </>
+  );
+};

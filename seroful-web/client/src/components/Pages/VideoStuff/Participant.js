@@ -56,10 +56,12 @@ export const Participant = ({ participant }) => {
 
   useEffect(() => {
     toggleVideo();
+    //eslint-disable-next-line
   }, [vidTogg]);
 
   useEffect(() => {
     toggleAudio();
+    //eslint-disable-next-line
   }, [audTogg]);
 
   const toggleVideo = () => {

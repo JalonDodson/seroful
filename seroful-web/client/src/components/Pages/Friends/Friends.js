@@ -51,6 +51,7 @@ export const Friends = () => {
           (e) => console.log(e)
         );
       return () => subscriber();
+      //eslint-disable-next-line
     }, []);
 
   return (

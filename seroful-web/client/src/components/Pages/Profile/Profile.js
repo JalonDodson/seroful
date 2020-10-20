@@ -1,15 +1,6 @@
 import React from "react";
-import { makeStyles } from '@material-ui/core/styles';
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableContainer from '@material-ui/core/TableContainer';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
-import Paper from '@material-ui/core/Paper';
 import { Helmet } from "react-helmet";
 import Card from "@material-ui/core/Card";
-import CardActionArea from "@material-ui/core/CardActionArea";
 import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
 import Avatar from "@material-ui/core/Avatar";
@@ -19,26 +10,6 @@ import { useRecoilValue } from "recoil";
 import { userState } from "../../../store/store";
 import { getQuote } from "../../../util/api";
 import { List, ListItem } from "@material-ui/core";
-
-<<<<<<< HEAD
-
-const useStyles = makeStyles({
-  table: {
-    minwidth: 650,
-  },
-});
-
-
-
-
-
-
-=======
-const columns = [
-  { field: "id", headerName: "ID", width: 70 },
-  { field: "goalItem", headerName: "Goal", width: 130 },
-];
->>>>>>> ba46134875069e9b94a64f58493ce660f74deee4
 
 const quote = () => {
   const quote = [];
@@ -50,11 +21,7 @@ const quote = () => {
 const whatever = quote();
 export const Profile = (props) => {
   const styles = profileStyles();
-  const classes = useStyles();
   const user = useRecoilValue(userState);
-<<<<<<< HEAD
-  console.log(user.plans[0].goals);
-=======
   let todaysGoals =
     user.goals &&
     user.goals.filter((g) => {
@@ -87,7 +54,6 @@ export const Profile = (props) => {
   // console.log(rows);
   // const goals = user.goals && user.goals;
   // user.goals returns an array of objects, each object contains 3 goals (nested object of 3 strings) and a date in which the goals were made
->>>>>>> ba46134875069e9b94a64f58493ce660f74deee4
   return (
     <>
       <Helmet>
@@ -96,66 +62,13 @@ export const Profile = (props) => {
       <div className={styles.container}>
         <header className={styles.header}>
           <hr />
-<<<<<<< HEAD
-          <Typography variant="h3" className={styles.title}>
-          {`${user.displayName}'s Profile Page`}
-          </Typography>
-          <hr />
-        </header>
-        <Card className={styles.root}>
-          <CardActionArea className={styles.main}>
-            <Avatar className={styles.purple}>
-              {user.photoURL ? (
-                <img src={user.photoURL} alt={`${user.username}`} />
-              ) : user.displayName ? (
-                user.displayName[0]
-              ) : (
-                "S"
-              )}
-            </Avatar>
-            <CardContent className={styles.content}>
-              <Typography gutterBottom variant="h5" component="h2">
-                {user.displayName}
-              </Typography>
-              <Typography variant="body2" color="textSecondary" component="p">
-                {`${user.displayName}'s Profile Page`}
-              </Typography>
-            </CardContent>
-          </CardActionArea>
-        </Card>
-        <hr />
-        <br />
-        <div style={{ height: 325, width: "100%", backgroundColor: "#fff" }}>
-        <TableContainer component={Paper}>
-      <Table className={classes.table} aria-label="simple table">
-        <TableHead>
-          <TableRow>
-            <TableCell align="center">{user.displayName} 's Goals</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {user.plans[0].goals.map((goal, index) => (
-            <TableRow key={index++}>
-              <TableCell component="th" scope="row">
-                {goal}
-              </TableCell>
-            </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </TableContainer>
-=======
           <Typography variant="h2" className={styles.title}>
             {user.displayName}
           </Typography>
           <hr />
         </header>
         <Card className={styles.card}>
-          {user && user.photoURL ? (
-            <Avatar src={user.photoURL} alt={`${user.username}`} />
-          ) : (
-            <Avatar>{user.displayName[0]}</Avatar>
-          )}
+          {user && user.photoURL ? <Avatar src={user.photoURL} alt={`${user.username}`} /> : <Avatar>{user.displayName[0]}</Avatar>}
           <CardContent className={styles.content}>
             <Typography gutterBottom variant="h4">
               {user.displayName}
@@ -166,28 +79,28 @@ export const Profile = (props) => {
             </Typography>
           </CardContent>
         </Card>
-        <hr />
-        <br />
-        <div
-          style={{
-            margin: "auto",
-            float: "right",
-            height: "70%",
-            width: "35%",
-            backgroundColor: "#fff",
-          }}
-        >
-          <List>
-            {todaysGoals[0].goals.map((x, i) => {
-              const type = ["first", "second", "third"];
-              return (
-                <ListItem key={i}>
-                  ID: {i + 1} --- Goal: {x[type[i]]}
-                </ListItem>
-              )
-            })}
-          </List>
-          {/* {todaysGoals && (
+          <hr />
+          <br />
+          <div
+            style={{
+              margin: "auto",
+              float: "right",
+              height: "70%",
+              width: "35%",
+              backgroundColor: "#fff",
+            }}
+          >
+            <List>
+              {todaysGoals[0].goals.map((x, i) => {
+                const type = ["first", "second", "third"];
+                return (
+                  <ListItem key={i}>
+                    ID: {i + 1} --- Goal: {x[type[i]]}
+                  </ListItem>
+                );
+              })}
+            </List>
+            {/* {todaysGoals && (
             <DataGrid
               rows={rows}
               columns={columns}
@@ -195,14 +108,9 @@ export const Profile = (props) => {
               checkboxSelection
             />
           )} */}
+          <PageDrawer />
         </div>
-<<<<<<< HEAD
-        <PageDrawer />
-=======
-<PageDrawer />
->>>>>>> ba46134875069e9b94a64f58493ce660f74deee4
->>>>>>> 25e07c36abf86c7bfdab5eae8e9a2594c5ec7856
       </div>
-    </div>
     </>
-  )};
+  );
+};

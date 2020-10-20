@@ -1,4 +1,3 @@
-import { Button, List, ListItem } from "@material-ui/core";
 import React, { useEffect, useRef, useState } from "react";
 import { Helmet } from "react-helmet";
 
@@ -6,14 +5,12 @@ import { userState } from "../../../store/store";
 import { useRecoilValue } from "recoil";
 
 import { PageDrawer } from "../../PageDrawer/PageDrawer";
-import * as api from "../../../util/api";
 import { homeStyles } from "../../../styles/homeStyles";
-import { TextField, Typography } from "@material-ui/core";
+import { Typography } from "@material-ui/core";
 
 export const Home = () => {
   const styles = homeStyles();
   const activeUser = useRecoilValue(userState);
-  const inputRef = useRef();
   const [randomKittyUrl, setRandomKitty] = useState(null);
   useEffect(() => {
     fetch("https://api.thecatapi.com/v1/images/search", {
