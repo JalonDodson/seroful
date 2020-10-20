@@ -85,7 +85,12 @@ export const PageDrawer = () => {
   // const [chatBox, setChatBox] = useState(null);
   const [newMessage, setNewMessage] = useState(null);
   const loading = searchOpen && options.length === 0;
-
+  const [composerOptions, setComposerOptions] = useState(null);
+  const [composeSearch, setComposedSearch] = useState(null);
+  const [messageComposer, setMessageComposer] = useState(null);
+  const composerLoading = composeSearch && composerOptions.length === 0;
+  const [composed, setComposed] = useState(null);
+  
   const friendsMenu = (ev) => setAnchor(ev.currentTarget);
   const friendsClose = () => setAnchor(null);
   const videoMenu = (ev) => setVideoAnchor(ev.currentTarget);
@@ -131,6 +136,7 @@ export const PageDrawer = () => {
     if (!searchOpen) setOptions([]);
   }, [searchOpen]);
 
+<<<<<<< HEAD
   // useEffect(() => {
   //   const subscriber = firebase
   //     .firestore()
@@ -151,18 +157,53 @@ export const PageDrawer = () => {
   useEffect(() => {
     console.log(messages);
   }, [messages]);
+=======
+  useEffect(() => {
+    let active = true;
+
+    if (!composerLoading) return undefined;
+    (async () => {
+      firebase.firestore().collection("users").doc(activeUser.email).get()
+      .then(snapshot => {
+        const snapshotData = snapshot.data();
+        const friendsData = snapshotData.friends && snapshotData.friends.current ? snapshotData.friends.current : null;
+        friendsData && setComposerOptions(friendsData);
+      });
+    })();
+    return () => {
+      active = false;
+    }
+  }, [composerLoading]);
+
+  useEffect(() => {
+    if (!composeSearch) setComposerOptions([]);
+  }, [composeSearch])
+
+  useEffect(() => {
+    const subscriber = firebase
+      .firestore()
+      .collection("messages")
+      .doc(firebase.auth().currentUser.email)
+      .onSnapshot(
+        (docSnapshot) => {
+          const data = docSnapshot.data();
+          setMessages(
+            (x) =>
+              (x = {
+                sent: data && data.sent ? data.sent : [],
+                received: data && data.received ? data.received : [],
+              })
+          );
+        },
+        (e) => console.log(e)
+      );
+    return () => subscriber();
+  }, []);
+  
+>>>>>>> ba46134875069e9b94a64f58493ce660f74deee4
   const messagesArray = messages && [messages.sent, messages.received].flat();
   const inputMsgRef = useRef();
-  // const [chatBool, setChatBool] = useState(false);
-  // const chatTab = (sender, photo, message, recipient) => {
-  //   return (
-  //     <>
-  //       <Paper onClick={() => setChatBool(!chatBool)} className={!chatBool ? styles.chatPaper : styles.chatPaperClosed}>
-
-  //       </Paper>
-  //     </>
-  //   );
-  // };
+  const composeRef = useRef();
   return (
     <>
       <Drawer
@@ -271,6 +312,7 @@ export const PageDrawer = () => {
           <MenuItem>Friends List</MenuItem>
         </Link>
         <MenuItem onClick={() => setRequest(true)}>Requests</MenuItem>
+        <MenuItem onClick={() => setMessageComposer(true)}>Send a Message</MenuItem>
         <MenuItem onClick={() => setAddBy(true)}>Add by Username</MenuItem>
       </Menu>
       <Dialog
@@ -411,6 +453,57 @@ export const PageDrawer = () => {
           >
             Cancel
           </Button>
+        </DialogContent>
+      </Dialog>
+      <Dialog open={messageComposer} onClose={() => { setMessageComposer(false) 
+      setComposed(null)}}>
+        <DialogTitle>Compose New Message</DialogTitle>
+        <DialogContent>
+          <Typography component="h4">Who would you like to compose your new message to?</Typography>
+          <Autocomplete
+            id="async-user-search"
+            open={composeSearch}
+            onOpen={() => setComposedSearch(true)}
+            onClose={() => setComposedSearch(false)}
+            getOptionSelected={(opt, val) => opt.username === val.username}
+            getOptionLabel={(opt) => opt.username}
+            options={composerOptions}
+            loading={composerLoading}
+            onChange={(ev, val) => setComposed(x => x = { user: val })}
+            renderInput={(params) => (
+              <TextField
+                {...params}
+                label="Search for Friend"
+                variant="outlined"
+                InputProps={{
+                  ...params.InputProps,
+                  endAdornment: (
+                    <>
+                      {loading ? (
+                        <CircularProgress color="inherit" size={20} />
+                      ) : null}
+                      {params.InputProps.endAdornment}
+                    </>
+                  ),
+                }}
+              />
+            )}
+          /><br /><br />
+          { composed && composed.user ? (
+            <>
+          <TextField 
+          style={{ width: "100%" }} 
+          variant="outlined"
+          defaultValue=""
+          inputRef={composeRef} />
+          <Button style={{ float: "right" }} variant="outlined" startIcon={<SendIcon />} onClick={() => { 
+            console.log(composed);
+            api.sendMessage(activeUser.username, composed.user.username, composeRef.current.value)
+            setMessageComposer(false)}}>Send Message</Button>
+          </>)
+          
+          : null}
+          <Button style={{ float: "left" }} variant="outlined" startIcon={<CloseIcon />} onClick={() => setMessageComposer(false)}>Cancel</Button>
         </DialogContent>
       </Dialog>
       <Menu
@@ -577,41 +670,41 @@ export const PageDrawer = () => {
               {messages &&
                 messagesArray.map((x, i) => {
                   return x && x.sender !== activeUser.username ? (
-                      <Fragment key={i}>
-                        <ListItem>
-                          <ListItemAvatar>
-                            {(x.photoURL !== {}) | "" ? (
-                              <Avatar alt={`${x.username}`} src={x.photoURL} />
-                            ) : (
-                              <Avatar>{x.sender[0]}</Avatar>
-                            )}
-                          </ListItemAvatar>
-                          <ListItemText
-                            primary={x.sender}
-                            secondary={x.message && x.message}
-                          />
-                          <span style={{ float: "right" }}>
-                            <IconButton
-                              onClick={() =>
-                                setNewMessage(
-                                  (y) =>
-                                    (y = {
-                                      bool: true,
-                                      recipient: x.sender,
-                                      sender: x.recipient,
-                                      targetMessage: x.message,
-                                    })
-                                )
-                              }
-                            >
-                              <ReplyIcon />
-                            </IconButton>
-                            <IconButton>
-                              <DeleteIcon />
-                            </IconButton>
-                          </span>
-                        </ListItem>
-                      </Fragment>
+                    <Fragment key={i}>
+                      <ListItem>
+                        <ListItemAvatar>
+                          {(x.photoURL !== {}) | "" ? (
+                            <Avatar alt={`${x.username}`} src={x.photoURL} />
+                          ) : (
+                            <Avatar>{x.sender[0]}</Avatar>
+                          )}
+                        </ListItemAvatar>
+                        <ListItemText
+                          primary={x.sender}
+                          secondary={x.message && x.message}
+                        />
+                        <span style={{ float: "right" }}>
+                          <IconButton
+                            onClick={() =>
+                              setNewMessage(
+                                (y) =>
+                                  (y = {
+                                    bool: true,
+                                    recipient: x.sender,
+                                    sender: x.recipient,
+                                    targetMessage: x.message,
+                                  })
+                              )
+                            }
+                          >
+                            <ReplyIcon />
+                          </IconButton>
+                          <IconButton>
+                            <DeleteIcon />
+                          </IconButton>
+                        </span>
+                      </ListItem>
+                    </Fragment>
                   ) : null;
                 })}
             </List>

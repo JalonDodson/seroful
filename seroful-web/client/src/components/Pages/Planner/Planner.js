@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, Fragment } from "react";
 import { Helmet } from "react-helmet";
 
 import {
@@ -59,11 +59,8 @@ export const Planner = (props) => {
       durations: 0.25,
     },
     appt: 0,
-    goals: {
-      first: "",
-      second: "",
-      third: "",
-    },
+    goals: [
+    ],
   });
 
   const [expanded, setExpanded] = useState("panel1");
@@ -91,7 +88,7 @@ export const Planner = (props) => {
       </Helmet>
       <PageDrawer />
       <div className={styles.newPlanner}>
-        <Paper elevation="3" className={styles.planner}>
+        <Paper elevation={3} className={styles.planner}>
           <FormControl className={styles.formControl}>
             <InputLabel id="select-length">School Day Length</InputLabel>
             <Select
@@ -302,10 +299,11 @@ export const Planner = (props) => {
               id="goal1"
               label="First Goal"
               value={userPlan.goals.first}
-              onChange={(ev) => {
+              onBlur={(ev) => {
                 const value = ev.target.value;
+                value !== "" &&
                 setPlan(
-                  (x) => (x = { ...x, goals: { ...x.goals, first: value } })
+                  (x) => (x = { ...x, goals: [ ...x.goals, { first: value }] })
                 );
               }}
             />
@@ -314,10 +312,11 @@ export const Planner = (props) => {
               id="goal2"
               label="Second Goal"
               value={userPlan.goals.second}
-              onChange={(ev) => {
+              onBlur={(ev) => {
                 const value = ev.target.value;
+                value !== "" &&
                 setPlan(
-                  (x) => (x = { ...x, goals: { ...x.goals, second: value } })
+                  (x) => (x = { ...x, goals: [ ...x.goals, { second: value }] })
                 );
               }}
             />
@@ -326,10 +325,11 @@ export const Planner = (props) => {
               id="goal3"
               label="Third Goal"
               value={userPlan.goals.third}
-              onChange={(ev) => {
+              onBlur={(ev) => {
                 const value = ev.target.value;
+                value !== "" &&
                 setPlan(
-                  (x) => (x = { ...x, goals: { ...x.goals, third: value } })
+                  (x) => (x = { ...x, goals: [ ...x.goals, { third: value }] })
                 );
               }}
             />
@@ -339,6 +339,7 @@ export const Planner = (props) => {
             style={{ float: "right" }}
             onClick={() => {
               api.createPlan(userPlan);
+              api.addGoals(userPlan.goals);
               setPlan(
                 (x) =>
                   (x = {
@@ -372,7 +373,9 @@ export const Planner = (props) => {
         {activeUser.plans &&
           activeUser.plans.map((x, i) => {
             const date = new Date(x.timestamp).toString();
+            console.log(x);
             return (
+              <Fragment key={i}>
               <Accordion
                 expanded={expanded === `panel-${i}`}
                 onChange={handlePanel(`panel-${i}`)}
@@ -390,8 +393,9 @@ export const Planner = (props) => {
                 <AccordionDetails>
                   <Typography>
                     Today's Goals:
+                    </Typography>
                     <List dense component="div" role="list">
-                      <ListItem key={"test"} role="listitem">
+                      <ListItem key={`${i}-goal1`} role="listitem">
                         <ListItemIcon>
                           <Checkbox
                             checked={false}
@@ -405,14 +409,14 @@ export const Planner = (props) => {
                           id="test2"
                           primary={
                             <i>
-                              {x.goals.first
-                                ? x.goals.first
+                              {x.goals && x.goals[0].first
+                                ? x.goals[0].first
                                 : "No Goal Listed!"}
                             </i>
                           }
                         />
                       </ListItem>
-                      <ListItem key={"test"} role="listitem">
+                      <ListItem key={`${i}-goal2`} role="listitem">
                         <ListItemIcon>
                           <Checkbox
                             checked={false}
@@ -426,14 +430,14 @@ export const Planner = (props) => {
                           id="test2"
                           primary={
                             <i>
-                              {x.goals.second
-                                ? x.goals.second
+                              {x.goals && x.goals[1].second
+                                ? x.goals[1].second
                                 : "No Goal Listed!"}
                             </i>
                           }
                         />
                       </ListItem>
-                      <ListItem key={"test"} role="listitem">
+                      <ListItem key={`${i}-goal3`} role="listitem">
                         <ListItemIcon>
                           <Checkbox
                             checked={false}
@@ -447,19 +451,18 @@ export const Planner = (props) => {
                           id="test2"
                           primary={
                             <i>
-                              {x.goals.third
-                                ? x.goals.third
+                              {x.goals && x.goals[2].third
+                                ? x.goals[2].third
                                 : "No Goal Listed!"}
                             </i>
                           }
                         />
                       </ListItem>
                     </List>
-                    <Divider style={{ marginLeft: "-5%", width: "158.5%" }} />
                     {/* do something with the rest of the data */}
-                  </Typography>
                 </AccordionDetails>
               </Accordion>
+              </Fragment>
             );
           })}
       </div>

@@ -17,7 +17,9 @@ import { PageDrawer } from "../../PageDrawer/PageDrawer";
 import { profileStyles } from "../../../styles/profileStyles";
 import { useRecoilValue } from "recoil";
 import { userState } from "../../../store/store";
+import { getQuote } from "../../../util/api";
 
+<<<<<<< HEAD
 
 const useStyles = makeStyles({
   table: {
@@ -30,21 +32,72 @@ const useStyles = makeStyles({
 
 
 
+=======
+const columns = [
+  { field: "id", headerName: "ID", width: 70 },
+  { field: "goalItem", headerName: "Goal", width: 130 },
+  
+];
+>>>>>>> ba46134875069e9b94a64f58493ce660f74deee4
 
+const quote = () => {
+  const quote = [];
+  getQuote().then((resp) => {
+    quote.push(resp.contents.quotes[0].quote);
+  });
+  return quote;
+};
+const whatever = quote();
 export const Profile = (props) => {
+  let goalCount = 0;
   const styles = profileStyles();
   const classes = useStyles();
   const user = useRecoilValue(userState);
+<<<<<<< HEAD
   console.log(user.plans[0].goals);
+=======
+  let todaysGoals =
+    user.goals &&
+    user.goals.filter((g) => {
+      const goalDate = `${new Date(g.date).toString().split(" ")[1]} ${
+        new Date(g.date).toString().split(" ")[2]
+      }`;
+      const date = Date.now();
+      const todaysDate = `${new Date(date).toString().split(" ")[1]} ${
+        new Date(date).toString().split(" ")[2]
+      }`;
+
+      console.log(goalDate, todaysDate);
+      return goalDate === todaysDate;
+    });
+    console.log(todaysGoals)
+  const rows = todaysGoals
+    ? todaysGoals &&
+      todaysGoals[todaysGoals.length - 1].goals.map((x, i) => {
+        console.log(x)
+        goalCount++;
+        const type = ["first", "second", "third"];
+        return {
+        id: goalCount,
+        goalItem: x[type[i]] }}
+      )
+    : {
+        id: 0,
+        goalItem: "N/A",
+      };
+      console.log(rows)
+  // const goals = user.goals && user.goals;
+  // user.goals returns an array of objects, each object contains 3 goals (nested object of 3 strings) and a date in which the goals were made
+>>>>>>> ba46134875069e9b94a64f58493ce660f74deee4
   return (
     <>
       <Helmet>
         <title>Seroful - Profile</title>
       </Helmet>
-      <PageDrawer />
       <div className={styles.container}>
         <header className={styles.header}>
           <hr />
+<<<<<<< HEAD
           <Typography variant="h3" className={styles.title}>
           {`${user.displayName}'s Profile Page`}
           </Typography>
@@ -92,6 +145,38 @@ export const Profile = (props) => {
         </TableBody>
       </Table>
     </TableContainer>
+=======
+          <Typography variant="h2" className={styles.title}>
+            {user.displayName}
+          </Typography>
+          <hr />
+        </header>
+        <Card className={styles.card}>
+          {user && user.photoURL ? <Avatar src={user.photoURL} alt={`${user.username}`} /> : <Avatar></Avatar>user.displayName[0]}
+          <CardContent className={styles.content}>
+            <Typography gutterBottom variant="h4">
+              {user.displayName}
+            </Typography>
+            <Typography variant="h6"> Quote of the Day: </Typography>
+            <Typography variant="body2" color="textSecondary" component="p">
+              {whatever}
+            </Typography>
+          </CardContent>
+        </Card>
+        <hr />
+        <br />
+        <div style={{ margin: 'auto', float: "right",height: '70%', width: "35%", backgroundColor: "#fff" }}>
+          {todaysGoals &&
+          <DataGrid
+          rows={rows}
+          columns={columns}
+          pageSize={3}
+          checkboxSelection
+          />
+        }
+        </div>
+<PageDrawer />
+>>>>>>> ba46134875069e9b94a64f58493ce660f74deee4
       </div>
     </div>
     </>

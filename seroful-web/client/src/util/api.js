@@ -1,12 +1,14 @@
 import axios from "axios";
 import firebase from "firebase";
 import "firebase/auth";
+import "firebase/firestore";
 
 /*
   While in development, http://localhost:4000/ should be used for all API requests.
   When built, only /path should be used in the axios requests.
 */
 // axios stuff
+const quotes = axios.create({ baseURL: `https:quotes.rest` });
 const instance = axios.create({ baseURL: "http://localhost:4000" });
 
 export const getActiveUser = async (email) => {
@@ -123,6 +125,24 @@ export const getUser = async (target) => {
   }
 };
 
+export const addGoals = async (goals) => {
+  try {
+    const res = await firebase.firestore()
+    .collection("users")
+    .doc(firebase.auth().currentUser.email)
+    .update({
+      goals: firebase.firestore.FieldValue.arrayUnion({
+        goals: goals,
+        date: Date.now(),
+      })
+    })
+    console.log(res);
+    return res;
+  } catch (err) {
+    console.log(err);
+  }
+}
+
 export const addFriend = async (to, from) => {
   const token =
     firebase.auth().currentUser &&
@@ -181,6 +201,25 @@ export const acceptFriend = async (acceptedName, accepteeName) => {
     console.log(err);
   }
 };
+
+export const deleteFriend = async (deletedUser) => {
+  const token =
+  firebase.auth().currentUser &&
+  (await firebase.auth().currentUser.getIdToken());
+
+  const email = firebase.auth().currentUser && (await firebase.auth().currentUser.email);
+  try {
+    const res = await instance.delete(`/users/friends?email=${email}&target=${deletedUser}`, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    }).then(resp => resp.data);
+    console.log(res);
+    return res;
+  } catch (err) {
+    console.log(err);
+  }
+}
 
 export const deleteRequest = async (deniedName, denierName) => {
   const token =
@@ -443,5 +482,20 @@ export const connectToRoom = async (identity, roomName) => {
     return res;
   } catch (err) {
     console.log(err);
+  }
+};
+
+export const getQuote = async () => {
+  try {
+    const res = await quotes
+      .get("/qod?language=en", {
+        headers: {
+          accept: "application/json",
+        },
+      })
+      .then((resp) => resp.data);
+    return res;
+  } catch (error) {
+    console.log(error);
   }
 };
