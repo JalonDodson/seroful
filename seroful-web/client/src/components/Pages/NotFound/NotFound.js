@@ -1,5 +1,9 @@
 import React from "react";
+import bottle from '../../../resources/empty-blank-bottle.png';
 
 export const NotFound = () => {
-  return <h3>This is the not found page. Do stuff here</h3>;
-};
+  return (
+  <>
+  <img src={bottle} alt="empty medicine bottle with 404 label" />
+  </>
+  )};
