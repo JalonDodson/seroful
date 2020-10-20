@@ -126,21 +126,22 @@ export const getUser = async (target) => {
 
 export const addGoals = async (goals) => {
   try {
-    const res = await firebase.firestore()
-    .collection("users")
-    .doc(firebase.auth().currentUser.email)
-    .update({
-      goals: firebase.firestore.FieldValue.arrayUnion({
-        goals: goals,
-        date: Date.now(),
-      })
-    })
+    const res = await firebase
+      .firestore()
+      .collection("users")
+      .doc(firebase.auth().currentUser.email)
+      .update({
+        goals: firebase.firestore.FieldValue.arrayUnion({
+          goals: goals,
+          date: Date.now(),
+        }),
+      });
     console.log(res);
     return res;
   } catch (err) {
     console.log(err);
   }
-}
+};
 
 export const addFriend = async (to, from) => {
   const token =
@@ -201,24 +202,56 @@ export const acceptFriend = async (acceptedName, accepteeName) => {
   }
 };
 
+export const mittens = async (username) => {
+  const token =
+    firebase.auth().currentUser &&
+    (await firebase.auth().currentUser.getIdToken());
+
+    const email =
+    firebase.auth().currentUser && (await firebase.auth().currentUser.email);
+
+  try {
+    const res = await instance
+      .post(
+        `/users/friends?email=${email}&newUser=true`,
+        {
+          username: username,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      )
+      .then((resp) => resp.data);
+      console.log(res);
+      return res;
+  } catch (e) {
+    console.log(e);
+  }
+};
+
 export const deleteFriend = async (deletedUser) => {
   const token =
-  firebase.auth().currentUser &&
-  (await firebase.auth().currentUser.getIdToken());
+    firebase.auth().currentUser &&
+    (await firebase.auth().currentUser.getIdToken());
 
-  const email = firebase.auth().currentUser && (await firebase.auth().currentUser.email);
+  const email =
+    firebase.auth().currentUser && (await firebase.auth().currentUser.email);
   try {
-    const res = await instance.delete(`/users/friends?email=${email}&target=${deletedUser}`, {
-      headers: {
-        Authorization: `Bearer ${token}`
-      }
-    }).then(resp => resp.data);
+    const res = await instance
+      .delete(`/users/friends?email=${email}&target=${deletedUser}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((resp) => resp.data);
     console.log(res);
     return res;
   } catch (err) {
     console.log(err);
   }
-}
+};
 
 export const deleteRequest = async (deniedName, denierName) => {
   const token =
@@ -493,7 +526,7 @@ export const getQuote = async () => {
         },
       })
       .then((resp) => resp.data);
-      console.log(res);
+    console.log(res);
     return res;
   } catch (error) {
     console.log(error);

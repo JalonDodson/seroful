@@ -6,6 +6,7 @@ import React, {
   useRef,
 } from "react";
 import { Link } from "react-router-dom";
+import defaultImg from "../../resources/cuteavi.png";
 import {
   TextField,
   Button,
@@ -653,7 +654,7 @@ export const PageDrawer = () => {
                           {(x.photoURL !== {}) | "" ? (
                             <Avatar alt={`${x.username}`} src={x.photoURL} />
                           ) : (
-                            <Avatar>{x.sender[0]}</Avatar>
+                            <Avatar src={defaultImg} alt="default cute avi"></Avatar>
                           )}
                         </ListItemAvatar>
                         <ListItemText

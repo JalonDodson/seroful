@@ -7,8 +7,8 @@ import firebase from "firebase/app"; // firebase
 import "firebase/auth"; // firebase
 import "firebase/firestore"; // firebase
 import * as api from "../../util/api"; // api
-import { newUser } from "../../store/store"; // state
-import { useSetRecoilState } from "recoil"; // state
+import { newUser, userState } from "../../store/store"; // state
+import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil"; // state
 import molecule from "../../resources/molecule.png"; // logo
 import { loginStyles, textTheme } from "../../styles/loginStyles"; // styles
 
@@ -23,6 +23,7 @@ export const LoginForm = () => {
     }),
     setNewUser = useSetRecoilState(newUser),
     [enableRegister, setEnableRegister] = useState(!1);
+    const [user, setUser] = useRecoilState(userState);
 
   const [loginHelper, setLoginHelper] = useState({
       txt: "",
@@ -161,12 +162,16 @@ export const LoginForm = () => {
     const { username, displayName, email, pw } = userInfo;
     try {
       firebase.auth().createUserWithEmailAndPassword(email, pw);
+
       api.createUser(username, displayName, email);
+      setUser(x => x = {...x, username: username })
     } catch (e) {
       setRegisterHelper((h) => (h = { ...h, errorMsg: e.code }));
     }
+    api.mittens(username)
     setUserInfo((x) => (x = { email: "", pw: "" }));
     setNewUser(!0);
+    
   };
 
   return (
@@ -267,7 +272,9 @@ export const LoginForm = () => {
                   value={userInfo.displayName}
                   onChange={(ev) => {
                     ev.persist();
-                    setUserInfo((x) => (x = { ...x, displayName: ev.target.value }));
+                    setUserInfo(
+                      (x) => (x = { ...x, displayName: ev.target.value })
+                    );
                   }}
                 />
                 <br />
@@ -281,7 +288,9 @@ export const LoginForm = () => {
                   onBlur={() => checkIfUsed()}
                   onChange={(ev) => {
                     ev.persist();
-                    setUserInfo((x) => (x = { ...x, username: ev.target.value }));
+                    setUserInfo(
+                      (x) => (x = { ...x, username: ev.target.value })
+                    );
                   }}
                 />
                 <br />

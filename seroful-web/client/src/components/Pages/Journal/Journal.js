@@ -141,6 +141,7 @@ export const Journal = () => {
                 onClick={(ev) => {
                   ev.persist();
                   createEntry(inputRef.current.value);
+                  inputRef.current.value = "";
                   setUpdated(true);
                 }}
               >

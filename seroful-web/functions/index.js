@@ -5,10 +5,10 @@ const logMe = functions.logger;
 const admin = require("firebase-admin");
 // const credential = require("./seroful-firebase-adminsdk-ry93d-5b49e47b83.json");
 
-const accountSid = functions.config().twilio.account_sid
-const authToken = functions.config().twilio.auth_token
-const apiKey = functions.config().twilio.api_key
-const apiSecret = functions.config().twilio.api_secret
+const accountSid = functions.config().twilio.account_sid;
+const authToken = functions.config().twilio.auth_token;
+const apiKey = functions.config().twilio.api_key;
+const apiSecret = functions.config().twilio.api_secret;
 const client = require("twilio")(accountSid, authToken);
 const AccessToken = require("twilio").jwt.AccessToken;
 const VideoGrant = AccessToken.VideoGrant;
@@ -334,7 +334,68 @@ app.post("/users/friends", async (req, res) => {
   const isPending = req.query.isPending === "true";
   const email = req.query.email;
   const user = req["currentUser"];
+  const newUser = req.query.newUser === "true";
   if (user) {
+    if (newUser) {
+      try {
+        let mittensData;
+        await db
+          .collection("users")
+          .doc("seroful@seroful.tech")
+          .get()
+          .then((snapshot) => {
+            mittensData = snapshot.data();
+            return null;
+          });
+
+        let newUserData;
+        await db
+          .collection("users")
+          .where("username", "==", req.body.username)
+          .get()
+          .then((querySnapshot) => {
+            querySnapshot.docs.forEach((x) => (newUserData = x.data()));
+            return null;
+          });
+
+        const mittensRef = db.collection("users").doc("seroful@seroful.tech");
+        const mittensBatch = db.batch();
+        mittensBatch.update(mittensRef, {
+          "friends.current": admin.firestore.FieldValue.arrayUnion({
+            username: req.body.username,
+            photoURL: newUserData.photoURL,
+            displayName: newUserData.displayName,
+            friendSince: Date.now(),
+          }),
+        });
+        mittensBatch.commit();
+
+        await db
+          .collection("users")
+          .where("username", "==", req.body.username)
+          .get()
+          .then((query) => {
+            query.docs.forEach((doc) => {
+              const docRef = db.collection("users").doc(doc.id);
+              const newUserBatch = db.batch();
+              newUserBatch.update(docRef, {
+                "friends.current": admin.firestore.FieldValue.arrayUnion({
+                  username: "Mittens",
+                  photoURL: mittensData.photoURL,
+                  displayName: mittensData.displayName,
+                  friendSince: Date.now(),
+                }),
+              });
+              newUserBatch.commit();
+            });
+            return null;
+          });
+          res.status(201).send("Added mittens!");
+      } catch (e) {
+        console.log(e);
+        res.status(400).send("This shouldn't throw an error but it is.");
+      }
+    }
     if (isPending) {
       try {
         await db
@@ -468,7 +529,7 @@ app.post("/users/messages", async (req, res) => {
           querySnapshot.docs.forEach((x) => (recipientData = x.data()));
           return null;
         });
-        console.log(recipient);
+      console.log(recipient);
       const senderData = await db.collection("messages").doc(email);
       senderData.update({
         sent: admin.firestore.FieldValue.arrayUnion({
@@ -479,8 +540,8 @@ app.post("/users/messages", async (req, res) => {
           sentAt: Date.now(),
         }),
       });
-      console.log(senderData, "this is the sender data")
-      console.log(recipientData, "this is the recipient data")
+      console.log(senderData, "this is the sender data");
+      console.log(recipientData, "this is the recipient data");
 
       const recipientUpdate =
         recipientData &&

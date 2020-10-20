@@ -7,6 +7,7 @@ import { friendsStyles } from "../../../styles/friendsStyles";
 import { useRecoilState } from "recoil";
 import { userState } from "../../../store/store";
 import * as api from "../../../util/api";
+import defaultImg from "../../../resources/cuteavi.png";
 import { Avatar,
   Button,
   Dialog,
@@ -68,7 +69,7 @@ export const Friends = () => {
           return (<Fragment key={i}>
             <ListItem>
               <ListItemAvatar>
-                {x.photoURL ? <Avatar alt={x.username} src={x.photoURL} /> : <Avatar>{x.displayName[0]}</Avatar>}
+                {x.photoURL ? <Avatar alt={x.username} src={x.photoURL} /> : <Avatar alt="default cute avi" src={defaultImg}></Avatar>}
               </ListItemAvatar>
               <ListItemText>
                 {x.username}<span style={{ float: "right" }}><IconButton onClick={() => setMessage(y => y = {bool: true, recipient: x.username})}><SendIcon /></IconButton> <IconButton onClick={() => setDeleter(y => y = { username: x.username, bool: true })}><DeleteIcon /></IconButton></span>
