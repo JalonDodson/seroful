@@ -67,15 +67,15 @@ export const Participant = ({ participant }) => {
   const toggleVideo = () => {
     if (participant && participant.videoTracks) {
       return vidTogg
-        ? participant.videoTracks.forEach((tracks) => tracks.track.disable())
-        : participant.videoTracks.forEach((tracks) => tracks.track.enable());
+        ? participant.videoTracks.forEach((tracks) => tracks && tracks.track !== null ? tracks.track.disable() : null)
+        : participant.videoTracks.forEach((tracks) => tracks && tracks.track !== null ? tracks.track.enable() : null);
     } else return null;
   };
   const toggleAudio = () => {
     if (participant && participant.audioTracks) {
       return audTogg
-        ? participant.audioTracks.forEach((tracks) => tracks.track.disable())
-        : participant.audioTracks.forEach((tracks) => tracks.track.enable());
+        ? participant.audioTracks.forEach((tracks) => tracks && tracks.track !== null ? tracks.track.disable() : null)
+        : participant.audioTracks.forEach((tracks) => tracks && tracks.track !== null ? tracks.track.enable() : null);
     } else return null;
   };
 

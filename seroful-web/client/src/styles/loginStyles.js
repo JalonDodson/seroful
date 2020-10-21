@@ -47,6 +47,10 @@ export const loginStyles = makeStyles((theme) => ({
     fontFamily: "Happy Monkey",
     textTransform: "capitalize",
   },
+  alert: {
+    width: "25%",
+    marginLeft: "36vw",
+  }
 }));
 
 export const textTheme = createMuiTheme({

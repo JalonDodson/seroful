@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Helmet } from "react-helmet";
 // import multer from "multer";
 // import path from 'path';
@@ -12,8 +12,8 @@ import { settingsStyles } from "../../../styles/settingsStyles";
 import ButtonBase from "@material-ui/core/ButtonBase";
 import Typography from "@material-ui/core/Typography";
 import { Button, TextField, Fab } from "@material-ui/core";
-import { useRecoilState } from "recoil";
-import { userState } from "../../../store/store";
+import { useRecoilState, useSetRecoilState } from "recoil";
+import { userState, pwChanged } from "../../../store/store";
 import AddAPhotoIcon from "@material-ui/icons/AddAPhoto";
 import * as api from "../../../util/api";
 export const Settings = () => {
@@ -22,6 +22,8 @@ export const Settings = () => {
   const [img, setImg] = useState(null);
   const [newData, setNewData] = useState(null);
   const [error, setError] = useState(false);
+  const [pwError, setPwError] = useState(false);
+  const setPwChange = useSetRecoilState(pwChanged);
   const ref = useRef(null);
 
   const uploadPhoto = async (ev) => {
@@ -65,9 +67,24 @@ export const Settings = () => {
                 "User has changed their password and has been signed out."
               );
               setError(false);
+              setPwChange(true);
             })
         );
   };
+
+  useEffect(() => {
+    if (newData) {
+      if (
+        newData.password &&
+        newData.password.length < 6 &&
+        newData.password !== ""
+      ) {
+        setPwError(true);
+      } else {
+        setPwError(false);
+      }
+    }
+  }, [newData]);
 
   return (
     <>
@@ -153,24 +170,29 @@ export const Settings = () => {
           <br />
           <br />
           <TextField
-            error={newData && newData.password && newData.password.length < 6}
-            helperText="Password must be at least 6 characters!"
+            error={pwError}
+            helperText={
+              pwError ? "Password must be at least 6 characters!" : ""
+            }
             onChange={(ev) => {
               const value = ev.target.value;
               setNewData((x) => (x = { ...x, password: value }));
             }}
             label="New Password"
+            type="password"
           />
+          <br />
           <TextField
             error={error}
-            helperText="Passwords do not match!"
+            helperText={error ? "Passwords do not match!" : ""}
             onChange={(ev) => {
               const value = ev.target.value;
               return value !== newData.password && value !== ""
                 ? setError(true)
-                : null;
+                : setError(false);
             }}
             label="Confirm Password"
+            type="password"
           />
         </div>
         <Button className="btn" onClick={() => handleUserInfo()}>

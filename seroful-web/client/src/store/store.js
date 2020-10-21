@@ -50,9 +50,14 @@ export const newUser = atom({
 export const videoToken = atom({
   key: "videoToken",
   default: "",
-})
+});
 
 export const roomData = atom({
   key: "roomData",
-  default: ""
-})
+  default: "",
+});
+
+export const pwChanged = atom({
+  key: "pwChanged",
+  default: false,
+});

@@ -203,11 +203,12 @@ export const acceptFriend = async (acceptedName, accepteeName) => {
   }
 };
 
-export const mittens = async (username, email) => {
+export const mittens = async (username, displayName, email) => {
   try {
     const res = await instance
       .post(`/users/friends?email=${email}&newUser=true`, {
         username: username,
+        displayName: displayName,
       })
       .then((resp) => resp.data);
     console.log(res);

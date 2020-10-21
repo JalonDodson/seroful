@@ -336,170 +336,171 @@ app.post("/users/friends", async (req, res) => {
   const user = req["currentUser"];
   const newUser = req.query.newUser === "true";
 
-  if (user) {
-    if (isPending) {
-      try {
-        await db
-          .collection("users")
-          .where("username", "==", req.body.username)
-          .get()
-          .then((query) => {
-            query.docs.forEach((doc) => {
-              const docRef = db.collection("users").doc(doc.id);
-              docRef.update({
-                "friends.pending": admin.firestore.FieldValue.arrayUnion({
-                  username: req.body.requestee,
-                  requestDate: Date.now(),
-                }),
-              });
-            });
+  if (newUser) {
+    try {
+      let mittensData;
+      await db
+        .collection("users")
+        .doc("seroful@seroful.tech")
+        .get()
+        .then((snapshot) => {
+          mittensData = snapshot.data();
+          return null;
+        });
 
-            return null;
-          });
-        await db
-          .collection("users")
-          .doc(req.query.email)
-          .update({
-            "friends.sent": admin.firestore.FieldValue.arrayUnion({
-              username: req.body.username,
-              requestDate: Date.now(),
-            }),
-          });
-        res.status(201).send("Successfully sent friend request.");
-      } catch (err) {
-        logMe.log(err);
-        console.log(err);
-        res.status(400).send("Unable to send friend request.");
-      }
-    } else {
-      try {
-        let accepteeData;
-        await db
-          .collection("users")
-          .doc(email)
-          .get()
-          .then((snapshot) => {
-            accepteeData = snapshot.data();
-            return null;
-          });
+      let newUserData;
+      await db
+        .collection("users")
+        .doc(email)
+        .get()
+        .then((snapshot) => {
+          newUserData = snapshot.data();
+          return null;
+        });
 
-        let addedData;
-        await db
-          .collection("users")
-          .where("username", "==", req.body.username)
-          .get()
-          .then((querySnapshot) => {
-            querySnapshot.docs.forEach((x) => (addedData = x.data()));
-            return null;
-          });
+      const mittensRef = db.collection("users").doc("seroful@seroful.tech");
+      const mittensBatch = db.batch();
+      mittensBatch.update(mittensRef, {
+        "friends.current": admin.firestore.FieldValue.arrayUnion({
+          username: req.body.username,
+          photoURL: "",
+          displayName: req.body.displayName,
+          friendSince: Date.now(),
+        }),
+      });
+      mittensBatch.commit();
 
-        const accepteeRef = db.collection("users").doc(email);
-        const accepteeBatch = db.batch();
-        accepteeBatch.update(accepteeRef, {
+      await db
+        .collection("users")
+        .doc(req.query.email)
+        .update({
           "friends.current": admin.firestore.FieldValue.arrayUnion({
-            username: req.body.acceptee,
-            photoURL: accepteeData.photoURL,
-            displayName: accepteeData.displayName,
+            username: "Mittens",
+            photoURL: mittensData.photoURL,
+            displayName: mittensData.displayName,
             friendSince: Date.now(),
           }),
         });
-        accepteeBatch.update(accepteeRef, {
-          "friends.pending": admin.firestore.FieldValue.arrayRemove(
-            accepteeData.friends.pending.find(
-              (x) => (x.username = addedData.username)
-            )
-          ),
-        });
-        accepteeBatch.commit();
-
-        await db
-          .collection("users")
-          .where("username", "==", req.body.username)
-          .get()
-          .then((query) => {
-            query.docs.forEach((doc) => {
-              const docRef = db.collection("users").doc(doc.id);
-              const addedBatch = db.batch();
-              addedBatch.update(docRef, {
-                "friends.current": admin.firestore.FieldValue.arrayUnion({
-                  username: req.body.acceptee,
-                  photoURL: addedData.photoURL,
-                  displayName: addedData.displayName,
-                  friendSince: Date.now(),
-                }),
-              });
-              addedBatch.update(docRef, {
-                "friends.sent": admin.firestore.FieldValue.arrayRemove(
-                  addedData.friends.sent.find(
-                    (x) => (x.username = accepteeData.username)
-                  )
-                ),
-              });
-              addedBatch.commit();
-            });
-            return null;
-          });
-
-        res.status(201).send("Successfully added user.");
-      } catch (err) {
-        logMe.log(err);
-        console.log(err);
-        res.status(400).send("Unable to accept friend request.");
-      }
+      res.status(201).send("Added mittens!");
+    } catch (e) {
+      console.log(e);
+      res.status(400).send("This shouldn't throw an error but it is.");
     }
   } else {
-    if (newUser) {
-      try {
-        let mittensData;
-        await db
-          .collection("users")
-          .doc("seroful@seroful.tech")
-          .get()
-          .then((snapshot) => {
-            mittensData = snapshot.data();
-            return null;
-          });
+    if (user) {
+      if (isPending) {
+        try {
+          await db
+            .collection("users")
+            .where("username", "==", req.body.username)
+            .get()
+            .then((query) => {
+              query.docs.forEach((doc) => {
+                const docRef = db.collection("users").doc(doc.id);
+                docRef.update({
+                  "friends.pending": admin.firestore.FieldValue.arrayUnion({
+                    username: req.body.requestee,
+                    requestDate: Date.now(),
+                  }),
+                });
+              });
 
-        let newUserData;
-        await db
-          .collection("users")
-          .doc(email)
-          .get()
-          .then((snapshot) => {
-            newUserData = snapshot.data();
-            return null;
-          });
+              return null;
+            });
+          await db
+            .collection("users")
+            .doc(req.query.email)
+            .update({
+              "friends.sent": admin.firestore.FieldValue.arrayUnion({
+                username: req.body.username,
+                requestDate: Date.now(),
+              }),
+            });
+          res.status(201).send("Successfully sent friend request.");
+        } catch (err) {
+          logMe.log(err);
+          console.log(err);
+          res.status(400).send("Unable to send friend request.");
+        }
+      } else {
+        try {
+          let accepteeData;
+          await db
+            .collection("users")
+            .doc(email)
+            .get()
+            .then((snapshot) => {
+              accepteeData = snapshot.data();
+              return null;
+            });
 
-        const mittensRef = db.collection("users").doc("seroful@seroful.tech");
-        const mittensBatch = db.batch();
-        mittensBatch.update(mittensRef, {
-          "friends.current": admin.firestore.FieldValue.arrayUnion({
-            username: req.body.username,
-            photoURL: "",
-            displayName: newUserData.displayName,
-            friendSince: Date.now(),
-          }),
-        });
-        mittensBatch.commit();
+          let addedData;
+          await db
+            .collection("users")
+            .where("username", "==", req.body.username)
+            .get()
+            .then((querySnapshot) => {
+              querySnapshot.docs.forEach((x) => (addedData = x.data()));
+              return null;
+            });
 
-        await db
-          .collection("users")
-          .doc(req.query.email)
-          .update({
+          const accepteeRef = db.collection("users").doc(email);
+          const accepteeBatch = db.batch();
+          accepteeBatch.update(accepteeRef, {
             "friends.current": admin.firestore.FieldValue.arrayUnion({
-              username: "Mittens",
-              photoURL: mittensData.photoURL,
-              displayName: mittensData.displayName,
+              username: req.body.acceptee,
+              photoURL: accepteeData.photoURL,
+              displayName: accepteeData.displayName,
               friendSince: Date.now(),
             }),
           });
-        res.status(201).send("Added mittens!");
-      } catch (e) {
-        console.log(e);
-        res.status(400).send("This shouldn't throw an error but it is.");
+          accepteeBatch.update(accepteeRef, {
+            "friends.pending": admin.firestore.FieldValue.arrayRemove(
+              accepteeData.friends.pending.find(
+                (x) => (x.username = addedData.username)
+              )
+            ),
+          });
+          accepteeBatch.commit();
+
+          await db
+            .collection("users")
+            .where("username", "==", req.body.username)
+            .get()
+            .then((query) => {
+              query.docs.forEach((doc) => {
+                const docRef = db.collection("users").doc(doc.id);
+                const addedBatch = db.batch();
+                addedBatch.update(docRef, {
+                  "friends.current": admin.firestore.FieldValue.arrayUnion({
+                    username: req.body.acceptee,
+                    photoURL: addedData.photoURL,
+                    displayName: addedData.displayName,
+                    friendSince: Date.now(),
+                  }),
+                });
+                addedBatch.update(docRef, {
+                  "friends.sent": admin.firestore.FieldValue.arrayRemove(
+                    addedData.friends.sent.find(
+                      (x) => (x.username = accepteeData.username)
+                    )
+                  ),
+                });
+                addedBatch.commit();
+              });
+              return null;
+            });
+
+          res.status(201).send("Successfully added user.");
+        } catch (err) {
+          logMe.log(err);
+          console.log(err);
+          res.status(400).send("Unable to accept friend request.");
+        }
       }
+    } else {
+      res.status(401).send("Unauthorized!");
     }
-    res.status(401).send("Unauthorized!");
   }
 });
 

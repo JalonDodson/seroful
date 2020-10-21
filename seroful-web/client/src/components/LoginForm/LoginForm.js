@@ -7,10 +7,11 @@ import firebase from "firebase/app"; // firebase
 import "firebase/auth"; // firebase
 import "firebase/firestore"; // firebase
 import * as api from "../../util/api"; // api
-import { newUser, userState } from "../../store/store"; // state
+import { newUser, userState, pwChanged } from "../../store/store"; // state
 import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil"; // state
 import molecule from "../../resources/molecule.png"; // logo
 import { loginStyles, textTheme } from "../../styles/loginStyles"; // styles
+import { Alert, AlertTitle } from "@material-ui/lab";
 
 export const LoginForm = () => {
   const styles = loginStyles();
@@ -23,7 +24,7 @@ export const LoginForm = () => {
     }),
     setNewUser = useSetRecoilState(newUser),
     [enableRegister, setEnableRegister] = useState(!1);
-    const [user, setUser] = useRecoilState(userState);
+  const [user, setUser] = useRecoilState(userState);
 
   const [loginHelper, setLoginHelper] = useState({
       txt: "",
@@ -41,6 +42,7 @@ export const LoginForm = () => {
     }),
     [pwHelpers, setPwHelpers] = useState({ error: !1, helperText: "" }),
     [pwConfirm, setPwConfirm] = useState("");
+  const [pwChange, setPwChange] = useRecoilState(pwChanged);
 
   useEffect(() => {
     return (
@@ -154,6 +156,7 @@ export const LoginForm = () => {
         setLoginHelper((h) => (h = { ...h, errorMsg: e.code }));
         console.log(e);
       });
+    setPwChange(false);
     setUserInfo((x) => (x = { email: "", pw: "" }));
   };
 
@@ -164,14 +167,13 @@ export const LoginForm = () => {
       firebase.auth().createUserWithEmailAndPassword(email, pw);
 
       api.createUser(username, displayName, email);
-      setUser(x => x = {...x, username: username })
+      setUser((x) => (x = { ...x, username: username }));
     } catch (e) {
       setRegisterHelper((h) => (h = { ...h, errorMsg: e.code }));
     }
-    api.mittens(username, email)
+    api.mittens(username, displayName, email);
     setUserInfo((x) => (x = { email: "", pw: "" }));
     setNewUser(!0);
-    
   };
 
   return (
@@ -193,6 +195,15 @@ export const LoginForm = () => {
               />
               <br />
               <form autoComplete="off">
+                {pwChange ? (
+                  <>
+                    <Alert className={styles.alert} severity="error">
+                      <AlertTitle>Password Changed</AlertTitle>
+                      Your password has been changed. Please sign in again.
+                    </Alert>
+                    <br />
+                  </>
+                ) : null}
                 <TextField
                   label="Email"
                   type="email"
