@@ -336,58 +336,6 @@ app.post("/users/friends", async (req, res) => {
   const user = req["currentUser"];
   const newUser = req.query.newUser === "true";
 
-  if (newUser) {
-    try {
-      let mittensData;
-      await db
-        .collection("users")
-        .doc("seroful@seroful.tech")
-        .get()
-        .then((snapshot) => {
-          mittensData = snapshot.data();
-          return null;
-        });
-
-      let newUserData;
-      await db
-      .collection("users")
-      .doc(email)
-      .get()
-      .then((snapshot) => {
-        newUserData = snapshot.data();
-        return null;
-      });
-
-      const mittensRef = db.collection("users").doc("seroful@seroful.tech");
-      const mittensBatch = db.batch();
-      mittensBatch.update(mittensRef, {
-        "friends.current": admin.firestore.FieldValue.arrayUnion({
-          username: req.body.username,
-          photoURL: "",
-          displayName: newUserData.displayName,
-          friendSince: Date.now(),
-        }),
-      });
-      mittensBatch.commit();
-
-      await db
-        .collection("users")
-        .doc(req.query.email)
-        .update({
-          "friends.current": admin.firestore.FieldValue.arrayUnion({
-            username: "Mittens",
-            photoURL: mittensData.photoURL,
-            displayName: mittensData.displayName,
-            friendSince: Date.now(),
-          }),
-        });
-      res.status(201).send("Added mittens!");
-    } catch (e) {
-      console.log(e);
-      res.status(400).send("This shouldn't throw an error but it is.");
-    }
-  }
-
   if (user) {
     if (isPending) {
       try {
@@ -500,6 +448,57 @@ app.post("/users/friends", async (req, res) => {
       }
     }
   } else {
+    if (newUser) {
+      try {
+        let mittensData;
+        await db
+          .collection("users")
+          .doc("seroful@seroful.tech")
+          .get()
+          .then((snapshot) => {
+            mittensData = snapshot.data();
+            return null;
+          });
+
+        let newUserData;
+        await db
+          .collection("users")
+          .doc(email)
+          .get()
+          .then((snapshot) => {
+            newUserData = snapshot.data();
+            return null;
+          });
+
+        const mittensRef = db.collection("users").doc("seroful@seroful.tech");
+        const mittensBatch = db.batch();
+        mittensBatch.update(mittensRef, {
+          "friends.current": admin.firestore.FieldValue.arrayUnion({
+            username: req.body.username,
+            photoURL: "",
+            displayName: newUserData.displayName,
+            friendSince: Date.now(),
+          }),
+        });
+        mittensBatch.commit();
+
+        await db
+          .collection("users")
+          .doc(req.query.email)
+          .update({
+            "friends.current": admin.firestore.FieldValue.arrayUnion({
+              username: "Mittens",
+              photoURL: mittensData.photoURL,
+              displayName: mittensData.displayName,
+              friendSince: Date.now(),
+            }),
+          });
+        res.status(201).send("Added mittens!");
+      } catch (e) {
+        console.log(e);
+        res.status(400).send("This shouldn't throw an error but it is.");
+      }
+    }
     res.status(401).send("Unauthorized!");
   }
 });
