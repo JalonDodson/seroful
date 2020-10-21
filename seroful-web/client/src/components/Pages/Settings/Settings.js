@@ -21,6 +21,7 @@ export const Settings = () => {
   const [user, setUser] = useRecoilState(userState);
   const [img, setImg] = useState(null);
   const [newData, setNewData] = useState(null);
+  const [error, setError] = useState(false);
   const ref = useRef(null);
 
   const uploadPhoto = async (ev) => {
@@ -44,12 +45,29 @@ export const Settings = () => {
     }
   };
 
-  const handleUserInfo = async ev => {
+  const handleUserInfo = async (ev) => {
     console.log(newData);
-    if (newData && newData.email) firebase.auth().currentUser.updateEmail(newData.email);
+    if (newData && newData.email)
+      firebase.auth().currentUser.updateEmail(newData.email);
 
     api.updateUser(newData);
-  }
+
+    if (newData && newData.password)
+      firebase
+        .auth()
+        .currentUser.updatePassword(newData.password)
+        .then((x) =>
+          firebase
+            .auth()
+            .signOut()
+            .then(() => {
+              console.log(
+                "User has changed their password and has been signed out."
+              );
+              setError(false);
+            })
+        );
+  };
 
   return (
     <>
@@ -102,29 +120,57 @@ export const Settings = () => {
               </Fab>
             ) : null}
           </label>
-        </form><br />
+        </form>
+        <br />
         <div className={styles.inputs}>
-          <Typography variant="caption">* Any options left blank will not be changed.</Typography><br />
+          <Typography variant="caption">
+            * Any options left blank will not be changed.
+          </Typography>
+          <br />
           <TextField
             onChange={(ev) => {
               const value = ev.target.value;
-              setNewData((x) =>  x = { ...x, username: value })
+              setNewData((x) => (x = { ...x, username: value }));
             }}
             label="New Username"
-          /><br />
+          />
+          <br />
           <TextField
             onChange={(ev) => {
               const value = ev.target.value;
-              setNewData((x) =>  x = { ...x, displayName: value })
+              setNewData((x) => (x = { ...x, displayName: value }));
             }}
             label="New Display Name"
-          /><br />
+          />
+          <br />
           <TextField
-          onChange={(ev) => {
-            const value = ev.target.value;
-            setNewData((x) =>  x = { ...x, email: value })
-          }}
+            onChange={(ev) => {
+              const value = ev.target.value;
+              setNewData((x) => (x = { ...x, email: value }));
+            }}
             label="New Email"
+          />
+          <br />
+          <br />
+          <TextField
+            error={newData.password && newData.password.length < 6}
+            helperText="Password must be at least 6 characters!"
+            onChange={(ev) => {
+              const value = ev.target.value;
+              setNewData((x) => (x = { ...x, password: value }));
+            }}
+            label="New Password"
+          />
+          <TextField
+            error={error}
+            helperText="Passwords do not match!"
+            onChange={(ev) => {
+              const value = ev.target.value;
+              return value !== newData.password && value !== ""
+                ? setError(true)
+                : null;
+            }}
+            label="Confirm Password"
           />
         </div>
         <Button className="btn" onClick={() => handleUserInfo()}>
