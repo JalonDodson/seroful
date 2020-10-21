@@ -8,7 +8,8 @@ import "firebase/firestore";
   When built, only /path should be used in the axios requests.
 */
 // axios stuff
-const instance = axios.create({});
+// const instance = axios.create({});
+const instance = axios.create({ baseURL: "http://localhost:4000"});
 
 export const getActiveUser = async (email) => {
   const token =

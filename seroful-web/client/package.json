@@ -16,7 +16,9 @@
     "npm-run-all": "^4.1.5",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
+    "react-google-maps": "^9.4.5",
     "react-helmet": "^6.1.0",
+    "react-material-ui-carousel": "^2.0.1",
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.3",
     "recoil": "0.0.13",
@@ -33,7 +35,7 @@
     "dev:react": "react-scripts start",
     "jdev": "run-p --race jdev:firebase jdev:react",
     "jdev:firebase": "firebase serve -p 4000",
-    "jdev:react": "BROWSER='google-chrome-stable' react-scripts start"
+    "jdev:react": "BROWSER='microsoft-edge-dev' react-scripts start"
   },
   "eslintConfig": {
     "extends": "react-app"

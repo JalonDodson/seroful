@@ -41,6 +41,7 @@ import firebase from "firebase/app";
 import "firebase/auth";
 import "firebase/firestore";
 
+import FavoriteIcon from '@material-ui/icons/Favorite';
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import HomeIcon from "@material-ui/icons/Home";
 import MenuBookIcon from "@material-ui/icons/MenuBook";
@@ -262,6 +263,12 @@ export const PageDrawer = () => {
             </ListItemIcon>
             <ListItemText primary="Journal" />
           </ListItem>
+          <ListItem button key="Resources" component="a" href="/resources">
+            <ListItemIcon>
+              <FavoriteIcon />
+            </ListItemIcon>
+            <ListItemText style={{ marginLeft: "-10px"}} primary="Resources" />
+          </ListItem>
           <ListItem button key="Settings" component="a" href="/settings">
             <ListItemIcon>
               <SettingsIcon />
@@ -272,7 +279,7 @@ export const PageDrawer = () => {
             <ListItemIcon>
               <ExitToAppIcon />
             </ListItemIcon>
-            <ListItemText primary="Sign Out" />
+            <ListItemText style={{ marginLeft: "-10px"}} primary="Sign Out" />
           </ListItem>
         </List>
       </Drawer>
@@ -491,7 +498,7 @@ export const PageDrawer = () => {
         open={Boolean(videoAnchor)}
         onClose={videoMenuClose}
       >
-        <MenuItem onClick={() => setViewReq(true)}>View Room List</MenuItem>
+        {/* <MenuItem onClick={() => setViewReq(true)}>View Room List</MenuItem> */}
         <MenuItem onClick={() => setJoinReq(true)}>Join Room</MenuItem>
         <MenuItem onClick={() => setCreateReq(true)}>Create Room</MenuItem>
       </Menu>
@@ -573,55 +580,7 @@ export const PageDrawer = () => {
           </DialogContentText>
         </DialogContent>
       </Dialog>
-      <Dialog
-        open={viewRooms}
-        onClose={() => setViewReq(false)}
-        aria-labelledby="view-modal"
-        aria-describedby="view-video-rooms"
-      >
-        <DialogContent>
-          <DialogContentText>
-            <h4 className={styles.activeHeader}>List of Active Video Rooms</h4>
-          </DialogContentText>
-          // TODO: Map through array of rooms obtained via back-end, list them
-          here // TODO: Add a 'join' button that brings up the 'Join Room'
-          dialog with the user's username and the video name as both of the
-          values
-          <List>
-            <ListItem>
-              <ListItemIcon>
-                <VideocamIcon />
-              </ListItemIcon>
-              <ListItemText>
-                <strong>Room Name:</strong> <i>Daddy Dick</i>
-                <br />
-                <strong>Created By:</strong> <i>Mommy Vagene</i>
-                <br />
-                <strong> Active Since:</strong> <i>Grandma</i>
-                <br />
-              </ListItemText>
-            </ListItem>
-          </List>
-          <Divider />
-          <List>
-            <ListItem>
-              <ListItemIcon>
-                <VideocamIcon />
-              </ListItemIcon>
-              <ListItemText>
-                <strong>Room Name:</strong> <i>Booby Face</i>
-                <br />
-                <strong>Created By:</strong> <i>Clitter Blitter</i>
-                <br />
-                <strong>Active Since:</strong> <i>Mom</i>
-                <br />
-              </ListItemText>
-            </ListItem>
-          </List>
-          <Divider />
-        </DialogContent>
-      </Dialog>
-
+      
       {!messageBox ? (
         <>
           <CssBaseline />

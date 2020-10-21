@@ -8,6 +8,7 @@ import {
   Journal,
   Settings,
   NotFound,
+  Resources,
   Splash,
   VideoChat
 } from "../Pages/index";
@@ -30,6 +31,7 @@ export const Navigator = () => {
         <Route path="/planner" render={() => <Planner />} />
         <Route path="/journal" render={() => <Journal />} />
         <Route path="/settings" render={() => <Settings />} />
+        <Route path="/resources" render={() => <Resources />} />
         <Route path="*" render={() => <NotFound />} />
       </Switch>
     </BrowserRouter>
