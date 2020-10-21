@@ -153,7 +153,7 @@ export const Settings = () => {
           <br />
           <br />
           <TextField
-            error={newData.password && newData.password.length < 6}
+            error={newData && newData.password && newData.password.length < 6}
             helperText="Password must be at least 6 characters!"
             onChange={(ev) => {
               const value = ev.target.value;

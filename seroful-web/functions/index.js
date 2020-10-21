@@ -5,13 +5,13 @@ const logMe = functions.logger;
 const admin = require("firebase-admin");
 // const credential = require("./seroful-firebase-adminsdk-ry93d-5b49e47b83.json");
 
-// const accountSid = functions.config().twilio.account_sid;
-// const authToken = functions.config().twilio.auth_token;
-// const apiKey = functions.config().twilio.api_key;
-// const apiSecret = functions.config().twilio.api_secret;
-// const client = require("twilio")(accountSid, authToken);
-// const AccessToken = require("twilio").jwt.AccessToken;
-// const VideoGrant = AccessToken.VideoGrant;
+const accountSid = functions.config().twilio.account_sid;
+const authToken = functions.config().twilio.auth_token;
+const apiKey = functions.config().twilio.api_key;
+const apiSecret = functions.config().twilio.api_secret;
+const client = require("twilio")(accountSid, authToken);
+const AccessToken = require("twilio").jwt.AccessToken;
+const VideoGrant = AccessToken.VideoGrant;
 const uploadMiddleware = require("busboy-firebase");
 
 /* WHEN IN DEV MODE ASSIGN CREDENTIAL TO admin.credential.cert(credential)
